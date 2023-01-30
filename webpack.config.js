@@ -3,7 +3,7 @@ const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const EslintPlugin = require("eslint-webpack-plugin");
-/* const CopyWebpackPlugin = require("copy-webpack-plugin"); */
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const config = {
   entry: "./src/index.ts",
@@ -43,14 +43,14 @@ const config = {
     new CleanWebpackPlugin(),
     new EslintPlugin({ extensions: "ts" }),
 
-    /* new CopyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: [
         {
           from: "src/assets/favicon.ico",
           to: "assets/favicon.ico",
         },
       ],
-    }), */
+    }),
   ],
 };
 
