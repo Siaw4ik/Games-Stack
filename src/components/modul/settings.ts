@@ -11,7 +11,8 @@ const settings: Settings = {
 export function toggleVolume() {
   const volume = document.querySelector(".volumeOn") as HTMLElement;
   const volumeSlash = document.querySelector(".volume-slash") as HTMLElement;
-  (volume as HTMLElement).addEventListener("click", () => {
+
+  function changeClassVolume() {
     volume.classList.toggle("active");
     if (volume.classList.value === "volumeOn") {
       volumeSlash.classList.remove("active");
@@ -23,6 +24,16 @@ export function toggleVolume() {
       settings.volume = true;
       localStorage.setItem("settings", JSON.stringify(settings));
     }
+  }
+
+  (volume as HTMLElement).addEventListener("click", () => {
+    changeClassVolume();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "KeyV" && (event.ctrlKey || event.metaKey)) {
+      changeClassVolume();
+    }
   });
 }
 
@@ -33,7 +44,8 @@ export function toggleLight() {
   const wrap = document.querySelector(".wrapper") as HTMLElement;
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
-  btnLight.addEventListener("click", () => {
+
+  function changeClassDark() {
     btnLight.classList.toggle("light");
     header.classList.toggle("dark");
     footer.classList.toggle("dark");
@@ -49,6 +61,15 @@ export function toggleLight() {
       btnLight.setAttribute("src", dark);
       settings.style = "dark";
       localStorage.setItem("settings", JSON.stringify(settings));
+    }
+  }
+  btnLight.addEventListener("click", () => {
+    changeClassDark();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "KeyZ" && (event.ctrlKey || event.metaKey)) {
+      changeClassDark();
     }
   });
 }
