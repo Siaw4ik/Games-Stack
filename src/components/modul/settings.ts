@@ -31,11 +31,15 @@ export function toggleLight() {
   const header = document.querySelector(".header") as HTMLElement;
   const footer = document.querySelector(".footer") as HTMLElement;
   const wrap = document.querySelector(".wrapper") as HTMLElement;
+  const menu = document.querySelector(".burger_menu") as HTMLElement;
+  const menuItem = document.querySelectorAll(".burger_nav_ul");
   btnLight.addEventListener("click", () => {
     btnLight.classList.toggle("light");
     header.classList.toggle("dark");
     footer.classList.toggle("dark");
     wrap.classList.toggle("dark");
+    menu.classList.toggle("dark");
+    menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
       btnLight.setAttribute("src", light);
       settings.style = "light";
@@ -58,8 +62,16 @@ export function toggleLang() {
   const btnLogin = document.querySelector(
     ".btn_autorization.login"
   ) as HTMLElement;
+  const btnBurgerAuthorin = document.querySelector(
+    ".authorin-burger"
+  ) as HTMLElement;
+  const btnBurgerLogin = document.querySelector(".login-burger") as HTMLElement;
   const about = document.querySelector(".about") as HTMLElement;
   const result = document.querySelector(".result") as HTMLElement;
+  const burgerAbout = document.querySelector(".burger-about a") as HTMLElement;
+  const burgerResult = document.querySelector(
+    ".burger-result a"
+  ) as HTMLElement;
   langRu.addEventListener("click", () => {
     langRu.classList.add("lang-active");
     langEn.classList.remove("lang-active");
@@ -68,8 +80,12 @@ export function toggleLang() {
 
     btnAuthorin.innerHTML = "Авторизация";
     btnLogin.innerHTML = "Войти";
+    btnBurgerAuthorin.innerHTML = "Авторизация";
+    btnBurgerLogin.innerHTML = "Войти";
     about.innerHTML = "Главная";
     result.innerHTML = "Результаты";
+    burgerAbout.innerHTML = "Главная";
+    burgerResult.innerHTML = "Результаты";
   });
 
   langEn.addEventListener("click", () => {
@@ -80,7 +96,11 @@ export function toggleLang() {
 
     btnAuthorin.innerHTML = "Sign up";
     btnLogin.innerHTML = "Login";
+    btnBurgerAuthorin.innerHTML = "Sign up";
+    btnBurgerLogin.innerHTML = "Login";
     about.innerHTML = "Home";
     result.innerHTML = "Results";
+    burgerAbout.innerHTML = "Home";
+    burgerResult.innerHTML = "Results";
   });
 }
