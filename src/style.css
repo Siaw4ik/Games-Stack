@@ -40,7 +40,8 @@ body.lock {
   box-shadow: 0 8px 16px rgb(0 0 0 / 75%);
 }
 
-.shadow{
+.shadow,
+.shadow_login-window {
   display: none;
   background-color: #0000009e;
   width: 100%;
@@ -49,6 +50,18 @@ body.lock {
   top: 0;
   left: 0;
   z-index: 5;
+}
+
+.shadow {
+  z-index: 5;
+}
+
+.shadow_login-window {
+  z-index: 15;
+}
+
+.shadow_login-window.active {
+  display: block;
 }
 
 .up-header{
@@ -232,6 +245,112 @@ body.lock {
   display: none;
 }
 
+.cross,
+.cross svg,
+.login-window_cross,
+.login-window_cross svg,
+.signup-window_cross,
+.signup-window_cross svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cross:hover,
+.login-window_cross,
+.signup-window_cross {
+  cursor: pointer;
+}
+
+.cross:hover path {
+  fill: #4684ff;
+}
+
+.login-window,
+.signup-window {
+  display: none;
+}
+
+.login-window.active,
+.signup-window.active {
+  position: absolute;
+  z-index: 20;
+  top: 130px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: block;
+  width: 40%;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #000000;
+  border-radius: 10px;
+}
+
+.login-window_header,
+.signup-window_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 15px 30px;
+}
+
+.login-window_header p,
+.signup-window_header p {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2D73FF;
+  margin: 0;
+}
+
+
+.login-window_main,
+.signup-window_main {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-window_logName,
+.login-window_password,
+.signup-window_logName,
+.signup-window_password {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-window_logName p,
+.login-window_password p,
+.signup-window_logName p,
+.signup-window_password p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  width: 45%;
+}
+
+.login-window_logName input,
+.login-window_password input,
+.signup-window_logName input,
+.signup-window_password input {
+  width: 75%;
+  padding: 5px 10px;
+}
+.login-window_button,
+.signup-window_button {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #68e3ffc2 0%, #4684ff 100%);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 .main.active {
   background-color: #405079;
   color: white;
@@ -279,6 +398,27 @@ body.lock {
   box-shadow: 0 -8px 16px rgb(0 0 0 / 75%);
 }
 
+@media (max-width: 1400px) {
+  .login-window.active,
+  .signup-window.active {
+    width: 45%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .login-window.active,
+  .signup-window.active {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-window.active,
+  .signup-window.active {
+    width: 55%;
+  }
+}
+
 @media (max-width: 800px) {
   /* .up-header {
     align-items: flex-start;
@@ -302,6 +442,11 @@ body.lock {
   .authorization {
     display: none;
   }
+
+  .shadow.active {
+    display: block;
+  }
+
   .burger {
     display: block;
   }
@@ -368,23 +513,10 @@ body.lock {
   .burger_nav_ul_item:hover {
     color: #2D73FF;
   }
-
-  .cross,
-  .cross svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .cross:hover {
-    cursor: pointer;
-  }
-
-  .cross:hover path {
-    fill: #4684ff;
-  }
-
-  .shadow.active {
-    display: block;
+  .login-window.active,
+  .signup-window.active {
+    top: 55px;
+    width: 80%;
   }
 }
 
@@ -427,6 +559,11 @@ body.lock {
   .social-link img {
       max-height: 32px;
     }
+  
+    .login-window.active,
+    .signup-window.active {
+      width: 90%;
+    }
 }
 
 @media (max-width: 500px) {
@@ -464,6 +601,11 @@ body.lock {
   .cross svg {
     width: 16px;
     height: 16px;
+  }
+
+  .login-window.active,
+  .signup-window.active {
+    width: 95%;
   }
 }
 
