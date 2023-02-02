@@ -3,3 +3,13 @@ export type Settings = {
   style: string;
   volume: boolean;
 };
+
+export type TypeUser = {
+  username: string;
+  password: string;
+};
+
+export type AnswerRecordUser = {
+  success: boolean;
+  message: string;
+};

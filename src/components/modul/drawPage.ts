@@ -107,6 +107,55 @@ function drawHTMLLayout() {
         </div>
       </div>
       <div class="shadow"></div>
+      <div class="shadow_login-window"></div>
+      <div class="login-window">
+        <div class="login-window_header">
+          <p>Login to Game Satck</p>
+          <div class="login-window_cross">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
+              <path d="M13 14C12.7441 14 12.4883 13.9023 12.293 13.707L0.292969 1.70703C-0.0976562 1.31641 -0.0976562 0.683594 0.292969 0.292969C0.683594 -0.0976562 1.31641 -0.0976562 1.70703 0.292969L13.707 12.293C14.0977 12.6836 14.0977 13.3164 13.707 13.707C13.5117 13.9023 13.2559 14 13 14Z" fill="#4684ff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="login-window_main">
+          <div class="login-window_logName">
+            <p>Login:</p>
+            <input type="text">
+          </div>
+          <div class="login-window_password">
+            <p>Password:</p>
+            <input type="text">
+          </div>
+          <div class="login-window_button">
+            <span>Login</span>
+          </div>
+        </div>
+      </div>
+      <div class="signup-window">
+        <div class="signup-window_header">
+          <p>Sign Up to Game Satck</p>
+          <div class="signup-window_cross">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
+              <path d="M13 14C12.7441 14 12.4883 13.9023 12.293 13.707L0.292969 1.70703C-0.0976562 1.31641 -0.0976562 0.683594 0.292969 0.292969C0.683594 -0.0976562 1.31641 -0.0976562 1.70703 0.292969L13.707 12.293C14.0977 12.6836 14.0977 13.3164 13.707 13.707C13.5117 13.9023 13.2559 14 13 14Z" fill="#4684ff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="signup-window_main">
+          <div class="signup-window_logName">
+            <p>Login:</p>
+            <input type="text">
+          </div>
+          <div class="signup-window_password">
+            <p>Password:</p>
+            <input type="text">
+          </div>
+          <div class="signup-window_button">
+            <span>Sign Up</span>
+          </div>
+        </div>
+      </div>
     </header>
     <main class="main"></main>
   </div>
@@ -213,6 +262,12 @@ function toggleBurger() {
   });
 
   cross.addEventListener("click", () => {
+    menu.classList.remove("active");
+    body.classList.remove("lock");
+    shadow.classList.remove("active");
+  });
+
+  shadow.addEventListener("click", () => {
     menu.classList.remove("active");
     body.classList.remove("lock");
     shadow.classList.remove("active");
