@@ -204,7 +204,7 @@ body.lock {
 
 .pages p {
   margin: 0;
-  padding: 15px;
+  padding: 10px 15px;
   box-sizing: border-box;
   width: calc(100% / 6);
   text-align: center;
@@ -217,6 +217,12 @@ body.lock {
 }
 
 .pages p:hover {
+  background: linear-gradient(90deg, #68e3ffc2 0%, #4684ff 100%);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  color: #fff;
+}
+
+#choose {
   background: linear-gradient(90deg, #68e3ffc2 0%, #4684ff 100%);
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   color: #fff;
@@ -331,10 +337,6 @@ body.lock {
     justify-content: space-between;
   }
 
-  /* burger_logo_one-part {
-    color: #fff;
-  } */
-
   .burger_nav_ul {
     display: flex;
     flex-direction: column;
@@ -342,26 +344,28 @@ body.lock {
     gap: 10px;
     padding: 0;
   }
-  
-  .burger_nav_ul.item {
-    list-style-type: none;
-    /* width: 100%; */
+
+  .burger_nav_ul.dark {
+    color: #fff;
   }
-  .burger_nav_ul.item a {
-    display: block;
-    /* width: 100%; */
+  
+  .burger_nav_ul_item {
+    list-style-type: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+  .burger_nav_ul_item {
     text-decoration: none;
-    color: black;
     font-size: 20px;
   }
 
-  .burger_nav_ul.item.dark a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
+  #choose-burger {
+    color: #2D73FF;
   }
-  
-  .burger_nav_ul.item a:hover {
+
+  .burger_nav_ul_item:hover {
     color: #2D73FF;
   }
 

@@ -57,10 +57,10 @@ function drawHTMLLayout() {
       </div>
       <div class="pages">
         <p class="about">${settings?.lang === "en" ? "Home" : "Главная"}</p>
-        <p>Game 1</p>
-        <p>Game 2</p>
-        <p>Game 3</p>
-        <p>Game 4</p>
+        <p class="game1">Game 1</p>
+        <p class="game2">Game 2</p>
+        <p class="game3">Game 3</p>
+        <p class="game4">Game 4</p>
         <p class="result">${
           settings?.lang === "en" ? "Results" : "Результаты"
         }</p>
@@ -84,15 +84,15 @@ function drawHTMLLayout() {
         <div class="burger_nav_wrap">
           <nav class="burger_nav">
             <ul class="burger_nav_ul">
-              <li class="burger_nav_ul item burger-about"><a href="">
-              ${settings?.lang === "en" ? "Home" : "Главная"}</a>
+              <li class="burger_nav_ul_item burger-about">
+              ${settings?.lang === "en" ? "Home" : "Главная"}
               </li>
-              <li class="burger_nav_ul item"><a href="">Game 1</a></li>
-              <li class="burger_nav_ul item"><a href="">Game 2</a></li>
-              <li class="burger_nav_ul item"><a href="">Game 3</a></li>
-              <li class="burger_nav_ul item"><a href="">Game 4</a></li>
-              <li class="burger_nav_ul item burger-result"><a href="">
-              ${settings?.lang === "en" ? "Results" : "Результаты"}</a>
+              <li class="burger_nav_ul_item burger-game1">Game 1</li>
+              <li class="burger_nav_ul_item burger-game2">Game 2</li>
+              <li class="burger_nav_ul_item burger-game3">Game 3</li>
+              <li class="burger_nav_ul_item burger-game4">Game 4</li>
+              <li class="burger_nav_ul_item burger-result">
+              ${settings?.lang === "en" ? "Results" : "Результаты"}
               </li>
             </ul>
             <div class="authorization-burger">
@@ -195,6 +195,7 @@ function toggleBurger() {
   const burger = document.querySelector(".burger") as HTMLElement;
   const cross = document.querySelector(".cross") as HTMLElement;
   const shadow = document.querySelector(".shadow") as HTMLElement;
+  const burgerNav = document.querySelectorAll(".burger_nav_ul_item");
   const { body } = document;
 
   burger.addEventListener("click", () => {
@@ -203,10 +204,13 @@ function toggleBurger() {
     shadow.classList.add("active");
   });
 
-  /* menu.addEventListener("click", () => {
-    menu.classList.remove("active");
-    body.classList.remove("lock");
-  }); */
+  burgerNav.forEach((item) => {
+    item.addEventListener("click", () => {
+      menu.classList.remove("active");
+      body.classList.remove("lock");
+      shadow.classList.remove("active");
+    });
+  });
 
   cross.addEventListener("click", () => {
     menu.classList.remove("active");
