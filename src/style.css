@@ -1,5 +1,6 @@
 .body {
   margin: 0;
+  font-family: "Lato", sans-serif;
 }
 
 body.lock {
@@ -41,7 +42,8 @@ body.lock {
 }
 
 .shadow,
-.shadow_login-window {
+.shadow_login-window,
+.shadow_account-window {
   display: none;
   background-color: #0000009e;
   width: 100%;
@@ -205,6 +207,17 @@ body.lock {
   cursor: pointer;
 }
 
+.iconUser {
+  width: 43px;
+  height: 43px;
+  cursor: pointer;
+  display: none;
+}
+
+.iconUser.active {
+  display: block;
+}
+
 .btn_autorization-burger {
   padding: 7px 20px;
 }
@@ -310,7 +323,10 @@ body.lock {
   padding: 20px 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+}
+
+.signup-window_main.no-active {
+  display: none;
 }
 
 .login-window_logName,
@@ -349,6 +365,136 @@ body.lock {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.wrapper-signup-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.wrapper-signup-success.active {
+  display: flex;
+}
+
+.wrapper-signup-success p{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.signup-window_logName{
+  position: relative;
+}
+
+.signup-window_logName input{
+  position: relative;
+  z-index: 40;
+}
+
+.check-login {
+  margin: 0;
+  background-color: #00bbffe9;
+  color: black;
+  width: 180px;
+  position: absolute;
+  top: -75px;
+  left: 0px;
+  display: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 20;
+}
+
+.check-login::after{
+  content: "";
+  border: 13px solid transparent; 
+  border-top: 10px solid #00bbffe9;
+  position: absolute;
+  top: 60px;
+  left: 165px;
+  z-index: 30;
+}
+
+.check-login.active {
+  display: block;
+}
+
+.check-login-down{
+  margin: 0;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 15px;
+  color: red;
+}
+
+.signup-window_logName img {
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  z-index: 50;
+}
+
+.account-window { 
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 60;
+}
+
+.account-window.active { 
+  display: block;
+}
+
+.account-window p{
+  color: #000000;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.account-window p:hover{
+  color: #2D73FF;
+}
+
+.header_account-window {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.account-window img {
+  width: 30px;
+  height: 30px;
+}
+
+.account-window svg{
+  cursor: pointer;
+}
+
+.shadow_account-window {
+  z-index: 50;
+}
+
+.shadow_account-window.active {
+  display: block;
 }
 
 .main.active {
