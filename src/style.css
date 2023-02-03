@@ -354,7 +354,9 @@ body.lock {
 .signup-window_password input {
   width: 75%;
   padding: 5px 10px;
+  font-size: 18px;
 }
+
 .login-window_button,
 .signup-window_button {
   padding: 10px 20px;
@@ -437,7 +439,7 @@ body.lock {
 
 .signup-window_logName img {
   position: absolute;
-  top: 6px;
+  top: 9px;
   right: 5px;
   width: 16px;
   height: 16px;

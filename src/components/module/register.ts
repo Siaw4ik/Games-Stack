@@ -243,10 +243,6 @@ export function authorizeUser() {
   });
 
   loginUserInput.addEventListener("input", () => {
-    /* loginUserInput.style.color = "black";
-    checkLoginDown.innerHTML = "";
-    checkLoginDown.innerHTML = "";
-    checkLoginImg.setAttribute("src", ""); */
     clearInputFalse();
   });
 
