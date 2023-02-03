@@ -3,14 +3,14 @@ import {
   toggleVolume,
   toggleLight,
   toggleLang,
-} from "./components/modul/settings";
-import { drawPage } from "./components/modul/drawPage";
-import { drawHomePage, changePage } from "./components/modul/changePage";
+} from "./components/module/settings";
+import { drawPage } from "./components/module/drawPage";
+import { drawHomePage, changePage } from "./components/module/changePage";
 import {
   loginSystem,
   signupSystem,
-  authorizateUser,
-} from "./components/modul/register";
+  authorizeUser,
+} from "./components/module/register";
 
 drawPage();
 drawHomePage();
@@ -22,6 +22,6 @@ toggleLang();
 
 loginSystem();
 signupSystem();
-authorizateUser();
+authorizeUser();
 
 console.log("start page");
