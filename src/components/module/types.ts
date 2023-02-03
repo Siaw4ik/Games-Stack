@@ -13,3 +13,7 @@ export type AnswerRecordUser = {
   success: boolean;
   message: string;
 };
+
+export type LogName = {
+  username: string;
+};

@@ -12,3 +12,12 @@ export function returnLocalStorage() {
   }
   return state;
 }
+
+export function returnLocalStorageIsRegistred() {
+  const storage = localStorage.getItem("isRegistred");
+  let result = "";
+  if (typeof storage === "string" && storage.length > 0) {
+    result = storage;
+  }
+  return result;
+}

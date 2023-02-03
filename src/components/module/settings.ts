@@ -89,10 +89,30 @@ export function toggleLang() {
   const btnBurgerLogin = document.querySelector(".login-burger") as HTMLElement;
   const about = document.querySelector(".about") as HTMLElement;
   const result = document.querySelector(".result") as HTMLElement;
-  const burgerAbout = document.querySelector(".burger-about a") as HTMLElement;
-  const burgerResult = document.querySelector(
-    ".burger-result a"
+  const burgerAbout = document.querySelector(".burger-about") as HTMLElement;
+  const burgerResult = document.querySelector(".burger-result") as HTMLElement;
+
+  const loginLogNameP = document.querySelector(
+    ".login-window_logName p"
   ) as HTMLElement;
+  const loginPasswordP = document.querySelector(
+    ".login-window_password p"
+  ) as HTMLElement;
+  const loginBtn = document.querySelector(
+    ".login-window_button span"
+  ) as HTMLElement;
+  const signupLogNameP = document.querySelector(
+    ".signup-window_logName p"
+  ) as HTMLElement;
+  const signupPasswordP = document.querySelector(
+    ".signup-window_password p"
+  ) as HTMLElement;
+  const signupBtn = document.querySelector(
+    ".signup-window_button"
+  ) as HTMLElement;
+  const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
+  const scoreWindow = document.querySelector(".score-window") as HTMLElement;
+
   langRu.addEventListener("click", () => {
     langRu.classList.add("lang-active");
     langEn.classList.remove("lang-active");
@@ -107,6 +127,16 @@ export function toggleLang() {
     result.innerHTML = "Результаты";
     burgerAbout.innerHTML = "Главная";
     burgerResult.innerHTML = "Результаты";
+
+    loginLogNameP.innerHTML = "Логин";
+    loginPasswordP.innerHTML = "Пароль";
+    loginBtn.innerHTML = "Войти";
+    signupLogNameP.innerHTML = "Логин";
+    signupPasswordP.innerHTML = "Пароль";
+    signupBtn.innerHTML = "Зарегистрироваться";
+
+    logoutBtn.innerHTML = "Выйти";
+    scoreWindow.innerHTML = "Статистика игр";
   });
 
   langEn.addEventListener("click", () => {
@@ -123,5 +153,15 @@ export function toggleLang() {
     result.innerHTML = "Results";
     burgerAbout.innerHTML = "Home";
     burgerResult.innerHTML = "Results";
+
+    loginLogNameP.innerHTML = "Login";
+    loginPasswordP.innerHTML = "Password";
+    loginBtn.innerHTML = "Login";
+    signupLogNameP.innerHTML = "Login";
+    signupPasswordP.innerHTML = "Password";
+    signupBtn.innerHTML = "Sign Up";
+
+    logoutBtn.innerHTML = "Logout";
+    scoreWindow.innerHTML = "Game statistics";
   });
 }
