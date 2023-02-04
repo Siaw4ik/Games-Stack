@@ -25,7 +25,6 @@ export function getLocationHash(): string {
 export function drawHomePage() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
-  parallax();
   const div = document.createElement("div");
   div.classList.add("parallax_container");
   div.innerHTML = `
@@ -45,6 +44,7 @@ export function drawHomePage() {
   main.appendChild(div);
 
   setButtonChooseAtr("about");
+  parallax();
 }
 
 export function renderNewPage(idPage: string) {
