@@ -24,6 +24,8 @@
     "node": true
   },
   "rules": {
+    "no-param-reassign": 0,
+    "no-undef": 0,
     "no-debugger": "off",
     "no-console": 0,
     "class-methods-use-this": "off",
@@ -38,6 +40,6 @@
         "ts": "never",
         "tsx": "never"
       }
-   ]
+    ]
   }
 }
