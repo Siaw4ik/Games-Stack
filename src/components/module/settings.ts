@@ -41,16 +41,18 @@ export function toggleLight() {
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const header = document.querySelector(".header") as HTMLElement;
   const footer = document.querySelector(".footer") as HTMLElement;
-  const wrap = document.querySelector(".wrapper") as HTMLElement;
+  /* const wrap = document.querySelector(".wrapper") as HTMLElement; */
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
+  const main = document.querySelector(".main") as HTMLElement;
 
   function changeClassDark() {
     btnLight.classList.toggle("light");
     header.classList.toggle("dark");
     footer.classList.toggle("dark");
-    wrap.classList.toggle("dark");
+    main.classList.toggle("dark");
     menu.classList.toggle("dark");
+
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
       btnLight.setAttribute("src", light);
