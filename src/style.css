@@ -14,10 +14,10 @@ body.lock {
   height: 100vh;
 }
 
-.wrapper.dark {
+/* .wrapper.dark {
   background-color: #405079;
   color: white;
-}
+} */
 
 .conteiner_header-main {
   display: flex;
