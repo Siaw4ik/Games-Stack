@@ -21,7 +21,7 @@ function drawHTMLLayout() {
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
-          <a class="wrap_logo_a" href="../../index.html">
+          <a class="wrap_logo_a" href="../../#about">
             <div class="logo">
               <p><span class="one-part">GAME </span><span class="two-part"> STACK</span></p>
             </div>
@@ -78,7 +78,7 @@ function drawHTMLLayout() {
       <div class="burger_menu">
         <div class="wrap_burger_up">
           <div class="wrap_logo">
-            <a class="wrap_logo_a" href="../../index.html">
+            <a class="wrap_logo_a" href="../../#about">
               <div class="logo">
                 <p><span class="one-part">GAME </span><span class="two-part"> STACK</span></p>
               </div>
@@ -250,14 +250,14 @@ function addLinkCithubRS() {
 function drawStyleLightOrDark() {
   const header = document.querySelector(".header") as HTMLElement;
   const footer = document.querySelector(".footer") as HTMLElement;
-  const wrap = document.querySelector(".wrapper") as HTMLElement;
+  const main = document.querySelector(".main") as HTMLElement;
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
   if (settings.style === "dark") {
     header.classList.add("dark");
     footer.classList.add("dark");
-    wrap.classList.add("dark");
+    main.classList.add("dark");
     menu.classList.add("dark");
     menuItem.forEach((item) => item.classList.add("dark"));
     btnLight.setAttribute("src", dark);
@@ -265,7 +265,7 @@ function drawStyleLightOrDark() {
   } else if (settings.style === "light") {
     header.classList.remove("dark");
     footer.classList.remove("dark");
-    wrap.classList.remove("dark");
+    main.classList.remove("dark");
     menu.classList.remove("dark");
     menuItem.forEach((item) => item.classList.remove("dark"));
     btnLight.setAttribute("src", light);
