@@ -5,15 +5,23 @@ import {
   toggleLang,
 } from "./components/module/settings";
 import { drawPage } from "./components/module/drawPage";
-import { drawHomePage, changePage } from "./components/module/changePage";
+import {
+  renderNewPage,
+  getLocationHash,
+  changePage,
+  enableRoutChange,
+} from "./components/module/changePage";
 import {
   loginSystem,
   signupSystem,
   authorizeUser,
 } from "./components/module/register";
 
+enableRoutChange();
 drawPage();
-drawHomePage();
+const pageId = getLocationHash() ? getLocationHash() : "about";
+renderNewPage(pageId);
+// drawHomePage();
 changePage();
 
 toggleVolume();
