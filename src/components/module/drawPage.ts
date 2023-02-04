@@ -52,10 +52,10 @@ function drawHTMLLayout() {
             <div class="btn_autorization login" style="${
               isRegistred === "true" ? "display: none;" : "display: flex;"
             }">${settings?.lang === "en" ? "Login" : "Войти"}</div>
-            <img class="${
-              isRegistred === "true" ? "iconUser active" : "iconUser"
-            }" src="${iconUser}">
           </div>
+          <img class="${
+            isRegistred === "true" ? "iconUser active" : "iconUser"
+          }" src="${iconUser}">
           <div class="burger">
             <svg class="burger_svg" width="26" height="15" viewBox="0 0 26 15" fill="#4784ff" xmlns="http://www.w3.org/2000/svg">
               <rect width="26" height="3" rx="2" fill="#4784ff"/>

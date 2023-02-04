@@ -49,11 +49,13 @@ function clearInputFalse() {
   const checkLoginDown = document.querySelector(
     ".check-login-down"
   ) as HTMLElement;
+  const checkLogin = document.querySelector(".check-login") as HTMLElement;
 
   loginUserInput.style.color = "black";
   checkLoginDown.innerHTML = "";
   checkLoginDown.innerHTML = "";
   checkLoginImg.setAttribute("src", "");
+  checkLogin.classList.remove("active");
 }
 
 export function signupSystem() {
@@ -76,11 +78,13 @@ export function signupSystem() {
   btnSignup.addEventListener("click", () => {
     signupWindow.classList.add("active");
     shadow.classList.add("active");
+    clearInputFalse();
   });
 
   btnSignupBurger.addEventListener("click", () => {
     signupWindow.classList.add("active");
     shadow.classList.add("active");
+    clearInputFalse();
   });
 
   crossLogin.addEventListener("click", () => {
@@ -222,10 +226,6 @@ export function authorizeUser() {
     ".signup-window_logName img"
   ) as HTMLElement;
 
-  /* const checkLoginDown = document.querySelector(
-    ".check-login-down"
-  ) as HTMLElement; */
-
   loginUserInput.addEventListener("blur", () => {
     const loginUser = loginUserInput.value;
     const objUser = {
@@ -263,15 +263,15 @@ export function authorizeUser() {
           passwordUserInput.value = "";
           checkLoginImg.setAttribute("src", "");
           loginUserInput.style.color = "black";
+          btnSignup.style.display = "none";
+          btnSignupBurger.style.display = "none";
+          btnLogin.style.display = "none";
+          btnLoginBurger.style.display = "none";
+          iconUser.classList.add("active");
+          localStorage.setItem("isRegistred", "true");
           setTimeout(() => {
             signupWindow.classList.remove("active");
             shadow.classList.remove("active");
-            btnSignup.style.display = "none";
-            btnSignupBurger.style.display = "none";
-            btnLogin.style.display = "none";
-            btnLoginBurger.style.display = "none";
-            iconUser.classList.add("active");
-            localStorage.setItem("isRegistred", "true");
           }, 3000);
         }
         /* if (result.success === false) {
