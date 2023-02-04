@@ -4,6 +4,23 @@ import { game3 } from "../game3";
 import { game4 } from "../game4";
 import { result } from "../results";
 
+function setButtonChooseAtr(hash: string) {
+  const pages = document.querySelectorAll(".pages p");
+  pages.forEach((elem) => elem.removeAttribute("id"));
+  const page = document.querySelector(`.${hash}`) as HTMLElement;
+  const burgerPage = document.querySelector(`.burger-${hash}`) as HTMLElement;
+  page.setAttribute("id", "choose");
+  burgerPage.setAttribute("id", "choose-burger");
+}
+
+function changeLocationHash(hash: string) {
+  window.location.hash = `#${hash}`;
+}
+
+export function getLocationHash(): string {
+  return window.location.hash.slice(1);
+}
+
 export function drawHomePage() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
@@ -12,13 +29,46 @@ export function drawHomePage() {
 
   main.appendChild(div);
 
-  const about = document.querySelector(".about") as HTMLElement;
-  const burgerAbout = document.querySelector(".burger-about") as HTMLElement;
-  about.setAttribute("id", "choose");
-  burgerAbout.setAttribute("id", "choose-burger");
+  setButtonChooseAtr("about");
+}
+
+export function renderNewPage(idPage: string) {
+  changeLocationHash(idPage);
+  setButtonChooseAtr(idPage);
+  switch (idPage) {
+    case "about":
+      drawHomePage();
+      break;
+    case "result":
+      result();
+      break;
+    case "game1":
+      game1();
+      break;
+    case "game2":
+      game2();
+      break;
+    case "game3":
+      game3();
+      break;
+    case "game4":
+      game4();
+      break;
+    default:
+      drawHomePage();
+  }
+}
+
+export function enableRoutChange() {
+  window.addEventListener("hashchange", () => {
+    const hashPage = window.location.hash.slice(1);
+    renderNewPage(hashPage);
+  });
 }
 
 function changePageMain() {
+  const hashPage = window.location.hash.slice(1);
+  renderNewPage(hashPage);
   const pages = document.querySelector(".pages") as HTMLElement;
   pages.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -33,27 +83,27 @@ function changePageMain() {
     });
     burgerLi?.setAttribute("id", "choose-burger");
     if (target.closest(".about")) {
-      drawHomePage();
-      console.log("HOME");
+      renderNewPage("about");
+      console.log("main");
     }
     if (target.closest(".game1")) {
-      game1();
+      renderNewPage("game1");
       console.log("game1");
     }
     if (target.closest(".game2")) {
-      game2();
+      renderNewPage("game2");
       console.log("game2");
     }
     if (target.closest(".game3")) {
-      game3();
+      renderNewPage("game3");
       console.log("game3");
     }
     if (target.closest(".game4")) {
-      game4();
+      renderNewPage("game4");
       console.log("game4");
     }
     if (target.closest(".result")) {
-      result();
+      renderNewPage("result");
       console.log("result");
     }
   });
@@ -74,27 +124,27 @@ function changePageBurger() {
     });
     pageP?.setAttribute("id", "choose");
     if (target.closest(".burger-about")) {
-      drawHomePage();
+      renderNewPage("about");
       console.log("burger-HOME");
     }
     if (target.closest(".burger-game1")) {
-      game1();
+      renderNewPage("game1");
       console.log("burger-game1");
     }
     if (target.closest(".burger-game2")) {
-      game2();
+      renderNewPage("game2");
       console.log("burger-game2");
     }
     if (target.closest(".burger-game3")) {
-      game3();
+      renderNewPage("game3");
       console.log("burger-game3");
     }
     if (target.closest(".burger-game4")) {
-      game4();
+      renderNewPage("game4");
       console.log("burger-game4");
     }
     if (target.closest(".burger-result")) {
-      result();
+      renderNewPage("result");
       console.log("burger-result");
     }
   });
