@@ -39,11 +39,23 @@ export function loginSystem() {
   });
 }
 
-function drawWindowSignup() {
-  const signupWindow = document.querySelector(".signup-window") as HTMLElement;
-  const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
-  signupWindow.classList.add("active");
-  shadow.classList.add("active");
+function clearInputFalse() {
+  const loginUserInput = document.querySelector(
+    ".signup-window_logName input"
+  ) as HTMLInputElement;
+  const checkLoginImg = document.querySelector(
+    ".signup-window_logName img"
+  ) as HTMLElement;
+  const checkLoginDown = document.querySelector(
+    ".check-login-down"
+  ) as HTMLElement;
+  const checkLogin = document.querySelector(".check-login") as HTMLElement;
+
+  loginUserInput.style.color = "black";
+  checkLoginDown.innerHTML = "";
+  checkLoginDown.innerHTML = "";
+  checkLoginImg.setAttribute("src", "");
+  checkLogin.classList.remove("active");
 }
 
 export function signupSystem() {
@@ -56,21 +68,37 @@ export function signupSystem() {
   ) as HTMLElement;
   const signupWindow = document.querySelector(".signup-window") as HTMLElement;
   const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
+  const loginUserInput = document.querySelector(
+    ".signup-window_logName input"
+  ) as HTMLInputElement;
+  const passwordUserInput = document.querySelector(
+    ".signup-window_password input"
+  ) as HTMLInputElement;
 
   btnSignup.addEventListener("click", () => {
-    drawWindowSignup();
+    signupWindow.classList.add("active");
+    shadow.classList.add("active");
+    clearInputFalse();
   });
 
   btnSignupBurger.addEventListener("click", () => {
-    drawWindowSignup();
+    signupWindow.classList.add("active");
+    shadow.classList.add("active");
+    clearInputFalse();
   });
 
   crossLogin.addEventListener("click", () => {
+    loginUserInput.value = "";
+    passwordUserInput.value = "";
+    clearInputFalse();
     signupWindow.classList.remove("active");
     shadow.classList.remove("active");
   });
 
   shadow.addEventListener("click", () => {
+    loginUserInput.value = "";
+    passwordUserInput.value = "";
+    clearInputFalse();
     shadow.classList.remove("active");
     signupWindow.classList.remove("active");
   });
@@ -214,6 +242,10 @@ export function authorizeUser() {
     }
   });
 
+  loginUserInput.addEventListener("input", () => {
+    clearInputFalse();
+  });
+
   btnSendSignup.addEventListener("click", () => {
     const loginUser = loginUserInput.value;
     const passwordUser = passwordUserInput.value;
@@ -231,15 +263,15 @@ export function authorizeUser() {
           passwordUserInput.value = "";
           checkLoginImg.setAttribute("src", "");
           loginUserInput.style.color = "black";
+          btnSignup.style.display = "none";
+          btnSignupBurger.style.display = "none";
+          btnLogin.style.display = "none";
+          btnLoginBurger.style.display = "none";
+          iconUser.classList.add("active");
+          localStorage.setItem("isRegistred", "true");
           setTimeout(() => {
             signupWindow.classList.remove("active");
             shadow.classList.remove("active");
-            btnSignup.style.display = "none";
-            btnSignupBurger.style.display = "none";
-            btnLogin.style.display = "none";
-            btnLoginBurger.style.display = "none";
-            iconUser.classList.add("active");
-            localStorage.setItem("isRegistred", "true");
           }, 3000);
         }
         /* if (result.success === false) {
