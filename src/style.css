@@ -33,6 +33,7 @@ body.lock {
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   position: relative;
   height: 125px;
+  z-index: 5;
 }
 
 .header.dark{
@@ -418,7 +419,7 @@ body.lock {
 
 .check-login::after{
   content: "";
-  border: 13px solid transparent; 
+  border: 13px solid transparent;
   border-top: 10px solid #00bbffe9;
   position: absolute;
   top: 60px;
@@ -447,7 +448,7 @@ body.lock {
   z-index: 50;
 }
 
-.account-window { 
+.account-window {
   display: none;
   position: absolute;
   top: 60px;
@@ -458,7 +459,7 @@ body.lock {
   z-index: 60;
 }
 
-.account-window.active { 
+.account-window.active {
   display: block;
 }
 
@@ -519,6 +520,7 @@ body.lock {
   font-size: 30px;
   height: 60px;
   box-shadow: 0 -8px 16px rgba(0,0,0,0.2);
+  z-index: 5;
 }
 
 .footer p{
@@ -541,20 +543,20 @@ body.lock {
 .social-link img {
   max-height: 40px;
   }
-  
+
 .github-icon1,
 .github-icon2,
 .github-icon3 {
   height: 40px;
 }
-  
+
 .social-link img {
   opacity: .8;
   cursor: pointer;
   transition: all .4s ease-in-out;
   background-color: unset;
 }
-  
+
 .social-link img:hover {
   transform: scale(1.2);
   opacity: 1;
@@ -648,13 +650,12 @@ body.lock {
   .burger_nav_ul.dark {
     color: #fff;
   }
-  
+
   .burger_nav_ul_item {
     list-style-type: none;
     font-size: 20px;
     cursor: pointer;
   }
-  
 
   .burger_nav_ul_item {
     text-decoration: none;
@@ -721,7 +722,7 @@ body.lock {
   .social-link img {
       max-height: 32px;
     }
-  
+
     .login-window.active,
     .signup-window.active {
       width: 90%;

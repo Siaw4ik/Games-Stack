@@ -3,6 +3,7 @@ import { game2 } from "../game2";
 import { game3 } from "../game3";
 import { game4 } from "../game4";
 import { result } from "../results";
+import { parallax } from "../parallax";
 
 function setButtonChooseAtr(hash: string) {
   const pages = document.querySelectorAll(".pages p");
@@ -24,8 +25,22 @@ export function getLocationHash(): string {
 export function drawHomePage() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
+  parallax();
   const div = document.createElement("div");
-  div.innerHTML = `<p> home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home </p>`;
+  div.classList.add("parallax_container");
+  div.innerHTML = `
+    <div class="parallax_images images-parallax">
+      <div class="images-parallax_item">
+        <div class="images-parallax_galaxy"></div>
+      </div>
+      <div class="images-parallax_item">
+        <div class="images-parallax_death-star"></div>
+      </div>
+      <div class="images-parallax_item">
+        <div class="images-parallax_ship"></div>
+      </div>
+    </div>
+ `;
 
   main.appendChild(div);
 
