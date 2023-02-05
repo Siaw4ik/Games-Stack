@@ -1,4 +1,6 @@
-import { game1, startGame, clickAnswer, clickNext, startAgain } from "../game1";
+import {
+  game1 /* , startGame, clickAnswer, clickNext, startAgain */,
+} from "../game1";
 import { game2 } from "../game2";
 import { game3 } from "../game3";
 import { game4 } from "../game4";
@@ -70,10 +72,10 @@ export function renderNewPage(idPage: string) {
       break;
     case "game1":
       game1();
-      startGame();
+      /*       startGame();
       clickAnswer();
       clickNext();
-      startAgain();
+      startAgain(); */
       break;
     case "game2":
       game2();
