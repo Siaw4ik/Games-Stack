@@ -41,15 +41,11 @@ export function toggleLight() {
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const header = document.querySelector(".header") as HTMLElement;
   const footer = document.querySelector(".footer") as HTMLElement;
-  /* const wrap = document.querySelector(".wrapper") as HTMLElement; */
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
   const main = document.querySelector(".main") as HTMLElement;
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
-  ) as HTMLElement;
-  const gamesInfoContainer = document.querySelector(
-    ".games_info_container"
   ) as HTMLElement;
 
   function changeClassDark() {
@@ -59,7 +55,6 @@ export function toggleLight() {
     main.classList.toggle("dark");
     menu.classList.toggle("dark");
     containerHeaderMain.classList.toggle("dark");
-    gamesInfoContainer.classList.toggle("dark");
 
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
@@ -75,11 +70,19 @@ export function toggleLight() {
   }
   btnLight.addEventListener("click", () => {
     changeClassDark();
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
+    gamesInfoContainer.classList.toggle("dark");
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "KeyZ" && (event.ctrlKey || event.metaKey)) {
       changeClassDark();
+      const gamesInfoContainer = document.querySelector(
+        ".games_info_container"
+      ) as HTMLElement;
+      gamesInfoContainer.classList.toggle("dark");
     }
   });
 }
@@ -122,8 +125,8 @@ export function toggleLang() {
   ) as HTMLElement;
   const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
   const scoreWindow = document.querySelector(".score-window") as HTMLElement;
-  const main = document.querySelector(".main") as HTMLElement;
-  main.innerHTML = "";
+  /* const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = ""; */
   // main.appendChild(createGamesInfoSection());
 
   langRu.addEventListener("click", () => {
