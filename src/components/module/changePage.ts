@@ -3,6 +3,9 @@ import { game2 } from "../game2";
 import { game3 } from "../game3";
 import { game4 } from "../game4";
 import { result } from "../results";
+import { parallax } from "../parallax";
+import { createGamesInfoSection } from "../gamesInfo";
+import { returnLocalStorage } from "./localStorage";
 
 function setButtonChooseAtr(hash: string) {
   const pages = document.querySelectorAll(".pages p");
@@ -22,14 +25,37 @@ export function getLocationHash(): string {
 }
 
 export function drawHomePage() {
+  const { style } = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const div = document.createElement("div");
-  div.innerHTML = `<p> home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home  home </p>`;
+  div.classList.add("parallax_container");
+  div.innerHTML = `
+    <div class="parallax_images images-parallax">
+      <div class="images-parallax_item">
+        <div class="images-parallax_death-star"></div>
+      </div>
+      <div class="images-parallax_item">
+        <div class="images-parallax_ship"></div>
+      </div>
+    </div>
+ `;
 
   main.appendChild(div);
+  main.appendChild(createGamesInfoSection());
+
+  const gamesInfoContainer = document.querySelector(
+    ".games_info_container"
+  ) as HTMLElement;
+
+  if (style === "dark") {
+    gamesInfoContainer.classList.add("dark");
+  } else if (style === "light") {
+    gamesInfoContainer.classList.remove("dark");
+  }
 
   setButtonChooseAtr("about");
+  parallax();
 }
 
 export function renderNewPage(idPage: string) {

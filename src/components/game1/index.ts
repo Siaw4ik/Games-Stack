@@ -1,6 +1,8 @@
-import { Question } from './core/types/types';
-import { questions } from './core/data/questions';
-import './index.css';
+/* eslint no-param-reassign: ["error", { "props": false }] */
+
+import { Question } from "./core/types/types";
+import { questions } from "./core/data/questions";
+import "./index.css";
 
 questions.sort(
   (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
@@ -11,7 +13,8 @@ let answersCount = 0;
 let nextBtnClicksCount = 1;
 let minutes = 0;
 let seconds = 0;
-let timer: NodeJS.Timer;
+/* let timer: NodeJS.Timer; */
+let timer: ReturnType<typeof setInterval>;
 
 function startTimer() {
   const minute = document.getElementById('game1-minute') as HTMLElement;
@@ -71,10 +74,11 @@ export const startGame = () => {
   ) as HTMLDivElement;
   const question = document.getElementById('game1-question') as HTMLElement;
   const answersBlocks = document.querySelectorAll(
-    '.game1-main__answer'
-  ) as NodeListOf<Element>;
+
   document.body.addEventListener('click', (e) => {
     if ((<HTMLButtonElement>e.target).id === 'game1-startBtn') {
+      mainGame.style.display = "block";
+      startMessage.style.display = "none";
       question.innerHTML = questionsForGame[0].question;
       answersBlocks.forEach((element, i) => {
         element.innerHTML = questionsForGame[0].answers[i];
@@ -167,7 +171,7 @@ export const clickNext = (): void => {
 export const startAgain = (): void => {
   document.body.addEventListener('click', (e) => {
     const question = document.getElementById('game1-question') as HTMLElement;
-    const answersBlocks = document.querySelectorAll(
+    const answersBlocks = document.querySelectorAll(Ф
       '.game1-main__answer'
     ) as NodeListOf<Element>;
     const correctAnswers = document.getElementById(

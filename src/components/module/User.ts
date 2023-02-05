@@ -1,4 +1,4 @@
-import { TypeUser, AnswerRecordUser, LogName } from "./types";
+import { TypeUser, AnswerRecordUser, LogName, AnswerLoginUser } from "./types";
 
 export class User {
   async reсordUser(user: TypeUser): Promise<AnswerRecordUser> {
@@ -12,7 +12,6 @@ export class User {
         body: JSON.stringify(user),
       }
     );
-    console.log(JSON.stringify(user));
     const data: AnswerRecordUser = await response.json();
 
     return data;
@@ -30,6 +29,22 @@ export class User {
       }
     );
     const data: AnswerRecordUser = await response.json();
+
+    return data;
+  }
+
+  async loginUser(user: TypeUser): Promise<AnswerLoginUser | AnswerRecordUser> {
+    const response = await fetch(
+      "https://rsclonetestserver-production.up.railway.app/user/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    );
+    const data: AnswerRecordUser | AnswerLoginUser = await response.json();
 
     return data;
   }
