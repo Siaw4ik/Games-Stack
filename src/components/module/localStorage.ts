@@ -14,10 +14,13 @@ export function returnLocalStorage() {
 }
 
 export function returnLocalStorageIsRegistred() {
-  const storage = localStorage.getItem("isRegistred");
-  let result = "";
+  const storage = localStorage.getItem("userTrue");
+  let result = {
+    userName: "",
+    isRegistred: "",
+  };
   if (typeof storage === "string" && storage.length > 0) {
-    result = storage;
+    result = JSON.parse(storage);
   }
   return result;
 }

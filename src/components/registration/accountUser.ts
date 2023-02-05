@@ -6,17 +6,20 @@ export function clickingIconUserandLogout() {
   const shadowAccount = document.querySelector(
     ".shadow_account-window"
   ) as HTMLElement;
-  /*  const accountWindowP = document.querySelectorAll(".account-window p"); */
   const crossAccWindow = document.querySelector(
     ".account-window svg"
   ) as HTMLElement;
   const btnLogout = document.querySelector(".btn-logout") as HTMLElement;
-  const mainSuccess = document.querySelector(
+  const mainSuccessSignup = document.querySelector(
     ".wrapper-signup-success"
   ) as HTMLElement;
   const mainSignUp = document.querySelector(
     ".signup-window_main"
   ) as HTMLElement;
+  const mainSuccessLogIn = document.querySelector(
+    ".wrapper-login-success"
+  ) as HTMLElement;
+  const mainLogIn = document.querySelector(".login-window_main") as HTMLElement;
   const btnSignup = document.querySelector(".authorin") as HTMLElement;
   const btnSignupBurger = document.querySelector(
     ".authorin-burger"
@@ -48,9 +51,15 @@ export function clickingIconUserandLogout() {
     btnLogin.style.display = "flex";
     btnLoginBurger.style.display = "flex";
     iconUser.classList.remove("active");
-    localStorage.setItem("isRegistred", "false");
+    const object = {
+      userName: "",
+      isRegistred: "false",
+    };
+    localStorage.setItem("userTrue", JSON.stringify(object));
 
-    mainSuccess.classList.remove("active");
+    mainSuccessSignup.classList.remove("active");
     mainSignUp.classList.remove("no-active");
+    mainSuccessLogIn.classList.remove("active");
+    mainLogIn.classList.remove("no-active");
   });
 }

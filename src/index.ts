@@ -13,7 +13,6 @@ import {
 } from "./components/module/changePage";
 import {
   authorizeUser,
-  logInUser,
   closeOpenWindowRegisration,
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
@@ -30,7 +29,6 @@ toggleLight();
 toggleLang();
 
 authorizeUser();
-logInUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
 

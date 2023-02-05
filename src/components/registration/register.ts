@@ -1,6 +1,5 @@
 import { User } from "../module/User";
 import { TypeUser } from "../module/types";
-/* import iconOk from "../../assets/icons8-ок-128.svg"; */
 import VImg from "../../assets/icons8-галочка.svg";
 import XImg from "../../assets/1675432350.svg";
 
@@ -19,6 +18,62 @@ function clearInputFalse(name: string) {
   checkLoginImg.setAttribute("src", "");
   if (name === "signup") {
     checkLogin.classList.remove("active");
+  }
+}
+
+function drawSuccessBlock(name: string, user: string) {
+  const settings = returnLocalStorage();
+  const mainSuccess = document.querySelector(
+    `.wrapper-${name}-success`
+  ) as HTMLElement;
+  const mainSuccessP = document.querySelector(
+    `.wrapper-${name}-success p`
+  ) as HTMLElement;
+  const main = document.querySelector(`.${name}-window_main`) as HTMLElement;
+
+  mainSuccess.classList.add("active");
+  main.classList.add("no-active");
+
+  if (name === "signup") {
+    mainSuccessP.innerHTML = `
+    ${
+      settings.lang === "en"
+        ? `Authorization completed successfully!!!<br>Welcome, ${user}!!!`
+        : `Авторизация выполнена успешно!!!<br>Добро пожаловать, ${user}!!!`
+    }`;
+  }
+  if (name === "login") {
+    mainSuccessP.innerHTML = `
+    ${
+      settings.lang === "en"
+        ? `You are logged into your account!!!<br>Welcome, ${user}!!!`
+        : `Вы вошли в свой аккаунт!!!<br>Добро пожаловать, ${user}!!!`
+    }`;
+  }
+}
+
+function drawFailBlock(status: string) {
+  const settings = returnLocalStorage();
+  const mainFail = document.querySelector(`.wrapper-login-fail`) as HTMLElement;
+  const mainFailP = document.querySelector(
+    `.wrapper-login-fail p`
+  ) as HTMLElement;
+  const main = document.querySelector(`.login-window_main`) as HTMLElement;
+
+  if (status === "add") {
+    mainFail.classList.add("active");
+    main.classList.add("no-active");
+    mainFailP.innerHTML = `
+    ${
+      settings.lang === "en"
+        ? "Error!!!<br>Incorrectly entered login or password data.<br>Try again!!!"
+        : "Ошибка!!!<br>Неправильно введены данные Логина или Пароля.<br>Попробуйте еще раз!!!"
+    }`;
+  }
+  if (status === "remove") {
+    mainFail.classList.remove("active");
+    main.classList.remove("no-active");
+    mainFailP.innerHTML = "";
   }
 }
 
@@ -51,11 +106,17 @@ export function closeOpenWindowRegisration() {
     crossLogin.addEventListener("click", () => {
       window.classList.remove("active");
       shadow.classList.remove("active");
+      if (name === "login") {
+        drawFailBlock("remove");
+      }
     });
 
     shadow.addEventListener("click", () => {
       shadow.classList.remove("active");
       window.classList.remove("active");
+      if (name === "login") {
+        drawFailBlock("remove");
+      }
     });
   }
 
@@ -103,29 +164,6 @@ export function closeOpenWindowRegisration() {
     clearInputFalse(nameWindow);
     clearInput(nameWindow);
   });
-}
-
-function drawSuccessBlock() {
-  const settings = returnLocalStorage();
-  const mainSuccess = document.querySelector(
-    ".wrapper-signup-success"
-  ) as HTMLElement;
-  const mainSuccessP = document.querySelector(
-    ".wrapper-signup-success p"
-  ) as HTMLElement;
-  const mainSignUp = document.querySelector(
-    ".signup-window_main"
-  ) as HTMLElement;
-
-  mainSuccess.classList.add("active");
-  mainSignUp.classList.add("no-active");
-
-  mainSuccessP.innerHTML = `
-    ${
-      settings.lang === "en"
-        ? "Authorization completed successfully!!!"
-        : "Авторизация выполнена успешно!!!"
-    }</p>`;
 }
 
 function checkInputLogNameTrue() {
@@ -196,6 +234,9 @@ export function authorizeUser() {
   const passwordUserInput = document.querySelector(
     ".signup-window_password input"
   ) as HTMLInputElement;
+  const checkLoginImg = document.querySelector(
+    ".signup-window_logName img"
+  ) as HTMLElement;
   const signupWindow = document.querySelector(".signup-window") as HTMLElement;
   const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
   const btnSignup = document.querySelector(".authorin") as HTMLElement;
@@ -206,8 +247,19 @@ export function authorizeUser() {
   const btnLoginBurger = document.querySelector(".login-burger") as HTMLElement;
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
 
-  const checkLoginImg = document.querySelector(
-    ".signup-window_logName img"
+  const loginWindow = document.querySelector(".login-window") as HTMLElement;
+  const loginLogInInput = document.querySelector(
+    ".login-window_logName input"
+  ) as HTMLInputElement;
+  const passwordLogInInput = document.querySelector(
+    ".login-window_password input"
+  ) as HTMLInputElement;
+  const btnSendLogIn = document.querySelector(
+    ".login-window_button"
+  ) as HTMLElement;
+
+  const accountNameUser = document.querySelector(
+    ".account_nameUser"
   ) as HTMLElement;
 
   loginUserInput.addEventListener("blur", () => {
@@ -231,6 +283,19 @@ export function authorizeUser() {
     clearInputFalse("signup");
   });
 
+  function activeIconandBtn(userLogin: string) {
+    btnSignup.style.display = "none";
+    btnSignupBurger.style.display = "none";
+    btnLogin.style.display = "none";
+    btnLoginBurger.style.display = "none";
+    iconUser.classList.add("active");
+    const object = {
+      userName: userLogin,
+      isRegistred: "true",
+    };
+    localStorage.setItem("userTrue", JSON.stringify(object));
+  }
+
   btnSendSignup.addEventListener("click", () => {
     const loginUser = loginUserInput.value;
     const passwordUser = passwordUserInput.value;
@@ -243,17 +308,13 @@ export function authorizeUser() {
       user.reсordUser(objUser).then((result) => {
         console.log(result);
         if (result.success === true) {
-          drawSuccessBlock();
+          drawSuccessBlock("signup", loginUser);
           loginUserInput.value = "";
           passwordUserInput.value = "";
           checkLoginImg.setAttribute("src", "");
           loginUserInput.style.color = "black";
-          btnSignup.style.display = "none";
-          btnSignupBurger.style.display = "none";
-          btnLogin.style.display = "none";
-          btnLoginBurger.style.display = "none";
-          iconUser.classList.add("active");
-          localStorage.setItem("isRegistred", "true");
+          activeIconandBtn(loginUser);
+          accountNameUser.innerHTML = loginUser;
           setTimeout(() => {
             signupWindow.classList.remove("active");
             shadow.classList.remove("active");
@@ -264,8 +325,37 @@ export function authorizeUser() {
       });
     }
   });
-}
 
-export function logInUser() {
-  console.log("login");
+  btnSendLogIn.addEventListener("click", () => {
+    const loginUser = loginLogInInput.value;
+    const passwordUser = passwordLogInInput.value;
+    const objUser: TypeUser = {
+      username: loginUser,
+      password: passwordUser,
+    };
+    console.log(objUser);
+
+    user.loginUser(objUser).then((result) => {
+      if (result.success === true) {
+        console.log(result);
+        drawSuccessBlock("login", loginUser);
+        loginLogInInput.value = "";
+        passwordLogInInput.value = "";
+        activeIconandBtn(loginUser);
+        accountNameUser.innerHTML = loginUser;
+        setTimeout(() => {
+          loginWindow.classList.remove("active");
+          shadow.classList.remove("active");
+        }, 3000);
+      } else if (result.success === false) {
+        console.log(result);
+        drawFailBlock("add");
+        setTimeout(() => {
+          drawFailBlock("remove");
+          loginLogInInput.value = "";
+          passwordLogInInput.value = "";
+        }, 2000);
+      }
+    });
+  });
 }

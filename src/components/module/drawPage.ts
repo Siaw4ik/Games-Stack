@@ -4,14 +4,15 @@ import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
 import iconUser from "../../assets/account.png";
 import iconOk from "../../assets/icons8-ок-128.svg";
+import iconNO from "../../assets/icons8-unavailable.svg";
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistred,
 } from "./localStorage";
 
 const settings = returnLocalStorage();
-const isRegistred = returnLocalStorageIsRegistred();
-console.log(isRegistred);
+const userTrue = returnLocalStorageIsRegistred();
+console.log(userTrue);
 
 function drawHTMLLayout() {
   const div = document.createElement("div");
@@ -47,14 +48,18 @@ function drawHTMLLayout() {
           </div>
           <div class="authorization">
             <div class="btn_autorization authorin" style="${
-              isRegistred === "true" ? "display: none;" : "display: flex;"
+              userTrue.isRegistred === "true"
+                ? "display: none;"
+                : "display: flex;"
             }">${settings?.lang === "en" ? "Sign up" : "Авторизация"}</div>
             <div class="btn_autorization login" style="${
-              isRegistred === "true" ? "display: none;" : "display: flex;"
+              userTrue.isRegistred === "true"
+                ? "display: none;"
+                : "display: flex;"
             }">${settings?.lang === "en" ? "Login" : "Войти"}</div>
           </div>
           <img class="${
-            isRegistred === "true" ? "iconUser active" : "iconUser"
+            userTrue.isRegistred === "true" ? "iconUser active" : "iconUser"
           }" src="${iconUser}">
           <div class="burger">
             <svg class="burger_svg" width="26" height="15" viewBox="0 0 26 15" fill="#4784ff" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +112,9 @@ function drawHTMLLayout() {
             </ul>
             <div class="authorization-burger">
               <div class="btn_autorization-burger authorin-burger" style="${
-                isRegistred === "true" ? "display: none;" : "display: flex;"
+                userTrue.isRegistred === "true"
+                  ? "display: none;"
+                  : "display: flex;"
               }">${settings?.lang === "en" ? "Sign up" : "Авторизация"}</div>
               <div class="btn_autorization-burger login-burger">${
                 settings?.lang === "en" ? "Login" : "Войти"
@@ -143,6 +150,14 @@ function drawHTMLLayout() {
           <div class="login-window_button">
             <span>${settings?.lang === "en" ? "Login" : "Войти"}</span>
           </div>
+        </div>
+        <div class="wrapper-login-success">
+          <p></p>
+          <img class="iconOk" src="${iconOk}">
+        </div>
+        <div class="wrapper-login-fail">
+          <p></p>
+          <img class="iconOk" src="${iconNO}">
         </div>
       </div>
       <div class="signup-window">
@@ -180,11 +195,16 @@ function drawHTMLLayout() {
       </div>
       <div class="account-window">
         <div class="header_account-window">
-          <img src="${iconUser}">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
-          <path d="M13 14C12.7441 14 12.4883 13.9023 12.293 13.707L0.292969 1.70703C-0.0976562 1.31641 -0.0976562 0.683594 0.292969 0.292969C0.683594 -0.0976562 1.31641 -0.0976562 1.70703 0.292969L13.707 12.293C14.0977 12.6836 14.0977 13.3164 13.707 13.707C13.5117 13.9023 13.2559 14 13 14Z" fill="#4684ff"/>
-      </svg>
+          <div class="header_account-window_up">
+            <img src="${iconUser}">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
+              <path d="M13 14C12.7441 14 12.4883 13.9023 12.293 13.707L0.292969 1.70703C-0.0976562 1.31641 -0.0976562 0.683594 0.292969 0.292969C0.683594 -0.0976562 1.31641 -0.0976562 1.70703 0.292969L13.707 12.293C14.0977 12.6836 14.0977 13.3164 13.707 13.707C13.5117 13.9023 13.2559 14 13 14Z" fill="#4684ff"/>
+            </svg>
+          </div>
+          <div class="account_nameUser">${
+            userTrue.isRegistred === "true" ? `${userTrue.userName}` : ""
+          }</div>
         </div>
         <p class="score-window">${
           settings.lang === "en" ? "Game statistics" : "Статистика игр"

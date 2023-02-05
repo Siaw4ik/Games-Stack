@@ -325,7 +325,8 @@ body.lock {
   flex-direction: column;
 }
 
-.signup-window_main.no-active {
+.signup-window_main.no-active,
+.login-window_main.no-active {
   display: none;
 }
 
@@ -372,7 +373,9 @@ body.lock {
   margin-top: 20px;
 }
 
-.wrapper-signup-success {
+.wrapper-signup-success,
+.wrapper-login-success,
+.wrapper-login-fail {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -381,14 +384,19 @@ body.lock {
   padding: 20px 0;
 }
 
-.wrapper-signup-success.active {
+.wrapper-signup-success.active,
+.wrapper-login-success.active,
+.wrapper-login-fail.active {
   display: flex;
 }
 
-.wrapper-signup-success p{
+.wrapper-signup-success p,
+.wrapper-login-success p,
+.wrapper-login-fail p{
   font-size: 20px;
   font-weight: 600;
   margin: 0;
+  text-align: center;
 }
 
 .signup-window_logName{
@@ -477,10 +485,22 @@ body.lock {
 
 .header_account-window {
   display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  gap: 5px;
+}
+
+.header_account-window_up {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+}
+
+.account_nameUser {
+  color: #2D73FF;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .account-window img {
