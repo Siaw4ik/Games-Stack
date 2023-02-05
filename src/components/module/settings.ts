@@ -122,6 +122,9 @@ export function toggleLang() {
   ) as HTMLElement;
   const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
   const scoreWindow = document.querySelector(".score-window") as HTMLElement;
+  const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = "";
+  // main.appendChild(createGamesInfoSection());
 
   langRu.addEventListener("click", () => {
     langRu.classList.add("lang-active");

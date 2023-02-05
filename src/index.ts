@@ -12,10 +12,10 @@ import {
   enableRoutChange,
 } from "./components/module/changePage";
 import {
-  loginSystem,
-  signupSystem,
   authorizeUser,
-} from "./components/module/register";
+  closeOpenWindowRegisration,
+} from "./components/registration/register";
+import { clickingIconUserandLogout } from "./components/registration/accountUser";
 
 enableRoutChange();
 drawPage();
@@ -28,8 +28,8 @@ toggleVolume();
 toggleLight();
 toggleLang();
 
-loginSystem();
-signupSystem();
 authorizeUser();
+closeOpenWindowRegisration();
+clickingIconUserandLogout();
 
 console.log("start page");

@@ -12,7 +12,6 @@ body.lock {
   flex-direction: column;
   justify-content: space-between;
   overflow-x: hidden;
-  height: 200vh;
 }
 
 /* .wrapper.dark {
@@ -359,7 +358,8 @@ body.lock {
   flex-direction: column;
 }
 
-.signup-window_main.no-active {
+.signup-window_main.no-active,
+.login-window_main.no-active {
   display: none;
 }
 
@@ -406,7 +406,9 @@ body.lock {
   margin-top: 20px;
 }
 
-.wrapper-signup-success {
+.wrapper-signup-success,
+.wrapper-login-success,
+.wrapper-login-fail {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -415,14 +417,19 @@ body.lock {
   padding: 20px 0;
 }
 
-.wrapper-signup-success.active {
+.wrapper-signup-success.active,
+.wrapper-login-success.active,
+.wrapper-login-fail.active {
   display: flex;
 }
 
-.wrapper-signup-success p{
+.wrapper-signup-success p,
+.wrapper-login-success p,
+.wrapper-login-fail p{
   font-size: 20px;
   font-weight: 600;
   margin: 0;
+  text-align: center;
 }
 
 .signup-window_logName{
@@ -438,7 +445,7 @@ body.lock {
   margin: 0;
   background-color: #00bbffe9;
   color: black;
-  width: 190px;
+  width: 195px;
   position: absolute;
   top: -75px;
   left: 0px;
@@ -464,7 +471,8 @@ body.lock {
   display: block;
 }
 
-.check-login-down{
+.login_check-login-down,
+.signup_check-login-down {
   margin: 0;
   display: flex;
   justify-content: end;
@@ -510,10 +518,22 @@ body.lock {
 
 .header_account-window {
   display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  gap: 5px;
+}
+
+.header_account-window_up {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+}
+
+.account_nameUser {
+  color: #2D73FF;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .account-window img {
@@ -534,7 +554,7 @@ body.lock {
 }
 
 .main {
-  height: calc(100vh - 125px - 60px);
+  min-height: calc(100vh - 125px - 16px - 60px);
   /* background-color: rgb(249, 246, 238); */
   /* height: 100vh;
   width: 100vw;
@@ -606,7 +626,7 @@ body.lock {
 }
 
 .footer.dark{
-  /* background-color: #252d42; */
+  background-color: #181A21;
   color: white;
   /* box-shadow: 0 -8px 16px rgb(0 0 0 / 75%); */
 }
@@ -720,7 +740,7 @@ body.lock {
   }
 
   .main {
-    height: calc(100vh - 58px - 60px);
+    min-height: calc(100vh - 58px - 16px - 60px);
   }
 }
 
@@ -771,7 +791,7 @@ body.lock {
   }
 
   .main {
-    height: calc(100vh - 52px - 60px);
+    min-height: calc(100vh - 52px - 16px - 60px);
   }
 }
 
@@ -832,7 +852,7 @@ body.lock {
     gap: 5px;
   }
   .main {
-    height: calc(100vh - 40px - 60px);
+    min-height: calc(100vh - 40px - 16px - 60px);
   }
 }
 
@@ -842,7 +862,7 @@ body.lock {
   }
 
   .main {
-    height: calc(100vh - 40px - 50px);
+    min-height: calc(100vh - 40px - 16px - 50px);
   }
 
   .footer {

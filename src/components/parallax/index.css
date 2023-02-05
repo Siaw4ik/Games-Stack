@@ -16,9 +16,9 @@
 }
 
 .parallax_container {
+  height: calc(100vh - 125px - 60px);
   position: relative;
   z-index: 2;
-  height: 120%;
   width: 120%;
   top: -10%;
   left: -10%;

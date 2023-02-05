@@ -1,8 +1,6 @@
 import { gamesData } from "./gamesData";
 import { returnLocalStorage } from "../module/localStorage";
 import "./index.css";
-// import rectangleDark from "../../assets/rectangle_dark.svg";
-// import rectangleLight from "../../assets/rectangle_light.svg";
 
 export function createGamesInfoSection(): HTMLDivElement {
   const language = returnLocalStorage().lang;
@@ -31,14 +29,13 @@ export function createGamesInfoSection(): HTMLDivElement {
             </div>
           </div>
           <div class="game_section_picture">
-            <img class="logoHeader" src="${obj.pictureUrl}" alt="game picture">
+            <img class="logo_games_picture" src="${obj.pictureUrl}" alt="game picture">
           </div>
         </div>
         <div class="game_section_btn">
           <p class="game_btn" id="${obj.id}">${obj.button}</p>
         </div>
         <div class="game_section_line">
-          <hr>
         </div>
       `;
 
