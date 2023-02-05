@@ -1,106 +1,107 @@
-import { User } from "./User";
-import { TypeUser } from "./types";
+import { User } from "../module/User";
+import { TypeUser } from "../module/types";
 /* import iconOk from "../../assets/icons8-ок-128.svg"; */
 import VImg from "../../assets/icons8-галочка.svg";
 import XImg from "../../assets/1675432350.svg";
 
-import { returnLocalStorage } from "./localStorage";
+import { returnLocalStorage } from "../module/localStorage";
 
-export function loginSystem() {
-  const btnLogin = document.querySelector(".login") as HTMLElement;
-  const btnLoginBurger = document.querySelector(".login-burger") as HTMLElement;
-  const crossLogin = document.querySelector(
-    ".login-window_cross"
-  ) as HTMLElement;
-  const loginWindow = document.querySelector(".login-window") as HTMLElement;
-  const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
-
-  function drawWindowLogin() {
-    loginWindow.classList.add("active");
-    shadow.classList.add("active");
-  }
-
-  btnLogin.addEventListener("click", () => {
-    drawWindowLogin();
-  });
-
-  btnLoginBurger.addEventListener("click", () => {
-    drawWindowLogin();
-  });
-
-  crossLogin.addEventListener("click", () => {
-    loginWindow.classList.remove("active");
-    shadow.classList.remove("active");
-  });
-
-  shadow.addEventListener("click", () => {
-    shadow.classList.remove("active");
-    loginWindow.classList.remove("active");
-  });
-}
-
-function clearInputFalse() {
-  const loginUserInput = document.querySelector(
-    ".signup-window_logName input"
-  ) as HTMLInputElement;
+function clearInputFalse(name: string) {
   const checkLoginImg = document.querySelector(
-    ".signup-window_logName img"
+    `.${name}-window_logName img`
   ) as HTMLElement;
   const checkLoginDown = document.querySelector(
-    ".check-login-down"
+    `.${name}_check-login-down`
   ) as HTMLElement;
   const checkLogin = document.querySelector(".check-login") as HTMLElement;
 
-  loginUserInput.style.color = "black";
-  checkLoginDown.innerHTML = "";
   checkLoginDown.innerHTML = "";
   checkLoginImg.setAttribute("src", "");
-  checkLogin.classList.remove("active");
+  if (name === "signup") {
+    checkLogin.classList.remove("active");
+  }
 }
 
-export function signupSystem() {
+export function closeOpenWindowRegisration() {
+  const btnLogin = document.querySelector(".login") as HTMLElement;
+  const btnLoginBurger = document.querySelector(".login-burger") as HTMLElement;
   const btnSignup = document.querySelector(".authorin") as HTMLElement;
   const btnSignupBurger = document.querySelector(
     ".authorin-burger"
   ) as HTMLElement;
-  const crossLogin = document.querySelector(
-    ".signup-window_cross"
-  ) as HTMLElement;
-  const signupWindow = document.querySelector(".signup-window") as HTMLElement;
-  const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
-  const loginUserInput = document.querySelector(
-    ".signup-window_logName input"
-  ) as HTMLInputElement;
-  const passwordUserInput = document.querySelector(
-    ".signup-window_password input"
-  ) as HTMLInputElement;
+
+  function openWindowRegistration(name: string) {
+    const window = document.querySelector(`.${name}-window`) as HTMLElement;
+    const shadow = document.querySelector(
+      `.shadow_login-window`
+    ) as HTMLElement;
+    window.classList.add("active");
+    shadow.classList.add("active");
+  }
+
+  function closeWindowRegistration(name: string) {
+    const window = document.querySelector(`.${name}-window`) as HTMLElement;
+    const crossLogin = document.querySelector(
+      `.${name}-window_cross`
+    ) as HTMLElement;
+    const shadow = document.querySelector(
+      `.shadow_login-window`
+    ) as HTMLElement;
+
+    crossLogin.addEventListener("click", () => {
+      window.classList.remove("active");
+      shadow.classList.remove("active");
+    });
+
+    shadow.addEventListener("click", () => {
+      shadow.classList.remove("active");
+      window.classList.remove("active");
+    });
+  }
+
+  function clearInput(name: string) {
+    const loginInput = document.querySelector(
+      `.${name}-window_logName input`
+    ) as HTMLInputElement;
+    const passwordInput = document.querySelector(
+      `.${name}-window_password input`
+    ) as HTMLInputElement;
+
+    loginInput.style.color = "black";
+    loginInput.value = "";
+    passwordInput.value = "";
+  }
+
+  btnLogin.addEventListener("click", () => {
+    const nameWindow = "login";
+    openWindowRegistration(nameWindow);
+    closeWindowRegistration(nameWindow);
+    clearInputFalse(nameWindow);
+    clearInput(nameWindow);
+  });
+
+  btnLoginBurger.addEventListener("click", () => {
+    const nameWindow = "login";
+    openWindowRegistration(nameWindow);
+    closeWindowRegistration(nameWindow);
+    clearInputFalse(nameWindow);
+    clearInput(nameWindow);
+  });
 
   btnSignup.addEventListener("click", () => {
-    signupWindow.classList.add("active");
-    shadow.classList.add("active");
-    clearInputFalse();
+    const nameWindow = "signup";
+    openWindowRegistration(nameWindow);
+    closeWindowRegistration(nameWindow);
+    clearInputFalse(nameWindow);
+    clearInput(nameWindow);
   });
 
   btnSignupBurger.addEventListener("click", () => {
-    signupWindow.classList.add("active");
-    shadow.classList.add("active");
-    clearInputFalse();
-  });
-
-  crossLogin.addEventListener("click", () => {
-    loginUserInput.value = "";
-    passwordUserInput.value = "";
-    clearInputFalse();
-    signupWindow.classList.remove("active");
-    shadow.classList.remove("active");
-  });
-
-  shadow.addEventListener("click", () => {
-    loginUserInput.value = "";
-    passwordUserInput.value = "";
-    clearInputFalse();
-    shadow.classList.remove("active");
-    signupWindow.classList.remove("active");
+    const nameWindow = "signup";
+    openWindowRegistration(nameWindow);
+    closeWindowRegistration(nameWindow);
+    clearInputFalse(nameWindow);
+    clearInput(nameWindow);
   });
 }
 
@@ -130,7 +131,7 @@ function drawSuccessBlock() {
 function checkInputLogNameTrue() {
   const checkLogin = document.querySelector(".check-login") as HTMLElement;
   const checkLoginDown = document.querySelector(
-    ".check-login-down"
+    ".signup_check-login-down"
   ) as HTMLElement;
   const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
@@ -165,7 +166,7 @@ function checkInputLogNameTrue() {
 
 function checkInputLogNameFalse() {
   const checkLoginDown = document.querySelector(
-    ".check-login-down"
+    ".signup_check-login-down"
   ) as HTMLElement;
   const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
@@ -205,23 +206,6 @@ export function authorizeUser() {
   const btnLoginBurger = document.querySelector(".login-burger") as HTMLElement;
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
 
-  const accountWindow = document.querySelector(
-    ".account-window"
-  ) as HTMLElement;
-  const shadowAccount = document.querySelector(
-    ".shadow_account-window"
-  ) as HTMLElement;
-  /*  const accountWindowP = document.querySelectorAll(".account-window p"); */
-  const crossAccWindow = document.querySelector(
-    ".account-window svg"
-  ) as HTMLElement;
-  const btnLogout = document.querySelector(".btn-logout") as HTMLElement;
-  const mainSuccess = document.querySelector(
-    ".wrapper-signup-success"
-  ) as HTMLElement;
-  const mainSignUp = document.querySelector(
-    ".signup-window_main"
-  ) as HTMLElement;
   const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
   ) as HTMLElement;
@@ -243,7 +227,8 @@ export function authorizeUser() {
   });
 
   loginUserInput.addEventListener("input", () => {
-    clearInputFalse();
+    loginUserInput.style.color = "black";
+    clearInputFalse("signup");
   });
 
   btnSendSignup.addEventListener("click", () => {
@@ -279,34 +264,8 @@ export function authorizeUser() {
       });
     }
   });
+}
 
-  iconUser.addEventListener("click", () => {
-    accountWindow.classList.add("active");
-    shadowAccount.classList.add("active");
-  });
-
-  shadowAccount.addEventListener("click", () => {
-    accountWindow.classList.remove("active");
-    shadowAccount.classList.remove("active");
-  });
-
-  crossAccWindow.addEventListener("click", () => {
-    accountWindow.classList.remove("active");
-    shadowAccount.classList.remove("active");
-  });
-
-  btnLogout.addEventListener("click", () => {
-    accountWindow.classList.remove("active");
-    shadowAccount.classList.remove("active");
-
-    btnSignup.style.display = "flex";
-    btnSignupBurger.style.display = "flex";
-    btnLogin.style.display = "flex";
-    btnLoginBurger.style.display = "flex";
-    iconUser.classList.remove("active");
-    localStorage.setItem("isRegistred", "false");
-
-    mainSuccess.classList.remove("active");
-    mainSignUp.classList.remove("no-active");
-  });
+export function logInUser() {
+  console.log("login");
 }

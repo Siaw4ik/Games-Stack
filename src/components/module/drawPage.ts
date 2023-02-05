@@ -133,7 +133,9 @@ function drawHTMLLayout() {
           <div class="login-window_logName">
             <p>${settings?.lang === "en" ? "Login:" : "Логин:"}</p>
             <input type="text">
+            <img src="">
           </div>
+          <p class="login_check-login-down"></p>
           <div class="login-window_password">
             <p>${settings?.lang === "en" ? "Password:" : "Пароль:"}</p>
             <input type="text">
@@ -160,7 +162,7 @@ function drawHTMLLayout() {
             <img src="">
             <div class="check-login"></div>
           </div>
-          <p class="check-login-down"></p>
+          <p class="signup_check-login-down"></p>
           <div class="signup-window_password">
             <p>${settings?.lang === "en" ? "Password:" : "Пароль:"}</p>
             <input type="text">
