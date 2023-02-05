@@ -4,6 +4,8 @@ import { game3 } from "../game3";
 import { game4 } from "../game4";
 import { result } from "../results";
 import { parallax } from "../parallax";
+import { createGamesInfoSection } from "../gamesInfo";
+import { returnLocalStorage } from "./localStorage";
 
 function setButtonChooseAtr(hash: string) {
   const pages = document.querySelectorAll(".pages p");
@@ -23,6 +25,7 @@ export function getLocationHash(): string {
 }
 
 export function drawHomePage() {
+  const { style } = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const div = document.createElement("div");
@@ -39,6 +42,17 @@ export function drawHomePage() {
  `;
 
   main.appendChild(div);
+  main.appendChild(createGamesInfoSection());
+
+  const gamesInfoContainer = document.querySelector(
+    ".games_info_container"
+  ) as HTMLElement;
+
+  if (style === "dark") {
+    gamesInfoContainer.classList.add("dark");
+  } else if (style === "light") {
+    gamesInfoContainer.classList.remove("dark");
+  }
 
   setButtonChooseAtr("about");
   parallax();

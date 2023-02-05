@@ -1,0 +1,28 @@
+.games_info_container {
+  background: url(../../assets/rectangle_light.svg) top / cover no-repeat;
+  color: black;
+  position: relative;
+  bottom: 192px;
+  left: 0;
+  z-index: 10;
+}
+
+.games_info_container.dark {
+  background: url(../../assets/rectangle_dark.svg) top / cover no-repeat;
+  color: white;;
+  bottom: 192px;
+  left: 0;
+  z-index: 10;
+}
+
+.games_info_container .game_section_line {
+  border-bottom: 1px solid rgba(0, 0, 0);
+  border-top: 2px solid rgba(0, 0, 0);
+  padding: 3px 0 0 0;
+}
+
+.games_info_container.dark .game_section_line {
+  border-bottom: 1px solid rgba(255, 255, 255);
+  border-top: 2px solid rgba(255, 255, 255);
+  padding: 3px 0 0 0;
+}

@@ -263,13 +263,16 @@ function drawStyleLightOrDark() {
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
   ) as HTMLElement;
-  console.log(containerHeaderMain);
+  // const gamesInfoContainer = document.querySelector(
+  //   ".games_info_container"
+  // ) as HTMLElement;
   if (settings.style === "dark") {
     header.classList.add("dark");
     footer.classList.add("dark");
     main.classList.add("dark");
     menu.classList.add("dark");
     containerHeaderMain.classList.add("dark");
+    // gamesInfoContainer.classList.add("dark");
     menuItem.forEach((item) => item.classList.add("dark"));
     btnLight.setAttribute("src", dark);
     btnLight.classList.remove("light");
@@ -279,6 +282,7 @@ function drawStyleLightOrDark() {
     main.classList.remove("dark");
     menu.classList.remove("dark");
     containerHeaderMain.classList.remove("dark");
+    // gamesInfoContainer.classList.remove("dark");
     menuItem.forEach((item) => item.classList.remove("dark"));
     btnLight.setAttribute("src", light);
   }

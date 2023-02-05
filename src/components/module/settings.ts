@@ -48,6 +48,9 @@ export function toggleLight() {
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
   ) as HTMLElement;
+  const gamesInfoContainer = document.querySelector(
+    ".games_info_container"
+  ) as HTMLElement;
 
   function changeClassDark() {
     btnLight.classList.toggle("light");
@@ -56,6 +59,7 @@ export function toggleLight() {
     main.classList.toggle("dark");
     menu.classList.toggle("dark");
     containerHeaderMain.classList.toggle("dark");
+    gamesInfoContainer.classList.toggle("dark");
 
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
