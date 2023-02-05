@@ -89,6 +89,7 @@ export const startGame = () => {
     const question = document.getElementById("game1-question") as HTMLElement;
     const answersBlocks = document.querySelectorAll(".game1-main__answer");
     if ((<HTMLButtonElement>e.target).id === "game1-startBtn") {
+      clearInterval(timer);
       question.innerHTML = questionsForGame[0].question;
       answersBlocks.forEach((element, i) => {
         element.innerHTML = questionsForGame[0].answers[i];
@@ -239,6 +240,9 @@ export const gameAllfunc = () => {
 export function game1() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
+  clearInterval(timer);
+  minutes = 0;
+  seconds = 0;
   const page = `<div class="game1-main__container _game1-container">
   <h1 class="game1-main__title">Conversion types-game</h1>
   <div class="game1-main__settings">
