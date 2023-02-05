@@ -1,6 +1,7 @@
 import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
 import { Settings } from "./types";
+import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 
 const settings: Settings = {
   lang: "en",
@@ -153,6 +154,7 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Выйти";
     scoreWindow.innerHTML = "Статистика игр";
+    redrawGameInfoSectionForToggleLang(settings.lang);
   });
 
   langEn.addEventListener("click", () => {
@@ -179,5 +181,6 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Logout";
     scoreWindow.innerHTML = "Game statistics";
+    redrawGameInfoSectionForToggleLang(settings.lang);
   });
 }
