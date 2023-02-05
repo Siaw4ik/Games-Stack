@@ -44,3 +44,27 @@ export function createGamesInfoSection(): HTMLDivElement {
 
   return gamesInfoSection;
 }
+
+export function redrawGameInfoSectionForToggleLang(language: string) {
+  const sections = document.querySelectorAll(".game_section");
+  sections.forEach((section) => {
+    const id = section.getAttribute("class")?.slice(0, 5);
+    console.log(id);
+
+    const dataArr = language === "ru" ? gamesData.ru : gamesData.en;
+    if (id) {
+      const obj = dataArr.find((elem) => elem.id === id);
+      (section.querySelector(
+        ".game_name"
+      ) as HTMLElement).innerHTML = `${obj?.name}`;
+
+      (section.querySelector(
+        ".game_description"
+      ) as HTMLElement).innerHTML = `${obj?.description}`;
+
+      (section.querySelector(
+        ".game_rules"
+      ) as HTMLElement).innerHTML = `${obj?.rules}`;
+    }
+  });
+}
