@@ -1,0 +1,51 @@
+.games_info_container {
+  background: url(../../assets/rectangle_light.svg) top / cover no-repeat;
+  color: black;
+  position: relative;
+  left: 0;
+  z-index: 10;
+  margin-top: -105px;
+  padding-right: 10vw;
+  padding-left: 10vw;
+  padding-top: 180px;
+  padding-bottom: 40px;
+}
+
+.games_info_container.dark {
+  background: url(../../assets/rectangle_dark.svg) top / cover no-repeat;
+  color: white;;
+  left: 0;
+  z-index: 10;
+  margin-top: -105px;
+  padding-right: 10vw;
+  padding-left: 10vw;
+  padding-top: 180px;
+  padding-bottom: 40px;
+}
+
+.games_info_container .game_section_line {
+  border-bottom: 1px solid rgba(0, 0, 0);
+  border-top: 2px solid rgba(0, 0, 0);
+  padding: 1px 0 0 0;
+}
+
+.games_info_container.dark .game_section_line {
+  border-bottom: 1px solid rgba(255, 255, 255);
+  border-top: 2px solid rgba(255, 255, 255);
+  padding: 3px 0 0 0;
+}
+
+.game_section {
+  display: flex;
+  flex-direction: column;
+}
+
+.game_section_heder {
+  display: flex;
+}
+
+.logo_games_picture {
+  padding: 10px 0 0 20px;
+  height: 240px;
+  border-radius: 50px;
+}
