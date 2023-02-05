@@ -30,9 +30,6 @@ export function drawHomePage() {
   div.innerHTML = `
     <div class="parallax_images images-parallax">
       <div class="images-parallax_item">
-        <div class="images-parallax_galaxy"></div>
-      </div>
-      <div class="images-parallax_item">
         <div class="images-parallax_death-star"></div>
       </div>
       <div class="images-parallax_item">

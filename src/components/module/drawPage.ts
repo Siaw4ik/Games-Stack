@@ -4,6 +4,7 @@ import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
 import iconUser from "../../assets/account.png";
 import iconOk from "../../assets/icons8-ок-128.svg";
+import logoHeder from "../../assets/logo.svg";
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistred,
@@ -15,15 +16,20 @@ console.log(isRegistred);
 
 function drawHTMLLayout() {
   const div = document.createElement("div");
-  div.setAttribute("class", "wrapper");
+  div.classList.add("wrapper");
   div.innerHTML = `
   <div class="conteiner_header-main">
+    <div class="parallax_background_container">
+      <div class="parallax_background">
+        <div class="images-parallax_galaxy"></div>
+      </div>
+    </div>
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
           <a class="wrap_logo_a" href="../../#about">
             <div class="logo">
-              <p><span class="one-part">GAME </span><span class="two-part"> STACK</span></p>
+              <img class="logoHeader" src="${logoHeder}">
             </div>
           </a>
         </div>
@@ -254,11 +260,16 @@ function drawStyleLightOrDark() {
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
+  const containerHeaderMain = document.querySelector(
+    ".conteiner_header-main"
+  ) as HTMLElement;
+  console.log(containerHeaderMain);
   if (settings.style === "dark") {
     header.classList.add("dark");
     footer.classList.add("dark");
     main.classList.add("dark");
     menu.classList.add("dark");
+    containerHeaderMain.classList.add("dark");
     menuItem.forEach((item) => item.classList.add("dark"));
     btnLight.setAttribute("src", dark);
     btnLight.classList.remove("light");
@@ -267,6 +278,7 @@ function drawStyleLightOrDark() {
     footer.classList.remove("dark");
     main.classList.remove("dark");
     menu.classList.remove("dark");
+    containerHeaderMain.classList.remove("dark");
     menuItem.forEach((item) => item.classList.remove("dark"));
     btnLight.setAttribute("src", light);
   }

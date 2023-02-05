@@ -1,10 +1,27 @@
+.parallax_background_container {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.parallax_background {
+  position: absolute;
+  height: 120%;
+  width: 120%;
+  top: -10%;
+  left: -10%;
+}
+
 .parallax_container {
   position: relative;
-    z-index: 2;
-    height: 120%;
-    width: 120%;
-    top: -10%;
-    left: -10%;
+  z-index: 2;
+  height: 120%;
+  width: 120%;
+  top: -10%;
+  left: -10%;
 }
 
 .parallax_images {
@@ -41,7 +58,7 @@
   left: 0;
 }
 
-.main.dark .images-parallax_galaxy {
+.conteiner_header-main.dark .images-parallax_galaxy {
   background: url(../../assets/parallax_galaxy.png) top / cover no-repeat;
 }
 
