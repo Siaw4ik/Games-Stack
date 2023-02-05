@@ -16,6 +16,7 @@ import {
   closeOpenWindowRegisration,
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
+import { gameAllfunc } from "./components/game1";
 
 enableRoutChange();
 drawPage();
@@ -31,5 +32,7 @@ toggleLang();
 authorizeUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
+
+gameAllfunc();
 
 console.log("start page");
