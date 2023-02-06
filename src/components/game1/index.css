@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 100;
 }
 ._game1-container {
   max-width: 1630px;

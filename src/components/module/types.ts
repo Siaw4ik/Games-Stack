@@ -39,7 +39,19 @@ export type ScoreGamesUserSort = {
   option: string;
 };
 
-/* export type ScoreGamesUser = {
-  username: string,
-  option: string
-} */
+export type ScoreGameUserSort = {
+  success: boolean;
+  username: string;
+  scores: object;
+};
+
+export type RequestTop10 = {
+  gamename: string;
+  option: string;
+};
+
+export type ResultTop10 = {
+  success: boolean;
+  gamename: string;
+  scores: object;
+};

@@ -1,4 +1,4 @@
-/* import { renderNewPage } from "../module/changePage"; */
+import { renderNewPage } from "../module/changePage";
 
 export function clickingIconUserandLogout() {
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
@@ -74,6 +74,6 @@ export function clickingIconUserandLogout() {
   });
 
   accountStatistic.addEventListener("click", () => {
-    window.location.hash = "#result";
+    renderNewPage("result");
   });
 }
