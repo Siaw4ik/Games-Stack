@@ -4,14 +4,12 @@
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #000000;
-  background: #d9d9d9;
+  color: white;
   min-height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 100;
 }
 ._game1-container {
   max-width: 1630px;

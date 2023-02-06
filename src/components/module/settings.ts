@@ -41,7 +41,7 @@ export function toggleVolume() {
 export function toggleLight() {
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const header = document.querySelector(".header") as HTMLElement;
-  const footer = document.querySelector(".footer") as HTMLElement;
+  const footer = document.querySelector(".footer_wrapper") as HTMLElement;
   const menu = document.querySelector(".burger_menu") as HTMLElement;
   const menuItem = document.querySelectorAll(".burger_nav_ul");
   const main = document.querySelector(".main") as HTMLElement;
@@ -126,9 +126,6 @@ export function toggleLang() {
   ) as HTMLElement;
   const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
   const scoreWindow = document.querySelector(".score-window") as HTMLElement;
-  /* const main = document.querySelector(".main") as HTMLElement;
-  main.innerHTML = ""; */
-  // main.appendChild(createGamesInfoSection());
 
   langRu.addEventListener("click", () => {
     langRu.classList.add("lang-active");

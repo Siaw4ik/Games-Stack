@@ -220,23 +220,25 @@ function drawHTMLLayout() {
     </header>
     <main class="main"></main>
   </div>
-  <footer class="footer">
-    <div class="github">
-      <a class="social-link" href="https://github.com/bulrock" target="_blank">
+  <div class="footer_wrapper">
+    <footer class="footer">
+      <div class="github">
+        <a class="social-link" href="https://github.com/bulrock" target="_blank">
           <img class="icon github-icon1" src="" alt="github icon1"/>
+        </a>
+        <a class="social-link" href="https://github.com/Siaw4ik" target="_blank">
+          <img class="icon github-icon2" src="" alt="github icon2"/>
+        </a>
+        <a class="social-link" href="https://github.com/pahomomg" target="_blank">
+          <img class="icon github-icon3" src="" alt="github icon2"/>
+        </a>
+      </div>
+      <p>Game Stack 2023</p>
+      <a href="https://rs.school/js/" class="social-link">
+          <img class="logoRS" src="" alt="rs school logo"/>
       </a>
-      <a class="social-link" href="https://github.com/Siaw4ik" target="_blank">
-        <img class="icon github-icon2" src="" alt="github icon2"/>
-      </a>
-      <a class="social-link" href="https://github.com/pahomomg" target="_blank">
-        <img class="icon github-icon3" src="" alt="github icon2"/>
-      </a>
+    </footer>
   </div>
-  <p>Game Stack 2023</p>
-  <a href="https://rs.school/js/" class="social-link">
-      <img class="logoRS" src="" alt="rs school logo"/>
-  </a>
-  </footer>
   `;
   document.body.appendChild(div);
 
@@ -277,7 +279,7 @@ function addLinkCithubRS() {
 
 function drawStyleLightOrDark() {
   const header = document.querySelector(".header") as HTMLElement;
-  const footer = document.querySelector(".footer") as HTMLElement;
+  const footer = document.querySelector(".footer_wrapper") as HTMLElement;
   const main = document.querySelector(".main") as HTMLElement;
   const btnLight = document.querySelector(".btn-style") as HTMLElement;
   const menu = document.querySelector(".burger_menu") as HTMLElement;
@@ -285,16 +287,12 @@ function drawStyleLightOrDark() {
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
   ) as HTMLElement;
-  // const gamesInfoContainer = document.querySelector(
-  //   ".games_info_container"
-  // ) as HTMLElement;
   if (settings.style === "dark") {
     header.classList.add("dark");
     footer.classList.add("dark");
     main.classList.add("dark");
     menu.classList.add("dark");
     containerHeaderMain.classList.add("dark");
-    // gamesInfoContainer.classList.add("dark");
     menuItem.forEach((item) => item.classList.add("dark"));
     btnLight.setAttribute("src", dark);
     btnLight.classList.remove("light");
@@ -304,7 +302,7 @@ function drawStyleLightOrDark() {
     main.classList.remove("dark");
     menu.classList.remove("dark");
     containerHeaderMain.classList.remove("dark");
-    // gamesInfoContainer.classList.remove("dark");
+
     menuItem.forEach((item) => item.classList.remove("dark"));
     btnLight.setAttribute("src", light);
   }
