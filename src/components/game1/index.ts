@@ -10,239 +10,15 @@ questions.sort(
 questions.forEach((e) => e.answers.sort(() => Math.random() - 0.5));
 let questionsForGame = questions;
 let answersCount = 0;
-let nextBtnClicksCount = 1;
-let minutes = 0;
-let seconds = 0;
-/* let timer: NodeJS.Timer; */
+let questionsAnsweredCount = 0;
+let seconds = 60;
 let timer: ReturnType<typeof setInterval>;
-
-function startTimer() {
-  const minute = document.getElementById("game1-minute") as HTMLElement;
-  const second = document.getElementById("game1-second") as HTMLElement;
-  minute.innerText = `${minutes}:`;
-  seconds += 1;
-  if (seconds < 9) {
-    second.innerText = `0${seconds}`;
-  }
-  if (seconds > 9) {
-    second.innerText = seconds.toString();
-  }
-  if (seconds > 59) {
-    minutes += 1;
-    minute.innerText = `${minutes} :`;
-    seconds = 0;
-    second.innerText = `0${seconds}`;
-  }
-}
-function viewFinishMessage() {
-  console.log("winn");
-  /* const minute = document.getElementById("game1-minute") as HTMLElement;
-  const second = document.getElementById("game1-second") as HTMLElement; */
-  const messageText = document.getElementById(
-    "game1-message-text"
-  ) as HTMLElement;
-  messageText.innerText = `You are completed with ${answersCount} correct answers`;
-  const completeContainer = document.getElementById(
-    "game1-complete"
-  ) as HTMLElement;
-  completeContainer.classList.add("game1-open");
-  function closeCompleteMessage(): void {
-    if (completeContainer.classList.contains("game1-open")) {
-      document.body.addEventListener("click", (e) => {
-        if (
-          (<HTMLButtonElement>e.target).closest("#game1-message-close")
-          // ||  !(<HTMLButtonElement>e.target).closest("#game1-message")
-        ) {
-          completeContainer.classList.remove("game1-open");
-        }
-      });
-    }
-  }
-  closeCompleteMessage();
-}
-
-export const startGame = () => {
-  /*   const startBtn = document.getElementById(
-    "game1-startBtn"
-  ) as HTMLButtonElement;
-  const resetBtn = document.getElementById(
-    "game1-resetBtn"
-  ) as HTMLButtonElement;
-  const mainGame = document.getElementById("game1-main-game") as HTMLElement;
-  const startMessage = document.getElementById(
-    "game1-start-message"
-  ) as HTMLDivElement;
-  const question = document.getElementById("game1-question") as HTMLElement;
-  const answersBlocks = document.querySelectorAll(".game1-main__answer"); */
-
-  document.body.addEventListener("click", (e) => {
-    const startBtn = document.getElementById(
-      "game1-startBtn"
-    ) as HTMLButtonElement;
-    const resetBtn = document.getElementById(
-      "game1-resetBtn"
-    ) as HTMLButtonElement;
-    const mainGame = document.getElementById("game1-main-game") as HTMLElement;
-    const startMessage = document.getElementById(
-      "game1-start-message"
-    ) as HTMLDivElement;
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const answersBlocks = document.querySelectorAll(".game1-main__answer");
-    if ((<HTMLButtonElement>e.target).id === "game1-startBtn") {
-      clearInterval(timer);
-      question.innerHTML = questionsForGame[0].question;
-      answersBlocks.forEach((element, i) => {
-        element.innerHTML = questionsForGame[0].answers[i];
-        return element;
-      });
-      startBtn.disabled = true;
-      resetBtn.disabled = false;
-      mainGame.style.display = "block";
-      startMessage.style.display = "none";
-      timer = setInterval(startTimer, 1000);
-    }
-  });
-};
-
-export const clickAnswer = (): void => {
-  /* const answersAll = Array.from(
-    document.querySelectorAll(".game1-main__answer")
-  );
-  const question = document.getElementById("game1-question") as HTMLElement;
-  const correctAnswers = document.getElementById(
-    "game1-answers-count"
-  ) as HTMLElement;
-  const nextBtn = document.getElementById("game1-nextBtn") as HTMLButtonElement; */
-  document.body.addEventListener("click", (e) => {
-    const answersAll = Array.from(
-      document.querySelectorAll(".game1-main__answer")
-    );
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const correctAnswers = document.getElementById(
-      "game1-answers-count"
-    ) as HTMLElement;
-    const nextBtn = document.getElementById(
-      "game1-nextBtn"
-    ) as HTMLButtonElement;
-
-    const questionAtNow: Question = questionsForGame.filter(
-      (el) => el.question === question.innerHTML
-    )[0];
-    const { correct } = questionAtNow;
-    const answer = e.target as HTMLElement;
-    if ((<HTMLDivElement>e.target).className === "game1-main__answer") {
-      clearInterval(timer);
-      if (
-        answer.innerHTML === correct &&
-        answersAll.filter((el) => el.classList.contains("game1-correct"))
-          .length === 0 &&
-        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
-          .length === 0
-      ) {
-        answer.classList.add("game1-correct");
-        answersCount += 1;
-        correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
-        nextBtn.disabled = false;
-      } else if (answer.innerHTML !== correct) {
-        answersAll
-          .filter((el) => el.innerHTML !== correct)
-          .forEach((el) => el.classList.add("game1-incorrect"));
-        answersAll
-          .filter((el) => el.innerHTML === correct)[0]
-          .classList.add("game1-correct");
-        nextBtn.disabled = false;
-      }
-      if (
-        nextBtnClicksCount === 15 &&
-        answersAll.filter((el) => el.classList.contains("game1-correct"))
-          .length > 0
-      ) {
-        nextBtn.disabled = true;
-        viewFinishMessage();
-      }
-    }
-  });
-};
-
-export const clickNext = (): void => {
-  /* const question = document.getElementById("game1-question") as HTMLElement;
-  const answersBlocks = document.querySelectorAll(
-    ".game1-main__answer"
-  ) as NodeListOf<Element>;
-  const nextBtn = document.getElementById("game1-nextBtn") as HTMLButtonElement; */
-
-  document.body.addEventListener("click", (e) => {
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const answersBlocks = document.querySelectorAll(
-      ".game1-main__answer"
-    ) as NodeListOf<Element>;
-    const nextBtn = document.getElementById(
-      "game1-nextBtn"
-    ) as HTMLButtonElement;
-    if ((<HTMLButtonElement>e.target).id === "game1-nextBtn") {
-      answersBlocks.forEach((el) => {
-        el.classList.remove("game1-correct");
-        el.classList.remove("game1-incorrect");
-      });
-      question.innerHTML = questionsForGame[nextBtnClicksCount].question;
-      answersBlocks.forEach((element, i) => {
-        element.innerHTML = questionsForGame[nextBtnClicksCount].answers[i];
-        return element;
-      });
-      console.log(nextBtnClicksCount);
-      nextBtnClicksCount += 1;
-
-      nextBtn.disabled = true;
-      timer = setInterval(startTimer, 1000);
-    }
-  });
-};
-
-export const startAgain = (): void => {
-  document.body.addEventListener("click", (e) => {
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const answersBlocks = document.querySelectorAll(
-      ".game1-main__answer"
-    ) as NodeListOf<Element>;
-    const correctAnswers = document.getElementById(
-      "game1-answers-count"
-    ) as HTMLElement;
-    if ((<HTMLButtonElement>e.target).id === "game1-resetBtn") {
-      questions.sort(
-        (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
-      );
-      questions.forEach((el) => el.answers.sort(() => Math.random() - 0.5));
-      questionsForGame = questions.slice(0, 15);
-      answersCount = 0;
-      nextBtnClicksCount = 1;
-      question.innerHTML = questionsForGame[0].question;
-      answersBlocks.forEach((element, i) => {
-        element.classList.remove("game1-correct");
-        element.classList.remove("game1-incorrect");
-        element.innerHTML = questionsForGame[0].answers[i];
-      });
-      correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
-      clearInterval(timer);
-      minutes = 0;
-      seconds = 0;
-      timer = setInterval(startTimer, 1000);
-    }
-  });
-};
-
-export const gameAllfunc = () => {
-  startGame();
-  clickAnswer();
-  clickNext();
-  startAgain();
-};
 
 export function game1() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   clearInterval(timer);
-  minutes = 0;
-  seconds = 0;
+  seconds = 60;
   const page = `<div class="game1-main__container _game1-container">
   <h1 class="game1-main__title">Conversion types-game</h1>
   <div class="game1-main__settings">
@@ -286,8 +62,240 @@ export function game1() {
   body.classList.add("game1-wrapper");
   body.innerHTML = page;
   main.appendChild(body);
-  /* gameAllfunc(); */
-  /* setTimeout(() => {
-    gameAllfunc();
-  }, 100); */
 }
+
+function viewFinishMessage() {
+  const mainContainer = document.querySelector(
+    ".game1-main__container"
+  ) as HTMLElement;
+  const messageText = document.getElementById(
+    "game1-message-text"
+  ) as HTMLElement;
+  messageText.innerText = `You are completed with ${answersCount} correct answers`;
+  const completeContainer = document.getElementById(
+    "game1-complete"
+  ) as HTMLElement;
+  completeContainer.classList.add("game1-open");
+  function closeCompleteMessage(): void {
+    if (completeContainer.classList.contains("game1-open")) {
+      mainContainer.addEventListener("click", (e) => {
+        if (
+          (<HTMLButtonElement>e.target).closest("#game1-message-close") ||
+          !(<HTMLButtonElement>e.target).closest("#game1-message")
+        ) {
+          completeContainer.classList.remove("game1-open");
+        }
+      });
+    }
+  }
+  closeCompleteMessage();
+}
+
+function startTimer() {
+  const second = document.getElementById("game1-second") as HTMLElement;
+  seconds -= 1;
+  if (seconds < 9) {
+    second.innerText = `0${seconds}`;
+  }
+  if (seconds > 9) {
+    second.innerText = seconds.toString();
+  }
+  if (second.innerText === "00") {
+    const answersAll = Array.from(
+      document.querySelectorAll(".game1-main__answer")
+    );
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const questionAtNow: Question = questionsForGame.filter(
+      (el) => el.question === question.innerHTML
+    )[0];
+    const { correct } = questionAtNow;
+    const nextBtn = document.getElementById(
+      "game1-nextBtn"
+    ) as HTMLButtonElement;
+    answersAll
+      .filter((el) => el.innerHTML !== correct)
+      .forEach((el) => el.classList.add("game1-incorrect"));
+    answersAll
+      .filter((el) => el.innerHTML === correct)[0]
+      .classList.add("game1-correct");
+    clearInterval(timer);
+    nextBtn.disabled = true;
+    viewFinishMessage();
+  }
+}
+export const startGame = () => {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.addEventListener("click", (e) => {
+    const startBtn = document.getElementById(
+      "game1-startBtn"
+    ) as HTMLButtonElement;
+    const resetBtn = document.getElementById(
+      "game1-resetBtn"
+    ) as HTMLButtonElement;
+    const mainGame = document.getElementById("game1-main-game") as HTMLElement;
+    const startMessage = document.getElementById(
+      "game1-start-message"
+    ) as HTMLDivElement;
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const answersBlocks = document.querySelectorAll(".game1-main__answer");
+    if ((<HTMLButtonElement>e.target).id === "game1-startBtn") {
+      clearInterval(timer);
+      question.innerHTML = questionsForGame[0].question;
+      answersBlocks.forEach((element, i) => {
+        element.innerHTML = questionsForGame[0].answers[i];
+      });
+      startBtn.disabled = true;
+      resetBtn.disabled = false;
+      mainGame.style.display = "block";
+      startMessage.style.display = "none";
+      timer = setInterval(startTimer, 1000);
+    }
+  });
+};
+
+export const clickAnswer = (): void => {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.addEventListener("click", (e) => {
+    const answersAll = Array.from(
+      document.querySelectorAll(".game1-main__answer")
+    );
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const correctAnswers = document.getElementById(
+      "game1-answers-count"
+    ) as HTMLElement;
+    const nextBtn = document.getElementById(
+      "game1-nextBtn"
+    ) as HTMLButtonElement;
+    const questionAtNow: Question = questionsForGame.filter(
+      (el) => el.question === question.innerHTML
+    )[0];
+    const { correct } = questionAtNow;
+    const answer = e.target as HTMLElement;
+    if ((<HTMLDivElement>e.target).className === "game1-main__answer") {
+      questionsAnsweredCount += 1;
+      console.log(questionsAnsweredCount);
+      if (
+        answer.innerHTML === correct &&
+        answersAll.filter((el) => el.classList.contains("game1-correct"))
+          .length === 0 &&
+        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+          .length === 0 &&
+        questionsAnsweredCount !== questionsForGame.length
+      ) {
+        answersCount += 1;
+        correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
+        question.innerHTML = questionsForGame[questionsAnsweredCount].question;
+        answersAll.forEach((element, i) => {
+          element.innerHTML =
+            questionsForGame[questionsAnsweredCount].answers[i];
+        });
+      } else if (
+        answer.innerHTML !== correct &&
+        questionsAnsweredCount !== questionsForGame.length
+      ) {
+        answersAll
+          .filter((el) => el.innerHTML !== correct)
+          .forEach((el) => el.classList.add("game1-incorrect"));
+        answersAll
+          .filter((el) => el.innerHTML === correct)[0]
+          .classList.add("game1-correct");
+        nextBtn.disabled = false;
+      }
+      if (
+        answer.innerHTML === correct &&
+        answersAll.filter((el) => el.classList.contains("game1-correct"))
+          .length === 0 &&
+        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+          .length === 0 &&
+        questionsAnsweredCount === questionsForGame.length
+      ) {
+        answersCount += 1;
+        answersAll
+          .filter((el) => el.innerHTML !== correct)
+          .forEach((el) => el.classList.add("game1-incorrect"));
+        answersAll
+          .filter((el) => el.innerHTML === correct)[0]
+          .classList.add("game1-correct");
+        clearInterval(timer);
+        correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
+        viewFinishMessage();
+      } else if (
+        answer.innerHTML !== correct &&
+        questionsAnsweredCount === questionsForGame.length
+      ) {
+        answersAll
+          .filter((el) => el.innerHTML !== correct)
+          .forEach((el) => el.classList.add("game1-incorrect"));
+        answersAll
+          .filter((el) => el.innerHTML === correct)[0]
+          .classList.add("game1-correct");
+        nextBtn.disabled = true;
+        clearInterval(timer);
+        viewFinishMessage();
+      }
+    }
+  });
+};
+
+export const clickNext = (): void => {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.addEventListener("click", (e) => {
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const answersBlocks = document.querySelectorAll(
+      ".game1-main__answer"
+    ) as NodeListOf<Element>;
+    const nextBtn = document.getElementById(
+      "game1-nextBtn"
+    ) as HTMLButtonElement;
+    if ((<HTMLButtonElement>e.target).id === "game1-nextBtn") {
+      answersBlocks.forEach((el) => {
+        el.classList.remove("game1-correct");
+        el.classList.remove("game1-incorrect");
+      });
+      question.innerHTML = questionsForGame[questionsAnsweredCount].question;
+      answersBlocks.forEach((element, i) => {
+        element.innerHTML = questionsForGame[questionsAnsweredCount].answers[i];
+      });
+      nextBtn.disabled = true;
+    }
+  });
+};
+
+export const startAgain = (): void => {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.addEventListener("click", (e) => {
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const answersBlocks = document.querySelectorAll(
+      ".game1-main__answer"
+    ) as NodeListOf<Element>;
+    const correctAnswers = document.getElementById(
+      "game1-answers-count"
+    ) as HTMLElement;
+    if ((<HTMLButtonElement>e.target).id === "game1-resetBtn") {
+      questions.sort(
+        (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
+      );
+      questions.forEach((el) => el.answers.sort(() => Math.random() - 0.5));
+      questionsForGame = questions;
+      answersCount = 0;
+      questionsAnsweredCount = 0;
+      question.innerHTML = questionsForGame[0].question;
+      answersBlocks.forEach((element, i) => {
+        element.classList.remove("game1-correct");
+        element.classList.remove("game1-incorrect");
+        element.innerHTML = questionsForGame[0].answers[i];
+      });
+      correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
+      clearInterval(timer);
+      seconds = 60;
+      timer = setInterval(startTimer, 1000);
+    }
+  });
+};
+
+export const gameAllfunc = () => {
+  startGame();
+  clickAnswer();
+  clickNext();
+  startAgain();
+};
