@@ -6,13 +6,11 @@
   font-size: 16px;
   font-weight: 400;
   color: white;
-  background: #d9d9d9;
   min-height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 100;
 }
 ._game1-container {
   max-width: 1630px;
