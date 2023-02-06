@@ -4,7 +4,7 @@
   position: relative;
   left: 0;
   z-index: 10;
-  margin-top: -13vh;
+  margin-top: -15vh;
   padding: 180px 40px 0 40px;
 }
 
@@ -38,6 +38,22 @@
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+}
+
+.games_info_title {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.games_info_quote {
+  margin: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  margin-bottom: 50px;
 }
 
 .game_name {
