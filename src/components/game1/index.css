@@ -1,10 +1,11 @@
 .game1-wrapper {
+  margin: 0px auto 0px auto;
   height: 100%;
   line-height: 1;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #000000;
+  color: white;
   background: #d9d9d9;
   min-height: 100%;
   overflow: hidden;
@@ -93,8 +94,6 @@
   cursor: auto;
 }
 
-/*============================================================================================================*/
-
 .game1-main__title {
   width: 1200px;
   text-align: center;
@@ -124,6 +123,9 @@
   flex: 0 1 25%;
   font-size: 24px;
   line-height: 70px;
+}
+.game1-main__answers-count {
+  text-align: end;
 }
 
 .game1-main__start-message {
@@ -274,6 +276,7 @@
 
 .game1-main__next-button {
   display: block;
+  color: black;
   margin: 15px auto 0px auto;
 }
 
@@ -286,8 +289,8 @@
   background-color: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
-  opacity: 0; /*hide*/
-  visibility: hidden; /*hide*/
+  opacity: 0;
+  visibility: hidden;
   transition: all 0.3s ease 0s;
 }
 .game1-open {
@@ -536,11 +539,12 @@
     align-items: center;
   }
   .game1-main__answers-count {
+    display: flex;
     flex: 0 1 36%;
     line-height: 20px;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
     text-align: center;
   }
 
@@ -570,11 +574,11 @@
   }
 
   .game1-main__buttons {
-    width: 210px;
+    width: 230px;
   }
 
   .game1-button {
-    width: 80px;
+    width: 90px;
     font-size: 14px;
   }
 
