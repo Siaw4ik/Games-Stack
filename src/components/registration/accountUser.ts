@@ -1,3 +1,5 @@
+/* import { renderNewPage } from "../module/changePage"; */
+
 export function clickingIconUserandLogout() {
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
   const accountWindow = document.querySelector(
@@ -26,6 +28,9 @@ export function clickingIconUserandLogout() {
   ) as HTMLElement;
   const btnLogin = document.querySelector(".login") as HTMLElement;
   const btnLoginBurger = document.querySelector(".login-burger") as HTMLElement;
+  const accountStatistic = document.querySelector(
+    ".score-window"
+  ) as HTMLElement;
 
   iconUser.addEventListener("click", () => {
     accountWindow.classList.add("active");
@@ -38,6 +43,11 @@ export function clickingIconUserandLogout() {
   });
 
   crossAccWindow.addEventListener("click", () => {
+    accountWindow.classList.remove("active");
+    shadowAccount.classList.remove("active");
+  });
+
+  accountStatistic.addEventListener("click", () => {
     accountWindow.classList.remove("active");
     shadowAccount.classList.remove("active");
   });
@@ -61,5 +71,9 @@ export function clickingIconUserandLogout() {
     mainSignUp.classList.remove("no-active");
     mainSuccessLogIn.classList.remove("active");
     mainLogIn.classList.remove("no-active");
+  });
+
+  accountStatistic.addEventListener("click", () => {
+    window.location.hash = "#result";
   });
 }

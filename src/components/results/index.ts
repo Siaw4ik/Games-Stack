@@ -1,8 +1,16 @@
-export function result() {
-  const main = document.querySelector(".main") as HTMLElement;
-  main.innerHTML = "";
-  const div = document.createElement("div");
-  div.innerHTML = `<p> result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result  result </p>`;
+import { StatisticGames } from "../module/Games";
+import { ScoreGamesUserSort } from "../module/types";
+import { returnLocalStorageIsRegistred } from "../module/localStorage";
 
-  main.appendChild(div);
+export function result() {
+  const statistic = new StatisticGames();
+  const user = returnLocalStorageIsRegistred().userName;
+  const optionSort = "ascScore";
+  const userOption: ScoreGamesUserSort = {
+    username: user,
+    option: optionSort,
+  };
+  statistic.getScoreGamesUser(userOption).then((data) => {
+    console.log(data);
+  });
 }
