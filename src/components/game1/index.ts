@@ -50,9 +50,6 @@ export function game1() {
     <div id="game1-complete" class="game1-main__complete">
       <div id="game1-message" class="game1-main__complete-message">
         <div id="game1-message-text" class="game1-main__complete-text"></div>
-        <div id="game1-message-close" class="game1-main__complete-close">
-        <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg fill="orange" height="30px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="30px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>
-        </div>
       </div>
     </div>
   </div>
@@ -65,62 +62,60 @@ export function game1() {
 }
 
 function viewFinishMessage() {
-  const mainContainer = document.querySelector(
-    ".game1-main__container"
+  const question = document.getElementById("game1-question") as HTMLElement;
+  const answersBlock = document.querySelector(
+    ".game1-main__answers-block"
   ) as HTMLElement;
+  const nextBtn = document.getElementById("game1-nextBtn") as HTMLButtonElement;
   const messageText = document.getElementById(
     "game1-message-text"
   ) as HTMLElement;
-  messageText.innerText = `You are completed with ${answersCount} correct answers`;
+  messageText.innerText = `You are completed with ${answersCount} correct answers. \n
+  To try again press Start again`;
   const completeContainer = document.getElementById(
     "game1-complete"
   ) as HTMLElement;
+  question.classList.add("game1-close");
+  answersBlock.classList.add("game1-close");
+  nextBtn.classList.add("game1-close");
   completeContainer.classList.add("game1-open");
-  function closeCompleteMessage(): void {
-    if (completeContainer.classList.contains("game1-open")) {
-      mainContainer.addEventListener("click", (e) => {
-        if (
-          (<HTMLButtonElement>e.target).closest("#game1-message-close") ||
-          !(<HTMLButtonElement>e.target).closest("#game1-message")
-        ) {
-          completeContainer.classList.remove("game1-open");
-        }
-      });
-    }
-  }
-  closeCompleteMessage();
 }
 
 function startTimer() {
-  const second = document.getElementById("game1-second") as HTMLElement;
-  seconds -= 1;
-  if (seconds < 9) {
-    second.innerText = `0${seconds}`;
-  }
-  if (seconds > 9) {
-    second.innerText = seconds.toString();
-  }
-  if (second.innerText === "00") {
-    const answersAll = Array.from(
-      document.querySelectorAll(".game1-main__answer")
-    );
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const questionAtNow: Question = questionsForGame.filter(
-      (el) => el.question === question.innerHTML
-    )[0];
-    const { correct } = questionAtNow;
-    const nextBtn = document.getElementById(
-      "game1-nextBtn"
-    ) as HTMLButtonElement;
-    answersAll
-      .filter((el) => el.innerHTML !== correct)
-      .forEach((el) => el.classList.add("game1-incorrect"));
-    answersAll
-      .filter((el) => el.innerHTML === correct)[0]
-      .classList.add("game1-correct");
-    clearInterval(timer);
-    nextBtn.disabled = true;
-    viewFinishMessage();
+  const mainContainer = document.querySelector(
+    ".game1-main__container"
+  ) as HTMLElement;
+  if (mainContainer) {
+    const second = document.getElementById("game1-second") as HTMLElement;
+    seconds -= 1;
+    if (seconds < 9) {
+      second.innerText = `0${seconds}`;
+    }
+    if (seconds > 9) {
+      second.innerText = seconds.toString();
+    }
+    if (second.innerText === "00") {
+      const answersAll = Array.from(
+        document.querySelectorAll(".game1-main__answer")
+      );
+      const question = document.getElementById("game1-question") as HTMLElement;
+      const questionAtNow: Question = questionsForGame.filter(
+        (el) => el.question === question.innerHTML
+      )[0];
+      const { correct } = questionAtNow;
+      const nextBtn = document.getElementById(
+        "game1-nextBtn"
+      ) as HTMLButtonElement;
+      answersAll
+        .filter((el) => el.innerHTML !== correct)
+        .forEach((el) => el.classList.add("game1-incorrect"));
+      answersAll
+        .filter((el) => el.innerHTML === correct)[0]
+        .classList.add("game1-correct");
+      clearInterval(timer);
+      nextBtn.disabled = true;
+      viewFinishMessage();
+    }
   }
 }
 export const startGame = () => {
@@ -139,6 +134,13 @@ export const startGame = () => {
     const question = document.getElementById("game1-question") as HTMLElement;
     const answersBlocks = document.querySelectorAll(".game1-main__answer");
     if ((<HTMLButtonElement>e.target).id === "game1-startBtn") {
+      questions.sort(
+        (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
+      );
+      questions.forEach((el) => el.answers.sort(() => Math.random() - 0.5));
+      questionsForGame = questions;
+      answersCount = 0;
+      questionsAnsweredCount = 0;
       clearInterval(timer);
       question.innerHTML = questionsForGame[0].question;
       answersBlocks.forEach((element, i) => {
@@ -173,7 +175,6 @@ export const clickAnswer = (): void => {
     const answer = e.target as HTMLElement;
     if ((<HTMLDivElement>e.target).className === "game1-main__answer") {
       questionsAnsweredCount += 1;
-      console.log(questionsAnsweredCount);
       if (
         answer.innerHTML === correct &&
         answersAll.filter((el) => el.classList.contains("game1-correct"))
@@ -265,6 +266,15 @@ export const startAgain = (): void => {
   const main = document.querySelector(".main") as HTMLElement;
   main.addEventListener("click", (e) => {
     const question = document.getElementById("game1-question") as HTMLElement;
+    const answersBlock = document.querySelector(
+      ".game1-main__answers-block"
+    ) as HTMLElement;
+    const nextBtn = document.getElementById(
+      "game1-nextBtn"
+    ) as HTMLButtonElement;
+    const completeContainer = document.getElementById(
+      "game1-complete"
+    ) as HTMLElement;
     const answersBlocks = document.querySelectorAll(
       ".game1-main__answer"
     ) as NodeListOf<Element>;
@@ -279,6 +289,10 @@ export const startAgain = (): void => {
       questionsForGame = questions;
       answersCount = 0;
       questionsAnsweredCount = 0;
+      question.classList.remove("game1-close");
+      answersBlock.classList.remove("game1-close");
+      nextBtn.classList.remove("game1-close");
+      completeContainer.classList.remove("game1-open");
       question.innerHTML = questionsForGame[0].question;
       answersBlocks.forEach((element, i) => {
         element.classList.remove("game1-correct");

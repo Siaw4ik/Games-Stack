@@ -33,6 +33,7 @@ export function drawHomePage() {
   const div = document.createElement("div");
   div.classList.add("parallax_container");
   div.innerHTML = `
+    <div class="image_dark_hole"></div>
     <div class="parallax_images images-parallax">
       <div class="images-parallax_item">
         <div class="images-parallax_death-star"></div>
