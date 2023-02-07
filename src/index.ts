@@ -17,6 +17,9 @@ import {
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
 import { gameAllfunc } from "./components/game1";
+import { gameLoop, currentTime } from "./components/game2";
+
+gameLoop(currentTime);
 
 enableRoutChange();
 drawPage();
