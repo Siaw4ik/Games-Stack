@@ -5,4 +5,5 @@ export function game2() {
   div.innerHTML = `<p> game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2  game2 </p>`;
 
   main.appendChild(div);
+  console.log("game2");
 }

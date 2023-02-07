@@ -73,10 +73,6 @@ export function renderNewPage(idPage: string) {
       break;
     case "game1":
       game1();
-      /*       startGame();
-      clickAnswer();
-      clickNext();
-      startAgain(); */
       break;
     case "game2":
       game2();
@@ -100,8 +96,8 @@ export function enableRoutChange() {
 }
 
 function changePageMain() {
-  const hashPage = window.location.hash.slice(1);
-  renderNewPage(hashPage);
+  /* const hashPage = window.location.hash.slice(1); */
+  /* renderNewPage(hashPage); */
   const pages = document.querySelector(".pages") as HTMLElement;
   pages.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -116,28 +112,22 @@ function changePageMain() {
     });
     burgerLi?.setAttribute("id", "choose-burger");
     if (target.closest(".about")) {
-      renderNewPage("about");
-      console.log("main");
+      window.location.hash = "#about";
     }
     if (target.closest(".game1")) {
-      renderNewPage("game1");
-      console.log("game1");
+      window.location.hash = "#game1";
     }
     if (target.closest(".game2")) {
-      renderNewPage("game2");
-      console.log("game2");
+      window.location.hash = "game2";
     }
     if (target.closest(".game3")) {
-      renderNewPage("game3");
-      console.log("game3");
+      window.location.hash = "#game3";
     }
     if (target.closest(".game4")) {
-      renderNewPage("game4");
-      console.log("game4");
+      window.location.hash = "#game4";
     }
     if (target.closest(".result")) {
-      renderNewPage("result");
-      console.log("result");
+      window.location.hash = "#result";
     }
   });
 }
@@ -157,28 +147,22 @@ function changePageBurger() {
     });
     pageP?.setAttribute("id", "choose");
     if (target.closest(".burger-about")) {
-      renderNewPage("about");
-      console.log("burger-HOME");
+      window.location.hash = "#about";
     }
     if (target.closest(".burger-game1")) {
-      renderNewPage("game1");
-      console.log("burger-game1");
+      window.location.hash = "#game1";
     }
     if (target.closest(".burger-game2")) {
-      renderNewPage("game2");
-      console.log("burger-game2");
+      window.location.hash = "#game2";
     }
     if (target.closest(".burger-game3")) {
-      renderNewPage("game3");
-      console.log("burger-game3");
+      window.location.hash = "#game3";
     }
     if (target.closest(".burger-game4")) {
-      renderNewPage("game4");
-      console.log("burger-game4");
+      window.location.hash = "#game4";
     }
     if (target.closest(".burger-result")) {
-      renderNewPage("result");
-      console.log("burger-result");
+      window.location.hash = "#result";
     }
   });
 }

@@ -27,3 +27,31 @@ export type AnswerLoginUser = {
     password: string;
   };
 };
+
+export type ScoreGameUser = {
+  username: string;
+  gamename: string;
+  score: number;
+};
+
+export type ScoreGamesUserSort = {
+  username: string;
+  option: string;
+};
+
+export type ScoreGameUserSort = {
+  success: boolean;
+  username: string;
+  scores: object;
+};
+
+export type RequestTop10 = {
+  gamename: string;
+  option: string;
+};
+
+export type ResultTop10 = {
+  success: boolean;
+  gamename: string;
+  scores: object;
+};
