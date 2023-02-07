@@ -4,6 +4,7 @@ import {
   ScoreGamesUserSort,
   ScoreGameUserSort,
   ResultTop10,
+  RequestTop10,
 } from "../module/types";
 import {
   returnLocalStorageIsRegistred,
@@ -61,7 +62,10 @@ export function drawTable(lang: string) {
     (buttonDivUser.querySelector("input") as HTMLInputElement).checked = true;
     (document.querySelector(
       ".wrapper_table-result table"
-    ) as HTMLElement).setAttribute("id", "user-table");
+    ) as HTMLElement).setAttribute("class", "user-table");
+    (document.querySelector(
+      ".wrapper_table-result table"
+    ) as HTMLElement).setAttribute("id", `table-${userRegistred.userName}`);
   }
 }
 
@@ -102,6 +106,20 @@ function drawRawEmpty(mode: string, lang: string, name?: string) {
   tbody.appendChild(raw);
 }
 
+function drawRawWait(lang: string) {
+  const tbody = document.querySelector(
+    ".wrapper_table-result tbody"
+  ) as HTMLElement;
+  tbody.innerHTML = "";
+  const raw = document.createElement("tr");
+  raw.innerHTML = `
+    <td class="raw-empty" colspan="3">${
+      lang === "en" ? "Loading..." : "Загрузка..."
+    }</td>
+  `;
+  tbody.appendChild(raw);
+}
+
 export function drawtbody(data: ScoreGameUserSort | ResultTop10) {
   const tbody = document.querySelector(
     ".wrapper_table-result tbody"
@@ -113,63 +131,99 @@ export function drawtbody(data: ScoreGameUserSort | ResultTop10) {
   });
 }
 
-export function result() {
-  const settings = returnLocalStorage();
-  const userRegistred = returnLocalStorageIsRegistred();
-  const main = document.querySelector(".main") as HTMLElement;
-  main.innerHTML = "";
-  const statistic = new StatisticGames();
-  const optionSort = "ascGame";
-  const userOption: ScoreGamesUserSort = {
-    username: userRegistred.userName,
-    option: optionSort,
-  };
-  if (userRegistred.isRegistred === "true") {
-    drawTable(settings.lang);
-    (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
-      settings.lang === "en" ? "Name Game" : "Имя игры"
-    }`;
-    statistic.getScoreGamesUser(userOption).then((data) => {
-      if (Object.entries(data.scores).length > 0) {
-        drawtbody(data);
-      } else if (Object.entries(data.scores).length === 0) {
-        drawRawEmpty("user", settings.lang);
-      }
-    });
-  } else if (userRegistred.isRegistred === "false") {
-    drawTable(settings.lang);
-    const objgame1 = {
-      gamename: arrButton[0],
-      option: "ascName",
-    };
-    statistic.getScoreTop10(objgame1).then((data) => {
-      (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
-        settings.lang === "en" ? "Players" : "Игроки"
-      }`;
-      if (Object.entries(data.scores).length > 0) {
-        drawtbody(data);
-      } else if (Object.entries(data.scores).length === 0) {
-        drawRawEmpty("game", settings.lang, arrButton[0]);
-      }
-    });
-    const buttonGAme1 = document.querySelector(
-      `.table-result_${arrButton[0]}`
-    ) as HTMLInputElement;
-    buttonGAme1.checked = true;
-    console.log(buttonGAme1);
-  }
+let optionNameUser: string = "ascGame";
+let optionNameGame: string = "ascName";
+let optionScore: string = "ascScore";
 
+function sortresult() {
+  const statistic = new StatisticGames();
+  const table = document.querySelector(
+    ".wrapper_table-result table"
+  ) as HTMLElement;
+  if (table) {
+    const resultCell = document.querySelector(".table-result") as HTMLElement;
+    const nameCell = document.querySelector(".table-name") as HTMLElement;
+    resultCell.addEventListener("click", () => {
+      const settings = returnLocalStorage();
+      optionScore = optionScore === "ascScore" ? "descScore" : "ascScore";
+      drawRawWait(settings.lang);
+      const nameTable = table.getAttribute("id");
+      const classTable = table.getAttribute("class");
+      if (nameTable && classTable === "user-table") {
+        const obj: ScoreGamesUserSort = {
+          username: nameTable.slice(6),
+          option: optionScore,
+        };
+        statistic.getScoreGamesUser(obj).then((data) => {
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("game", settings.lang);
+          }
+        });
+      }
+      if (nameTable && classTable === "games-table") {
+        const obj: RequestTop10 = {
+          gamename: nameTable.slice(6),
+          option: optionScore,
+        };
+        statistic.getScoreTop10(obj).then((data) => {
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("game", settings.lang);
+          }
+        });
+      }
+    });
+
+    nameCell.addEventListener("click", () => {
+      const settings = returnLocalStorage();
+      drawRawWait(settings.lang);
+      const nameTable = table.getAttribute("id");
+      const classTable = table.getAttribute("class");
+      if (nameTable && classTable === "user-table") {
+        optionNameUser = optionNameUser === "ascGame" ? "descGame" : "ascGame";
+        const obj: ScoreGamesUserSort = {
+          username: nameTable.slice(6),
+          option: optionNameUser,
+        };
+        statistic.getScoreGamesUser(obj).then((data) => {
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("game", settings.lang);
+          }
+        });
+      }
+      if (nameTable && classTable === "games-table") {
+        optionNameGame = optionNameGame === "ascName" ? "descName" : "ascName";
+        const obj: RequestTop10 = {
+          gamename: nameTable.slice(6),
+          option: optionNameGame,
+        };
+        statistic.getScoreTop10(obj).then((data) => {
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("game", settings.lang);
+          }
+        });
+      }
+    });
+  }
+}
+
+function changeRadioBtn() {
   const radioTables = document.querySelectorAll(
     'input[type=radio][name="table"]'
   );
   radioTables.forEach((radio) => {
     radio.addEventListener("change", () => {
+      const statistic = new StatisticGames();
       const settingsChange = returnLocalStorage();
-      const userRegistredChange = returnLocalStorageIsRegistred();
-      const userOptionChange: ScoreGamesUserSort = {
-        username: userRegistredChange.userName,
-        option: optionSort,
-      };
+      const userRegistred = returnLocalStorageIsRegistred();
+      drawRawWait(settingsChange.lang);
       const value = radio.getAttribute("value");
       if (
         value === "game1" ||
@@ -179,11 +233,14 @@ export function result() {
       ) {
         const objgame = {
           gamename: value,
-          option: "ascName",
+          option: optionNameGame,
         };
         (document.querySelector(
           ".wrapper_table-result table"
-        ) as HTMLElement).setAttribute("id", "games-table");
+        ) as HTMLElement).setAttribute("class", "games-table");
+        (document.querySelector(
+          ".wrapper_table-result table"
+        ) as HTMLElement).setAttribute("id", `table-${value}`);
         statistic.getScoreTop10(objgame).then((data) => {
           (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
             settingsChange.lang === "en" ? "Players" : "Игроки"
@@ -200,9 +257,16 @@ export function result() {
           }
         });
       } else if (value === "user") {
+        const userOptionChange: ScoreGamesUserSort = {
+          username: userRegistred.userName,
+          option: optionNameUser,
+        };
         (document.querySelector(
           ".wrapper_table-result table"
-        ) as HTMLElement).setAttribute("id", "user-table");
+        ) as HTMLElement).setAttribute("class", "user-table");
+        (document.querySelector(
+          ".wrapper_table-result table"
+        ) as HTMLElement).setAttribute("id", `table-${userRegistred.userName}`);
         statistic.getScoreGamesUser(userOptionChange).then((data) => {
           (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
             settingsChange.lang === "en" ? "Name Game" : "Имя игры"
@@ -223,6 +287,61 @@ export function result() {
   });
 }
 
+export function result() {
+  const settings = returnLocalStorage();
+  const userRegistred = returnLocalStorageIsRegistred();
+  const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = "";
+  const statistic = new StatisticGames();
+  const userOption: ScoreGamesUserSort = {
+    username: userRegistred.userName,
+    option: optionNameUser,
+  };
+  if (userRegistred.isRegistred === "true") {
+    drawTable(settings.lang);
+    (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+      settings.lang === "en" ? "Name Game" : "Имя игры"
+    }`;
+    drawRawWait(settings.lang);
+    statistic.getScoreGamesUser(userOption).then((data) => {
+      if (Object.entries(data.scores).length > 0) {
+        drawtbody(data);
+      } else if (Object.entries(data.scores).length === 0) {
+        drawRawEmpty("user", settings.lang);
+      }
+    });
+  } else if (userRegistred.isRegistred === "false") {
+    drawTable(settings.lang);
+    const objgame1 = {
+      gamename: arrButton[0],
+      option: optionNameGame,
+    };
+    drawRawWait(settings.lang);
+    statistic.getScoreTop10(objgame1).then((data) => {
+      (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+        settings.lang === "en" ? "Players" : "Игроки"
+      }`;
+      if (Object.entries(data.scores).length > 0) {
+        drawtbody(data);
+      } else if (Object.entries(data.scores).length === 0) {
+        drawRawEmpty("game", settings.lang, arrButton[0]);
+      }
+    });
+    const buttonGAme1 = document.querySelector(
+      `.table-result_${arrButton[0]}`
+    ) as HTMLInputElement;
+    buttonGAme1.checked = true;
+    (document.querySelector(
+      ".wrapper_table-result table"
+    ) as HTMLElement).setAttribute("class", "games-table");
+    (document.querySelector(
+      ".wrapper_table-result table"
+    ) as HTMLElement).setAttribute("id", `table-${arrButton[0]}`);
+  }
+  changeRadioBtn();
+  sortresult();
+}
+
 export function translateHeaderTable(lang: string) {
   const table = document.querySelector(
     ".wrapper_table-result table"
@@ -231,7 +350,7 @@ export function translateHeaderTable(lang: string) {
   const nameCell = document.querySelector(".table-name") as HTMLElement;
 
   if (table) {
-    const nameTable = table.getAttribute("id");
+    const nameTable = table.getAttribute("class");
     resultCell.innerHTML = `${lang === "en" ? "Result" : "Результат"}`;
 
     if (nameTable === "user-table") {
