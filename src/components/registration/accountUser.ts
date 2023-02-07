@@ -73,7 +73,6 @@ export function clickingIconUserandLogout() {
     mainSignUp.classList.remove("no-active");
     mainSuccessLogIn.classList.remove("active");
     mainLogIn.classList.remove("no-active");
-    console.log(window.location.hash.slice(1));
 
     if (window.location.hash.slice(1) === "result") {
       const statistic = new StatisticGames();
@@ -83,7 +82,6 @@ export function clickingIconUserandLogout() {
       const userRadio = document.querySelector(
         ".table-flip .user-radio"
       ) as HTMLElement;
-      console.log(userRadio);
       if (userRadio) {
         userRadio.style.display = "none";
       }

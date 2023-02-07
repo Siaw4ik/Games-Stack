@@ -2,6 +2,7 @@ import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
 import { Settings } from "./types";
 import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
+import { translateHeaderTable } from "../results";
 
 const settings: Settings = {
   lang: "en",
@@ -151,6 +152,7 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Выйти";
     scoreWindow.innerHTML = "Статистика игр";
+    translateHeaderTable(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 
@@ -178,6 +180,7 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Logout";
     scoreWindow.innerHTML = "Game statistics";
+    translateHeaderTable(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 }
