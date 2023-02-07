@@ -49,7 +49,7 @@ export function drawTable(lang: string) {
 
   const buttonDivUser = document.createElement("div");
   buttonDivUser.setAttribute("class", "user-radio");
-  /* buttonDivUser.style.display = "flex"; */
+  buttonDivUser.style.display = "none";
   buttonDivUser.innerHTML = `
       <input type="radio" name="table" value="user">
       <p>${userRegistred.userName}</p>
@@ -57,6 +57,7 @@ export function drawTable(lang: string) {
   form.prepend(buttonDivUser);
 
   if (userRegistred.isRegistred === "true") {
+    buttonDivUser.style.display = "flex";
     (buttonDivUser.querySelector("input") as HTMLInputElement).checked = true;
     (document.querySelector(
       ".wrapper_table-result table"
