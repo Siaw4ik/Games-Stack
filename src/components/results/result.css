@@ -53,3 +53,11 @@
 .table-flip div p{
 	margin: 0;
 }
+
+.table-flip div input{
+	cursor: pointer;
+}
+
+.raw-empty {
+	text-align: center;
+}

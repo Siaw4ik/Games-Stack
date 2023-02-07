@@ -78,6 +78,30 @@ function drawRawGameUser(num: number, name: string, score: number) {
   tbody.appendChild(raw);
 }
 
+function drawRawEmpty(mode: string, lang: string, name?: string) {
+  const tbody = document.querySelector(
+    ".wrapper_table-result tbody"
+  ) as HTMLElement;
+  tbody.innerHTML = "";
+  const raw = document.createElement("tr");
+  raw.innerHTML = `
+    <td class="raw-empty" colspan="3">${
+      lang === "en"
+        ? `${
+            mode === "user"
+              ? "No results! You haven't played yet!"
+              : `No results for ${name}`
+          }`
+        : `${
+            mode === "user"
+              ? "Нет результатов! Вы еще не играли!"
+              : `Нет результатов игры ${name}`
+          }`
+    }</td>
+  `;
+  tbody.appendChild(raw);
+}
+
 export function drawtbody(data: ScoreGameUserSort | ResultTop10) {
   const tbody = document.querySelector(
     ".wrapper_table-result tbody"
@@ -102,8 +126,15 @@ export function result() {
   };
   if (userRegistred.isRegistred === "true") {
     drawTable(settings.lang);
+    (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+      settings.lang === "en" ? "Name Game" : "Имя игры"
+    }`;
     statistic.getScoreGamesUser(userOption).then((data) => {
-      drawtbody(data);
+      if (Object.entries(data.scores).length > 0) {
+        drawtbody(data);
+      } else if (Object.entries(data.scores).length === 0) {
+        drawRawEmpty("user", settings.lang);
+      }
     });
   } else if (userRegistred.isRegistred === "false") {
     drawTable(settings.lang);
@@ -112,9 +143,14 @@ export function result() {
       option: "ascName",
     };
     statistic.getScoreTop10(objgame1).then((data) => {
-      (document.querySelector(".table-name") as HTMLElement).innerHTML =
-        "участники";
-      drawtbody(data);
+      (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+        settings.lang === "en" ? "Players" : "Игроки"
+      }`;
+      if (Object.entries(data.scores).length > 0) {
+        drawtbody(data);
+      } else if (Object.entries(data.scores).length === 0) {
+        drawRawEmpty("game", settings.lang, arrButton[0]);
+      }
     });
     const buttonGAme1 = document.querySelector(
       `.table-result_${arrButton[0]}`
@@ -128,6 +164,12 @@ export function result() {
   );
   radioTables.forEach((radio) => {
     radio.addEventListener("change", () => {
+      const settingsChange = returnLocalStorage();
+      const userRegistredChange = returnLocalStorageIsRegistred();
+      const userOptionChange: ScoreGamesUserSort = {
+        username: userRegistredChange.userName,
+        option: optionSort,
+      };
       const value = radio.getAttribute("value");
       if (
         value === "game1" ||
@@ -143,20 +185,61 @@ export function result() {
           ".wrapper_table-result table"
         ) as HTMLElement).setAttribute("id", "games-table");
         statistic.getScoreTop10(objgame).then((data) => {
-          (document.querySelector(".table-name") as HTMLElement).innerHTML =
-            "участники";
-          drawtbody(data);
+          (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+            settingsChange.lang === "en" ? "Players" : "Игроки"
+          }`;
+          (document.querySelector(
+            ".table-result"
+          ) as HTMLElement).innerHTML = `${
+            settingsChange.lang === "en" ? "Result" : "Результат"
+          }`;
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("game", settingsChange.lang, value);
+          }
         });
       } else if (value === "user") {
         (document.querySelector(
           ".wrapper_table-result table"
         ) as HTMLElement).setAttribute("id", "user-table");
-        statistic.getScoreGamesUser(userOption).then((data) => {
-          (document.querySelector(".table-name") as HTMLElement).innerHTML =
-            "Имя игры";
-          drawtbody(data);
+        statistic.getScoreGamesUser(userOptionChange).then((data) => {
+          (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+            settingsChange.lang === "en" ? "Name Game" : "Имя игры"
+          }`;
+          (document.querySelector(
+            ".table-result"
+          ) as HTMLElement).innerHTML = `${
+            settingsChange.lang === "en" ? "Result" : "Результат"
+          }`;
+          if (Object.entries(data.scores).length > 0) {
+            drawtbody(data);
+          } else if (Object.entries(data.scores).length === 0) {
+            drawRawEmpty("user", settingsChange.lang);
+          }
         });
       }
     });
   });
+}
+
+export function translateHeaderTable(lang: string) {
+  const table = document.querySelector(
+    ".wrapper_table-result table"
+  ) as HTMLElement;
+  const resultCell = document.querySelector(".table-result") as HTMLElement;
+  const nameCell = document.querySelector(".table-name") as HTMLElement;
+
+  if (table) {
+    const nameTable = table.getAttribute("id");
+    resultCell.innerHTML = `${lang === "en" ? "Result" : "Результат"}`;
+
+    if (nameTable === "user-table") {
+      nameCell.innerHTML = `${lang === "en" ? "Name Game" : "Имя игры"}`;
+    }
+
+    if (nameTable === "games-table") {
+      nameCell.innerHTML = `${lang === "en" ? "Players" : "Игроки"}`;
+    }
+  }
 }

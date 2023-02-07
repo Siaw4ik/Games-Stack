@@ -2,7 +2,10 @@ import { User } from "../module/User";
 import { TypeUser } from "../module/types";
 import VImg from "../../assets/icons8-галочка.svg";
 import XImg from "../../assets/1675432350.svg";
-import { returnLocalStorage } from "../module/localStorage";
+import {
+  returnLocalStorage,
+  returnLocalStorageIsRegistred,
+} from "../module/localStorage";
 
 function clearInputFalse(name: string) {
   const checkLoginImg = document.querySelector(
@@ -295,12 +298,16 @@ export function authorizeUser() {
     localStorage.setItem("userTrue", JSON.stringify(object));
 
     if (window.location.hash.slice(1) === "result") {
+      const userRegisred = returnLocalStorageIsRegistred();
       const userRadio = document.querySelector(
         ".table-flip .user-radio"
       ) as HTMLElement;
-      console.log(userRadio);
       if (userRadio) {
         userRadio.style.display = "flex";
+        const userRadioP = document.querySelector(
+          ".table-flip .user-radio p"
+        ) as HTMLElement;
+        userRadioP.innerHTML = userRegisred.userName;
       }
     }
   }
