@@ -157,82 +157,89 @@ export const startGame = () => {
 
 export const clickAnswer = (): void => {
   const main = document.querySelector(".main") as HTMLElement;
+
   main.addEventListener("click", (e) => {
-    const answersAll = Array.from(
-      document.querySelectorAll(".game1-main__answer")
-    );
-    const question = document.getElementById("game1-question") as HTMLElement;
-    const correctAnswers = document.getElementById(
-      "game1-answers-count"
+    const game1wrapper = document.getElementById(
+      "game1-main-game"
     ) as HTMLElement;
-    const nextBtn = document.getElementById(
-      "game1-nextBtn"
-    ) as HTMLButtonElement;
-    const questionAtNow: Question = questionsForGame.filter(
-      (el) => el.question === question.innerHTML
-    )[0];
-    const { correct } = questionAtNow;
-    const answer = e.target as HTMLElement;
-    if ((<HTMLDivElement>e.target).className === "game1-main__answer") {
-      questionsAnsweredCount += 1;
-      if (
-        answer.innerHTML === correct &&
-        answersAll.filter((el) => el.classList.contains("game1-correct"))
-          .length === 0 &&
-        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
-          .length === 0 &&
-        questionsAnsweredCount !== questionsForGame.length
-      ) {
-        answersCount += 1;
-        correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
-        question.innerHTML = questionsForGame[questionsAnsweredCount].question;
-        answersAll.forEach((element, i) => {
-          element.innerHTML =
-            questionsForGame[questionsAnsweredCount].answers[i];
-        });
-      } else if (
-        answer.innerHTML !== correct &&
-        questionsAnsweredCount !== questionsForGame.length
-      ) {
-        answersAll
-          .filter((el) => el.innerHTML !== correct)
-          .forEach((el) => el.classList.add("game1-incorrect"));
-        answersAll
-          .filter((el) => el.innerHTML === correct)[0]
-          .classList.add("game1-correct");
-        nextBtn.disabled = false;
-      }
-      if (
-        answer.innerHTML === correct &&
-        answersAll.filter((el) => el.classList.contains("game1-correct"))
-          .length === 0 &&
-        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
-          .length === 0 &&
-        questionsAnsweredCount === questionsForGame.length
-      ) {
-        answersCount += 1;
-        answersAll
-          .filter((el) => el.innerHTML !== correct)
-          .forEach((el) => el.classList.add("game1-incorrect"));
-        answersAll
-          .filter((el) => el.innerHTML === correct)[0]
-          .classList.add("game1-correct");
-        clearInterval(timer);
-        correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
-        viewFinishMessage();
-      } else if (
-        answer.innerHTML !== correct &&
-        questionsAnsweredCount === questionsForGame.length
-      ) {
-        answersAll
-          .filter((el) => el.innerHTML !== correct)
-          .forEach((el) => el.classList.add("game1-incorrect"));
-        answersAll
-          .filter((el) => el.innerHTML === correct)[0]
-          .classList.add("game1-correct");
-        nextBtn.disabled = true;
-        clearInterval(timer);
-        viewFinishMessage();
+    if (game1wrapper) {
+      const answersAll = Array.from(
+        document.querySelectorAll(".game1-main__answer")
+      );
+      const question = document.getElementById("game1-question") as HTMLElement;
+      const correctAnswers = document.getElementById(
+        "game1-answers-count"
+      ) as HTMLElement;
+      const nextBtn = document.getElementById(
+        "game1-nextBtn"
+      ) as HTMLButtonElement;
+      const questionAtNow: Question = questionsForGame.filter(
+        (el) => el.question === question.innerHTML
+      )[0];
+      const { correct } = questionAtNow;
+      const answer = e.target as HTMLElement;
+      if ((<HTMLDivElement>e.target).className === "game1-main__answer") {
+        questionsAnsweredCount += 1;
+        if (
+          answer.innerHTML === correct &&
+          answersAll.filter((el) => el.classList.contains("game1-correct"))
+            .length === 0 &&
+          answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+            .length === 0 &&
+          questionsAnsweredCount !== questionsForGame.length
+        ) {
+          answersCount += 1;
+          correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
+          question.innerHTML =
+            questionsForGame[questionsAnsweredCount].question;
+          answersAll.forEach((element, i) => {
+            element.innerHTML =
+              questionsForGame[questionsAnsweredCount].answers[i];
+          });
+        } else if (
+          answer.innerHTML !== correct &&
+          questionsAnsweredCount !== questionsForGame.length
+        ) {
+          answersAll
+            .filter((el) => el.innerHTML !== correct)
+            .forEach((el) => el.classList.add("game1-incorrect"));
+          answersAll
+            .filter((el) => el.innerHTML === correct)[0]
+            .classList.add("game1-correct");
+          nextBtn.disabled = false;
+        }
+        if (
+          answer.innerHTML === correct &&
+          answersAll.filter((el) => el.classList.contains("game1-correct"))
+            .length === 0 &&
+          answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+            .length === 0 &&
+          questionsAnsweredCount === questionsForGame.length
+        ) {
+          answersCount += 1;
+          answersAll
+            .filter((el) => el.innerHTML !== correct)
+            .forEach((el) => el.classList.add("game1-incorrect"));
+          answersAll
+            .filter((el) => el.innerHTML === correct)[0]
+            .classList.add("game1-correct");
+          clearInterval(timer);
+          correctAnswers.innerHTML = `Correct answers: ${answersCount}`;
+          viewFinishMessage();
+        } else if (
+          answer.innerHTML !== correct &&
+          questionsAnsweredCount === questionsForGame.length
+        ) {
+          answersAll
+            .filter((el) => el.innerHTML !== correct)
+            .forEach((el) => el.classList.add("game1-incorrect"));
+          answersAll
+            .filter((el) => el.innerHTML === correct)[0]
+            .classList.add("game1-correct");
+          nextBtn.disabled = true;
+          clearInterval(timer);
+          viewFinishMessage();
+        }
       }
     }
   });

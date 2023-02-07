@@ -1,0 +1,31 @@
+.game2-wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  line-height: 1;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  background: white;
+  position: relative;
+}
+._game2-container {
+  max-width: 1630px;
+  padding: 0px 15px;
+  margin: 0px auto;
+}
+
+/*========================================================================================================*/
+
+.game2-main__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game2-main__game {
+  border: 2px solid black;
+}
