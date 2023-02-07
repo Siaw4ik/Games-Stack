@@ -122,9 +122,11 @@ function drawHTMLLayout() {
                   ? "display: none;"
                   : "display: flex;"
               }">${settings?.lang === "en" ? "Sign up" : "Авторизация"}</div>
-              <div class="btn_autorization-burger login-burger">${
-                settings?.lang === "en" ? "Login" : "Войти"
-              }</div>
+              <div class="btn_autorization-burger login-burger" style="${
+                userTrue.isRegistred === "true"
+                  ? "display: none;"
+                  : "display: flex;"
+              }">${settings?.lang === "en" ? "Login" : "Войти"}</div>
             </div>
           </nav>
         </div>

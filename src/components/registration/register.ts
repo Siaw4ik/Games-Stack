@@ -2,7 +2,6 @@ import { User } from "../module/User";
 import { TypeUser } from "../module/types";
 import VImg from "../../assets/icons8-галочка.svg";
 import XImg from "../../assets/1675432350.svg";
-
 import { returnLocalStorage } from "../module/localStorage";
 
 function clearInputFalse(name: string) {
@@ -294,6 +293,16 @@ export function authorizeUser() {
       isRegistred: "true",
     };
     localStorage.setItem("userTrue", JSON.stringify(object));
+
+    if (window.location.hash.slice(1) === "result") {
+      const userRadio = document.querySelector(
+        ".table-flip .user-radio"
+      ) as HTMLElement;
+      console.log(userRadio);
+      if (userRadio) {
+        userRadio.style.display = "flex";
+      }
+    }
   }
 
   btnSendSignup.addEventListener("click", () => {

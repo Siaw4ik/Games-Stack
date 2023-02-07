@@ -1,4 +1,6 @@
 import { renderNewPage } from "../module/changePage";
+import { drawtbody } from "../results";
+import { StatisticGames } from "../module/Games";
 
 export function clickingIconUserandLogout() {
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
@@ -71,6 +73,36 @@ export function clickingIconUserandLogout() {
     mainSignUp.classList.remove("no-active");
     mainSuccessLogIn.classList.remove("active");
     mainLogIn.classList.remove("no-active");
+    console.log(window.location.hash.slice(1));
+
+    if (window.location.hash.slice(1) === "result") {
+      const statistic = new StatisticGames();
+      const table = document.querySelector(
+        ".wrapper_table-result table"
+      ) as HTMLElement;
+      const userRadio = document.querySelector(
+        ".table-flip .user-radio"
+      ) as HTMLElement;
+      console.log(userRadio);
+      if (userRadio) {
+        userRadio.style.display = "none";
+      }
+      if (table.getAttribute("id") === "user-table") {
+        const objgame1 = {
+          gamename: "game1",
+          option: "ascName",
+        };
+        statistic.getScoreTop10(objgame1).then((data) => {
+          (document.querySelector(".table-name") as HTMLElement).innerHTML =
+            "участники";
+          drawtbody(data);
+        });
+        const buttonGAme1 = document.querySelector(
+          ".table-result_game1"
+        ) as HTMLInputElement;
+        buttonGAme1.checked = true;
+      }
+    }
   });
 
   accountStatistic.addEventListener("click", () => {
