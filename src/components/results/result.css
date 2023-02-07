@@ -3,11 +3,12 @@
 	color: #fff;
 	width: 100%;
 	height: 100%;
+	font-size: 17px;
 }
 
 .wrapper_table-result {
 	color: #fff;
-	width: 300px;
+	width: 350px;
 	margin: 20px auto;
 }
 
@@ -19,24 +20,36 @@
 .wrapper_table-result th,
 .wrapper_table-result td{
 	border: 1px solid #fff;
+	text-align: center;
 }
 
 
 
 .table-number {
-	width: 30px;
+	width: 40px;
 }
 
 .table-name,
 .table-result {
-	width: 100px;
+	width: 155px;
 	text-align: center;
 	font-size: 18px;
+	cursor: pointer;
+	color: rgb(184, 184, 254);
+}
+
+.table-name{
+	width: 210px;
+}
+
+.table-result {
+	width: 100px;
 }
 
 .table-flip {
 	display: flex;
 	flex-direction: row;
+	
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 40px;
@@ -52,4 +65,12 @@
 
 .table-flip div p{
 	margin: 0;
+}
+
+.table-flip div input{
+	cursor: pointer;
+}
+
+.raw-empty {
+	text-align: center;
 }

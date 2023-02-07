@@ -26,7 +26,7 @@ export class StatisticGames {
 
   async getScoreGamesUser(
     gameSort: ScoreGamesUserSort
-  ): Promise<ScoreGameUserSort /*  | AnswerRecordUser */> {
+  ): Promise<ScoreGameUserSort> {
     const response = await fetch(
       "https://rsclonetestserver-production.up.railway.app/user/scores",
       {
@@ -37,7 +37,7 @@ export class StatisticGames {
         body: JSON.stringify(gameSort),
       }
     );
-    const data: ScoreGameUserSort /*  | AnswerRecordUser */ = await response.json();
+    const data: ScoreGameUserSort = await response.json();
 
     return data;
   }
