@@ -49,6 +49,27 @@
   left: 0;
 }
 
+/* .image_dark_hole {
+  width: 16%;
+  height: 39%;
+  position: absolute;
+  background: url(../../assets/dark_hole.png) top / cover no-repeat;
+  top: 0;
+  right: 160px;
+  z-index: 5;
+  animation: 20s linear infinite rotate;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
 .images-parallax_galaxy {
   width: 100%;
   height: 100%;

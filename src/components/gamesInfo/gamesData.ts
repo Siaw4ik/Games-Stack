@@ -16,7 +16,7 @@ export const gamesData = {
       description:
         "Для поддержания силы разума джедая и существует данное упражнение-соревнование силы мысли.",
       rules:
-        "Правила игры: Вам необходимио за 60 секунд ответить верно на как можно большее количество вопросов, каждый правильный ответ дает вам 1 балл.",
+        "Правила игры: Вам необходимио за 60 секунд ответить верно на как можно большее количество вопросов, каждый правильный ответ дает вам 1 балл. По завершении времени Джедай может сравнить свои способности с остальными в таблице результатов.",
       pictureUrl: `${picture3}`,
       button: "Играть",
     },
@@ -58,7 +58,7 @@ export const gamesData = {
       description:
         "To maintain the power of the mind of the Jedi, there is this exercise-competition of the power of thought.",
       rules:
-        "Game rules: You need to answer as many questions correctly as possible in 60 seconds, each correct answer gives you 1 point.",
+        "Game rules: You need to answer as many questions correctly as possible in 60 seconds, each correct answer gives you 1 point. At the end of the time, the Jedi can compare his abilities with the rest in the scoreboard.",
       pictureUrl: `${picture3}`,
       button: "Play",
     },
