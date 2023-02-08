@@ -8,11 +8,15 @@ body.lock {
   overflow: hidden;
 }
 
+.wrapper_outer {
+  overflow: hidden;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .conteiner_header-main {
@@ -78,6 +82,7 @@ body.lock {
   font-weight: 700;
   font-size: 32px;
   line-height: 180%;
+  color: #D713C3;
 }
 
 .logoHeader {
@@ -737,6 +742,14 @@ body.lock {
   .header {
     height: 58px;
   }
+  .up-header {
+    padding: 0px 15px 10px 15px;
+  }
+
+  .logoHeader {
+    padding-top: 10px;
+  }
+
   .pages {
     display: none;
   }
@@ -753,7 +766,7 @@ body.lock {
   }
 
   .burger_menu {
-    background-color: rgb(255, 251, 240);
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     width: 100%;
     box-sizing: border-box;
@@ -768,7 +781,7 @@ body.lock {
   }
 
   .burger_menu.dark {
-    background-color: #252d42;
+    background-color: #181A21;
     box-shadow: 0 8px 16px rgb(0 0 0 / 75%);
   }
 
@@ -790,6 +803,7 @@ body.lock {
     align-items: flex-start;
     gap: 10px;
     padding: 0;
+    color:#000000;
   }
 
   .burger_nav_ul.dark {
@@ -800,6 +814,7 @@ body.lock {
     list-style-type: none;
     font-size: 20px;
     cursor: pointer;
+    transition: all .3s ease-in-out;
   }
 
   .burger_nav_ul_item {
@@ -808,11 +823,11 @@ body.lock {
   }
 
   #choose-burger {
-    color: #2D73FF;
+    color: #D713C3;
   }
 
   .burger_nav_ul_item:hover {
-    color: #2D73FF;
+    color: #D713C3;
   }
   .login-window.active,
   .signup-window.active {
@@ -830,10 +845,13 @@ body.lock {
     height: 52px;
   }
   .up-header {
-    padding: 5px 10px;
+    padding: 10px 10px;
   }
   .logo p {
     font-size: 29px;
+  }
+  .logoHeader {
+    padding-top: 0;
   }
   .lang_ru,
   .lang_en {

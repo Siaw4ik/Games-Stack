@@ -100,8 +100,6 @@
   background-color: #D713C3;
 }
 
-
-
 @media (max-width: 1000px) {
   .logo_games_picture {
     height: 200px;
@@ -143,5 +141,27 @@
   .logo_games_picture {
     height: 160px;
     border-radius: 50px;
+  }
+}
+
+@media (min-width: 3000px) {
+  .games_info_container {
+    padding: 300px 40px 0 40px;
+  }
+}
+@media (min-width: 4000px) {
+  .games_info_container {
+    padding: 350px 40px 0 40px;
+  }
+}
+@media (min-width: 5000px) {
+  .games_info_container {
+    padding: 400px 40px 0 40px;
+  }
+}
+
+@media (min-width: 6000px) {
+  .games_info_container {
+    padding: 450px 40px 0 40px;
   }
 }
