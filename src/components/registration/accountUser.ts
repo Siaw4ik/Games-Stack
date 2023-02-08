@@ -87,7 +87,7 @@ export function clickingIconUserandLogout() {
       }
       if (table.getAttribute("id") === "user-table") {
         const objgame1 = {
-          gamename: "game1",
+          gamename: "Jedi's Mind",
           option: "ascName",
         };
         statistic.getScoreTop10(objgame1).then((data) => {

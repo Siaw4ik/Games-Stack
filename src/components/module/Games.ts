@@ -1,6 +1,6 @@
 import {
   ScoreGameUser,
-  AnswerRecordUser,
+  /*   AnswerRecordUser, */
   ScoreGamesUserSort,
   ScoreGameUserSort,
   ResultTop10,
@@ -8,9 +8,11 @@ import {
 } from "./types";
 
 export class StatisticGames {
-  async addScoreGameUser(gameUser: ScoreGameUser): Promise<AnswerRecordUser> {
-    const response = await fetch(
-      "https://rsclonetestserver-production.up.railway.app/user/login",
+  async addScoreGameUser(
+    gameUser: ScoreGameUser
+  ): Promise<void> /* Promise<AnswerRecordUser> */ {
+    await fetch(
+      "https://rsclonetestserver-production.up.railway.app/user/addscore",
       {
         method: "POST",
         headers: {
@@ -19,9 +21,9 @@ export class StatisticGames {
         body: JSON.stringify(gameUser),
       }
     );
-    const data: AnswerRecordUser = await response.json();
+    /* const data: AnswerRecordUser = await response.json();
 
-    return data;
+    return data; */
   }
 
   async getScoreGamesUser(
@@ -42,8 +44,10 @@ export class StatisticGames {
     return data;
   }
 
-  async addScoreTop10(scoregame: ScoreGameUser): Promise<AnswerRecordUser> {
-    const response = await fetch(
+  async addScoreTop10(
+    scoregame: ScoreGameUser
+  ): Promise<void> /* Promise<AnswerRecordUser> */ {
+    await fetch(
       "https://rsclonetestserver-production.up.railway.app/top/addscore",
       {
         method: "POST",
@@ -53,9 +57,9 @@ export class StatisticGames {
         body: JSON.stringify(scoregame),
       }
     );
-    const data: AnswerRecordUser = await response.json();
+    /* const data: AnswerRecordUser = await response.json();
 
-    return data;
+    return data; */
   }
 
   async getScoreTop10(gameSort: RequestTop10): Promise<ResultTop10> {

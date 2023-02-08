@@ -11,7 +11,12 @@ import {
   returnLocalStorage,
 } from "../module/localStorage";
 
-const arrButton = ["game1", "game2", "game3", "game4"];
+const arrButton = [
+  { game1: "Jedi's Mind" },
+  { game2: "Jedi Agility" },
+  { game3: "game3" },
+  { game4: "game4" },
+];
 
 export function drawTable(lang: string) {
   const userRegistred = returnLocalStorageIsRegistred();
@@ -42,8 +47,10 @@ export function drawTable(lang: string) {
   arrButton.forEach((elem) => {
     const buttonDiv = document.createElement("div");
     buttonDiv.innerHTML = `
-      <input  class="table-result_${elem}" type="radio" name="table" value="${elem}">
-      <p>${elem}</p>
+      <input  class="table-result_${
+        Object.keys(elem)[0]
+      }" type="radio" name="table" value="${Object.values(elem)[0]}">
+      <p>${Object.values(elem)[0]}</p>
     `;
     form.appendChild(buttonDiv);
   });
@@ -225,12 +232,7 @@ function changeRadioBtn() {
       const userRegistred = returnLocalStorageIsRegistred();
       drawRawWait(settingsChange.lang);
       const value = radio.getAttribute("value");
-      if (
-        value === "game1" ||
-        value === "game2" ||
-        value === "game3" ||
-        value === "game4"
-      ) {
+      if (value && value !== "user") {
         const objgame = {
           gamename: value,
           option: optionNameGame,
@@ -313,7 +315,7 @@ export function result() {
   } else if (userRegistred.isRegistred === "false") {
     drawTable(settings.lang);
     const objgame1 = {
-      gamename: arrButton[0],
+      gamename: "Jedi's Mind",
       option: optionNameGame,
     };
     drawRawWait(settings.lang);
@@ -324,11 +326,11 @@ export function result() {
       if (Object.entries(data.scores).length > 0) {
         drawtbody(data);
       } else if (Object.entries(data.scores).length === 0) {
-        drawRawEmpty("game", settings.lang, arrButton[0]);
+        drawRawEmpty("game", settings.lang, "Jedi's Mind");
       }
     });
     const buttonGAme1 = document.querySelector(
-      `.table-result_${arrButton[0]}`
+      `.table-result_game1`
     ) as HTMLInputElement;
     buttonGAme1.checked = true;
     (document.querySelector(
@@ -336,7 +338,7 @@ export function result() {
     ) as HTMLElement).setAttribute("class", "games-table");
     (document.querySelector(
       ".wrapper_table-result table"
-    ) as HTMLElement).setAttribute("id", `table-${arrButton[0]}`);
+    ) as HTMLElement).setAttribute("id", `table-game1`);
   }
   changeRadioBtn();
   sortresult();

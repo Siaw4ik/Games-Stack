@@ -8,6 +8,7 @@ import Score from "./types/score";
 import enemy1 from "../../assets/images/enemy_1.png";
 import enemy2 from "../../assets/images/enemy_2.png";
 import enemy3 from "../../assets/images/enemy_3.png";
+import { sendScore } from "../results/sendScore";
 
 const gameSpeedStart = 0.55;
 const gameSpeedIncrement = 0.00001;
@@ -197,6 +198,8 @@ function gameLoop(currentTime: number) {
 
   if (!gameOver && enemyController.collideWith(player)) {
     gameOver = true;
+    console.log(score.score);
+    sendScore("Jedi Agility", Math.trunc(score.score));
     setupGameReset();
   }
   ground.draw();
