@@ -1,6 +1,6 @@
-import dino from "../../../assets/images/dino.png";
-import dinorun1 from "../../../assets/images/dino_run1.png";
-import dinorun2 from "../../../assets/images/dino_run2.png";
+import jedi from "../../../assets/images/jedi.png";
+import jediRun1 from "../../../assets/images/jedi_run1.png";
+import jediRun2 from "../../../assets/images/jedi_run2.png";
 
 export default class Player {
   walk_animation_timer = 200;
@@ -17,7 +17,7 @@ export default class Player {
 
   jump_speed = 0.6;
 
-  gravity = 0.4;
+  gravity = 0.35;
 
   ctx: CanvasRenderingContext2D;
 
@@ -63,19 +63,19 @@ export default class Player {
     this.maxJumpHeight = maxJumpHeight;
     this.scaleRatio = scaleRatio;
 
-    this.x = 10 * scaleRatio;
+    this.x = 180 * scaleRatio;
     this.y = this.canvas.height - this.height - 1.5 * scaleRatio;
     this.yStandingPosition = this.y;
 
     this.standingStillImage = new Image();
-    this.standingStillImage.src = dino;
+    this.standingStillImage.src = jedi;
     this.image = this.standingStillImage;
 
     this.dinoRunImage1 = new Image();
-    this.dinoRunImage1.src = dinorun1;
+    this.dinoRunImage1.src = jediRun1;
 
     this.dinoRunImage2 = new Image();
-    this.dinoRunImage2.src = dinorun2;
+    this.dinoRunImage2.src = jediRun2;
     this.dinoRunImages.push(this.dinoRunImage1);
     this.dinoRunImages.push(this.dinoRunImage2);
 

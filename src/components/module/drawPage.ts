@@ -3,9 +3,9 @@ import icon from "../../assets/github_icon.svg";
 import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
 import iconUser from "../../assets/account.png";
-import iconOk from "../../assets/icons8-ок-128.svg";
+import iconOk from "../../assets/input_OK.svg";
 import logoHeder from "../../assets/logo.svg";
-import iconNO from "../../assets/icons8-unavailable.svg";
+import iconNO from "../../assets/input_Unavailable.svg";
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistred,

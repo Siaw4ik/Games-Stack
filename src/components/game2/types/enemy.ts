@@ -1,4 +1,4 @@
-import Player from "./dino";
+import Player from "./jedi";
 
 export default class Cactus {
   ctx: CanvasRenderingContext2D;
