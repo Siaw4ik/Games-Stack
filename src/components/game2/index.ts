@@ -8,6 +8,7 @@ import Score from "./types/score";
 import cactus1 from "../../assets/images/cactus_1.png";
 import cactus2 from "../../assets/images/cactus_2.png";
 import cactus3 from "../../assets/images/cactus_3.png";
+import { sendScore } from "../results/sendScore";
 
 const gameSpeedStart = 0.75;
 const gameSpeedIncrement = 0.00001;
@@ -197,6 +198,8 @@ function gameLoop(currentTime: number) {
 
   if (!gameOver && cactiController.collideWith(player)) {
     gameOver = true;
+    console.log(score.score);
+    sendScore("Jedi Agility", Math.trunc(score.score));
     setupGameReset();
   }
   ground.draw();
