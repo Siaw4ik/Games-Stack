@@ -1,6 +1,4 @@
-import {
-  game1 /* , startGame, clickAnswer, clickNext, startAgain */,
-} from "../game1";
+import { game1 } from "../game1";
 import { game2 } from "../game2";
 import { game3 } from "../game3";
 import { game4 } from "../game4";
@@ -118,7 +116,7 @@ function changePageMain() {
       window.location.hash = "#game1";
     }
     if (target.closest(".game2")) {
-      window.location.hash = "game2";
+      window.location.hash = "#game2";
     }
     if (target.closest(".game3")) {
       window.location.hash = "#game3";

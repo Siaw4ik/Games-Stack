@@ -17,12 +17,14 @@ import {
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
 import { gameAllfunc } from "./components/game1";
+import { costylGame2 } from "./components/game2";
 
 enableRoutChange();
 drawPage();
+
 const pageId = getLocationHash() ? getLocationHash() : "about";
 renderNewPage(pageId);
-// drawHomePage();
+
 changePage();
 
 toggleVolume();
@@ -34,5 +36,7 @@ closeOpenWindowRegisration();
 clickingIconUserandLogout();
 
 gameAllfunc();
+
+costylGame2();
 
 console.log("start page");
