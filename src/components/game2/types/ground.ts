@@ -1,3 +1,5 @@
+import ground from "../../../assets/images/ground.png";
+
 export default class Ground {
   ctx: CanvasRenderingContext2D;
 
@@ -35,8 +37,7 @@ export default class Ground {
     this.y = this.canvas.height - this.height;
 
     this.groundImage = new Image();
-    this.groundImage.src =
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/ground.png?token=GHSAT0AAAAAAB6OOP44BY4VL5MGSEQMEH5QY7CLZ5Q";
+    this.groundImage.src = ground;
   }
 
   draw() {
