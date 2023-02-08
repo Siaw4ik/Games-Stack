@@ -14,7 +14,7 @@ export default class Score {
   score = 0;
 
   update(frameTimeDelta: number) {
-    this.score += frameTimeDelta;
+    this.score += frameTimeDelta / 600;
   }
 
   reset() {
@@ -22,12 +22,12 @@ export default class Score {
   }
 
   draw() {
-    const y = 20 * this.scaleRatio;
+    const y = 30 * this.scaleRatio;
 
-    const fontSize = 20 * this.scaleRatio;
-    this.ctx.font = `${fontSize}px serif`;
-    this.ctx.fillStyle = "#525250";
-    const scoreX = this.canvas.width - 75 * this.scaleRatio;
+    const fontSize = 18 * this.scaleRatio;
+    this.ctx.font = `${fontSize}px sans-serif`;
+    this.ctx.fillStyle = "black";
+    const scoreX = this.canvas.width - 85 * this.scaleRatio;
     const scorePadded = Math.floor(this.score).toString().padStart(6, "0");
     this.ctx.fillText(scorePadded, scoreX, y);
   }

@@ -1,7 +1,7 @@
 import { User } from "../module/User";
 import { TypeUser } from "../module/types";
-import VImg from "../../assets/icons8-галочка.svg";
-import XImg from "../../assets/1675432350.svg";
+import VImg from "../../assets/input_V.svg";
+import XImg from "../../assets/cross_input.svg";
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistred,

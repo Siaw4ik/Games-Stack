@@ -17,7 +17,7 @@ import {
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
 import { gameAllfunc } from "./components/game1";
-import { costylGame2 } from "./components/game2";
+import { fixGame2 } from "./components/game2";
 
 enableRoutChange();
 drawPage();
@@ -37,6 +37,6 @@ clickingIconUserandLogout();
 
 gameAllfunc();
 
-costylGame2();
+fixGame2();
 
 console.log("start page");

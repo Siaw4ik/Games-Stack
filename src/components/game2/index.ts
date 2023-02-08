@@ -1,42 +1,42 @@
 import "./index.css";
-import Player from "./types/dino";
-import Ground from "./types/ground";
+import Player from "./types/jedi";
+import Ground from "./types/background";
 
-import CactiController from "./types/cacti-controller";
+import EnemyController from "./types/enemy-controller";
 import Score from "./types/score";
 
-import cactus1 from "../../assets/images/cactus_1.png";
-import cactus2 from "../../assets/images/cactus_2.png";
-import cactus3 from "../../assets/images/cactus_3.png";
+import enemy1 from "../../assets/images/enemy_1.png";
+import enemy2 from "../../assets/images/enemy_2.png";
+import enemy3 from "../../assets/images/enemy_3.png";
 import { sendScore } from "../results/sendScore";
 
-const gameSpeedStart = 0.75;
+const gameSpeedStart = 0.55;
 const gameSpeedIncrement = 0.00001;
 const gameWidth = 800;
 const gameHeight = 200;
-const playerWidth = 88 / 1.5;
-const playerHight = 94 / 1.5;
+const playerWidth = 100 / 1.5;
+const playerHight = 100 / 1.5;
 const maxJumpingHeight = gameHeight;
 const minJumpingHeight = 150;
-const groundWidth = 2400;
-const groundHeight = 24;
+const groundWidth = 1000;
+const groundHeight = 200;
 const groundAndCactusSpeed = 0.5;
 
-const cactiConfig = [
+const enemyConfig = [
   {
-    width: 48 / 1.5,
-    height: 100 / 1.5,
-    image: cactus1,
+    width: 62.37 / 1.5,
+    height: 110 / 1.5,
+    image: enemy1,
   },
   {
-    width: 98 / 1.5,
-    height: 100 / 1.5,
-    image: cactus2,
+    width: 148 / 1.5,
+    height: 85 / 1.5,
+    image: enemy2,
   },
   {
-    width: 68 / 1.5,
-    height: 70 / 1.5,
-    image: cactus3,
+    width: 90 / 1.5,
+    height: 73 / 1.5,
+    image: enemy3,
   },
 ];
 
@@ -45,19 +45,19 @@ let previousTime: number;
 let player: Player;
 let ground: Ground;
 let score: Score;
-let cactiController: CactiController;
+let enemyController: EnemyController;
 let gameSpeed = gameSpeedStart;
 let gameOver = false;
 let hasAddedEventListenersForRestart = false;
 let waitingToStart = true;
 
 function createSprites() {
-  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     const playerWidthInGame = playerWidth * scaleRatio;
     const playerHightInGame = playerHight * scaleRatio;
-    const minJunpHeightInGame = minJumpingHeight * scaleRatio;
+    const minJumpHeightInGame = minJumpingHeight * scaleRatio;
     const maxJumpWidthInGame = maxJumpingHeight * scaleRatio;
 
     const groundWidthInGame = groundWidth * scaleRatio;
@@ -67,7 +67,7 @@ function createSprites() {
       ctx,
       playerWidthInGame,
       playerHightInGame,
-      minJunpHeightInGame,
+      minJumpHeightInGame,
       maxJumpWidthInGame,
       scaleRatio
     );
@@ -80,7 +80,7 @@ function createSprites() {
       scaleRatio
     );
 
-    const cactiImages = cactiConfig.map((e) => {
+    const enemyImages = enemyConfig.map((e) => {
       const image = new Image();
       image.src = e.image;
       return {
@@ -90,9 +90,9 @@ function createSprites() {
       };
     });
 
-    cactiController = new CactiController(
+    enemyController = new EnemyController(
       ctx,
-      cactiImages,
+      enemyImages,
       scaleRatio,
       groundAndCactusSpeed
     );
@@ -102,27 +102,27 @@ function createSprites() {
 }
 
 function showGameOver() {
-  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 40 * scaleRatio;
-    ctx.font = `${fontSize}px Verdana`;
-    ctx.fillStyle = "grey";
-    const x = canvas.width / 14;
-    const y = canvas.height / 2;
-    ctx.fillText("Tap Screen or Press Space To Start", x, y);
+    const fontSize = 18 * scaleRatio;
+    ctx.font = `${fontSize}px Lato`;
+    ctx.fillStyle = "#D713C3";
+    const x = canvas.width / 3.5;
+    const y = canvas.height / 7;
+    ctx.fillText("Game Over! Press Space to Start Again", x, y);
   }
 }
 
 export function reset() {
-  const mainchild = (document.querySelector(".main") as HTMLElement)
+  const mainChild = (document.querySelector(".main") as HTMLElement)
     .childNodes[0] as HTMLElement;
-  if (mainchild.classList.value === "game2-wrapper") {
+  if (mainChild.classList.value === "game2-wrapper") {
     hasAddedEventListenersForRestart = false;
     gameOver = false;
     waitingToStart = false;
     ground.reset();
-    cactiController.reset();
+    enemyController.reset();
     score.reset();
     gameSpeed = gameSpeedStart;
   }
@@ -152,15 +152,15 @@ function setupGameReset() {
 }
 
 function showStartGameText() {
-  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 40 * scaleRatio;
-    ctx.font = `${fontSize}px Verdana`;
-    ctx.fillStyle = "grey";
-    const x = canvas.width / 14;
-    const y = canvas.height / 2;
-    ctx.fillText("Tap Screen or Press Space To Start", x, y);
+    const fontSize = 18 * scaleRatio;
+    ctx.font = `${fontSize}px Lato`;
+    ctx.fillStyle = "#D713C3";
+    const x = canvas.width / 3;
+    const y = canvas.height / 7;
+    ctx.fillText("Tap Screen or Press Space to Start", x, y);
   }
 }
 
@@ -169,7 +169,7 @@ function updateGameSpeed(frameTimeDelta: number) {
 }
 
 function clearScreen() {
-  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     ctx.fillStyle = "white";
@@ -190,20 +190,20 @@ function gameLoop(currentTime: number) {
 
   if (!gameOver && !waitingToStart) {
     ground.update(gameSpeed, frameTimeDelta);
-    cactiController.update(gameSpeed, frameTimeDelta);
+    enemyController.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
     score.update(frameTimeDelta);
     updateGameSpeed(frameTimeDelta);
   }
 
-  if (!gameOver && cactiController.collideWith(player)) {
+  if (!gameOver && enemyController.collideWith(player)) {
     gameOver = true;
     console.log(score.score);
     sendScore("Jedi Agility", Math.trunc(score.score));
     setupGameReset();
   }
   ground.draw();
-  cactiController.draw();
+  enemyController.draw();
   player.draw();
   score.draw();
 
@@ -228,24 +228,24 @@ export const game2 = () => {
   const body = document.createElement("div");
   body.classList.add("game2-wrapper");
   body.innerHTML = `<div class="game2-main__container _game2-container">
-      <canvas id="game2" class="game2-main__game"></canvas>
+      <canvas id="game_2" class="game2-main__game"></canvas>
     </div>`;
   main.appendChild(body);
-  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  const canvas = document.getElementById("game_2") as HTMLCanvasElement;
 
   function getScaleRatio() {
-    const scrrenHeight = Math.min(
+    const screenHeight = Math.min(
       window.innerHeight,
       document.documentElement.clientHeight
     );
-    const scrrenWidth = Math.min(
+    const screenWidth = Math.min(
       window.innerWidth,
       document.documentElement.clientWidth
     );
-    if (scrrenWidth / scrrenHeight < gameWidth / gameHeight) {
-      return scrrenWidth / gameWidth;
+    if (screenWidth / screenHeight < gameWidth / gameHeight) {
+      return screenWidth / gameWidth;
     }
-    return scrrenHeight / gameHeight;
+    return screenHeight / gameHeight;
   }
 
   function setScreen() {
@@ -264,10 +264,8 @@ export const game2 = () => {
   requestAnimationFrame(gameLoop);
 };
 
-export function costylGame2() {
+export function fixGame2() {
   window.addEventListener("hashchange", () => {
-    const game2Main = document.querySelector(".game2-wrapper") as HTMLElement;
-    console.log(game2Main);
     document.body.addEventListener("keyup", reset, { once: true });
     window.addEventListener("touchstart", reset, { once: true });
   });
