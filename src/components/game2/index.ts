@@ -1,11 +1,13 @@
 import "./index.css";
-import Player from "./core/types/dino";
-import Ground from "./core/types/ground";
+import Player from "./types/dino";
+import Ground from "./types/ground";
 
-import CactiController from "./core/types/cacti-controller";
-import Score from "./core/types/score";
+import CactiController from "./types/cacti-controller";
+import Score from "./types/score";
 
-export const currentTime: number = 0;
+import cactus1 from "../../assets/images/cactus_1.png";
+import cactus2 from "../../assets/images/cactus_2.png";
+import cactus3 from "../../assets/images/cactus_3.png";
 
 const gameSpeedStart = 0.75;
 const gameSpeedIncrement = 0.00001;
@@ -23,20 +25,17 @@ const cactiConfig = [
   {
     width: 48 / 1.5,
     height: 100 / 1.5,
-    image:
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/cactus_1.png?token=GHSAT0AAAAAAB6OOP45CPUELEFJPZCMGEJAY7CLZYA",
+    image: cactus1,
   },
   {
     width: 98 / 1.5,
     height: 100 / 1.5,
-    image:
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/cactus_2.png?token=GHSAT0AAAAAAB6OOP445NZTRROBRE57N5YCY7CLZZQ",
+    image: cactus2,
   },
   {
     width: 68 / 1.5,
     height: 70 / 1.5,
-    image:
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/cactus_3.png?token=GHSAT0AAAAAAB6OOP454OZETDZZWOY3J22MY7CLZ2Q",
+    image: cactus3,
   },
 ];
 
@@ -52,114 +51,80 @@ let hasAddedEventListenersForRestart = false;
 let waitingToStart = true;
 
 function createSprites() {
-  const canvas = document.getElementById("game") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const playerWidthInGame = playerWidth * scaleRatio;
-  const playerHightInGame = playerHight * scaleRatio;
-  const minJunpHeightInGame = minJumpingHeight * scaleRatio;
-  const maxJumpWidthInGame = maxJumpingHeight * scaleRatio;
-
-  const groundWidthInGame = groundWidth * scaleRatio;
-  const groundHeightInGame = groundHeight * scaleRatio;
-
-  player = new Player(
-    ctx,
-    playerWidthInGame,
-    playerHightInGame,
-    minJunpHeightInGame,
-    maxJumpWidthInGame,
-    scaleRatio
-  );
-
-  ground = new Ground(
-    ctx,
-    groundWidthInGame,
-    groundHeightInGame,
-    groundAndCactusSpeed,
-    scaleRatio
-  );
-
-  const cactiImages = cactiConfig.map((e) => {
-    const image = new Image();
-    image.src = e.image;
-    return {
-      image,
-      width: e.width * scaleRatio,
-      height: e.height * scaleRatio,
-    };
-  });
-
-  cactiController = new CactiController(
-    ctx,
-    cactiImages,
-    scaleRatio,
-    groundAndCactusSpeed
-  );
-
-  score = new Score(ctx, scaleRatio);
-}
-
-export const game2 = () => {
-  const main = document.querySelector(".main") as HTMLElement;
-  main.innerHTML = "";
-  const page = `<div class="game2-main__container _game2-container">
-    <canvas id="game2" class="game2-main__game"></canvas>
-  </div>`;
-  const body = document.createElement("div");
-  body.classList.add("game2-wrapper");
-  body.innerHTML = page;
-  document.body.appendChild(body);
   const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const playerWidthInGame = playerWidth * scaleRatio;
+    const playerHightInGame = playerHight * scaleRatio;
+    const minJunpHeightInGame = minJumpingHeight * scaleRatio;
+    const maxJumpWidthInGame = maxJumpingHeight * scaleRatio;
 
-  function getScaleRatio() {
-    const scrrenHeight = Math.min(
-      window.innerHeight,
-      document.documentElement.clientHeight
+    const groundWidthInGame = groundWidth * scaleRatio;
+    const groundHeightInGame = groundHeight * scaleRatio;
+
+    player = new Player(
+      ctx,
+      playerWidthInGame,
+      playerHightInGame,
+      minJunpHeightInGame,
+      maxJumpWidthInGame,
+      scaleRatio
     );
-    const scrrenWidth = Math.min(
-      window.innerWidth,
-      document.documentElement.clientWidth
+
+    ground = new Ground(
+      ctx,
+      groundWidthInGame,
+      groundHeightInGame,
+      groundAndCactusSpeed,
+      scaleRatio
     );
-    if (scrrenWidth / scrrenHeight < gameWidth / gameHeight) {
-      return scrrenWidth / gameWidth;
-    }
-    return scrrenHeight / gameHeight;
-  }
 
-  function setScreen() {
-    scaleRatio = getScaleRatio();
-    canvas.width = gameWidth * scaleRatio;
-    canvas.height = gameHeight * scaleRatio;
-    createSprites();
-  }
+    const cactiImages = cactiConfig.map((e) => {
+      const image = new Image();
+      image.src = e.image;
+      return {
+        image,
+        width: e.width * scaleRatio,
+        height: e.height * scaleRatio,
+      };
+    });
 
-  setScreen();
-  window.addEventListener("resize", () => setTimeout(setScreen, 500));
+    cactiController = new CactiController(
+      ctx,
+      cactiImages,
+      scaleRatio,
+      groundAndCactusSpeed
+    );
 
-  if (window.screen) {
-    window.addEventListener("resize", setScreen);
+    score = new Score(ctx, scaleRatio);
   }
-};
+}
 
 function showGameOver() {
-  const canvas = document.getElementById("game") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const fontSize = 40 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "grey";
-  const x = canvas.width / 14;
-  const y = canvas.height / 2;
-  ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const fontSize = 40 * scaleRatio;
+    ctx.font = `${fontSize}px Verdana`;
+    ctx.fillStyle = "grey";
+    const x = canvas.width / 14;
+    const y = canvas.height / 2;
+    ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  }
 }
 
-function reset() {
-  hasAddedEventListenersForRestart = false;
-  gameOver = false;
-  waitingToStart = false;
-  ground.reset();
-  cactiController.reset();
-  score.reset();
-  gameSpeed = gameSpeedStart;
+export function reset() {
+  const mainchild = (document.querySelector(".main") as HTMLElement)
+    .childNodes[0] as HTMLElement;
+  if (mainchild.classList.value === "game2-wrapper") {
+    hasAddedEventListenersForRestart = false;
+    gameOver = false;
+    waitingToStart = false;
+    ground.reset();
+    cactiController.reset();
+    score.reset();
+    gameSpeed = gameSpeedStart;
+  }
 }
 
 function setupGameReset() {
@@ -167,21 +132,35 @@ function setupGameReset() {
     hasAddedEventListenersForRestart = true;
 
     setTimeout(() => {
-      window.addEventListener("keyup", reset, { once: true });
-      window.addEventListener("touchstart", reset, { once: true });
+      window.addEventListener(
+        "keyup",
+        () => {
+          reset();
+        },
+        { once: true }
+      );
+      window.addEventListener(
+        "touchstart",
+        () => {
+          reset();
+        },
+        { once: true }
+      );
     }, 1000);
   }
 }
 
 function showStartGameText() {
-  const canvas = document.getElementById("game") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const fontSize = 40 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "grey";
-  const x = canvas.width / 14;
-  const y = canvas.height / 2;
-  ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const fontSize = 40 * scaleRatio;
+    ctx.font = `${fontSize}px Verdana`;
+    ctx.fillStyle = "grey";
+    const x = canvas.width / 14;
+    const y = canvas.height / 2;
+    ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  }
 }
 
 function updateGameSpeed(frameTimeDelta: number) {
@@ -189,14 +168,15 @@ function updateGameSpeed(frameTimeDelta: number) {
 }
 
 function clearScreen() {
-  const canvas = document.getElementById("game") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
 }
 
-export function gameLoop(currentTime: number) {
-  console.log(gameSpeed);
+function gameLoop(currentTime: number) {
   if (previousTime === null) {
     previousTime = currentTime;
     requestAnimationFrame(gameLoop);
@@ -234,7 +214,61 @@ export function gameLoop(currentTime: number) {
 
   requestAnimationFrame(gameLoop);
 }
-requestAnimationFrame(gameLoop);
+
+if (window.location.hash === "#game2") {
+  requestAnimationFrame(gameLoop);
+}
+
+export const game2 = () => {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = "";
+  const body = document.createElement("div");
+  body.classList.add("game2-wrapper");
+  body.innerHTML = `<div class="game2-main__container _game2-container">
+      <canvas id="game2" class="game2-main__game"></canvas>
+    </div>`;
+  main.appendChild(body);
+  const canvas = document.getElementById("game2") as HTMLCanvasElement;
+
+  function getScaleRatio() {
+    const scrrenHeight = Math.min(
+      window.innerHeight,
+      document.documentElement.clientHeight
+    );
+    const scrrenWidth = Math.min(
+      window.innerWidth,
+      document.documentElement.clientWidth
+    );
+    if (scrrenWidth / scrrenHeight < gameWidth / gameHeight) {
+      return scrrenWidth / gameWidth;
+    }
+    return scrrenHeight / gameHeight;
+  }
+
+  function setScreen() {
+    scaleRatio = getScaleRatio();
+    canvas.width = gameWidth * scaleRatio;
+    canvas.height = gameHeight * scaleRatio;
+    createSprites();
+  }
+
+  setScreen();
+  window.addEventListener("resize", () => setTimeout(setScreen, 500));
+
+  if (window.screen) {
+    window.addEventListener("resize", setScreen);
+  }
+  requestAnimationFrame(gameLoop);
+};
+
+export function costylGame2() {
+  window.addEventListener("hashchange", () => {
+    const game2Main = document.querySelector(".game2-wrapper") as HTMLElement;
+    console.log(game2Main);
+    document.body.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
+  });
+}
 
 window.addEventListener("keyup", reset, { once: true });
 window.addEventListener("touchstart", reset, { once: true });

@@ -1,3 +1,7 @@
+import dino from "../../../assets/images/dino.png";
+import dinorun1 from "../../../assets/images/dino_run1.png";
+import dinorun2 from "../../../assets/images/dino_run2.png";
+
 export default class Player {
   walk_animation_timer = 200;
 
@@ -64,18 +68,14 @@ export default class Player {
     this.yStandingPosition = this.y;
 
     this.standingStillImage = new Image();
-    this.standingStillImage.src = "./dino.png";
-    // 'https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/standing_still.png?token=GHSAT0AAAAAAB6OOP44YK6R6GKS3R7XMJKSY7CLZ7A');
-    // 'https://dino-chrome.com/static/images/dino.jpg';
+    this.standingStillImage.src = dino;
     this.image = this.standingStillImage;
 
     this.dinoRunImage1 = new Image();
-    this.dinoRunImage1.src =
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/dino_run1.png?token=GHSAT0AAAAAAB6OOP45QRQ2KJ3B2ZO2NTCQY7CLZ3Q";
+    this.dinoRunImage1.src = dinorun1;
 
     this.dinoRunImage2 = new Image();
-    this.dinoRunImage2.src =
-      "https://raw.githubusercontent.com/rolling-scopes-school/pahomomg-JSFE2022Q3/dino/dino_run2.png?token=GHSAT0AAAAAAB6OOP44YMQFIJAE6OLCYMNEY7CLZ4A";
+    this.dinoRunImage2.src = dinorun2;
     this.dinoRunImages.push(this.dinoRunImage1);
     this.dinoRunImages.push(this.dinoRunImage2);
 
@@ -145,11 +145,10 @@ export default class Player {
 
   run(gameSpeed: number, frameTimeDelta: number) {
     if (this.walkAnimationTimer <= 0) {
-      if (this.image === this.dinoRunImages[0]) {
-        this.image = this.dinoRunImages[1];
-      } else {
-        this.image = this.dinoRunImages[0];
-      }
+      this.image =
+        this.image === this.dinoRunImages[0]
+          ? this.dinoRunImages[1]
+          : this.dinoRunImages[0];
       this.walkAnimationTimer = this.walk_animation_timer;
     }
     this.walkAnimationTimer -= frameTimeDelta * gameSpeed;
