@@ -4,6 +4,8 @@ import { Question } from "./core/types/types";
 import { questions } from "./core/data/questions";
 import "./index.css";
 
+import { sendScore } from "../results/sendScore";
+
 questions.sort(
   (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
 );
@@ -79,6 +81,7 @@ function viewFinishMessage() {
   answersBlock.classList.add("game1-close");
   nextBtn.classList.add("game1-close");
   completeContainer.classList.add("game1-open");
+  sendScore("Jedi's Mind", answersCount);
 }
 
 function startTimer() {
