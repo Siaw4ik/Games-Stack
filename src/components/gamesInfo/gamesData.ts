@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-// import picture1 from "../../assets/game1_picture.png"
-// import picture2 from "../../assets/game2_picture.png"
+import picture1 from "../../assets/game1_picture.png"
+import picture2 from "../../assets/game2_picture.png"
 import picture3 from "../../assets/game3_picture.png"
 import picture4 from "../../assets/game4_picture.png"
 
@@ -12,81 +12,81 @@ export const gamesData = {
   "ru": [
     {
       id: "game1",
-      name: "Сила мысли Джедая",
+      name: "Jedi's Mind",
       description:
         "Для поддержания силы разума джедая и существует данное упражнение-соревнование силы мысли.",
       rules:
         "Правила игры: Вам необходимио за 60 секунд ответить верно на как можно большее количество вопросов, каждый правильный ответ дает вам 1 балл. По завершении времени Джедай может сравнить свои способности с остальными в таблице результатов.",
-      pictureUrl: `${picture3}`,
+      pictureUrl: `${picture1}`,
       button: "Играть",
     },
     {
       id: "game2",
-      name: "Ловкость Джедая",
+      name: "Jedi's Agility",
       description:
-        "В данной игре вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. Вам необходимио помочь Дино в его любимом занятии - беге с препятствиями, при подготовке к Мировому чемпионату по этой дисциплине.",
+        "Каким бы ни был разум Джедая, его тело также нуждается в ежедневных тренировках. В данной игре вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. Вам необходимио помочь Люку Скайокеру в его тренировках.",
       rules:
-        "Правила игры: Вам необходимио избегать столкновений с препятствиями, каждое пройденное препятствие вознаграждается набранными баллами, больше баллов - гарантия отличной подготовки Дино к Мировому первенству, а также меньше травм для нашего претендента на пьедестал.",
-      pictureUrl: `${picture3}`,
+        "Правила игры: Вам необходимио избегать столкновений с врагами, ведь Джедай использует Силу для познания и защиты, никогда для нападения. Чем дольше сможете избегать прямого контакта с врагами - тем больше очков будет получено. По завершении времени Джедай может сравнить свои способности с остальными в таблице результатов.",
+      pictureUrl: `${picture2}`,
       button: "Играть",
     },
     {
       id: "game3",
-      name: "Игра 3",
+      name: "Jedi's Mobility",
       description:
-        "В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции.",
+        "Быть сильным физически и умственно - это замечательно, но ты не сможешь быть соверешенным, если ты не владеешь навыками пилотирования корабля, благодаря которым Джедаю открываются новые горизонты и возможности. В данной игре Вам предоставляется возможность проявить и улучшить свои навыки пилотирования.",
       rules:
-        "Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой.",
+        "Правила игры: Вам необходимио, управляя Тысячелетним Соколом, избегать столкновений с космческими объектами, чем больше объектов сможете пролететь, тем больше получите очков. По завершении времени Джедай может сравнить свои способности с остальными в таблице результатов.",
       pictureUrl: `${picture3}`,
       button: "Играть",
     },
     {
       id: "game4",
-      name: "Игра 4",
+      name: "Jedi's Strategy",
       description:
-        "В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции.",
+        "Каждый Джедай должен обладать одним из обязательных качеств на пути к совершенному контролю Силы - навыками стратегии. Для этого требуется ежедневные тренировки по улучшению стратегических навыков.",
       rules:
-        "Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой.",
-      pictureUrl: `${picture3}`,
+        "Правила игры: Вам необходимо проявить все свои лучшие качества, приобретенные во всех тренировках, а также навыки стратега и нанести сокрушительный удар по темной стороне Силы. За каждую победу вы будете вознаграждены одним очком опыта. Удачи в сражении!",
+      pictureUrl: `${picture4}`,
       button: "Играть",
     },
   ],
   "en": [
     {
       id: "game1",
-      name: "Jedi mind powers",
+      name: "Jedi's Mind",
       description:
         "To maintain the power of the mind of the Jedi, there is this exercise-competition of the power of thought.",
       rules:
         "Game rules: You need to answer as many questions correctly as possible in 60 seconds, each correct answer gives you 1 point. At the end of the time, the Jedi can compare his abilities with the rest in the scoreboard.",
-      pictureUrl: `${picture3}`,
+      pictureUrl: `${picture1}`,
       button: "Play",
     },
     {
       id: "game2",
-      name: "Jedi Agility",
+      name: "Jedi's Agility",
       description:
-        "In this game, you are given the opportunity to show the dexterity of your fingers and quick reaction. You need to help Dino in his favorite pastime - steeplechase, in preparation for the World Championship in this discipline.",
+        "Whatever the mind of a Jedi, his body also needs daily exercise. In this game, you are given the opportunity to show the dexterity of your fingers and quick reaction. You need to help Luke Skywalker in his training.",
       rules:
-        "Game rules: You need to avoid collisions with obstacles, each obstacle passed is rewarded with points scored, more points guarantee Dino's excellent preparation for the World Championship, as well as fewer injuries for our podium contender.",
-      pictureUrl: `${picture3}`,
+        "Game Rules: You need to avoid collisions with enemies, because the Jedi uses the Force for knowledge and defense, never for offense. The longer you can avoid direct contact with enemies, the more points you will get. At the end of the time, the Jedi can compare his abilities with the rest in the scoreboard.",
+      pictureUrl: `${picture2}`,
       button: "Play",
     },
     {
       id: "game3",
-      name: "Game 3",
+      name: "Jedi's Mobility",
       description:
-        "In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction.",
-      rules: "Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game.",
+        "Being strong physically and mentally is great, but you can't be perfect if you don't have the skills to pilot a ship that open up new horizons and possibilities for a Jedi. In this game you are given the opportunity to show and improve your piloting skills.",
+      rules: "Game rules: When you control the Millennium Falcon, you need to avoid collisions with space objects, the more objects you can fly, the more points you get. At the end of the time, the Jedi can compare his abilities with the rest in the scoreboard.",
       pictureUrl: `${picture3}`,
       button: "Play",
     },
     {
       id: "game4",
-      name: "Game 4",
+      name: "Jedi's Strategy",
       description:
-        "In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction.",
-      rules: "Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game.",
+        "Every Jedi must possess one of the essential qualities on the path to perfect control of the Force - the skill of strategy. This requires daily training to improve strategic skills.",
+      rules: "Game rules: You need to show all your best qualities acquired in all trainings, as well as the skills of a strategist and deal a crushing blow to the dark side of the Force. For each victory you will be rewarded with one experience point. Good luck in battle!",
       pictureUrl: `${picture4}`,
       button: "Play",
     },

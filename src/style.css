@@ -16,7 +16,6 @@ body.lock {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* overflow-x: hidden; */
 }
 
 .conteiner_header-main {
@@ -735,6 +734,13 @@ body.lock {
   .login-window.active,
   .signup-window.active {
     width: 55%;
+  }
+}
+
+@media (max-width: 950px) {
+  .pages p {
+    padding: 10px 5px;
+    font-size: 17px;
   }
 }
 
