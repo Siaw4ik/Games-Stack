@@ -13,6 +13,7 @@ import {
 
 const settings = returnLocalStorage();
 const userTrue = returnLocalStorageIsRegistred();
+
 console.log(userTrue);
 
 function drawHTMLLayout() {
@@ -25,6 +26,7 @@ function drawHTMLLayout() {
         <div class="images-parallax_galaxy"></div>
       </div>
     </div>
+    <div class="generalAudio"></div>
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
@@ -348,8 +350,22 @@ function toggleBurger() {
   });
 }
 
+function drawIconVolume() {
+  const volume = document.querySelector(".volumeOn") as HTMLElement;
+  const volumeSlash = document.querySelector(".volume-slash") as HTMLElement;
+  if (settings.volume === true) {
+    volume.classList.add("active");
+    volumeSlash.classList.add("active");
+  }
+  if (settings.volume === false) {
+    volume.classList.remove("active");
+    volumeSlash.classList.remove("active");
+  }
+}
+
 export function drawPage() {
   drawHTMLLayout();
+  drawIconVolume();
   addLinkCithubRS();
   drawStyleLightOrDark();
   toggleBurger();
