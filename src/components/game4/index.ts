@@ -1,16 +1,6 @@
 import "./index.css";
 
-const origBoard: string[] = new Array(
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8"
-);
+const origBoard: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 const humanPlay = "O";
 const ai = "X";
 const winCombinatios = [
@@ -24,13 +14,9 @@ const winCombinatios = [
   [6, 4, 2],
 ];
 
-function cellsremoveListener() {
-  const cells: HTMLElement[] = Array.from(
-    document.querySelectorAll(".game4-main__game-cell")
-  );
-  for (let i = 0; i < cells.length; i += 1) {
-    cells[i].removeEventListener("click", turnClick, false);
-  }
+function declareWinner(who: string) {
+  const winner = document.getElementById("game4-end") as HTMLElement;
+  winner.innerHTML = who;
 }
 
 function checkWin(board: string[], player: string) {
@@ -39,60 +25,22 @@ function checkWin(board: string[], player: string) {
       e === player ? a.concat(i.toString()) : a,
     []
   );
+  console.log(plays);
   let gameWon = null;
-  for (const [index, win] of winCombinatios.entries()) {
-    if (win.every((elem) => plays.indexOf(elem.toString()) > -1)) {
+  for (let index = 0; index < winCombinatios.length; index += 1) {
+    if (
+      winCombinatios[index].every((elem) => plays.indexOf(elem.toString()) > -1)
+    ) {
+      console.log("lala");
       gameWon = { index, player };
       break;
     }
   }
   return gameWon;
 }
-function gameOver(gameWon: { index: number; player: string }) {
-  for (const index of winCombinatios[gameWon.index]) {
-    const winSquare = document.getElementById(
-      `game4-cell-${index}`
-    ) as HTMLElement;
-    winSquare.style.backgroundColor =
-      gameWon.player === humanPlay ? "blue" : "red";
-  }
-  cellsremoveListener();
-  declareWinner(gameWon.player === humanPlay ? "You win" : "You lose");
-}
-
-function turn(squareId: string, player: string) {
-  origBoard[Number(squareId.split("-")[2])] = player;
-
-  const current = document.getElementById(squareId) as HTMLElement;
-  current.innerHTML = player;
-  const gameWon = checkWin(origBoard, player);
-  if (gameWon) {
-    gameOver(gameWon);
-  }
-}
-
-function declareWinner(who: string) {
-  const winner = document.getElementById("game4-end") as HTMLElement;
-  winner.innerHTML = who;
-}
 
 function emptySquares() {
   return origBoard.filter((e) => Number(e) >= 0);
-}
-
-function checkTie() {
-  if (emptySquares().length === 0) {
-    const cells: HTMLElement[] = Array.from(
-      document.querySelectorAll(".game4-main__game-cell")
-    );
-    cells.forEach((e) => {
-      e.style.background = "green";
-      e.removeEventListener("click", turnClick, false);
-    });
-    declareWinner("Tie Game");
-    return true;
-  }
-  return false;
 }
 
 function bestSpot() {
@@ -101,6 +49,47 @@ function bestSpot() {
 }
 
 function turnClick(e: Event): void {
+  function gameOver(gameWon: { index: number; player: string }) {
+    winCombinatios[gameWon.index].forEach((el) => {
+      const winSquare = document.getElementById(
+        `game4-cell-${Number(el)}`
+      ) as HTMLElement;
+      winSquare.style.backgroundColor =
+        gameWon.player === humanPlay ? "blue" : "red";
+    });
+    const cells: HTMLElement[] = Array.from(
+      document.querySelectorAll(".game4-main__game-cell")
+    );
+    for (let i = 0; i < cells.length; i += 1) {
+      cells[i].removeEventListener("click", turnClick, false);
+    }
+    declareWinner(gameWon.player === humanPlay ? "You win" : "You lose");
+  }
+  function turn(squareId: string, player: string) {
+    origBoard[Number(squareId.split("-")[2])] = player;
+
+    const current = document.getElementById(squareId) as HTMLElement;
+    current.innerHTML = player;
+    const gameWon = checkWin(origBoard, player);
+    if (gameWon) {
+      gameOver(gameWon);
+    }
+  }
+  function checkTie() {
+    if (emptySquares().length === 0) {
+      const cells: HTMLElement[] = Array.from(
+        document.querySelectorAll(".game4-main__game-cell")
+      );
+      cells.forEach((element) => {
+        element.style.background = "green";
+        element.removeEventListener("click", turnClick, false);
+      });
+      declareWinner("Tie Game");
+      return true;
+    }
+    return false;
+  }
+
   const target = e.target as HTMLElement;
   if (Number(origBoard[Number(target.id.split("-")[2])]) >= 0) {
     turn(target.id, humanPlay);
