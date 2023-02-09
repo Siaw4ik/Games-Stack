@@ -6,6 +6,16 @@ export function createGamesInfoSection(): HTMLDivElement {
   const language = returnLocalStorage().lang;
   const gamesInfoSection = document.createElement("div") as HTMLDivElement;
   gamesInfoSection.classList.add("games_info_container");
+  gamesInfoSection.addEventListener("click", (e) => {
+    const targetBtn = e.target as HTMLElement;
+    if (targetBtn) {
+      if (targetBtn.closest(".game_btn")) {
+        window.location.hash = `#${(targetBtn as HTMLElement).getAttribute(
+          "id"
+        )}`;
+      }
+    }
+  });
   const gamesInfoTitle = document.createElement("h2") as HTMLDivElement;
   gamesInfoTitle.classList.add("games_info_title");
   const blockquoteTitle = document.createElement("blockquote") as HTMLElement;
