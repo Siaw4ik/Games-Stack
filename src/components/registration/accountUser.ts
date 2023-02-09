@@ -1,6 +1,7 @@
 import { renderNewPage } from "../module/changePage";
 import { drawtbody } from "../results";
 import { StatisticGames } from "../module/Games";
+import { returnLocalStorage } from "../module/localStorage";
 
 export function clickingIconUserandLogout() {
   const iconUser = document.querySelector(".iconUser") as HTMLElement;
@@ -76,6 +77,7 @@ export function clickingIconUserandLogout() {
 
     if (window.location.hash.slice(1) === "result") {
       const statistic = new StatisticGames();
+      const settings = returnLocalStorage();
       const table = document.querySelector(
         ".wrapper_table-result table"
       ) as HTMLElement;
@@ -85,14 +87,15 @@ export function clickingIconUserandLogout() {
       if (userRadio) {
         userRadio.style.display = "none";
       }
-      if (table.getAttribute("id") === "user-table") {
+      if (table.getAttribute("class") === "user-table") {
         const objgame1 = {
           gamename: "Jedi's Mind",
           option: "ascName",
         };
         statistic.getScoreTop10(objgame1).then((data) => {
-          (document.querySelector(".table-name") as HTMLElement).innerHTML =
-            "участники";
+          (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+            settings.lang === "en" ? "Players" : "Игроки"
+          }`;
           drawtbody(data);
         });
         const buttonGAme1 = document.querySelector(
