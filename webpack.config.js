@@ -19,7 +19,7 @@ const config = {
         use: "ts-loader",
       },
       {
-        test: /\.(svg|png|jpe?g|gif)$/,
+        test: /\.(svg|png|jpe?g|gif|mp3)$/,
         type: "asset/resource",
         generator: {
           filename: "./assets/[hash][ext]",
