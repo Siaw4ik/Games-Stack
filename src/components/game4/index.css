@@ -1,0 +1,53 @@
+.game4-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  line-height: 1;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  background: white;
+  position: relative;
+}
+._game4-container {
+  max-width: 1630px;
+  margin: 0px auto;
+}
+
+/*========================================================================================================*/
+
+.game4-main__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game4-main__game-cell {
+  border: 2px solid black;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 36px;
+  cursor: pointer;
+}
+.game4-main__game-table {
+  border-collapse: collapse;
+}
+.game4-main__game-table .game4-main__game-row:first-child td {
+  border-top: 0;
+}
+
+.game4-main__game-table .game4-main__game-row:last-child td {
+  border-bottom: 0;
+}
+
+.game4-main__game-table .game4-main__game-row td:first-child {
+  border-left: 0;
+}
+
+.game4-main__game-table .game4-main__game-row td:last-child {
+  border-right: 0;
+}
