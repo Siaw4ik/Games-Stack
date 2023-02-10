@@ -1,47 +1,57 @@
+/* eslint-disable no-plusplus */
+import { meteorImgArr, createMeteorLine } from "./module/meteors";
+import { METEOR, METEOR_ARR } from "./constants/constants";
 // import audiofile from "../../assets/sounds/Mercury_audio.mp3";
 import "./index.css";
 import background from "../../assets/images_game_3/background.png";
-import shipLeft from "../../assets/images_game_3/millennium-falcon_left.png";
-import shipRight from "../../assets/images_game_3/millennium-falcon_right.png";
 import ship from "../../assets/images_game_3/millennium-falcon.png";
-import met1 from "../../assets/images_game_3/meteor_1.png";
-// import met2 from "../../assets/images_game_3/meteor_2.png";
-// import met3 from "../../assets/images_game_3/meteor_3.png";
-// import met4 from "../../assets/images_game_3/meteor_4.png";
-// import met5 from "../../assets/images_game_3/meteor_5.png";
-// import met6 from "../../assets/images_game_3/meteor_6.png";
-// import met7 from "../../assets/images_game_3/meteor_7.png";
-// import met8 from "../../assets/images_game_3/meteor_8.png";
-// import met9 from "../../assets/images_game_3/meteor_9.png";
-// import met10 from "../../assets/images_game_3/meteor_10.png";
-// import met11 from "../../assets/images_game_3/meteor_11.png";
-// import met12 from "../../assets/images_game_3/meteor_12.png";
+
 let context: CanvasRenderingContext2D;
 const bg = new Image();
 bg.src = background;
 const falcon = new Image();
 falcon.src = ship;
-const falconLeft = new Image();
-falconLeft.src = shipLeft;
-const falconRight = new Image();
-falconRight.src = shipRight;
-const meteor1 = new Image();
-meteor1.src = met1;
 
-function drawBackground() {
+let xPos = 700;
+let yPos = 400;
+
+const cache = {
+  falcon: falcon.src,
+};
+
+function draw() {
   context.drawImage(bg, 0, 0);
-  context.drawImage(falcon, 700, 400);
-  context.drawImage(meteor1, 100, 0);
-  context.drawImage(meteor1, 500, 0);
-  context.drawImage(meteor1, 900, 0);
+  context.drawImage(falcon, xPos, yPos);
+  // const canvas = document.getElementById("game_3") as HTMLCanvasElement;
+  let isTrue = false;
+  for (let i = 0; i < METEOR_ARR.length; i++) {
+    context.drawImage(meteorImgArr["0"], METEOR_ARR[i].x, METEOR_ARR[i].y);
+
+    METEOR_ARR[i].y += 2;
+
+    if (METEOR_ARR[i].y === 800) {
+      isTrue = true;
+    }
+  }
+
+  const line = createMeteorLine(METEOR);
+  if (isTrue) {
+    METEOR_ARR.map((elem, index) => {
+      elem.x = line[index].x;
+      elem.y = line[index].y;
+      return elem;
+    });
+  }
+
+  requestAnimationFrame(draw);
 }
 
-// function setCanvasSize(elem: HTMLCanvasElement) {
-//   window.addEventListener("resize", () => {
-//     elem.height = window.innerHeight * 0.8;
-//     elem.width = window.innerWidth * 0.7;
-//   });
-// }
+function setCanvasSize(elem: HTMLCanvasElement) {
+  window.addEventListener("resize", () => {
+    elem.height = window.innerHeight * 0.85;
+    elem.width = window.innerWidth * 0.7;
+  });
+}
 
 export function game3() {
   const main = document.querySelector(".main") as HTMLElement;
@@ -56,26 +66,39 @@ export function game3() {
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
 
   if (canvas) {
+    setCanvasSize(canvas);
+  }
+
+  if (canvas) {
     context = canvas.getContext("2d") as CanvasRenderingContext2D;
   }
 
-  drawBackground();
+  draw();
 }
 
-// const canvas = document.getElementById("game_3") as HTMLCanvasElement;
-// if (canvas) {
-//   console.log("Canvas!");
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") {
-    // console.log(`Нажата клавиша ${e.code} (${e.key})`);
-    falcon.src = shipLeft;
-  }
-  if (e.key === "ArrowRight") {
-    // console.log(`Нажата клавиша ${e.code} (${e.key})`);
-    falcon.src = shipRight;
+  switch (e.code) {
+    case "ArrowLeft":
+    case "KeyA":
+      falcon.src = cache.falcon;
+      xPos -= 50;
+      break;
+    case "ArrowRight":
+    case "KeyD":
+      falcon.src = cache.falcon;
+      xPos += 50;
+      break;
+    case "ArrowUp":
+    case "KeyW":
+      falcon.src = cache.falcon;
+      yPos -= 50;
+      break;
+    case "ArrowDown":
+    case "KeyS":
+      falcon.src = cache.falcon;
+      yPos += 50;
+      break;
+    default:
+      falcon.src = cache.falcon;
   }
 });
-
-// if (canvas) {
-//   setCanvasSize(canvas);
-// }
