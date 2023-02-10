@@ -1,12 +1,44 @@
+.game3-wrapper {
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 100px;
+}
+
+.game3-wrapper_info {
+  font-size: 18px;
+}
+
+.game3-wrapper_button {
+  width: 130px;
+  padding: 10px;
+  background-color: fuchsia;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all .3s ease-in-out
+}
+
+.game3-wrapper_button:hover {
+  transform: scale(1.1);
+}
+
 .wrapper_game_3 {
   position: relative;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   margin: 0 auto;
 }
 
 #game_3 {
   position: relative;
+  background-color: aqua;
 }

@@ -53,10 +53,22 @@ export const meteorImgArr: HTMLImageElement[] = [
   meteor12,
 ];
 
+let removedMeteor: IMeteor[];
+
+export function getHoleStart() {
+  const start = removedMeteor[0].x;
+  return start;
+}
+
+export function getHoleEnd() {
+  const end = removedMeteor[0].x + removedMeteor[0].img.width;
+  return end;
+}
+
 export function createMeteorLine(arr: IMeteor[]): IMeteor[] {
   const newArr = arr.slice();
   const randomNum = Math.floor(Math.random() * 7);
-  newArr.splice(randomNum, 1);
+  removedMeteor = newArr.splice(randomNum, 1);
   return newArr;
 }
 

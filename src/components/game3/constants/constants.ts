@@ -10,3 +10,6 @@ export const METEOR: IMeteor[] = [
   { img: createRandomMeteorImg(), x: 1050, y: -150 },
   { img: createRandomMeteorImg(), x: 1250, y: -150 },
 ];
+
+export const GAME_WIDTH = 1400;
+export const GAME_HEIGHT = 800;
