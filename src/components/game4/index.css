@@ -4,7 +4,7 @@
   flex-direction: column;
 
   line-height: 1;
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #000000;
@@ -24,30 +24,58 @@
   justify-content: center;
 }
 
+.game4-main__game-table {
+  border: 8px solid rgb(77, 75, 75);
+}
+.game4-main__game-row {
+  display: flex;
+}
+
 .game4-main__game-cell {
-  border: 2px solid black;
+  background-color: #121212;
+  border: 2px solid rgb(77, 75, 75);
   width: 100px;
   height: 100px;
   text-align: center;
   vertical-align: middle;
   font-size: 36px;
   cursor: pointer;
+  color: transparent;
+  user-select: none;
 }
+.game4-main__game-cell:hover {
+  opacity: 0.7;
+}
+
+.game4-yoda {
+  background-image: url("../../assets/game4images/Yoda.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.game4-dart {
+  background-image: url("../../assets/game4images/Anakin.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
 .game4-main__game-table {
   border-collapse: collapse;
 }
-.game4-main__game-table .game4-main__game-row:first-child td {
+.game4-main__game-table .game4-main__game-row:first-child div {
   border-top: 0;
 }
 
-.game4-main__game-table .game4-main__game-row:last-child td {
+.game4-main__game-table .game4-main__game-row:last-child div {
   border-bottom: 0;
 }
 
-.game4-main__game-table .game4-main__game-row td:first-child {
+.game4-main__game-table .game4-main__game-row div:first-child {
   border-left: 0;
 }
 
-.game4-main__game-table .game4-main__game-row td:last-child {
+.game4-main__game-table .game4-main__game-row div:last-child {
   border-right: 0;
 }

@@ -25,13 +25,11 @@ function checkWin(board: string[], player: string) {
       e === player ? a.concat(i.toString()) : a,
     []
   );
-  console.log(plays);
   let gameWon = null;
   for (let index = 0; index < winCombinatios.length; index += 1) {
     if (
       winCombinatios[index].every((elem) => plays.indexOf(elem.toString()) > -1)
     ) {
-      console.log("lala");
       gameWon = { index, player };
       break;
     }
@@ -44,8 +42,302 @@ function emptySquares() {
 }
 
 function bestSpot() {
-  console.log(`game4-cell-${emptySquares()[0]}`);
-  return `game4-cell-${emptySquares()[0]}`;
+  let thirdTurnAi = false;
+  let aiTurn: string = "";
+  const emptyCells = emptySquares();
+  const cells: HTMLElement[] = Array.from(
+    document.querySelectorAll(".game4-main__game-cell")
+  );
+  emptyCells.sort(
+    (a, b) =>
+      Number(a) -
+      Number(a) +
+      Math.random() -
+      (Number(b) - Number(b) + Math.random())
+  );
+  const humanCells: HTMLElement[] = [];
+  for (let i = 0; i < cells.length; i += 1) {
+    if (cells[i].innerText === humanPlay) {
+      humanCells.push(cells[i]);
+    }
+  }
+  if (humanCells.length === 1) {
+    if (humanCells.filter((e) => e.id === "game4-cell-4").length === 0) {
+      aiTurn = "game4-cell-4";
+    } else {
+      aiTurn = [cells[0], cells[2], cells[6], cells[8]].sort(
+        (a, b) =>
+          Number(a.id.split("-")[2]) -
+          Number(a.id.split("-")[2]) +
+          Math.random() -
+          (Number(b.id.split("-")[2]) -
+            Number(b.id.split("-")[2]) +
+            Math.random())
+      )[0].id;
+    }
+  }
+
+  if (humanCells.length === 2) {
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-1").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-5").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0 &&
+        cells[2].innerHTML !== ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-5").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-5").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-8").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        cells[0].innerHTML === ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0)
+    ) {
+      aiTurn = "game4-cell-2";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-2").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-3").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0 &&
+        cells[0].innerHTML !== ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-3").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-6").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        cells[2].innerHTML === ai)
+    ) {
+      aiTurn = "game4-cell-0";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-3").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0)
+    ) {
+      aiTurn = "game4-cell-5";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-5").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0)
+    ) {
+      aiTurn = "game4-cell-3";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-6").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-5").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        cells[8].innerHTML !== ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-3").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-5").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-5").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-6").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        cells[6].innerHTML === ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        cells[6].innerHTML === ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-3").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-5").length > 0)
+    ) {
+      aiTurn = "game4-cell-8";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-7").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-3").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-2").length > 0 &&
+        cells[6].innerHTML !== ai) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-1").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-3").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-3").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        cells[8].innerHTML === ai)
+    ) {
+      aiTurn = "game4-cell-6";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-0").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-2").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-7").length > 0)
+    ) {
+      aiTurn = "game4-cell-1";
+    }
+    if (
+      (humanCells.filter((e) => e.id === "game4-cell-6").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-8").length > 0) ||
+      (humanCells.filter((e) => e.id === "game4-cell-4").length > 0 &&
+        humanCells.filter((e) => e.id === "game4-cell-1").length > 0)
+    ) {
+      aiTurn = "game4-cell-7";
+    }
+  }
+  if (humanCells.length === 3) {
+    if (
+      (cells[0].innerHTML === ai &&
+        cells[3].innerHTML === ai &&
+        cells[6].innerHTML !== humanPlay) ||
+      (cells[8].innerHTML === ai &&
+        cells[7].innerHTML === ai &&
+        cells[6].innerHTML !== humanPlay) ||
+      (cells[2].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[6].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-6";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[6].innerHTML === ai &&
+        cells[3].innerHTML === ai &&
+        cells[0].innerHTML !== humanPlay) ||
+      (cells[2].innerHTML === ai &&
+        cells[1].innerHTML === ai &&
+        cells[0].innerHTML !== humanPlay) ||
+      (cells[8].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[0].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-0";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[8].innerHTML === ai &&
+        cells[5].innerHTML === ai &&
+        cells[2].innerHTML !== humanPlay) ||
+      (cells[0].innerHTML === ai &&
+        cells[1].innerHTML === ai &&
+        cells[2].innerHTML !== humanPlay) ||
+      (cells[6].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[2].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-2";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[2].innerHTML === ai &&
+        cells[5].innerHTML === ai &&
+        cells[8].innerHTML !== humanPlay) ||
+      (cells[6].innerHTML === ai &&
+        cells[7].innerHTML === ai &&
+        cells[8].innerHTML !== humanPlay) ||
+      (cells[0].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[8].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-8";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[0].innerHTML === ai &&
+        cells[2].innerHTML === ai &&
+        cells[1].innerHTML !== humanPlay) ||
+      (cells[7].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[1].innerHTML !== humanPlay) ||
+      (cells[0].innerHTML === ai &&
+        cells[2].innerHTML === ai &&
+        cells[1].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-1";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[6].innerHTML === ai &&
+        cells[8].innerHTML === ai &&
+        cells[7].innerHTML !== humanPlay) ||
+      (cells[1].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[7].innerHTML !== humanPlay) ||
+      (cells[8].innerHTML === ai &&
+        cells[6].innerHTML === ai &&
+        cells[7].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-7";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[0].innerHTML === ai &&
+        cells[6].innerHTML === ai &&
+        cells[3].innerHTML !== humanPlay) ||
+      (cells[5].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[3].innerHTML !== humanPlay) ||
+      (cells[0].innerHTML === ai &&
+        cells[6].innerHTML === ai &&
+        cells[3].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-3";
+      thirdTurnAi = true;
+    }
+
+    if (
+      (cells[2].innerHTML === ai &&
+        cells[8].innerHTML === ai &&
+        cells[5].innerHTML !== humanPlay) ||
+      (cells[3].innerHTML === ai &&
+        cells[4].innerHTML === ai &&
+        cells[5].innerHTML !== humanPlay) ||
+      (cells[2].innerHTML === ai &&
+        cells[8].innerHTML === ai &&
+        cells[5].innerHTML !== humanPlay)
+    ) {
+      aiTurn = "game4-cell-5";
+      thirdTurnAi = true;
+    }
+  }
+
+  const aiCells: HTMLElement[] = [];
+  for (let i = 0; i < cells.length; i += 1) {
+    if (cells[i].innerText === ai) {
+      aiCells.push(cells[i]);
+    }
+  }
+  if (humanCells.length === 3 && thirdTurnAi === false) {
+    aiTurn = `game4-cell-${emptyCells[0]}`;
+  }
+  if (humanCells.length > 3) {
+    aiTurn = `game4-cell-${emptyCells[0]}`;
+  }
+
+  return aiTurn;
 }
 
 function turnClick(e: Event): void {
@@ -70,18 +362,24 @@ function turnClick(e: Event): void {
 
     const current = document.getElementById(squareId) as HTMLElement;
     current.innerHTML = player;
-    const gameWon = checkWin(origBoard, player);
-    if (gameWon) {
-      gameOver(gameWon);
+
+    if (player === "X") {
+      current.classList.add("game4-dart");
+      current.removeEventListener("click", turnClick, false);
+    }
+    if (player === "O") {
+      current.classList.add("game4-yoda");
+      current.removeEventListener("click", turnClick, false);
     }
   }
   function checkTie() {
-    if (emptySquares().length === 0) {
+    const gameWon = checkWin(origBoard, humanPlay);
+    if (emptySquares().length === 0 && !gameWon) {
       const cells: HTMLElement[] = Array.from(
         document.querySelectorAll(".game4-main__game-cell")
       );
       cells.forEach((element) => {
-        element.style.background = "green";
+        element.style.backgroundColor = "green";
         element.removeEventListener("click", turnClick, false);
       });
       declareWinner("Tie Game");
@@ -90,10 +388,21 @@ function turnClick(e: Event): void {
     return false;
   }
 
+  let gameWon = null;
   const target = e.target as HTMLElement;
   if (Number(origBoard[Number(target.id.split("-")[2])]) >= 0) {
     turn(target.id, humanPlay);
-    if (!checkTie()) turn(bestSpot(), ai);
+    gameWon = checkWin(origBoard, humanPlay);
+    if (gameWon) {
+      gameOver(gameWon);
+    }
+  }
+  if (!checkTie() && !gameWon) {
+    turn(bestSpot(), ai);
+    gameWon = checkWin(origBoard, ai);
+    if (gameWon) {
+      gameOver(gameWon);
+    }
   }
 }
 
@@ -117,23 +426,23 @@ export function game4() {
   body.classList.add("game4-wrapper");
   body.innerHTML = `    <div class="game4-wrapper">
   <div class="game4-main__container _game4-container">
-    <table id="game4-main" class="game4-main__game-table">
-      <tr class="game4-main__game-row">
-        <td id="game4-cell-0" class="game4-main__game-cell"></td>
-        <td id="game4-cell-1" class="game4-main__game-cell"></td>
-        <td id="game4-cell-2" class="game4-main__game-cell"></td>
-      </tr>
-      <tr class="game4-main__game-row">
-        <td id="game4-cell-3" class="game4-main__game-cell"></td>
-        <td id="game4-cell-4" class="game4-main__game-cell"></td>
-        <td id="game4-cell-5" class="game4-main__game-cell"></td>
-      </tr>
-      <tr class="game4-main__game-row">
-        <td id="game4-cell-6" class="game4-main__game-cell"></td>
-        <td id="game4-cell-7" class="game4-main__game-cell"></td>
-        <td id="game4-cell-8" class="game4-main__game-cell"></td>
-      </tr>
-    </table>
+    <div id="game4-main" class="game4-main__game-table">
+      <div class="game4-main__game-row">
+        <div id="game4-cell-0" class="game4-main__game-cell"></div>
+        <div id="game4-cell-1" class="game4-main__game-cell"></div>
+        <div id="game4-cell-2" class="game4-main__game-cell"></div>
+      </div>
+      <div class="game4-main__game-row">
+        <div id="game4-cell-3" class="game4-main__game-cell"></div>
+        <div id="game4-cell-4" class="game4-main__game-cell"></div>
+        <div id="game4-cell-5" class="game4-main__game-cell"></div>
+      </div>
+      <div class="game4-main__game-row">
+        <div id="game4-cell-6" class="game4-main__game-cell"></div>
+        <div id="game4-cell-7" class="game4-main__game-cell"></div>
+        <div id="game4-cell-8" class="game4-main__game-cell"></div>
+      </div>
+    </div>
     <div id="game4-end" class="game4-main__endgame"></div>
   </div>
 </div>`;
