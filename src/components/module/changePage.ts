@@ -2,6 +2,7 @@ import { game1 } from "../game1";
 import { game2 } from "../game2";
 import { game3 } from "../game3";
 import { game4 } from "../game4";
+import { game5 } from "../game5";
 import { result } from "../results";
 import { parallax } from "../parallax";
 import { createGamesInfoSection } from "../gamesInfo";
@@ -81,6 +82,9 @@ export function renderNewPage(idPage: string) {
     case "game4":
       game4();
       break;
+    case "game5":
+      game5();
+      break;
     default:
       drawHomePage();
   }
@@ -124,6 +128,9 @@ function changePageMain() {
     if (target.closest(".game4")) {
       window.location.hash = "#game4";
     }
+    if (target.closest(".game5")) {
+      window.location.hash = "#game5";
+    }
     if (target.closest(".result")) {
       window.location.hash = "#result";
     }
@@ -158,6 +165,9 @@ function changePageBurger() {
     }
     if (target.closest(".burger-game4")) {
       window.location.hash = "#game4";
+    }
+    if (target.closest(".burger-game5")) {
+      window.location.hash = "#game5";
     }
     if (target.closest(".burger-result")) {
       window.location.hash = "#result";

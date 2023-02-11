@@ -100,6 +100,79 @@
   background-color: #D713C3;
 }
 
+.arrowUp{
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 11;
+  transform: rotate(180deg);
+}
+
+.arrowUp svg{
+  width: 60px;
+  height: 60px;
+  fill: #000000;
+}
+
+.arrowUp.dark svg{
+  fill: #ffffff;
+}
+
+.arrowUp svg:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.arrowDown {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 12;
+  background-color: rgb(71, 132, 255);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.arrowDown svg{
+  width: 50px;
+  height: 50px;
+}
+
+
+.arrowDown:before,
+.arrowDown:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(71, 132, 255);
+  border-radius: 50%;
+   z-index: -1;
+   opacity: 0.7;
+}
+
+.arrowDown:before {
+  animation: pulse 2s ease-out infinite;
+}
+
+.arrowDown:after {
+  animation: pulse 2s 1s ease-out infinite;
+  right: 0;
+}
+
+@keyframes pulse {
+  100%{
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+
 @media (max-width: 1000px) {
   .logo_games_picture {
     height: 200px;
@@ -113,6 +186,10 @@
   .logo_games_picture {
     height: 190px;
     border-radius: 50px;
+  }
+  .arrowUp img{
+    width: 42px;
+    height: 42px;
   }
 }
 @media (max-width: 700px) {
