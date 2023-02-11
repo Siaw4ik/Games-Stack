@@ -1,4 +1,6 @@
 import "./index.css";
+import { gamesData } from "../gamesInfo/gamesData";
+import { returnLocalStorage } from "../module/localStorage";
 
 let origBoard: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 let humanPlay: string = "";
@@ -13,6 +15,7 @@ const winCombinatios = [
   [0, 4, 8],
   [6, 4, 2],
 ];
+const settings = returnLocalStorage();
 
 function declareWinner(who: string) {
   const endBlock = document.getElementById("game4-end") as HTMLElement;
@@ -408,8 +411,12 @@ function turnClick(e: Event): void {
 export function startGame() {
   const mainGame = document.querySelector(".game4-main__container");
   if (mainGame) {
+    const mainTitle = document.querySelector(
+      ".game4-main__title"
+    ) as HTMLElement;
+    mainTitle.classList.remove("transparent");
     const chips = Array.from(document.querySelectorAll(".game4-main__chip"));
-    chips.forEach((el) => el.classList.remove("disable"));
+    chips.forEach((el) => el.classList.remove("disable", "chosen"));
     const cells: HTMLElement[] = Array.from(
       document.querySelectorAll(".game4-main__game-cell")
     );
@@ -423,11 +430,12 @@ export function startGame() {
     humanPlay = "";
   }
 }
-export function game4() {
+
+export function startGameTicTac() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
-  const body = document.createElement("div");
-  body.classList.add("game4-wrapper");
+  const body = document.createElement("div") as HTMLElement;
+  body.classList.add(".game4-wrapper");
   body.innerHTML = `
   <div class="game4-main__container _game4-container">
     <div class="game4-main__settings">
@@ -463,6 +471,34 @@ export function game4() {
   startGame();
 }
 
+export function game4() {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = "";
+  const divWrapper = document.createElement("div");
+  divWrapper.classList.add("game4-wrapper");
+  divWrapper.classList.remove("game4-start");
+  divWrapper.innerHTML = `
+  <h2>Jedi's TicTac</h2>
+  <p class="game4-wrapper_info">${
+    settings.lang === "en"
+      ? gamesData.en[3].description
+      : gamesData.ru[3].description
+  }</p>
+  <div class="game4-wrapper_button"><span>${
+    settings.lang === "en" ? "Start Game" : "Начать Игру"
+  }</span></div>`;
+  main.appendChild(divWrapper);
+
+  const startBtn = document.querySelector(
+    ".game4-wrapper_button"
+  ) as HTMLElement;
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      startGameTicTac();
+    });
+  }
+}
+
 export function retryBtnclick() {
   const main = document.querySelector(".main") as HTMLElement;
 
@@ -479,17 +515,26 @@ export function chipClick() {
   const main = document.querySelector(".main") as HTMLElement;
   main.addEventListener("click", (e) => {
     if ((<HTMLElement>e.target).className === "game4-main__chip") {
+      const chips: HTMLElement[] = Array.from(
+        document.querySelectorAll(".game4-main__chip")
+      );
+      chips.forEach((el) => el.classList.remove("chosen"));
+      const mainTitle = document.querySelector(
+        ".game4-main__title"
+      ) as HTMLElement;
+      mainTitle.classList.add("transparent");
+      (<HTMLElement>e.target).classList.add("chosen");
       humanPlay = (<HTMLElement>e.target).id;
+      if (humanPlay === "game4-yoda-chip") ai = "game4-dart-chip";
+      else {
+        ai = "game4-yoda-chip";
+      }
+      const cells: HTMLElement[] = Array.from(
+        document.querySelectorAll(".game4-main__game-cell")
+      );
+      cells.forEach((el) => {
+        el.addEventListener("click", turnClick, false);
+      });
     }
-    if (humanPlay === "game4-yoda-chip") ai = "game4-dart-chip";
-    else {
-      ai = "game4-yoda-chip";
-    }
-    const cells: HTMLElement[] = Array.from(
-      document.querySelectorAll(".game4-main__game-cell")
-    );
-    cells.forEach((el) => {
-      el.addEventListener("click", turnClick, false);
-    });
   });
 }
