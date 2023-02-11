@@ -19,6 +19,7 @@ import Ship from "./Ship";
 import Background from "./Background";
 import MeteorsController from "./MeteorsController";
 import Score from "./Score";
+import { sendScore } from "../../results/sendScore";
 
 let falcon: Ship;
 let background: Background;
@@ -97,14 +98,16 @@ function showGameOver() {
 export function reset() {
   const mainChild = (document.querySelector(".main") as HTMLElement)
     .childNodes[0] as HTMLElement;
-  if (mainChild.classList.value === "game3-wrapper") {
-    hasAddedEventListenersForRestart = false;
-    gameOver = false;
-    waitingToStart = false;
-    background.reset();
-    meteorsController.reset();
-    score.reset();
-    gameSpeed = GAME_SPEED_START;
+  if (mainChild) {
+    if (mainChild.classList.value === "game3-wrapper") {
+      hasAddedEventListenersForRestart = false;
+      gameOver = false;
+      waitingToStart = false;
+      background.reset();
+      meteorsController.reset();
+      score.reset();
+      gameSpeed = GAME_SPEED_START;
+    }
   }
 }
 
@@ -177,8 +180,7 @@ function gameLoop(currentTime: number) {
 
   if (!gameOver && meteorsController.collideWith(falcon)) {
     gameOver = true;
-    // console.log(Math.trunc(score.score));
-    // sendScore("Jedi's Mobility", Math.trunc(score.score));
+    sendScore("Jedi's Mobility", Math.trunc(score.score));
     setupGameReset();
   }
   background.draw();

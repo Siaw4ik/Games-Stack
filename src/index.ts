@@ -18,6 +18,7 @@ import {
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
 import { gameAllfunc } from "./components/game1";
 import { fixGame2 } from "./components/game2";
+import { retryBtnclick, chipClick } from "./components/game4";
 
 enableRoutChange();
 drawPage();
@@ -38,5 +39,6 @@ clickingIconUserandLogout();
 gameAllfunc();
 
 fixGame2();
-
+retryBtnclick();
+chipClick();
 console.log("start page");
