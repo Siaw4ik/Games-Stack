@@ -80,10 +80,10 @@ function drawHTMLLayout() {
       </div>
       <div class="pages">
         <p class="about">${settings?.lang === "en" ? "Home" : "Главная"}</p>
-        <p class="game1">Game 1</p>
-        <p class="game2">Game 2</p>
-        <p class="game3">Game 3</p>
-        <p class="game4">Game 4</p>
+        <p class="game1">Jedi's Mind</p>
+        <p class="game2">Jedi's Agility</p>
+        <p class="game3">Jedi's Mobility</p>
+        <p class="game4">Jedi's Strategy</p>
         <p class="game5">Jedi's Memory</p>
         <p class="result">${
           settings?.lang === "en" ? "Results" : "Результаты"

@@ -117,14 +117,16 @@ function showGameOver() {
 export function reset() {
   const mainChild = (document.querySelector(".main") as HTMLElement)
     .childNodes[0] as HTMLElement;
-  if (mainChild.classList.value === "game2-wrapper") {
-    hasAddedEventListenersForRestart = false;
-    gameOver = false;
-    waitingToStart = false;
-    ground.reset();
-    enemyController.reset();
-    score.reset();
-    gameSpeed = gameSpeedStart;
+  if (mainChild) {
+    if (mainChild.classList.value === "game2-wrapper") {
+      hasAddedEventListenersForRestart = false;
+      gameOver = false;
+      waitingToStart = false;
+      ground.reset();
+      enemyController.reset();
+      score.reset();
+      gameSpeed = gameSpeedStart;
+    }
   }
 }
 
@@ -199,7 +201,7 @@ function gameLoop(currentTime: number) {
   if (!gameOver && enemyController.collideWith(player)) {
     gameOver = true;
     console.log(score.score);
-    sendScore("Jedi Agility", Math.trunc(score.score));
+    sendScore("Jedi's Agility", Math.trunc(score.score));
     setupGameReset();
   }
   ground.draw();

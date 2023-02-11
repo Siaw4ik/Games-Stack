@@ -13,9 +13,9 @@ import {
 
 const arrButton = [
   { game1: "Jedi's Mind" },
-  { game2: "Jedi Agility" },
-  { game3: "game3" },
-  { game4: "game4" },
+  { game2: "Jedi's Agility" },
+  { game3: "Jedi's Mobility" },
+  { game4: "Jedi's Strategy" },
   { game5: "Jedi's Memory" },
 ];
 
