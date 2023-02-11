@@ -1,19 +1,6 @@
 import "./index.css";
 import { startGame3 } from "./module/start";
 
-function startGameMobility() {
-  const startBtn = document.querySelector(
-    ".game3-wrapper_button"
-  ) as HTMLElement;
-
-  startBtn.addEventListener("click", () => {
-    const wrapper = document.querySelector(".game3-wrapper") as HTMLElement;
-    wrapper.innerHTML = "";
-  });
-
-  startGame3();
-}
-
 export function game3() {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
@@ -25,5 +12,13 @@ export function game3() {
   <div class="game3-wrapper_button"><span>Start Game</span></div>`;
   main.appendChild(div);
 
-  startGameMobility();
+  const startBtn = document.querySelector(
+    ".game3-wrapper_button"
+  ) as HTMLElement;
+
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      startGame3();
+    });
+  }
 }

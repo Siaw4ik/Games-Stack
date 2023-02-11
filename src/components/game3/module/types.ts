@@ -1,5 +1,7 @@
 export interface IMeteor {
   img: HTMLImageElement;
-  x: number;
-  y: number;
+  dx: number;
+  dy: number;
+  width: number;
+  height: number;
 }

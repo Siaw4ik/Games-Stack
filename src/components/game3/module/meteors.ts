@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import { IMeteor } from "./types";
 import met1 from "../../../assets/images_game_3/meteor_1.png";
 import met2 from "../../../assets/images_game_3/meteor_2.png";
@@ -53,22 +52,20 @@ export const meteorImgArr: HTMLImageElement[] = [
   meteor12,
 ];
 
-let removedMeteor: IMeteor[];
+// eslint-disable-next-line no-unused-vars
+let removedOneMeteor: IMeteor[];
 
-export function getHoleStart() {
-  const start = removedMeteor[0].x;
-  return start;
-}
+// export function createMeteorLine(arr: IMeteor[]): IMeteor[] {
+//   const newArr = arr.slice();
+//   const randomNum = Math.floor(Math.random() * 7);
+//   removedMeteor = newArr.splice(randomNum, 1);
+//   return newArr;
+// }
 
-export function getHoleEnd() {
-  const end = removedMeteor[0].x + removedMeteor[0].img.width;
-  return end;
-}
-
-export function createMeteorLine(arr: IMeteor[]): IMeteor[] {
+export function createOneMeteorLine(arr: IMeteor[]): IMeteor[] {
   const newArr = arr.slice();
   const randomNum = Math.floor(Math.random() * 7);
-  removedMeteor = newArr.splice(randomNum, 1);
+  removedOneMeteor = newArr.splice(randomNum, 1);
   return newArr;
 }
 
