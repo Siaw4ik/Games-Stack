@@ -3,6 +3,7 @@ import dark from "../../assets/moon.svg";
 import { Settings } from "./types";
 import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 import { translateHeaderTable } from "../results";
+import { changeGame5AudioVolume, translateGame5 } from "../game5";
 
 const settings: Settings = {
   lang: "en",
@@ -20,11 +21,13 @@ export function toggleVolume() {
       volumeSlash.classList.remove("active");
       settings.volume = false;
       localStorage.setItem("settings", JSON.stringify(settings));
+      changeGame5AudioVolume(false);
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
       settings.volume = true;
       localStorage.setItem("settings", JSON.stringify(settings));
+      changeGame5AudioVolume(true);
     }
   }
 
@@ -58,7 +61,7 @@ export function toggleLight() {
     main.classList.toggle("dark");
     menu.classList.toggle("dark");
     containerHeaderMain.classList.toggle("dark");
-    arrowUP.classList.toggle("dark");
+    if (arrowUP) arrowUP.classList.toggle("dark");
 
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
@@ -155,6 +158,7 @@ export function toggleLang() {
     logoutBtn.innerHTML = "Выйти";
     scoreWindow.innerHTML = "Статистика игр";
     translateHeaderTable(settings.lang);
+    translateGame5(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 
@@ -183,6 +187,7 @@ export function toggleLang() {
     logoutBtn.innerHTML = "Logout";
     scoreWindow.innerHTML = "Game statistics";
     translateHeaderTable(settings.lang);
+    translateGame5(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 }

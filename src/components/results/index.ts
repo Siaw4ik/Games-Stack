@@ -16,6 +16,7 @@ const arrButton = [
   { game2: "Jedi Agility" },
   { game3: "game3" },
   { game4: "game4" },
+  { game5: "Jedi's Memory" },
 ];
 
 export function drawTable(lang: string) {

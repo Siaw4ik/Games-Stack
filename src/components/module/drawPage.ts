@@ -84,6 +84,7 @@ function drawHTMLLayout() {
         <p class="game2">Game 2</p>
         <p class="game3">Game 3</p>
         <p class="game4">Game 4</p>
+        <p class="game5">Jedi's Memory</p>
         <p class="result">${
           settings?.lang === "en" ? "Results" : "Результаты"
         }</p>
@@ -114,6 +115,7 @@ function drawHTMLLayout() {
               <li class="burger_nav_ul_item burger-game2">Game 2</li>
               <li class="burger_nav_ul_item burger-game3">Game 3</li>
               <li class="burger_nav_ul_item burger-game4">Game 4</li>
+              <li class="burger_nav_ul_item burger-game5">Jedi's Memory</li>
               <li class="burger_nav_ul_item burger-result">
               ${settings?.lang === "en" ? "Results" : "Результаты"}
               </li>

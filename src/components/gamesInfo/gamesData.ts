@@ -50,6 +50,16 @@ export const gamesData = {
       pictureUrl: `${picture3}`,
       button: "Играть",
     },
+    {
+      id: "game5",
+      name: "Игра 5",
+      description:
+        "В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции.",
+      rules:
+        "Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой.",
+      pictureUrl: `${picture3}`,
+      button: "Играть",
+    }
   ],
   "en": [
     {
@@ -90,5 +100,14 @@ export const gamesData = {
       pictureUrl: `${picture4}`,
       button: "Play",
     },
+    {
+      id: "game5",
+      name: "Game 5",
+      description:
+        "In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction.",
+      rules: "Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game.",
+      pictureUrl: `${picture4}`,
+      button: "Play",
+    }
   ],
 };
