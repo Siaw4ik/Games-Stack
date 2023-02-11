@@ -170,6 +170,7 @@ function shuffle() {
 }
 
 function startGameMemory() {
+  const settingsStart = returnLocalStorage();
   resetBoard();
   score = 1000;
   move = 0;
@@ -178,9 +179,9 @@ function startGameMemory() {
   game5BackAudio.play();
   game5BackAudio.currentTime = 0;
   game5FinalAudio.pause();
-  if (settings.volume === true) {
+  if (settingsStart.volume === true) {
     changeGame5AudioVolume(true);
-  } else if (settings.volume === false) {
+  } else if (settingsStart.volume === false) {
     changeGame5AudioVolume(false);
   }
 
@@ -190,14 +191,14 @@ function startGameMemory() {
   wrapper.innerHTML = `<div class="game5-wrapper_header">
       <h2>Jedi's Memory</h2>
       <div class="game5-wrapper_start-again-btn">${
-        settings.lang === "en" ? "Start again" : "Начать заново"
+        settingsStart.lang === "en" ? "Start again" : "Начать заново"
       }</div>
       <div class="game5-wrapper_score">
         <p class="game5-move"><span class="game5-move-span">${
-          settings.lang === "en" ? "Moves: " : "Ходы: "
+          settingsStart.lang === "en" ? "Moves: " : "Ходы: "
         }</span><span class="game5-move-span-count">0</span></p>
         <p class="game5-score"><span class="game5-score-span">${
-          settings.lang === "en" ? "Score: " : "Счёт: "
+          settingsStart.lang === "en" ? "Score: " : "Счёт: "
         }</span><span class="game5-score-span-count">1000</span></p>
       </div>
     </div>
@@ -210,9 +211,9 @@ function startGameMemory() {
   shadow.classList.add("game5-container_shadow");
   shadow.innerHTML = `
     <div>
-      <h3>${settings.lang === "en" ? "You win!!" : "Вы победили!!"}</h3>
+      <h3>${settingsStart.lang === "en" ? "You win!!" : "Вы победили!!"}</h3>
       <p><span class="game5-win-span">${
-        settings.lang === "en" ? "Your result: " : "Ваш результат: "
+        settingsStart.lang === "en" ? "Your result: " : "Ваш результат: "
       }</span><span class="game5-win-count">0</span></p>
     </div>
   `;
