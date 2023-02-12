@@ -446,10 +446,6 @@ function turnClick(e: Event): void {
 export function startGame() {
   const mainGame = document.querySelector(".game4-main__container");
   if (mainGame) {
-    const mainTitle = document.querySelector(
-      ".game4-main__title"
-    ) as HTMLElement;
-    mainTitle.classList.remove("transparent");
     const chips = Array.from(document.querySelectorAll(".game4-main__chip"));
     chips.forEach((el) => el.classList.remove("disable", "chosen"));
     const cells: HTMLElement[] = Array.from(
@@ -484,11 +480,7 @@ export function startGameTicTac() {
   body.innerHTML = `
   <div class="game4-main__container _game4-container">
     <div class="game4-main__settings">
-      <h1 class="game4-main__title">${
-        settingsStart.lang === "en"
-          ? "To play Jedi's Strategy choose a hero"
-          : "Для начала игры выберите персонажа"
-      }</h1>
+      <h2 class="game4-main__title">Jedi's Strategy</h2>
       <div class="game4-main__chips">
         <div id="game4-yoda-chip" class="game4-main__chip"></div>
         <div id="game4-dart-chip" class="game4-main__chip"></div>
@@ -535,7 +527,7 @@ export function game4() {
   divWrapper.classList.add("game4-wrapper");
   divWrapper.classList.remove("game4-start");
   divWrapper.innerHTML = `
-  <h2>Jedi's TicTac</h2>
+  <h2>Jedi's Strategy</h2>
   <p class="game4-wrapper_info">${
     settings.lang === "en"
       ? gamesData.en[3].description
@@ -586,10 +578,6 @@ export function chipClick() {
         document.querySelectorAll(".game4-main__chip")
       );
       chips.forEach((el) => el.classList.remove("chosen"));
-      const mainTitle = document.querySelector(
-        ".game4-main__title"
-      ) as HTMLElement;
-      mainTitle.classList.add("transparent");
       (<HTMLElement>e.target).classList.add("chosen");
       humanPlay = (<HTMLElement>e.target).id;
       if (humanPlay === "game4-yoda-chip") ai = "game4-dart-chip";
@@ -614,7 +602,6 @@ export function translateGame4(lang: string) {
   const startBtn = document.querySelector(
     ".game4-wrapper_button"
   ) as HTMLElement;
-  const mainTitle = document.querySelector(".game4-main__title") as HTMLElement;
   const retryBtn = document.querySelector(
     "#game4-retryBtn"
   ) as HTMLButtonElement;
@@ -627,14 +614,8 @@ export function translateGame4(lang: string) {
     }`;
   }
 
-  if (mainTitle && retryBtn && endMessage) {
-    console.log("qwewq");
+  if (retryBtn && endMessage) {
     retryBtn.innerHTML = `${lang === "en" ? "Start again" : "Начать заново"}`;
-    mainTitle.innerHTML = `${
-      lang === "en"
-        ? "To play Jedi's Strategy choose a hero"
-        : "Для начала игры выберите персонажа"
-    }`;
     if (endMessage.innerHTML === "You win!") {
       endMessage.innerHTML = `${lang === "en" ? "You win!" : "Вы победили!"}`;
     }

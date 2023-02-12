@@ -51,7 +51,7 @@
 }
 .game4-main__title {
   position: relative;
-  margin: 0px auto;
+  margin: 0px auto 15px;
   text-align: center;
   color: white;
   width: 450px;
@@ -67,8 +67,8 @@
 
 .game4-main__chip {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -76,13 +76,13 @@
   opacity: 0.5;
 }
 #game4-yoda-chip {
-  top: 160px;
-  left: -165px;
+  top: 140px;
+  left: -125px;
 }
 
 #game4-dart-chip {
-  top: 165px;
-  left: 475px;
+  top: 140px;
+  left: 445px;
 }
 
 .game4-main__chip:hover {
@@ -102,7 +102,7 @@
 .game4-main__game-table {
   margin: 0px auto;
   position: relative;
-  width: 455px;
+  width: 394px;
   border: 8px solid rgb(77, 75, 75);
 }
 .game4-main__game-row {
@@ -112,8 +112,8 @@
 .game4-main__game-cell {
   background-color: #121212;
   border: 2px solid rgb(77, 75, 75);
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   text-align: center;
   vertical-align: middle;
   font-size: 36px;
@@ -181,8 +181,8 @@
   border-radius: 5px;
   display: block;
   margin: 40px auto 0px auto;
-  width: 40%;
-  height: 80px;
+  width: 50%;
+  height: 60px;
   cursor: pointer;
 }
 
@@ -209,7 +209,7 @@
 
 @media (max-width: 790px) {
   .game4-main__game-table {
-    width: 308px;
+    width: 304px;
   }
   .game4-main__game-cell {
     width: 100px;
@@ -233,4 +233,17 @@
     height: 100px;
     width: 100px;
   }
+
+  .game4-endgame__message {
+    padding-top: 60px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+  }
+
+  .game4-endgame__button {
+    font-size: 24px;
+    width: 50%;
+    height: 50px;
+}
 }
