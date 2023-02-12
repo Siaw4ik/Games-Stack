@@ -313,7 +313,10 @@ export function result() {
         drawRawEmpty("user", settings.lang);
       }
     });
-  } else if (userRegistred.isRegistred === "false") {
+  } else if (
+    userRegistred.isRegistred === "false" ||
+    localStorage.getItem("userTrue") === null
+  ) {
     drawTable(settings.lang);
     const objgame1 = {
       gamename: "Jedi's Mind",
