@@ -53,16 +53,13 @@ export default class MeteorsController {
 
   createMeteors() {
     createOneMeteorLine(METEOR_CONFIG).forEach((met) => {
-      const meteorImage = met.img;
-      const x = met.dx;
-      const y = met.dy;
       const meteor = new Meteor(
         this.context,
-        x,
-        y,
-        meteorImage.width,
-        meteorImage.height,
-        meteorImage
+        met.dx * this.scaleRatio,
+        met.dy * this.scaleRatio,
+        met.width * this.scaleRatio,
+        met.height * this.scaleRatio,
+        met.img
       );
       this.meteors.push(meteor);
     });

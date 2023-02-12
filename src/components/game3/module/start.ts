@@ -11,9 +11,7 @@ import {
   METEORS_AND_BACKGROUND_SPEED,
   GAME_SPEED_START,
   GAME_SPEED_INCREMENT,
-  METEOR_CONFIG,
 } from "../constants/constants";
-import { createOneMeteorLine } from "./meteors";
 
 import Ship from "./Ship";
 import Background from "./Background";
@@ -61,19 +59,9 @@ function createSprites() {
       scaleRatio
     );
 
-    const meteorsImages = createOneMeteorLine(METEOR_CONFIG).map((meteor) => {
-      return {
-        img: meteor.img,
-        dx: meteor.dx,
-        dy: meteor.dy,
-        width: meteor.width * scaleRatio,
-        height: meteor.height * scaleRatio,
-      };
-    });
-
     meteorsController = new MeteorsController(
       context,
-      meteorsImages,
+      [],
       scaleRatio,
       METEORS_AND_BACKGROUND_SPEED
     );

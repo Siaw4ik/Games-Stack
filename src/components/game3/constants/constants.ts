@@ -1,20 +1,64 @@
 import { IMeteor } from "../module/types";
 import { createRandomMeteorImg } from "../module/meteors";
 
+const defaultMeteorSize = 80;
+const spaceBetweenMeteors = 110;
 export const METEOR_CONFIG: IMeteor[] = [
-  { img: createRandomMeteorImg(), dx: 0, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 210, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 420, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 630, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 840, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 1050, dy: -150, width: 31, height: 31 },
-  { img: createRandomMeteorImg(), dx: 1250, dy: -150, width: 31, height: 31 },
+  {
+    img: createRandomMeteorImg(),
+    dx: 10,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors * 2,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors * 3,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors * 4,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors * 5,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
+  {
+    img: createRandomMeteorImg(),
+    dx: spaceBetweenMeteors * 6,
+    dy: -150,
+    width: defaultMeteorSize,
+    height: defaultMeteorSize,
+  },
 ];
 
 export const GAME_WIDTH = 750;
-export const GAME_HEIGHT = 250;
-export const BACKGROUND_WIDTH = 750;
-export const BACKGROUND_HEIGHT = 250;
+export const GAME_HEIGHT = 750;
+export const BACKGROUND_WIDTH = GAME_WIDTH;
+export const BACKGROUND_HEIGHT = GAME_HEIGHT;
 export const PLAYER_WIDTH = 45;
 export const PLAYER_HEIGHT = 60;
 export const MAX_RIGHT_POS = GAME_WIDTH;

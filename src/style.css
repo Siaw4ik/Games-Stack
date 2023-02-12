@@ -744,7 +744,14 @@ body.lock {
 @media (max-width: 950px) {
   .pages p {
     padding: 10px 5px;
-    font-size: 17px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 850px) {
+  .pages p {
+    padding: 10px 5px;
+    font-size: 15px;
   }
 }
 
@@ -847,6 +854,12 @@ body.lock {
 
   .main {
     min-height: calc(100vh - 58px - 10px - 60px);
+  }
+}
+
+@media (min-width: 801px) {
+  .main.static-height {
+    height: calc(100vh - 125px - 10px - 60px);
   }
 }
 
