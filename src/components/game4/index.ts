@@ -1,6 +1,28 @@
 import "./index.css";
 import { gamesData } from "../gamesInfo/gamesData";
+import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
+import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
+import cardAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
+
+const game4BackAudio = new Audio(backAudio);
+const game4FinalAudio = new Audio(winAudio);
+const game4OneCard = new Audio(cardAudio);
+game4OneCard.volume = 0.5;
+game4BackAudio.volume = 0.7;
+game4FinalAudio.volume = 0.7;
+
+export function changeGame4AudioVolume(mode: boolean) {
+  if (mode === true) {
+    game4BackAudio.volume = 0.7;
+    game4FinalAudio.volume = 0.7;
+    game4OneCard.volume = 0.5;
+  } else if (mode === false) {
+    game4BackAudio.volume = 0;
+    game4FinalAudio.volume = 0;
+    game4OneCard.volume = 0;
+  }
+}
 
 let origBoard: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 let humanPlay: string = "";
@@ -348,16 +370,25 @@ function bestSpot() {
 
 function turnClick(e: Event): void {
   function gameOver(gameWon: { index: number; player: string }) {
+    const settingsStart = returnLocalStorage();
     const cells: HTMLElement[] = Array.from(
       document.querySelectorAll(".game4-main__game-cell")
     );
     for (let i = 0; i < cells.length; i += 1) {
       cells[i].removeEventListener("click", turnClick, false);
     }
-    declareWinner(gameWon.player === humanPlay ? "You win" : "You lose");
+    declareWinner(
+      gameWon.player === humanPlay
+        ? `${settingsStart.lang === "en" ? "You win!" : "Вы победили!"}`
+        : `${settingsStart.lang === "en" ? "You lose!" : "Вы проиграли!"}`
+    );
+    game4BackAudio.pause();
+    game4FinalAudio.play();
+    game4FinalAudio.currentTime = 0;
   }
   function turn(squareId: string, player: string) {
     if (humanPlay) {
+      game4OneCard.play();
       const chips = Array.from(document.querySelectorAll(".game4-main__chip"));
       chips.forEach((el) => el.classList.add("disable"));
       origBoard[Number(squareId.split("-")[2])] = player;
@@ -378,13 +409,17 @@ function turnClick(e: Event): void {
   function checkTie() {
     const gameWon = checkWin(origBoard, humanPlay);
     if (emptySquares().length === 0 && !gameWon) {
+      const settingsStart = returnLocalStorage();
       const cells: HTMLElement[] = Array.from(
         document.querySelectorAll(".game4-main__game-cell")
       );
       cells.forEach((element) => {
         element.removeEventListener("click", turnClick, false);
       });
-      declareWinner("Tie Game");
+      declareWinner(`${settingsStart.lang === "en" ? "Tie game!" : "Ничья!"}`);
+      game4BackAudio.pause();
+      game4FinalAudio.play();
+      game4FinalAudio.currentTime = 0;
       return true;
     }
     return false;
@@ -432,6 +467,16 @@ export function startGame() {
 }
 
 export function startGameTicTac() {
+  const settingsStart = returnLocalStorage();
+  game4BackAudio.loop = true;
+  game4BackAudio.play();
+  game4BackAudio.currentTime = 0;
+  game4FinalAudio.pause();
+  if (settingsStart.volume === true) {
+    changeGame4AudioVolume(true);
+  } else if (settingsStart.volume === false) {
+    changeGame4AudioVolume(false);
+  }
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const body = document.createElement("div") as HTMLElement;
@@ -439,7 +484,11 @@ export function startGameTicTac() {
   body.innerHTML = `
   <div class="game4-main__container _game4-container">
     <div class="game4-main__settings">
-      <h1 class="game4-main__title">To play Tic-Tac-Toe choose a chip</h1>
+      <h1 class="game4-main__title">${
+        settingsStart.lang === "en"
+          ? "To play Jedi's Strategy choose a hero"
+          : "Для начала игры выберите персонажа"
+      }</h1>
       <div class="game4-main__chips">
         <div id="game4-yoda-chip" class="game4-main__chip"></div>
         <div id="game4-dart-chip" class="game4-main__chip"></div>
@@ -463,12 +512,20 @@ export function startGameTicTac() {
       </div>
       <div id="game4-end" class="game4-main__endgame game4-endgame">
     <div id="game4-endMessage" class="game4-endgame__message"></div>
-    <button id="game4-retryBtn" class="game4-endgame__button">Retry</button>
+    <button id="game4-retryBtn" class="game4-endgame__button">${
+      settingsStart.lang === "en" ? "Start again" : "Начать заново"
+    }</button>
     </div>
     </div>
   </div>`;
   main.appendChild(body);
   startGame();
+  window.addEventListener("hashchange", () => {
+    if (window.location.href !== "#game4") {
+      game4BackAudio.pause();
+      game4FinalAudio.pause();
+    }
+  });
 }
 
 export function game4() {
@@ -507,6 +564,16 @@ export function retryBtnclick() {
       const endBlock = document.getElementById("game4-end") as HTMLElement;
       endBlock.classList.remove("open");
       startGame();
+      const settingsStart = returnLocalStorage();
+      game4BackAudio.loop = true;
+      game4BackAudio.play();
+      game4BackAudio.currentTime = 0;
+      game4FinalAudio.pause();
+      if (settingsStart.volume === true) {
+        changeGame4AudioVolume(true);
+      } else if (settingsStart.volume === false) {
+        changeGame4AudioVolume(false);
+      }
     }
   });
 }
@@ -535,6 +602,56 @@ export function chipClick() {
       cells.forEach((el) => {
         el.addEventListener("click", turnClick, false);
       });
+      game4OneCard.play();
     }
   });
+}
+
+export function translateGame4(lang: string) {
+  const description = document.querySelector(
+    ".game4-wrapper_info"
+  ) as HTMLElement;
+  const startBtn = document.querySelector(
+    ".game4-wrapper_button"
+  ) as HTMLElement;
+  const mainTitle = document.querySelector(".game4-main__title") as HTMLElement;
+  const retryBtn = document.querySelector(
+    "#game4-retryBtn"
+  ) as HTMLButtonElement;
+  const endMessage = document.getElementById("game4-endMessage") as HTMLElement;
+
+  if (startBtn && description) {
+    startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
+    description.innerHTML = `${
+      lang === "en" ? gamesData.en[3].description : gamesData.ru[3].description
+    }`;
+  }
+
+  if (mainTitle && retryBtn && endMessage) {
+    console.log("qwewq");
+    retryBtn.innerHTML = `${lang === "en" ? "Start again" : "Начать заново"}`;
+    mainTitle.innerHTML = `${
+      lang === "en"
+        ? "To play Jedi's Strategy choose a hero"
+        : "Для начала игры выберите персонажа"
+    }`;
+    if (endMessage.innerHTML === "You win!") {
+      endMessage.innerHTML = `${lang === "en" ? "You win!" : "Вы победили!"}`;
+    }
+    if (endMessage.innerHTML === "Вы победили!") {
+      endMessage.innerHTML = `${lang === "ru" ? "Вы победили!" : "You win!"}`;
+    }
+    if (endMessage.innerHTML === "You lose!") {
+      endMessage.innerHTML = `${lang === "en" ? "You lose!" : "Вы проиграли!"}`;
+    }
+    if (endMessage.innerHTML === "Вы проиграли!") {
+      endMessage.innerHTML = `${lang === "ru" ? "Вы проиграли!" : "You lose!"}`;
+    }
+    if (endMessage.innerHTML === "Tie game!") {
+      endMessage.innerHTML = `${lang === "en" ? "Tie game!" : "Ничья!"}`;
+    }
+    if (endMessage.innerHTML === "Ничья!") {
+      endMessage.innerHTML = `${lang === "ru" ? "Ничья!" : "Tie game!"}`;
+    }
+  }
 }
