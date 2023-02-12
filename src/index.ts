@@ -16,7 +16,6 @@ import {
   closeOpenWindowRegisration,
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
-import { gameAllfunc } from "./components/game1";
 import { fixGame2 } from "./components/game2";
 import { retryBtnclick, chipClick } from "./components/game4";
 
@@ -36,7 +35,6 @@ authorizeUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
 
-gameAllfunc();
 
 fixGame2();
 retryBtnclick();

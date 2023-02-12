@@ -742,6 +742,14 @@ body.lock {
     padding: 10px 5px;
     font-size: 17px;
   }
+  .pages {
+    padding: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .header .pages .about {
+    width: 74px;
+  }
 }
 
 @media (max-width: 800px) {
