@@ -5,7 +5,7 @@ import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 import { translateHeaderTable } from "../results";
 import { changeGame5AudioVolume, translateGame5 } from "../game5";
 import { changeGame4AudioVolume, translateGame4 } from "../game4";
-import { translateGame1 } from "../game1";
+import { changeGame1AudioVolume, translateGame1 } from "../game1";
 
 const settings: Settings = {
   lang: "en",
@@ -25,6 +25,7 @@ export function toggleVolume() {
       localStorage.setItem("settings", JSON.stringify(settings));
       changeGame5AudioVolume(false);
       changeGame4AudioVolume(false);
+      changeGame1AudioVolume(false);
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
@@ -32,6 +33,7 @@ export function toggleVolume() {
       localStorage.setItem("settings", JSON.stringify(settings));
       changeGame5AudioVolume(true);
       changeGame4AudioVolume(true);
+      changeGame1AudioVolume(true);
     }
   }
 
