@@ -3,6 +3,7 @@ import picture1 from "../../assets/game1_picture.png"
 import picture2 from "../../assets/game2_picture.png"
 import picture3 from "../../assets/game3_picture.png"
 import picture4 from "../../assets/game4_picture.png"
+import picture5 from "../../assets/game5_picture.png"
 
 export const gamesData = {
   ru_title: "Способности Силы были проявлением возможностей чувствительных к Силе существ, например, джедаев или ситхов. Учёными эти способности были описаны как сверхъестественные явления, невозможные с точки зрения науки. Существовало множество способностей Силы, однако для освоения некоторых требовалась приверженность к светлой или тёмной стороне Силы, а для познания иных был необходим высокий потенциал и постоянные тренировки разума и тела.",
@@ -52,12 +53,12 @@ export const gamesData = {
     },
     {
       id: "game5",
-      name: "Игра 5",
+      name: "Jedi's Memory",
       description:
-        "В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции. В данной игре Вам предоставляется возможность проявить ловкость своих пальцев и быстроту реакции.",
+        "В данной игре Вам предоставляется возможность проявить свою способность запоминанию. Также это отличная возможность Джедаю потренировать свои способности к теликинезу и удивить всех своим результатом.",
       rules:
-        "Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой. Правила игры: Вам необходимио играть, чтобы просто играть и наслаждаться игрой.",
-      pictureUrl: `${picture3}`,
+        "Правила игры: Изначально вам предоставляется 1000 очков и 36 перевернутых рубашкой вверх карт. Ваша задача, открывая по 2 карты, найти пару каждой карте. Если 2 открытых карты не совпадают, то они снова поворачиваются рубашкой вверх. Первые 18 поворотов пар карт не уменьшают количество очков, далее за кждую последующую перевернутую пару отнимается 20 очков, если игра закончена более, чем за 68 ходов - Джедай получает 0 очков.",
+      pictureUrl: `${picture5}`,
       button: "Играть",
     }
   ],
@@ -102,11 +103,11 @@ export const gamesData = {
     },
     {
       id: "game5",
-      name: "Game 5",
+      name: "Jedi's Memory",
       description:
-        "In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction. In this game you are given the opportunity to show the dexterity of your fingers and quick reaction.",
-      rules: "Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game. Game rules: You need to play just to play and enjoy the game.",
-      pictureUrl: `${picture4}`,
+        "In this game you are given the opportunity to show your ability to memorize. It is also a great opportunity for a Jedi to train his telekinesis abilities and surprise everyone with his result.",
+      rules: "Game rules: Initially, you are given 1000 points and 36 cards turned face down. Your task, opening 2 cards, is to find a pair of each card. If the 2 open cards do not match, they are turned face down again. The first 18 turns of pairs of cards do not reduce the number of points, then 20 points are taken away for each subsequent turned pair of cards, if the game is over in more than 68 turns - the Jedi receives 0 points.",
+      pictureUrl: `${picture5}`,
       button: "Play",
     }
   ],
