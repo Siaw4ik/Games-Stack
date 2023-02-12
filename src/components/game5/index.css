@@ -140,7 +140,6 @@
 
 @media (max-width: 1120px) {
   .game5-wrapper_div-card {
-
     width: 111px;
     height: 158px;
   }
@@ -148,28 +147,37 @@
 
 @media (max-width: 1070px) {
   .game5-wrapper_container-cards {
-    grid-template-columns: repeat(8, auto);
+    grid-template-columns: repeat(9, auto);
     gap: 5px 5px;
     padding: 3px;
     border: 5px solid rgb(72, 64, 64);
   }
   .game5-wrapper_div-card {
-
     width: 108px;
     height: 153px;
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1035px) {
   .game5-wrapper_container-cards {
-    grid-template-columns: repeat(8, auto);
     gap: 4px 4px;
-    padding: 2px;
+    padding: 3px;
     border: 4px solid rgb(72, 64, 64);
   }
   .game5-wrapper_div-card {
     width: 105px;
     height: 150px;
+  }
+}
+
+@media (max-width: 1010px) {
+  .game5-wrapper_container-cards {
+    grid-template-columns: repeat(6, auto);
+    padding: 2px;
+  }
+  .game5-wrapper_div-card {
+    width: 117px;
+    height: 167px;
   }
 }
 
