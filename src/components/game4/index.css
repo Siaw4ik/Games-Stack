@@ -1,18 +1,46 @@
 .game4-wrapper {
-  overflow: hidden;
+  position: relative;
+  color: white;
   display: flex;
   flex-direction: column;
-  margin: 0px auto;
-  line-height: 1;
-  font-family: "PT Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #000000;
-  position: relative;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px 100px;
 }
+
+.game4-wrapper h2 {
+  color: rgb(71, 132, 255);
+}
+
+.game4-wrapper.game4-start {
+  padding: 0;
+}
+
+.game4-wrapper_info {
+  font-size: 18px;
+}
+
+.game4-wrapper_button {
+  width: 130px;
+  padding: 10px;
+  background-color: rgb(71, 132, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.game4-wrapper_button:active {
+  transform: scale(1.1);
+}
+
 ._game4-container {
-  max-width: 1630px;
   margin: 0px auto;
+  max-width: 1000px;
 }
 
 /*========================================================================================================*/
@@ -21,26 +49,41 @@
   margin-top: 15px;
 }
 .game4-main__title {
+  position: relative;
   margin: 0px auto;
   text-align: center;
   color: white;
+  width: 450px;
+  z-index: 9999;
+  user-select: none;
 }
 
 .game4-main__chips {
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
+  position: relative;
+  width: 450px;
   margin: 0px auto;
 }
+
 .game4-main__chip {
-  flex: 0 1 45%;
-  height: 135px;
+  position: absolute;
+  width: 150px;
+  height: 150px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
   cursor: pointer;
   opacity: 0.5;
 }
+#game4-yoda-chip {
+  top: 160px;
+  left: -165px;
+}
+
+#game4-dart-chip {
+  top: 165px;
+  left: 475px;
+}
+
 .game4-main__chip:hover {
   transition: 0.2s;
   opacity: 1;
@@ -58,6 +101,7 @@
 .game4-main__game-table {
   margin: 0px auto;
   position: relative;
+  width: 455px;
   border: 8px solid rgb(77, 75, 75);
 }
 .game4-main__game-row {
@@ -67,8 +111,8 @@
 .game4-main__game-cell {
   background-color: #121212;
   border: 2px solid rgb(77, 75, 75);
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   text-align: center;
   vertical-align: middle;
   font-size: 36px;
@@ -154,7 +198,18 @@
   opacity: 0.3;
 }
 
-@media (max-width: 670px) {
+.chosen {
+  opacity: 1;
+}
+.transparent {
+  transition: 1s;
+  color: transparent;
+}
+
+@media (max-width: 790px) {
+  .game4-main__game-table {
+    width: 308px;
+  }
   .game4-main__game-cell {
     width: 100px;
     height: 100px;
@@ -166,8 +221,14 @@
 
   .game4-main__chips {
     width: 225px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
   }
   .game4-main__chip {
+    top: auto;
+    left: auto;
+    position: static;
     height: 100px;
     width: 100px;
   }
