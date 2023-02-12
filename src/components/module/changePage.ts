@@ -21,7 +21,7 @@ function changeLocationHash(hash: string) {
   window.location.hash = `#${hash}`;
 }
 
-export function getLocationHash(): string {
+export function getCurrentPageId(): string {
   return window.location.hash.slice(1);
 }
 
@@ -72,8 +72,16 @@ function updateBackgroundStyle(shouldStretch: boolean) {
   }
 }
 
-function updateMainStyle(shouldSetHeight: boolean) {
+function updateMainStyle(
+  prevGameId: string,
+  newGameId: string,
+  shouldSetHeight: boolean
+) {
   const main = document.querySelector(".main") as HTMLElement;
+  if (prevGameId) {
+    main.classList.remove(prevGameId);
+  }
+  main.classList.add(newGameId);
 
   if (main) {
     if (shouldSetHeight) {
@@ -84,49 +92,50 @@ function updateMainStyle(shouldSetHeight: boolean) {
   }
 }
 
-export function renderNewPage(idPage: string) {
-  changeLocationHash(idPage);
-  setButtonChooseAtr(idPage);
-  switch (idPage) {
+export function renderNewPage(pageId: string) {
+  const previousPageId = getCurrentPageId();
+  changeLocationHash(pageId);
+  setButtonChooseAtr(pageId);
+  switch (pageId) {
     case "about":
-      drawHomePage();
       updateBackgroundStyle(false);
-      updateMainStyle(false);
+      updateMainStyle(previousPageId, pageId, false);
+      drawHomePage();
       break;
     case "result":
       result();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     case "game1":
       game1();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     case "game2":
       game2();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     case "game3":
       game3();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     case "game4":
       game4();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     case "game5":
       game5();
       updateBackgroundStyle(true);
-      updateMainStyle(true);
+      updateMainStyle(previousPageId, pageId, true);
       break;
     default:
       drawHomePage();
       updateBackgroundStyle(false);
-      updateMainStyle(false);
+      updateMainStyle(previousPageId, pageId, false);
   }
 }
 
@@ -138,8 +147,6 @@ export function enableRoutChange() {
 }
 
 function changePageMain() {
-  /* const hashPage = window.location.hash.slice(1); */
-  /* renderNewPage(hashPage); */
   const pages = document.querySelector(".pages") as HTMLElement;
   pages.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -154,25 +161,25 @@ function changePageMain() {
     });
     burgerLi?.setAttribute("id", "choose-burger");
     if (target.closest(".about")) {
-      window.location.hash = "#about";
+      renderNewPage("about");
     }
     if (target.closest(".game1")) {
-      window.location.hash = "#game1";
+      renderNewPage("game1");
     }
     if (target.closest(".game2")) {
-      window.location.hash = "#game2";
+      renderNewPage("game2");
     }
     if (target.closest(".game3")) {
-      window.location.hash = "#game3";
+      renderNewPage("game3");
     }
     if (target.closest(".game4")) {
-      window.location.hash = "#game4";
+      renderNewPage("game4");
     }
     if (target.closest(".game5")) {
-      window.location.hash = "#game5";
+      renderNewPage("game5");
     }
     if (target.closest(".result")) {
-      window.location.hash = "#result";
+      renderNewPage("result");
     }
   });
 }

@@ -7,7 +7,7 @@ import {
 import { drawPage } from "./components/module/drawPage";
 import {
   renderNewPage,
-  getLocationHash,
+  getCurrentPageId,
   changePage,
   enableRoutChange,
 } from "./components/module/changePage";
@@ -22,7 +22,7 @@ import { retryBtnclick, chipClick } from "./components/game4";
 enableRoutChange();
 drawPage();
 
-const pageId = getLocationHash() ? getLocationHash() : "about";
+const pageId = getCurrentPageId() ? getCurrentPageId() : "about";
 renderNewPage(pageId);
 
 changePage();
