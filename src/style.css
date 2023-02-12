@@ -866,8 +866,12 @@ body.lock {
 }
 
 @media (min-width: 801px) {
-  .main.static-height {
+  .static-height {
     height: calc(100vh - 125px - 10px - 60px);
+  }
+
+  .game5 {
+    height: unset;
   }
 }
 
