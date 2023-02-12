@@ -4,6 +4,7 @@ import { Settings } from "./types";
 import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 import { translateHeaderTable } from "../results";
 import { changeGame5AudioVolume, translateGame5 } from "../game5";
+import { changeGame4AudioVolume, translateGame4 } from "../game4";
 import { translateGame1 } from "../game1";
 
 const settings: Settings = {
@@ -23,12 +24,14 @@ export function toggleVolume() {
       settings.volume = false;
       localStorage.setItem("settings", JSON.stringify(settings));
       changeGame5AudioVolume(false);
+      changeGame4AudioVolume(false);
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
       settings.volume = true;
       localStorage.setItem("settings", JSON.stringify(settings));
       changeGame5AudioVolume(true);
+      changeGame4AudioVolume(true);
     }
   }
 
@@ -160,6 +163,7 @@ export function toggleLang() {
     scoreWindow.innerHTML = "Статистика игр";
     translateHeaderTable(settings.lang);
     translateGame5(settings.lang);
+    translateGame4(settings.lang);
     translateGame1(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
@@ -190,6 +194,7 @@ export function toggleLang() {
     scoreWindow.innerHTML = "Game statistics";
     translateHeaderTable(settings.lang);
     translateGame5(settings.lang);
+    translateGame4(settings.lang);
     translateGame1(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
