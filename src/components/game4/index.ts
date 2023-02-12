@@ -535,7 +535,7 @@ export function game4() {
   divWrapper.classList.add("game4-wrapper");
   divWrapper.classList.remove("game4-start");
   divWrapper.innerHTML = `
-  <h2>Jedi's TicTac</h2>
+  <h2>Jedi's Strategy</h2>
   <p class="game4-wrapper_info">${
     settings.lang === "en"
       ? gamesData.en[3].description
@@ -628,7 +628,6 @@ export function translateGame4(lang: string) {
   }
 
   if (mainTitle && retryBtn && endMessage) {
-    console.log("qwewq");
     retryBtn.innerHTML = `${lang === "en" ? "Start again" : "Начать заново"}`;
     mainTitle.innerHTML = `${
       lang === "en"
