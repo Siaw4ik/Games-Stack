@@ -13,9 +13,9 @@ import {
 
 const arrButton = [
   { game1: "Jedi's Mind" },
-  { game2: "Jedi Agility" },
-  { game3: "game3" },
-  { game4: "game4" },
+  { game2: "Jedi's Agility" },
+  { game3: "Jedi's Mobility" },
+  { game4: "Jedi's Strategy" },
   { game5: "Jedi's Memory" },
 ];
 
@@ -313,7 +313,10 @@ export function result() {
         drawRawEmpty("user", settings.lang);
       }
     });
-  } else if (userRegistred.isRegistred === "false") {
+  } else if (
+    userRegistred.isRegistred === "false" ||
+    localStorage.getItem("userTrue") === null
+  ) {
     drawTable(settings.lang);
     const objgame1 = {
       gamename: "Jedi's Mind",
