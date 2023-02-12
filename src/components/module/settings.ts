@@ -57,6 +57,9 @@ export function toggleLight() {
     ".conteiner_header-main"
   ) as HTMLElement;
   const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
+  const gamesInfoContainer = document.querySelector(
+    ".games_info_container"
+  ) as HTMLElement;
 
   function changeClassDark() {
     btnLight.classList.toggle("light");
@@ -66,6 +69,9 @@ export function toggleLight() {
     menu.classList.toggle("dark");
     containerHeaderMain.classList.toggle("dark");
     if (arrowUP) arrowUP.classList.toggle("dark");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.toggle("dark");
+    }
 
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
@@ -81,19 +87,11 @@ export function toggleLight() {
   }
   btnLight.addEventListener("click", () => {
     changeClassDark();
-    const gamesInfoContainer = document.querySelector(
-      ".games_info_container"
-    ) as HTMLElement;
-    gamesInfoContainer.classList.toggle("dark");
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "KeyZ" && (event.ctrlKey || event.metaKey)) {
       changeClassDark();
-      const gamesInfoContainer = document.querySelector(
-        ".games_info_container"
-      ) as HTMLElement;
-      gamesInfoContainer.classList.toggle("dark");
     }
   });
 }
