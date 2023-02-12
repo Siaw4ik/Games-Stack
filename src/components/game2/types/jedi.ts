@@ -1,16 +1,6 @@
 import jedi from "../../../assets/images/jedi.png";
 import jediRun1 from "../../../assets/images/jedi_run1.png";
 import jediRun2 from "../../../assets/images/jedi_run2.png";
-import cardAudio from "../../../assets/sounds/game5-one-card.mp3";
-
-const game2OneCard = new Audio(cardAudio);
-export function changeGame2JediAudioVolume(mode: boolean) {
-  if (mode === true) {
-    game2OneCard.volume = 0.5;
-  } else if (mode === false) {
-    game2OneCard.volume = 0;
-  }
-}
 
 export default class Player {
   walk_animation_timer = 200;
@@ -101,24 +91,35 @@ export default class Player {
   }
 
   keydown = (event: KeyboardEvent) => {
-    if (event.code === "Space") {
+    const container = document.querySelector(
+      ".game2-main__game"
+    ) as HTMLElement;
+    if (event.code === "Space" && container) {
       this.jumpPressed = true;
-      game2OneCard.play();
     }
   };
 
   keyup = (event: KeyboardEvent) => {
-    if (event.code === "Space") {
+    const container = document.querySelector(
+      ".game2-main__game"
+    ) as HTMLElement;
+    if (event.code === "Space" && container) {
       this.jumpPressed = false;
     }
   };
 
   touchstart = () => {
-    this.jumpPressed = true;
+    const container = document.querySelector(
+      ".game2-main__game"
+    ) as HTMLElement;
+    if (container) this.jumpPressed = true;
   };
 
   touchend = () => {
-    this.jumpPressed = false;
+    const container = document.querySelector(
+      ".game2-main__game"
+    ) as HTMLElement;
+    if (container) this.jumpPressed = false;
   };
 
   update(gameSpeed: number, frameTimeDelta: number) {
