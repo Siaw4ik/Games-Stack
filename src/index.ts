@@ -35,7 +35,6 @@ authorizeUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
 
-
 fixGame2();
 retryBtnclick();
 chipClick();

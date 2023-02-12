@@ -60,33 +60,73 @@ export function drawHomePage() {
   parallax();
 }
 
+function updateBackgroundStyle(shouldStretch: boolean) {
+  const containerHeaderMain = document.querySelector(".wrapper") as HTMLElement;
+
+  if (containerHeaderMain) {
+    if (shouldStretch) {
+      containerHeaderMain.classList.add("stretch");
+    } else {
+      containerHeaderMain.classList.remove("stretch");
+    }
+  }
+}
+
+function updateMainStyle(shouldSetHeight: boolean) {
+  const main = document.querySelector(".main") as HTMLElement;
+
+  if (main) {
+    if (shouldSetHeight) {
+      main.classList.add("static-height");
+    } else {
+      main.classList.remove("static-height");
+    }
+  }
+}
+
 export function renderNewPage(idPage: string) {
   changeLocationHash(idPage);
   setButtonChooseAtr(idPage);
   switch (idPage) {
     case "about":
       drawHomePage();
+      updateBackgroundStyle(false);
+      updateMainStyle(false);
       break;
     case "result":
       result();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     case "game1":
       game1();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     case "game2":
       game2();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     case "game3":
       game3();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     case "game4":
       game4();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     case "game5":
       game5();
+      updateBackgroundStyle(true);
+      updateMainStyle(true);
       break;
     default:
       drawHomePage();
+      updateBackgroundStyle(false);
+      updateMainStyle(false);
   }
 }
 

@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 100px;
+  padding: 10px 100px;
 }
 
 .game1-wrapper.game1-start{
@@ -18,13 +18,13 @@
 }
 
 .game1-wrapper h2 {
-  color: rgb(71, 132, 255);
+  color: white;
 }
 
 .game1-wrapper_button {
   width: 130px;
   padding: 10px;
-  background-color: rgb(71, 132, 255);
+  background-color: fuchsia;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -32,9 +32,10 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 600;
+  transition: all .3s ease-in-out
 }
 
-.game1-wrapper_button:active {
+.game1-wrapper_button:hover {
   transform: scale(1.1);
 }
 

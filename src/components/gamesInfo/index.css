@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .games_info_container {
   background: url(../../assets/rectangle_light.svg) top / cover no-repeat;
   color: black;
