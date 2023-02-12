@@ -6,6 +6,8 @@ import { translateHeaderTable } from "../results";
 import { changeGame5AudioVolume, translateGame5 } from "../game5";
 import { changeGame4AudioVolume, translateGame4 } from "../game4";
 import { changeGame1AudioVolume, translateGame1 } from "../game1";
+import { changeGame2AudioVolume } from "../game2";
+import { changeGame2JediAudioVolume } from "../game2/types/jedi";
 
 const settings: Settings = {
   lang: "en",
@@ -26,6 +28,8 @@ export function toggleVolume() {
       changeGame5AudioVolume(false);
       changeGame4AudioVolume(false);
       changeGame1AudioVolume(false);
+      changeGame2AudioVolume(false);
+      changeGame2JediAudioVolume(false);
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
@@ -34,6 +38,8 @@ export function toggleVolume() {
       changeGame5AudioVolume(true);
       changeGame4AudioVolume(true);
       changeGame1AudioVolume(true);
+      changeGame2AudioVolume(true);
+      changeGame2JediAudioVolume(true);
     }
   }
 

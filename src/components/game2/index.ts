@@ -9,6 +9,31 @@ import enemy1 from "../../assets/images/enemy_1.png";
 import enemy2 from "../../assets/images/enemy_2.png";
 import enemy3 from "../../assets/images/enemy_3.png";
 import { sendScore } from "../results/sendScore";
+import { gamesData } from "../gamesInfo/gamesData";
+import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
+import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
+import cardAudio from "../../assets/sounds/game5-one-card.mp3";
+import { returnLocalStorage } from "../module/localStorage";
+
+const game2BackAudio = new Audio(backAudio);
+const game2FinalAudio = new Audio(winAudio);
+const game2OneCard = new Audio(cardAudio);
+game2OneCard.volume = 0.5;
+game2BackAudio.volume = 0.7;
+game2FinalAudio.volume = 0.7;
+const settings = returnLocalStorage();
+
+export function changeGame2AudioVolume(mode: boolean) {
+  if (mode === true) {
+    game2BackAudio.volume = 0.7;
+    game2FinalAudio.volume = 0.7;
+    game2OneCard.volume = 0.5;
+  } else if (mode === false) {
+    game2BackAudio.volume = 0;
+    game2FinalAudio.volume = 0;
+    game2OneCard.volume = 0;
+  }
+}
 
 const gameSpeedStart = 0.55;
 const gameSpeedIncrement = 0.00001;
@@ -102,6 +127,7 @@ function createSprites() {
 }
 
 function showGameOver() {
+  const settingsStart = returnLocalStorage();
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -110,7 +136,15 @@ function showGameOver() {
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3.5;
     const y = canvas.height / 7;
-    ctx.fillText("Game Over! Press Space to Start Again", x, y);
+    ctx.fillText(
+      `${
+        settingsStart.lang === "en"
+          ? "Game Over! Press Space to Start Again"
+          : "Конец игры! Нажмите пробел, чтобы начать заново"
+      }`,
+      x,
+      y
+    );
   }
 }
 
@@ -126,6 +160,16 @@ export function reset() {
       enemyController.reset();
       score.reset();
       gameSpeed = gameSpeedStart;
+      const settingsStart = returnLocalStorage();
+      game2BackAudio.loop = true;
+      game2BackAudio.play();
+      game2BackAudio.currentTime = 0;
+      game2FinalAudio.pause();
+      if (settingsStart.volume === true) {
+        changeGame2AudioVolume(true);
+      } else if (settingsStart.volume === false) {
+        changeGame2AudioVolume(false);
+      }
     }
   }
 }
@@ -154,6 +198,7 @@ function setupGameReset() {
 }
 
 function showStartGameText() {
+  const settingsStart = returnLocalStorage();
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -162,7 +207,15 @@ function showStartGameText() {
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3;
     const y = canvas.height / 7;
-    ctx.fillText("Tap Screen or Press Space to Start", x, y);
+    ctx.fillText(
+      `${
+        settingsStart.lang === "en"
+          ? "Press Space to Start"
+          : "Для начала нажмите на пробел"
+      }`,
+      x,
+      y
+    );
   }
 }
 
@@ -200,6 +253,9 @@ function gameLoop(currentTime: number) {
 
   if (!gameOver && enemyController.collideWith(player)) {
     gameOver = true;
+    game2BackAudio.pause();
+    game2FinalAudio.play();
+    game2FinalAudio.currentTime = 0;
     console.log(score.score);
     sendScore("Jedi's Agility", Math.trunc(score.score));
     setupGameReset();
@@ -224,7 +280,7 @@ if (window.location.hash === "#game2") {
   requestAnimationFrame(gameLoop);
 }
 
-export const game2 = () => {
+export const startGameAgility = () => {
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const body = document.createElement("div");
@@ -264,7 +320,41 @@ export const game2 = () => {
     window.addEventListener("resize", setScreen);
   }
   requestAnimationFrame(gameLoop);
+  window.addEventListener("hashchange", () => {
+    if (window.location.href !== "#game2") {
+      game2BackAudio.pause();
+      game2FinalAudio.pause();
+    }
+  });
 };
+
+export function game2() {
+  const main = document.querySelector(".main") as HTMLElement;
+  main.innerHTML = "";
+  const divWrapper = document.createElement("div");
+  divWrapper.classList.add("game2-wrapper");
+  divWrapper.classList.remove("game2-start");
+  divWrapper.innerHTML = `
+  <h2>Jedi's Agility</h2>
+  <p class="game2-wrapper_info">${
+    settings.lang === "en"
+      ? gamesData.en[1].description
+      : gamesData.ru[1].description
+  }</p>
+  <div class="game2-wrapper_button"><span>${
+    settings.lang === "en" ? "Start Game" : "Начать Игру"
+  }</span></div>`;
+  main.appendChild(divWrapper);
+
+  const startBtn = document.querySelector(
+    ".game2-wrapper_button"
+  ) as HTMLElement;
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      startGameAgility();
+    });
+  }
+}
 
 export function fixGame2() {
   window.addEventListener("hashchange", () => {
