@@ -18,6 +18,10 @@ body.lock {
   justify-content: space-between;
 }
 
+.wrapper.stretch {
+  position: relative;
+}
+
 .conteiner_header-main {
   display: flex;
   flex-direction: column;
@@ -603,7 +607,7 @@ body.lock {
 }
 
 .main {
-  min-height: calc(100vh - 125px - 16px - 60px);
+  min-height: calc(100vh - 125px - 10px - 60px);
 }
 
 .main.dark {
@@ -842,7 +846,7 @@ body.lock {
   }
 
   .main {
-    min-height: calc(100vh - 58px - 16px - 60px);
+    min-height: calc(100vh - 58px - 10px - 60px);
   }
 }
 
@@ -896,7 +900,7 @@ body.lock {
   }
 
   .main {
-    min-height: calc(100vh - 52px - 16px - 60px);
+    min-height: calc(100vh - 52px - 10px - 60px);
   }
 }
 
@@ -957,7 +961,7 @@ body.lock {
     gap: 5px;
   }
   .main {
-    min-height: calc(100vh - 40px - 16px - 60px);
+    min-height: calc(100vh - 40px - 10px - 60px);
   }
 }
 
@@ -967,7 +971,7 @@ body.lock {
   }
 
   .main {
-    min-height: calc(100vh - 40px - 16px - 50px);
+    min-height: calc(100vh - 40px - 10px - 50px);
   }
 
   .footer {
