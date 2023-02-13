@@ -42,7 +42,6 @@ const winCombinatios = [
   [0, 4, 8],
   [6, 4, 2],
 ];
-const settings = returnLocalStorage();
 
 function declareWinner(who: string) {
   const endBlock = document.getElementById("game4-end") as HTMLElement;
@@ -535,6 +534,7 @@ export function startGameTicTac() {
 }
 
 export function game4() {
+  const settings = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const divWrapper = document.createElement("div");

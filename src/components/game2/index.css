@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  padding: 10px 100px;
   max-width: 1400px;
+  margin: auto;
+  padding-top: 10px;
 }
 
 .game2-wrapper h2 {
@@ -19,6 +19,7 @@
 
 .game2-wrapper_info {
   font-size: 18px;
+  text-align: center;
 }
 
 .game2-wrapper_button {
