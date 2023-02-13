@@ -153,6 +153,7 @@ export function reset() {
     .childNodes[0] as HTMLElement;
   if (mainChild) {
     if (mainChild.classList.value === "game2-wrapper") {
+      console.log("nnnnn");
       hasAddedEventListenersForRestart = false;
       gameOver = false;
       waitingToStart = false;
@@ -273,7 +274,7 @@ function gameLoop(currentTime: number) {
     if (waitingToStart) {
       showStartGameText();
     }
-    if (player.jumpPressed) {
+    if (player.jumpPressed && !waitingToStart) {
       game2OneCard.play();
     }
     const requestId = requestAnimationFrame(gameLoop);
@@ -322,19 +323,21 @@ export const startGameAgility = () => {
   if (window.screen) {
     window.addEventListener("resize", setScreen);
   }
-
   requestAnimationFrame(gameLoop);
+  const container = document.querySelector(".game2-main__game") as HTMLElement;
+  if (container) {
+    window.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
+  }
 };
 
 window.addEventListener("hashchange", () => {
-  if (
-    window.location.hash === "#game2" &&
-    document.querySelector(".game2-main__game")
-  ) {
+  if (window.location.hash === "#game2") {
+    console.log("changed");
     requestAnimationFrame(gameLoop);
   }
 
-  if (window.location.hash !== "#game2") {
+  if (player && window.location.hash !== "#game2") {
     game2BackAudio.pause();
     game2FinalAudio.pause();
     waitingToStart = true;
@@ -361,7 +364,6 @@ export function game2() {
     settings.lang === "en" ? "Start Game" : "Начать Игру"
   }</span></div>`;
   main.appendChild(divWrapper);
-
   const startBtn = document.querySelector(
     ".game2-wrapper_button"
   ) as HTMLElement;
@@ -379,5 +381,18 @@ export function fixGame2() {
   });
 }
 
-window.addEventListener("keyup", reset, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
+export function translateGame2(lang: string) {
+  const description = document.querySelector(
+    ".game2-wrapper_info"
+  ) as HTMLElement;
+  const startBtn = document.querySelector(
+    ".game2-wrapper_button"
+  ) as HTMLElement;
+
+  if (startBtn && description) {
+    startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
+    description.innerHTML = `${
+      lang === "en" ? gamesData.en[1].description : gamesData.ru[1].description
+    }`;
+  }
+}

@@ -91,35 +91,23 @@ export default class Player {
   }
 
   keydown = (event: KeyboardEvent) => {
-    const container = document.querySelector(
-      ".game2-main__game"
-    ) as HTMLElement;
-    if (event.code === "Space" && container) {
+    if (event.code === "Space") {
       this.jumpPressed = true;
     }
   };
 
   keyup = (event: KeyboardEvent) => {
-    const container = document.querySelector(
-      ".game2-main__game"
-    ) as HTMLElement;
-    if (event.code === "Space" && container) {
+    if (event.code === "Space") {
       this.jumpPressed = false;
     }
   };
 
   touchstart = () => {
-    const container = document.querySelector(
-      ".game2-main__game"
-    ) as HTMLElement;
-    if (container) this.jumpPressed = true;
+    this.jumpPressed = true;
   };
 
   touchend = () => {
-    const container = document.querySelector(
-      ".game2-main__game"
-    ) as HTMLElement;
-    if (container) this.jumpPressed = false;
+    this.jumpPressed = false;
   };
 
   update(gameSpeed: number, frameTimeDelta: number) {
