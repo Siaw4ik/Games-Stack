@@ -33,7 +33,7 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 600;
-  transition: all .3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
 
 .game4-wrapper_button:hover {
@@ -61,7 +61,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
 
 .game4-main__chips {
   position: relative;
@@ -133,14 +132,15 @@
   background-image: url("../../assets/game4images/Yoda.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: 95% 95%;
+  background-position-y: -5px;
 }
 
 .game4-dart {
   background-image: url("../../assets/game4images/Anakin.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: 95% 95%;
 }
 
 .game4-main__game-table {
@@ -219,7 +219,7 @@
 
 @media (max-width: 790px) {
   .game4-main__game-table {
-    width: 304px;
+    width: 308px;
   }
   .game4-main__game-cell {
     width: 100px;
@@ -256,5 +256,5 @@
     font-size: 18px;
     width: 50%;
     height: 50px;
-}
+  }
 }
