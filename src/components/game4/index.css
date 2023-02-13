@@ -49,15 +49,18 @@
 .game4-main__container {
   margin-top: 15px;
 }
-.game4-main__title {
+
+.game4-main-header {
   position: relative;
-  margin: 0px auto 15px;
-  text-align: center;
   color: white;
-  width: 450px;
-  z-index: 9999;
-  user-select: none;
+  width: 410px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
+
 
 .game4-main__chips {
   position: relative;
@@ -215,9 +218,10 @@
     width: 100px;
     height: 100px;
   }
-  .game4-main__title {
-    width: 320px;
-    font-size: 24px;
+
+  .game4-main-header {
+    color: white;
+    width: 310px;
   }
 
   .game4-main__chips {

@@ -6,6 +6,7 @@ import {
   returnLocalStorage,
   returnLocalStorageIsRegistred,
 } from "../module/localStorage";
+import { drawScoreFromBackEnd } from "../game4";
 
 function clearInputFalse(name: string) {
   const checkLoginImg = document.querySelector(
@@ -331,6 +332,7 @@ export function authorizeUser() {
           loginUserInput.style.color = "black";
           activeIconandBtn(loginUser);
           accountNameUser.innerHTML = loginUser;
+          drawScoreFromBackEnd();
           setTimeout(() => {
             signupWindow.classList.remove("active");
             shadow.classList.remove("active");
@@ -359,6 +361,7 @@ export function authorizeUser() {
         passwordLogInInput.value = "";
         activeIconandBtn(loginUser);
         accountNameUser.innerHTML = loginUser;
+        drawScoreFromBackEnd();
         setTimeout(() => {
           loginWindow.classList.remove("active");
           shadow.classList.remove("active");

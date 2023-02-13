@@ -3,7 +3,14 @@ import { gamesData } from "../gamesInfo/gamesData";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
 import cardAudio from "../../assets/sounds/game5-one-card.mp3";
-import { returnLocalStorage } from "../module/localStorage";
+import {
+  returnLocalStorage,
+  returnLocalStorageIsRegistred,
+  returnLocalStorageUnknown,
+} from "../module/localStorage";
+import { StatisticGames } from "../module/Games";
+import { ScoreGamesUserSort } from "../module/types";
+import { sendScore } from "../results/sendScore";
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
@@ -38,6 +45,8 @@ const winCombinatios = [
   [6, 4, 2],
 ];
 const settings = returnLocalStorage();
+let scoreUser: number;
+// let scoreUnknown: number;
 
 function declareWinner(who: string) {
   const endBlock = document.getElementById("game4-end") as HTMLElement;
@@ -371,12 +380,44 @@ function bestSpot() {
 function turnClick(e: Event): void {
   function gameOver(gameWon: { index: number; player: string }) {
     const settingsStart = returnLocalStorage();
+    const scoreHTML = document.querySelector(
+      ".game4-main-score-number"
+    ) as HTMLElement;
     const cells: HTMLElement[] = Array.from(
       document.querySelectorAll(".game4-main__game-cell")
     );
     for (let i = 0; i < cells.length; i += 1) {
       cells[i].removeEventListener("click", turnClick, false);
     }
+    const userTrue = returnLocalStorageIsRegistred();
+    if (gameWon.player === humanPlay) {
+      if (userTrue.isRegistred === "true") {
+        scoreUser += 3;
+        scoreHTML.innerHTML = `${scoreUser}`;
+        sendScore("Jedi's Strategy", scoreUser);
+      } else if (userTrue.isRegistred === "false") {
+        scoreHTML.innerHTML = `${Number(scoreHTML.innerHTML) + 3}`;
+        sendScore("Jedi's Strategy", Number(scoreHTML.innerHTML));
+        localStorage.setItem(
+          "unknownStrategy",
+          JSON.stringify(Number(scoreHTML.innerHTML))
+        );
+      }
+    } else if (gameWon.player !== humanPlay) {
+      if (userTrue.isRegistred === "true") {
+        scoreUser -= 3;
+        scoreHTML.innerHTML = `${scoreUser}`;
+        sendScore("Jedi's Strategy", scoreUser);
+      } else if (userTrue.isRegistred === "false") {
+        scoreHTML.innerHTML = `${Number(scoreHTML.innerHTML) - 3}`;
+        sendScore("Jedi's Strategy", Number(scoreHTML.innerHTML));
+        localStorage.setItem(
+          "unknownStrategy",
+          JSON.stringify(Number(scoreHTML.innerHTML))
+        );
+      }
+    }
+
     declareWinner(
       gameWon.player === humanPlay
         ? `${settingsStart.lang === "en" ? "You win!" : "Вы победили!"}`
@@ -407,6 +448,10 @@ function turnClick(e: Event): void {
     }
   }
   function checkTie() {
+    const userTrue = returnLocalStorageIsRegistred();
+    const scoreHTML = document.querySelector(
+      ".game4-main-score-number"
+    ) as HTMLElement;
     const gameWon = checkWin(origBoard, humanPlay);
     if (emptySquares().length === 0 && !gameWon) {
       const settingsStart = returnLocalStorage();
@@ -420,6 +465,19 @@ function turnClick(e: Event): void {
       game4BackAudio.pause();
       game4FinalAudio.play();
       game4FinalAudio.currentTime = 0;
+
+      if (userTrue.isRegistred === "true") {
+        scoreUser += 1;
+        scoreHTML.innerHTML = `${scoreUser}`;
+        sendScore("Jedi's Strategy", scoreUser);
+      } else if (userTrue.isRegistred === "false") {
+        scoreHTML.innerHTML = `${Number(scoreHTML.innerHTML) + 1}`;
+        sendScore("Jedi's Strategy", Number(scoreHTML.innerHTML));
+        localStorage.setItem(
+          "unknownStrategy",
+          JSON.stringify(Number(scoreHTML.innerHTML))
+        );
+      }
       return true;
     }
     return false;
@@ -462,8 +520,32 @@ export function startGame() {
   }
 }
 
+export function drawScoreFromBackEnd() {
+  const statisticGames = new StatisticGames();
+  const userTrue = returnLocalStorageIsRegistred();
+  const obj: ScoreGamesUserSort = {
+    username: userTrue.userName,
+    option: "ascScore",
+  };
+  statisticGames.getScoreGamesUser(obj).then((result) => {
+    const scoreHTML = document.querySelector(
+      ".game4-main-score-number"
+    ) as HTMLElement;
+    const propertyGame = Object.entries(result.scores).find(
+      (elem) => elem[0] === "Jedi's Strategy"
+    );
+    /* scoreUser = propertyGame !== undefined ? propertyGame[1] : 0; */
+    if (scoreHTML && window.location.hash === "#game4") {
+      scoreUser = propertyGame !== undefined ? propertyGame[1] : 0;
+      scoreHTML.innerHTML = `${scoreUser}`;
+    }
+  });
+}
+
 export function startGameTicTac() {
   const settingsStart = returnLocalStorage();
+  const userTrue = returnLocalStorageIsRegistred();
+  const unknownScore = returnLocalStorageUnknown();
   game4BackAudio.loop = true;
   game4BackAudio.play();
   game4BackAudio.currentTime = 0;
@@ -473,6 +555,9 @@ export function startGameTicTac() {
   } else if (settingsStart.volume === false) {
     changeGame4AudioVolume(false);
   }
+
+  if (userTrue.isRegistred === "true") drawScoreFromBackEnd();
+
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const body = document.createElement("div") as HTMLElement;
@@ -480,7 +565,19 @@ export function startGameTicTac() {
   body.innerHTML = `
   <div class="game4-main__container _game4-container">
     <div class="game4-main__settings">
-      <h2 class="game4-main__title">Jedi's Strategy</h2>
+      <div class="game4-main-header">
+        <h2 class="game4-main__title">Jedi's Strategy</h2>
+        <p class="game4-main-score">
+          <span class="game4-main-score-title">
+          ${settingsStart.lang === "en" ? "Score: " : "Счёт: "}
+          </span>
+          <span class="game4-main-score-number">${
+            userTrue.isRegistred === "true"
+              ? scoreUser
+              : `${unknownScore !== null ? unknownScore : "0"}`
+          }</span>
+        </p>
+      </div>
       <div class="game4-main__chips">
         <div id="game4-yoda-chip" class="game4-main__chip"></div>
         <div id="game4-dart-chip" class="game4-main__chip"></div>
@@ -521,6 +618,8 @@ export function startGameTicTac() {
 }
 
 export function game4() {
+  const userTrue = returnLocalStorageIsRegistred();
+  if (userTrue.isRegistred === "true") drawScoreFromBackEnd();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const divWrapper = document.createElement("div");
@@ -606,6 +705,9 @@ export function translateGame4(lang: string) {
     "#game4-retryBtn"
   ) as HTMLButtonElement;
   const endMessage = document.getElementById("game4-endMessage") as HTMLElement;
+  const scoreTitle = document.querySelector(
+    ".game4-main-score-title"
+  ) as HTMLElement;
 
   if (startBtn && description) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
@@ -616,6 +718,7 @@ export function translateGame4(lang: string) {
 
   if (retryBtn && endMessage) {
     retryBtn.innerHTML = `${lang === "en" ? "Start again" : "Начать заново"}`;
+    scoreTitle.innerHTML = `${lang === "en" ? "Score: " : "Счёт: "}`;
     if (endMessage.innerHTML === "You win!") {
       endMessage.innerHTML = `${lang === "en" ? "You win!" : "Вы победили!"}`;
     }
