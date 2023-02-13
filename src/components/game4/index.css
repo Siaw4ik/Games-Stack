@@ -19,6 +19,7 @@
 
 .game4-wrapper_info {
   font-size: 18px;
+  text-align: center;
 }
 
 .game4-wrapper_button {
@@ -205,6 +206,12 @@
 .transparent {
   transition: 1s;
   color: transparent;
+}
+
+@media (max-width: 800px) {
+  .game4-wrapper {
+    padding: 10px 10px;
+  }
 }
 
 @media (max-width: 790px) {

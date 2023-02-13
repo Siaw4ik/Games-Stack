@@ -2,7 +2,6 @@
   position: relative;
   margin: auto;
   max-width: 1400px;
-  font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: white;
@@ -19,6 +18,11 @@
 
 .game1-wrapper h2 {
   color: white;
+}
+
+.game1-wrapper_info {
+  font-size: 18px;
+  text-align: center;
 }
 
 .game1-wrapper_button {
@@ -46,7 +50,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-} 
+}
 
 .game1-button {
   width: 146px;
@@ -408,6 +412,10 @@
     margin-top: 10px;
     row-gap: 15px;
   }
+}
+
+.game1-wrapper {
+  padding: 10px 10px;
 }
 
 @media (max-width: 768px) {

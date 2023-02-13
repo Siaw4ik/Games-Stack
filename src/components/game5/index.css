@@ -19,6 +19,7 @@
 
 .game5-wrapper_info {
   font-size: 18px;
+  text-align: center;
 }
 
 .game5-wrapper_button,
@@ -200,6 +201,9 @@
     padding: 5px 5px;
     font-size: 14px;
     width: 101px;
+  }
+  .game5-wrapper {
+    padding: 10px 10px;
   }
 }
 

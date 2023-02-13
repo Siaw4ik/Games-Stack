@@ -211,7 +211,7 @@ function showStartGameText() {
       `${
         settingsStart.lang === "en"
           ? "Press Space to Start"
-          : "Для начала нажмите на пробел"
+          : "Для начала игры нажмите на пробел"
       }`,
       x,
       y
