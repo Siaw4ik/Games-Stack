@@ -1,6 +1,6 @@
 import Player from "./jedi";
 
-export default class Cactus {
+export default class Enemy {
   ctx: CanvasRenderingContext2D;
 
   x: number;
