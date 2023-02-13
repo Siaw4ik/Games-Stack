@@ -11,6 +11,9 @@ import {
   METEORS_AND_BACKGROUND_SPEED,
   GAME_SPEED_START,
   GAME_SPEED_INCREMENT,
+  GAME3_BACKGROUND_AUDIO,
+  GAME3_FINAL_AUDIO,
+  GAME3_MOVE_SOUND,
 } from "../constants/constants";
 
 import Ship from "./Ship";
@@ -18,6 +21,12 @@ import Background from "./Background";
 import MeteorsController from "./MeteorsController";
 import Score from "./Score";
 import { sendScore } from "../../results/sendScore";
+import { gamesData } from "../../gamesInfo/gamesData";
+import { returnLocalStorage } from "../../module/localStorage";
+
+GAME3_MOVE_SOUND.volume = 0.5;
+GAME3_BACKGROUND_AUDIO.volume = 0.7;
+GAME3_FINAL_AUDIO.volume = 0.7;
 
 let falcon: Ship;
 let background: Background;
@@ -30,6 +39,18 @@ let gameSpeed = GAME_SPEED_START;
 let gameOver = false;
 let hasAddedEventListenersForRestart = false;
 let waitingToStart = true;
+
+export function changeGame3AudioVolume(mode: boolean) {
+  if (mode === true) {
+    GAME3_BACKGROUND_AUDIO.volume = 0.7;
+    GAME3_FINAL_AUDIO.volume = 0.7;
+    GAME3_MOVE_SOUND.volume = 0.5;
+  } else if (mode === false) {
+    GAME3_BACKGROUND_AUDIO.volume = 0;
+    GAME3_FINAL_AUDIO.volume = 0;
+    GAME3_MOVE_SOUND.volume = 0;
+  }
+}
 
 function createSprites() {
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
@@ -71,6 +92,7 @@ function createSprites() {
 }
 
 function showGameOver() {
+  const settings = returnLocalStorage();
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -79,11 +101,20 @@ function showGameOver() {
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3.5;
     const y = canvas.height / 7;
-    ctx.fillText("Game Over! Press Any Key to Start Again", x, y);
+    ctx.fillText(
+      `${
+        settings.lang === "en"
+          ? "Game Over! Press Any Key to Start Again"
+          : "Конец игры! Нажмите оюбую клавишу, чтобы начать заново"
+      }`,
+      x,
+      y
+    );
   }
 }
 
 export function reset() {
+  const settings = returnLocalStorage();
   const mainChild = (document.querySelector(".main") as HTMLElement)
     .childNodes[0] as HTMLElement;
   if (mainChild) {
@@ -95,6 +126,15 @@ export function reset() {
       meteorsController.reset();
       score.reset();
       gameSpeed = GAME_SPEED_START;
+      GAME3_BACKGROUND_AUDIO.loop = true;
+      GAME3_BACKGROUND_AUDIO.play();
+      GAME3_BACKGROUND_AUDIO.currentTime = 0;
+      GAME3_FINAL_AUDIO.pause();
+      if (settings.volume === true) {
+        changeGame3AudioVolume(true);
+      } else if (settings.volume === false) {
+        changeGame3AudioVolume(false);
+      }
     }
   }
 }
@@ -123,6 +163,7 @@ function setupGameReset() {
 }
 
 function showStartGameText() {
+  const settings = returnLocalStorage();
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -131,7 +172,15 @@ function showStartGameText() {
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3;
     const y = canvas.height / 7;
-    ctx.fillText("Tap Screen or Press Any Key to Start", x, y);
+    ctx.fillText(
+      `${
+        settings.lang === "en"
+          ? "Press Any Key to Start"
+          : "Для начала игры нажмите на пробел"
+      }`,
+      x,
+      y
+    );
   }
 }
 
@@ -149,42 +198,51 @@ function clearScreen() {
 }
 
 function gameLoop(currentTime: number) {
-  if (previousTime === null) {
+  const container = document.querySelector(".game3-main_game") as HTMLElement;
+  if (container) {
+    if (previousTime === null) {
+      previousTime = currentTime;
+      requestAnimationFrame(gameLoop);
+      return;
+    }
+    const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
-    requestAnimationFrame(gameLoop);
-    return;
-  }
-  const frameTimeDelta = currentTime - previousTime;
-  previousTime = currentTime;
 
-  clearScreen();
-  if (!gameOver && !waitingToStart) {
-    background.update(gameSpeed, frameTimeDelta);
-    meteorsController.update(gameSpeed, frameTimeDelta);
-    falcon.update();
-    score.update(frameTimeDelta);
-    updateGameSpeed(frameTimeDelta);
-  }
+    clearScreen();
+    if (!gameOver && !waitingToStart) {
+      background.update(gameSpeed, frameTimeDelta);
+      meteorsController.update(gameSpeed, frameTimeDelta);
+      falcon.update();
+      score.update(frameTimeDelta);
+      updateGameSpeed(frameTimeDelta);
+    }
 
-  if (!gameOver && meteorsController.collideWith(falcon)) {
-    gameOver = true;
-    sendScore("Jedi's Mobility", Math.trunc(score.score));
-    setupGameReset();
-  }
-  background.draw();
-  meteorsController.drawMeteors();
-  falcon.draw();
-  score.draw();
+    if (!gameOver && meteorsController.collideWith(falcon)) {
+      gameOver = true;
+      GAME3_BACKGROUND_AUDIO.pause();
+      GAME3_FINAL_AUDIO.play();
+      GAME3_FINAL_AUDIO.currentTime = 0;
+      sendScore("Jedi's Mobility", Math.trunc(score.score));
+      setupGameReset();
+    }
+    background.draw();
+    meteorsController.drawMeteors();
+    falcon.draw();
+    score.draw();
 
-  if (gameOver) {
-    showGameOver();
-  }
+    if (gameOver) {
+      showGameOver();
+    }
 
-  if (waitingToStart) {
-    showStartGameText();
-  }
+    if (waitingToStart) {
+      showStartGameText();
+    }
 
-  requestAnimationFrame(gameLoop);
+    const requestId = requestAnimationFrame(gameLoop);
+    if (window.location.hash !== "#game3") {
+      cancelAnimationFrame(requestId);
+    }
+  }
 }
 
 export function startGame3() {
@@ -228,7 +286,40 @@ export function startGame3() {
     window.addEventListener("resize", setScreen);
   }
   requestAnimationFrame(gameLoop);
+
+  const container = document.querySelector(".game3-main_game") as HTMLElement;
+  if (container) {
+    window.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
+  }
 }
 
-window.addEventListener("keyup", reset, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
+window.addEventListener("hashchange", () => {
+  if (window.location.hash === "#game3") {
+    requestAnimationFrame(gameLoop);
+  }
+
+  if (falcon && window.location.hash !== "#game3") {
+    GAME3_BACKGROUND_AUDIO.pause();
+    GAME3_FINAL_AUDIO.pause();
+    waitingToStart = true;
+    gameOver = false;
+    window.removeEventListener("keydown", falcon.onKeyDown);
+  }
+});
+
+export function translateGame3(lang: string) {
+  const description = document.querySelector(
+    ".game3-wrapper_info"
+  ) as HTMLElement;
+  const startBtn = document.querySelector(
+    ".game3-wrapper_button"
+  ) as HTMLElement;
+
+  if (startBtn && description) {
+    startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
+    description.innerHTML = `${
+      lang === "en" ? gamesData.en[2].description : gamesData.ru[2].description
+    }`;
+  }
+}
