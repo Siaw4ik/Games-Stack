@@ -1,15 +1,24 @@
 import "./index.css";
 import { startGame3 } from "./module/start";
+import { gamesData } from "../gamesInfo/gamesData";
+import { returnLocalStorage } from "../module/localStorage";
 
 export function game3() {
   const main = document.querySelector(".main") as HTMLElement;
+  const settings = returnLocalStorage();
   main.innerHTML = "";
   const div = document.createElement("div");
   div.classList.add("game3-wrapper");
   div.innerHTML = `
   <h2>Jedi's Mobility</h2>
-  <p class="game3-wrapper_info">Some useful information about this awesome game presented for you by FireTeam</p>
-  <div class="game3-wrapper_button"><span>Start Game</span></div>`;
+  <p class="game3-wrapper_info">${
+    settings.lang === "en"
+      ? gamesData.en[2].description
+      : gamesData.ru[2].description
+  }</p>
+  <div class="game3-wrapper_button"><span>${
+    settings.lang === "en" ? "Start Game" : "Начать Игру"
+  }</span></div>`;
   main.appendChild(div);
 
   const startBtn = document.querySelector(

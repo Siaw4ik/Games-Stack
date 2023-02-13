@@ -19,6 +19,7 @@
 
 .game4-wrapper_info {
   font-size: 18px;
+  text-align: center;
 }
 
 .game4-wrapper_button {
@@ -174,13 +175,13 @@
 
 .game4-endgame__message {
   padding-top: 100px;
-  font-size: 36px;
+  font-size: 30px;
   color: white;
   text-align: center;
 }
 
 .game4-endgame__button {
-  font-size: 30px;
+  font-size: 22px;
   border-radius: 5px;
   display: block;
   margin: 40px auto 0px auto;
@@ -208,6 +209,12 @@
 .transparent {
   transition: 1s;
   color: transparent;
+}
+
+@media (max-width: 800px) {
+  .game4-wrapper {
+    padding: 10px 10px;
+  }
 }
 
 @media (max-width: 790px) {
@@ -240,13 +247,13 @@
 
   .game4-endgame__message {
     padding-top: 60px;
-    font-size: 30px;
+    font-size: 24px;
     color: white;
     text-align: center;
   }
 
   .game4-endgame__button {
-    font-size: 24px;
+    font-size: 18px;
     width: 50%;
     height: 50px;
 }

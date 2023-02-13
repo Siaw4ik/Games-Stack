@@ -47,8 +47,6 @@ const arrImage = [
   { name: "weid3", src: weid3 },
 ];
 
-const settings = returnLocalStorage();
-
 const game5BackAudio = new Audio(backAudio);
 const game5FinalAudio = new Audio(winAudio);
 const game5OneCard = new Audio(cardAudio);
@@ -254,6 +252,7 @@ function startGameMemory() {
 }
 
 export function game5() {
+  const settings = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const divWrapper = document.createElement("div");

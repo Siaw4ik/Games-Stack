@@ -5,6 +5,7 @@ import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 import { translateHeaderTable } from "../results";
 import { changeGame5AudioVolume, translateGame5 } from "../game5";
 import { changeGame4AudioVolume, translateGame4 } from "../game4";
+import { changeGame3AudioVolume, translateGame3 } from "../game3/module/start";
 import { changeGame2AudioVolume, translateGame2 } from "../game2";
 import { changeGame1AudioVolume, translateGame1 } from "../game1";
 
@@ -28,6 +29,7 @@ export function toggleVolume() {
       changeGame4AudioVolume(false);
       changeGame1AudioVolume(false);
       changeGame2AudioVolume(false);
+      changeGame3AudioVolume(false);
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
@@ -37,6 +39,7 @@ export function toggleVolume() {
       changeGame4AudioVolume(true);
       changeGame1AudioVolume(true);
       changeGame2AudioVolume(true);
+      changeGame3AudioVolume(true);
     }
   }
 
@@ -62,11 +65,11 @@ export function toggleLight() {
     ".conteiner_header-main"
   ) as HTMLElement;
   const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
-  const gamesInfoContainer = document.querySelector(
-    ".games_info_container"
-  ) as HTMLElement;
 
   function changeClassDark() {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
     btnLight.classList.toggle("light");
     header.classList.toggle("dark");
     footer.classList.toggle("dark");
@@ -169,6 +172,7 @@ export function toggleLang() {
     translateGame4(settings.lang);
     translateGame1(settings.lang);
     translateGame2(settings.lang);
+    translateGame3(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 
@@ -201,6 +205,7 @@ export function toggleLang() {
     translateGame4(settings.lang);
     translateGame1(settings.lang);
     translateGame2(settings.lang);
+    translateGame3(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
   });
 }

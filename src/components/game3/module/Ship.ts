@@ -23,9 +23,7 @@ export default class Ship {
 
   image: HTMLImageElement;
 
-  xPos = 0;
-
-  yPos = 0;
+  xPos: number;
 
   constructor(
     context: CanvasRenderingContext2D,
@@ -42,6 +40,7 @@ export default class Ship {
     this.maxMove = maxMove;
     this.minMove = minMove;
     this.scaleRatio = scaleRatio;
+    this.xPos = (this.canvas.width * scaleRatio) / 2;
     this.x = this.canvas.width * scaleRatio;
     this.y = this.canvas.height - this.height - 20 * scaleRatio;
 

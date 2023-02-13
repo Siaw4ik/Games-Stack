@@ -49,7 +49,6 @@ const winCombinatios = [
   [0, 4, 8],
   [6, 4, 2],
 ];
-const settings = returnLocalStorage();
 let scoreUser: number;
 // let scoreUnknown: number;
 
@@ -634,6 +633,7 @@ export function startGameTicTac() {
 export function game4() {
   const userTrue = returnLocalStorageIsRegistred();
   if (userTrue.isRegistred === "true") drawScoreFromBackEnd();
+  const settings = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const divWrapper = document.createElement("div");
