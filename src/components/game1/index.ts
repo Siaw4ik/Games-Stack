@@ -7,6 +7,41 @@ import "./index.css";
 import { sendScore } from "../results/sendScore";
 import { returnLocalStorage } from "../module/localStorage";
 import { gamesData } from "../gamesInfo/gamesData";
+import correctAudio from "../../assets/sounds/correctAnswer.mp3";
+import incorrectAudio from "../../assets/sounds/incorrectAnswer.mp3";
+import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
+import failAudio from "../../assets/sounds/failAudio-starwars.mp3";
+import successAudio from "../../assets/sounds/final-game5-starwars.mp3";
+
+const settingsLoadPage = returnLocalStorage();
+
+const game1BackAudio = new Audio(backAudio);
+const game1FinalFailAudio = new Audio(failAudio);
+const game1FinalSuccessAudio = new Audio(successAudio);
+const game1CorrectAudio = new Audio(correctAudio);
+const game1InCorrectAudio = new Audio(incorrectAudio);
+
+export function changeGame1AudioVolume(mode: boolean) {
+  if (mode === true) {
+    game1CorrectAudio.volume = 0.4;
+    game1InCorrectAudio.volume = 0.4;
+    game1BackAudio.volume = 0.6;
+    game1FinalFailAudio.volume = 0.5;
+    game1FinalSuccessAudio.volume = 0.5;
+  } else if (mode === false) {
+    game1CorrectAudio.volume = 0;
+    game1InCorrectAudio.volume = 0;
+    game1BackAudio.volume = 0;
+    game1FinalFailAudio.volume = 0;
+    game1FinalSuccessAudio.volume = 0;
+  }
+}
+
+if (settingsLoadPage.volume === true) {
+  changeGame1AudioVolume(true);
+} else if (settingsLoadPage.volume === false) {
+  changeGame1AudioVolume(false);
+}
 
 questions.sort(
   (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
@@ -28,6 +63,17 @@ function viewFinishMessage() {
   const messageText = document.getElementById(
     "game1-message-text"
   ) as HTMLElement;
+
+  if (answersCount > 3) {
+    game1BackAudio.pause();
+    game1FinalSuccessAudio.play();
+    game1FinalSuccessAudio.currentTime = 0;
+  } else if (answersCount < 3) {
+    game1BackAudio.pause();
+    game1FinalFailAudio.play();
+    game1FinalFailAudio.currentTime = 0;
+  }
+
   messageText.innerText = `${
     settings.lang === "en"
       ? `You are completed with ${answersCount} correct answers.\nTo try again press Start again`
@@ -81,81 +127,85 @@ function startTimer() {
   }
 }
 
-function clickAnswer(event: Event) {
-  const answersAll = Array.from(
-    document.querySelectorAll(".game1-main__answer")
-  );
-  const question = document.getElementById("game1-question") as HTMLElement;
-  const correctAnswers = document.querySelector(
-    ".game1-main__answers-count-number"
+function clickAnswer() {
+  const game1AnswerBlock = document.querySelector(
+    ".game1-main__answers-block"
   ) as HTMLElement;
-  const nextBtn = document.getElementById("game1-nextBtn") as HTMLButtonElement;
-  const questionAtNow: Question = questionsForGame.filter(
-    (el) => el.question === question.innerHTML
-  )[0];
-  const { correct } = questionAtNow;
-  const answer = event.target as HTMLElement;
-  if (answer.className === "game1-main__answer") {
-    questionsAnsweredCount += 1;
-    if (
-      answer.innerHTML === correct &&
-      answersAll.filter((el) => el.classList.contains("game1-correct"))
-        .length === 0 &&
-      answersAll.filter((el) => el.classList.contains("game1-incorrect"))
-        .length === 0 &&
-      questionsAnsweredCount !== questionsForGame.length
-    ) {
-      answersCount += 1;
-      correctAnswers.innerHTML = String(answersCount);
-      question.innerHTML = questionsForGame[questionsAnsweredCount].question;
-      answersAll.forEach((element, i) => {
-        element.innerHTML = questionsForGame[questionsAnsweredCount].answers[i];
-      });
-    } else if (
-      answer.innerHTML !== correct &&
-      questionsAnsweredCount !== questionsForGame.length
-    ) {
+  game1AnswerBlock.addEventListener("click", (event) => {
+    const answersAll = Array.from(
+      document.querySelectorAll(".game1-main__answer")
+    );
+    const question = document.getElementById("game1-question") as HTMLElement;
+    const correctAnswers = document.querySelector(
+      ".game1-main__answers-count-number"
+    ) as HTMLElement;
+    const nextBtn = document.getElementById(
+      "game1-nextBtn"
+    ) as HTMLButtonElement;
+    const questionAtNow: Question = questionsForGame.filter(
+      (el) => el.question === question.innerHTML
+    )[0];
+    const { correct } = questionAtNow;
+    const answer = event.target as HTMLElement;
+    function checkAnswerAllArray() {
       answersAll
         .filter((el) => el.innerHTML !== correct)
         .forEach((el) => el.classList.add("game1-incorrect"));
       answersAll
         .filter((el) => el.innerHTML === correct)[0]
         .classList.add("game1-correct");
-      nextBtn.disabled = false;
     }
-    if (
-      answer.innerHTML === correct &&
-      answersAll.filter((el) => el.classList.contains("game1-correct"))
-        .length === 0 &&
-      answersAll.filter((el) => el.classList.contains("game1-incorrect"))
-        .length === 0 &&
-      questionsAnsweredCount === questionsForGame.length
-    ) {
-      answersCount += 1;
-      answersAll
-        .filter((el) => el.innerHTML !== correct)
-        .forEach((el) => el.classList.add("game1-incorrect"));
-      answersAll
-        .filter((el) => el.innerHTML === correct)[0]
-        .classList.add("game1-correct");
-      clearInterval(timer);
-      correctAnswers.innerHTML = String(answersCount);
-      viewFinishMessage();
-    } else if (
-      answer.innerHTML !== correct &&
-      questionsAnsweredCount === questionsForGame.length
-    ) {
-      answersAll
-        .filter((el) => el.innerHTML !== correct)
-        .forEach((el) => el.classList.add("game1-incorrect"));
-      answersAll
-        .filter((el) => el.innerHTML === correct)[0]
-        .classList.add("game1-correct");
-      nextBtn.disabled = true;
-      clearInterval(timer);
-      viewFinishMessage();
+    if (answer.className === "game1-main__answer") {
+      console.log("click");
+      questionsAnsweredCount += 1;
+      if (
+        answer.innerHTML === correct &&
+        answersAll.filter((el) => el.classList.contains("game1-correct"))
+          .length === 0 &&
+        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+          .length === 0 &&
+        questionsAnsweredCount !== questionsForGame.length
+      ) {
+        answersCount += 1;
+        correctAnswers.innerHTML = String(answersCount);
+        question.innerHTML = questionsForGame[questionsAnsweredCount].question;
+        answersAll.forEach((element, i) => {
+          element.innerHTML =
+            questionsForGame[questionsAnsweredCount].answers[i];
+        });
+        game1CorrectAudio.play();
+      } else if (
+        answer.innerHTML !== correct &&
+        questionsAnsweredCount !== questionsForGame.length
+      ) {
+        checkAnswerAllArray();
+        nextBtn.disabled = false;
+        game1InCorrectAudio.play();
+      }
+      if (
+        answer.innerHTML === correct &&
+        answersAll.filter((el) => el.classList.contains("game1-correct"))
+          .length === 0 &&
+        answersAll.filter((el) => el.classList.contains("game1-incorrect"))
+          .length === 0 &&
+        questionsAnsweredCount === questionsForGame.length
+      ) {
+        answersCount += 1;
+        checkAnswerAllArray();
+        clearInterval(timer);
+        correctAnswers.innerHTML = String(answersCount);
+        viewFinishMessage();
+      } else if (
+        answer.innerHTML !== correct &&
+        questionsAnsweredCount === questionsForGame.length
+      ) {
+        checkAnswerAllArray();
+        nextBtn.disabled = true;
+        clearInterval(timer);
+        viewFinishMessage();
+      }
     }
-  }
+  });
 }
 
 export const clickNext = (): void => {
@@ -202,6 +252,10 @@ export const startAgain = (): void => {
       ".game1-main__answers-count-number"
     ) as HTMLElement;
     if ((<HTMLButtonElement>e.target).id === "game1-resetBtn") {
+      game1BackAudio.play();
+      game1BackAudio.currentTime = 0;
+      game1FinalFailAudio.pause();
+      game1FinalSuccessAudio.pause();
       questions.sort(
         (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
       );
@@ -237,12 +291,13 @@ export const startGame = () => {
       "game1-resetBtn"
     ) as HTMLButtonElement;
     const mainGame = document.getElementById("game1-main-game") as HTMLElement;
-    const startMessage = document.getElementById(
-      "game1-start-message"
-    ) as HTMLDivElement;
     const question = document.getElementById("game1-question") as HTMLElement;
     const answersBlocks = document.querySelectorAll(".game1-main__answer");
     if ((<HTMLButtonElement>e.target).id === "game1-startBtn") {
+      game1BackAudio.loop = true;
+      game1BackAudio.play();
+      game1BackAudio.currentTime = 0;
+
       questions.sort(
         (a, b) => a.id - a.id + Math.random() - (b.id - b.id + Math.random())
       );
@@ -258,17 +313,7 @@ export const startGame = () => {
       startBtn.disabled = true;
       resetBtn.disabled = false;
       mainGame.style.display = "block";
-      startMessage.style.display = "none";
       timer = setInterval(startTimer, 1000);
-
-      const game1Container = document.querySelector(
-        ".game1-main__answers-block"
-      ) as HTMLElement;
-      game1Container.addEventListener("click", (event) => {
-        clickAnswer(event);
-      });
-      clickNext();
-      startAgain();
     }
   });
 };
@@ -281,14 +326,14 @@ function startGameMind() {
   clearInterval(timer);
   seconds = 60;
   wrapper.innerHTML = `<div class="game1-main__container _game1-container">
-  <h1 class="game1-main__title">Jedi's Mind</h1>
+  <h2 class="game1-main__title">Jedi's Mind</h2>
   <div class="game1-main__settings">
     <div class="game1-main__timer game1-timer">
       <div class="game1-timer__text">${
-        settings.lang === "en" ? "Time: " : "Время: "
+        settings.lang === "en" ? "Time:  " : "Время:  "
       }</div>
       <div id="game1-minute" class="game1-timer__minutes"></div>
-      <div id="game1-second" class="game1-timer__seconds">60</div>
+      <div id="game1-second" class="game1-timer__seconds"> 60</div>
     </div>
     <div class="game1-main__buttons">
       <button id="game1-startBtn" class="game1-main__start-button game1-button">${
@@ -299,14 +344,9 @@ function startGameMind() {
       </button>
     </div>
     <div id="game1-answers-count" class="game1-main__answers-count"><span class="game1-main__answers-count-title">${
-      settings.lang === "en" ? "Correct answers: " : "Правильные ответы:"
+      settings.lang === "en" ? "Correct answers: " : "Правильные ответы: "
     }</span><span class="game1-main__answers-count-number"> 0</span></div>
   </div>
-  <h2 id="game1-start-message" class="game1-main__start-message">${
-    settings.lang === "en"
-      ? 'To play the game press "Start"'
-      : 'Чтобы начать игру, нажмите "Начать"'
-  }</h2>
   <div id="game1-main-game" class="game1-main__body">
     <div id="game1-question" class="game1-main__question"></div>
     <div class="game1-main__answers-block">
@@ -326,7 +366,18 @@ function startGameMind() {
   </div>
 </div>`;
 
+  window.addEventListener("hashchange", () => {
+    if (window.location.href !== "#game5") {
+      game1BackAudio.pause();
+      game1FinalFailAudio.pause();
+      game1FinalSuccessAudio.pause();
+    }
+  });
+
   startGame();
+  clickAnswer();
+  clickNext();
+  startAgain();
 }
 
 export function game1() {
@@ -374,9 +425,6 @@ export function translateGame1(lang: string) {
   const againBtnCont = document.querySelector(
     ".game1-main__buttons #game1-resetBtn"
   ) as HTMLElement;
-  const startMessege = document.querySelector(
-    ".game1-main__start-message"
-  ) as HTMLElement;
   const nextBtn = document.querySelector(
     ".game1-main__next-button.game1-button"
   ) as HTMLElement;
@@ -398,7 +446,6 @@ export function translateGame1(lang: string) {
     game1Timer &&
     startBtnCont &&
     againBtnCont &&
-    startMessege &&
     nextBtn &&
     messageText &&
     titleCorrectAnswer
@@ -407,11 +454,6 @@ export function translateGame1(lang: string) {
     startBtnCont.innerHTML = `${lang === "en" ? "Start" : "Начать"}`;
     againBtnCont.innerHTML = `${
       lang === "en" ? "Start again" : "Начать заново"
-    }`;
-    startMessege.innerHTML = `${
-      lang === "en"
-        ? 'To play the game press "Start"'
-        : 'Чтобы начать игру, нажмите "Начать"'
     }`;
     nextBtn.innerHTML = `${lang === "en" ? "Next" : "Следующий"}`;
     messageText.innerText = `${
