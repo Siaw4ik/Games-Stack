@@ -24,3 +24,11 @@ export function returnLocalStorageIsRegistred() {
   }
   return result;
 }
+export function returnLocalStorageUnknown() {
+  const storage = localStorage.getItem("unknownStrategy");
+  let result = 0;
+  if (typeof storage === "string" && storage.length > 0) {
+    result = JSON.parse(storage);
+  }
+  return result;
+}

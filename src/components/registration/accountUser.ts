@@ -104,6 +104,13 @@ export function clickingIconUserandLogout() {
         buttonGAme1.checked = true;
       }
     }
+    const scoreHTML = document.querySelector(
+      ".game4-main-score-number"
+    ) as HTMLElement;
+    localStorage.setItem("unknownStrategy", JSON.stringify(0));
+    if (window.location.hash === "#game4" && scoreHTML) {
+      scoreHTML.innerHTML = "0";
+    }
   });
 
   accountStatistic.addEventListener("click", () => {
