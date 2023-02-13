@@ -8,12 +8,29 @@ import { changeGame4AudioVolume, translateGame4 } from "../game4";
 import { changeGame3AudioVolume, translateGame3 } from "../game3/module/start";
 import { changeGame2AudioVolume, translateGame2 } from "../game2";
 import { changeGame1AudioVolume, translateGame1 } from "../game1";
+import backAudio from "../../assets/sounds/MercuryAudio.mp3";
+import { returnLocalStorage } from "./localStorage";
+
+const backHomeAudio = new Audio(backAudio);
+backHomeAudio.loop = true;
 
 const settings: Settings = {
   lang: "en",
   style: "light",
   volume: false,
 };
+
+window.addEventListener("hashchange", () => {
+  const settingsChange = returnLocalStorage();
+  if (window.location.hash !== "#about") {
+    backHomeAudio.pause();
+  } else if (
+    window.location.hash === "#about" &&
+    settingsChange.volume === true
+  ) {
+    backHomeAudio.play();
+  }
+});
 
 export function toggleVolume() {
   const volume = document.querySelector(".volumeOn") as HTMLElement;
@@ -30,6 +47,9 @@ export function toggleVolume() {
       changeGame1AudioVolume(false);
       changeGame2AudioVolume(false);
       changeGame3AudioVolume(false);
+      if (window.location.hash === "#about") {
+        backHomeAudio.pause();
+      }
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
@@ -40,6 +60,9 @@ export function toggleVolume() {
       changeGame1AudioVolume(true);
       changeGame2AudioVolume(true);
       changeGame3AudioVolume(true);
+      if (window.location.hash === "#about") {
+        backHomeAudio.play();
+      }
     }
   }
 
