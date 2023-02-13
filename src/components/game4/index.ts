@@ -642,9 +642,7 @@ export function game4() {
   divWrapper.innerHTML = `
   <h2>Jedi's Strategy</h2>
   <p class="game4-wrapper_info">${
-    settings.lang === "en"
-      ? gamesData.en[3].description
-      : gamesData.ru[3].description
+    settings.lang === "en" ? gamesData.en[3].manual : gamesData.ru[3].manual
   }</p>
   <div class="game4-wrapper_button"><span>${
     settings.lang === "en" ? "Start Game" : "Начать Игру"
@@ -710,9 +708,7 @@ export function chipClick() {
 }
 
 export function translateGame4(lang: string) {
-  const description = document.querySelector(
-    ".game4-wrapper_info"
-  ) as HTMLElement;
+  const manual = document.querySelector(".game4-wrapper_info") as HTMLElement;
   const startBtn = document.querySelector(
     ".game4-wrapper_button"
   ) as HTMLElement;
@@ -724,10 +720,10 @@ export function translateGame4(lang: string) {
     ".game4-main-score-title"
   ) as HTMLElement;
 
-  if (startBtn && description) {
+  if (startBtn && manual) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
-    description.innerHTML = `${
-      lang === "en" ? gamesData.en[3].description : gamesData.ru[3].description
+    manual.innerHTML = `${
+      lang === "en" ? gamesData.en[3].manual : gamesData.ru[3].manual
     }`;
   }
 

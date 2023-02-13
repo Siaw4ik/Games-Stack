@@ -305,17 +305,15 @@ window.addEventListener("hashchange", () => {
 });
 
 export function translateGame3(lang: string) {
-  const description = document.querySelector(
-    ".game3-wrapper_info"
-  ) as HTMLElement;
+  const manual = document.querySelector(".game3-wrapper_info") as HTMLElement;
   const startBtn = document.querySelector(
     ".game3-wrapper_button"
   ) as HTMLElement;
 
-  if (startBtn && description) {
+  if (startBtn && manual) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
-    description.innerHTML = `${
-      lang === "en" ? gamesData.en[2].description : gamesData.ru[2].description
+    manual.innerHTML = `${
+      lang === "en" ? gamesData.en[2].manual : gamesData.ru[2].manual
     }`;
   }
 }
