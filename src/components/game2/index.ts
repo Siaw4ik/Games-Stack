@@ -351,8 +351,8 @@ export function game2() {
   <h2>Jedi's Agility</h2>
   <p class="game2-wrapper_info">${
     settingsStart.lang === "en"
-      ? gamesData.en[1].description
-      : gamesData.ru[1].description
+      ? gamesData.en[1].manual
+      : gamesData.ru[1].manual
   }</p>
   <div class="game2-wrapper_button"><span>${
     settingsStart.lang === "en" ? "Start Game" : "Начать Игру"
@@ -376,17 +376,15 @@ export function fixGame2() {
 }
 
 export function translateGame2(lang: string) {
-  const description = document.querySelector(
-    ".game2-wrapper_info"
-  ) as HTMLElement;
+  const manual = document.querySelector(".game2-wrapper_info") as HTMLElement;
   const startBtn = document.querySelector(
     ".game2-wrapper_button"
   ) as HTMLElement;
 
-  if (startBtn && description) {
+  if (startBtn && manual) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
-    description.innerHTML = `${
-      lang === "en" ? gamesData.en[1].description : gamesData.ru[1].description
+    manual.innerHTML = `${
+      lang === "en" ? gamesData.en[1].manual : gamesData.ru[1].manual
     }`;
   }
 }

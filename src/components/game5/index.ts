@@ -261,9 +261,7 @@ export function game5() {
   divWrapper.innerHTML = `
   <h2>Jedi's Memory</h2>
   <p class="game5-wrapper_info">${
-    settings.lang === "en"
-      ? gamesData.en[4].description
-      : gamesData.ru[4].description
+    settings.lang === "en" ? gamesData.en[4].manual : gamesData.ru[4].manual
   }</p>
   <div class="game5-wrapper_button"><span>${
     settings.lang === "en" ? "Start Game" : "Начать Игру"
@@ -281,9 +279,7 @@ export function game5() {
 }
 
 export function translateGame5(lang: string) {
-  const description = document.querySelector(
-    ".game5-wrapper_info"
-  ) as HTMLElement;
+  const manual = document.querySelector(".game5-wrapper_info") as HTMLElement;
   const startBtn = document.querySelector(
     ".game5-wrapper_button"
   ) as HTMLElement;
@@ -304,10 +300,10 @@ export function translateGame5(lang: string) {
     ".game5-container_shadow p .game5-win-span"
   ) as HTMLElement;
 
-  if (startBtn && description) {
+  if (startBtn && manual) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
-    description.innerHTML = `${
-      lang === "en" ? gamesData.en[4].description : gamesData.ru[4].description
+    manual.innerHTML = `${
+      lang === "en" ? gamesData.en[4].manual : gamesData.ru[4].manual
     }`;
   }
 

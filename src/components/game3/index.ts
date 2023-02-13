@@ -12,9 +12,7 @@ export function game3() {
   div.innerHTML = `
   <h2>Jedi's Mobility</h2>
   <p class="game3-wrapper_info">${
-    settings.lang === "en"
-      ? gamesData.en[2].description
-      : gamesData.ru[2].description
+    settings.lang === "en" ? gamesData.en[2].manual : gamesData.ru[2].manual
   }</p>
   <div class="game3-wrapper_button"><span>${
     settings.lang === "en" ? "Start Game" : "Начать Игру"

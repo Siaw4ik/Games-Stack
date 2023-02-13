@@ -389,9 +389,7 @@ export function game1() {
   divWrapper.innerHTML = `
   <h2>Jedi's Mind</h2>
   <p class="game1-wrapper_info">${
-    settings.lang === "en"
-      ? gamesData.en[0].description
-      : gamesData.ru[0].description
+    settings.lang === "en" ? gamesData.en[0].manual : gamesData.ru[0].manual
   }</p>
   <div class="game1-wrapper_button"><span>${
     settings.lang === "en" ? "Start Game" : "Начать Игру"
@@ -409,9 +407,7 @@ export function game1() {
 }
 
 export function translateGame1(lang: string) {
-  const description = document.querySelector(
-    ".game1-wrapper_info"
-  ) as HTMLElement;
+  const manual = document.querySelector(".game1-wrapper_info") as HTMLElement;
   const startBtn = document.querySelector(
     ".game1-wrapper_button"
   ) as HTMLElement;
@@ -435,10 +431,10 @@ export function translateGame1(lang: string) {
     ".game1-main__answers-count-title"
   ) as HTMLElement;
 
-  if (startBtn && description) {
+  if (startBtn && manual) {
     startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
-    description.innerHTML = `${
-      lang === "en" ? gamesData.en[0].description : gamesData.ru[0].description
+    manual.innerHTML = `${
+      lang === "en" ? gamesData.en[0].manual : gamesData.ru[0].manual
     }`;
   }
 
