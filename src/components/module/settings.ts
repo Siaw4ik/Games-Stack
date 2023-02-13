@@ -65,11 +65,11 @@ export function toggleLight() {
     ".conteiner_header-main"
   ) as HTMLElement;
   const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
-  const gamesInfoContainer = document.querySelector(
-    ".games_info_container"
-  ) as HTMLElement;
 
   function changeClassDark() {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
     btnLight.classList.toggle("light");
     header.classList.toggle("dark");
     footer.classList.toggle("dark");

@@ -296,7 +296,13 @@ function drawStyleLightOrDark() {
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
   ) as HTMLElement;
+  const gamesInfoContainer = document.querySelector(
+    ".games_info_container"
+  ) as HTMLElement;
   if (settings.style === "dark") {
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.add("dark");
+    }
     header.classList.add("dark");
     footer.classList.add("dark");
     main.classList.add("dark");
@@ -306,6 +312,9 @@ function drawStyleLightOrDark() {
     btnLight.setAttribute("src", dark);
     btnLight.classList.remove("light");
   } else if (settings.style === "light") {
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("dark");
+    }
     header.classList.remove("dark");
     footer.classList.remove("dark");
     main.classList.remove("dark");

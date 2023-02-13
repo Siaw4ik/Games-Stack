@@ -1,6 +1,5 @@
 import { gamesData } from "./gamesData";
 import { returnLocalStorage } from "../module/localStorage";
-/* import arrowUP from "../../assets/arrow-svg.svg"; */
 import "./index.css";
 
 function drawArrow(name: string) {
