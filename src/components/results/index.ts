@@ -307,10 +307,12 @@ export function result() {
     }`;
     drawRawWait(settings.lang);
     statistic.getScoreGamesUser(userOption).then((data) => {
-      if (Object.entries(data.scores).length > 0) {
-        drawtbody(data);
-      } else if (Object.entries(data.scores).length === 0) {
-        drawRawEmpty("user", settings.lang);
+      if (window.location.hash === "#result") {
+        if (Object.entries(data.scores).length > 0) {
+          drawtbody(data);
+        } else if (Object.entries(data.scores).length === 0) {
+          drawRawEmpty("user", settings.lang);
+        }
       }
     });
   } else if (
@@ -324,13 +326,15 @@ export function result() {
     };
     drawRawWait(settings.lang);
     statistic.getScoreTop10(objgame1).then((data) => {
-      (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
-        settings.lang === "en" ? "Players" : "Игроки"
-      }`;
-      if (Object.entries(data.scores).length > 0) {
-        drawtbody(data);
-      } else if (Object.entries(data.scores).length === 0) {
-        drawRawEmpty("game", settings.lang, "Jedi's Mind");
+      if (window.location.hash === "#result") {
+        (document.querySelector(".table-name") as HTMLElement).innerHTML = `${
+          settings.lang === "en" ? "Players" : "Игроки"
+        }`;
+        if (Object.entries(data.scores).length > 0) {
+          drawtbody(data);
+        } else if (Object.entries(data.scores).length === 0) {
+          drawRawEmpty("game", settings.lang, "Jedi's Mind");
+        }
       }
     });
     const buttonGAme1 = document.querySelector(
