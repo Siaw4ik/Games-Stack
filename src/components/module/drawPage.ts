@@ -111,10 +111,10 @@ function drawHTMLLayout() {
               <li class="burger_nav_ul_item burger-about">
               ${settings?.lang === "en" ? "Home" : "Главная"}
               </li>
-              <li class="burger_nav_ul_item burger-game1">Game 1</li>
-              <li class="burger_nav_ul_item burger-game2">Game 2</li>
-              <li class="burger_nav_ul_item burger-game3">Game 3</li>
-              <li class="burger_nav_ul_item burger-game4">Game 4</li>
+              <li class="burger_nav_ul_item burger-game1">Jedi's Mind</li>
+              <li class="burger_nav_ul_item burger-game2">Jedi's Agility</li>
+              <li class="burger_nav_ul_item burger-game3">Jedi's Mobility</li>
+              <li class="burger_nav_ul_item burger-game4">Jedi's Strategy</li>
               <li class="burger_nav_ul_item burger-game5">Jedi's Memory</li>
               <li class="burger_nav_ul_item burger-result">
               ${settings?.lang === "en" ? "Results" : "Результаты"}
