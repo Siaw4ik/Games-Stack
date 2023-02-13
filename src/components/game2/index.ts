@@ -12,13 +12,13 @@ import { sendScore } from "../results/sendScore";
 import { gamesData } from "../gamesInfo/gamesData";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
-import cardAudio from "../../assets/sounds/game5-one-card.mp3";
+import jumpAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
 
 const game2BackAudio = new Audio(backAudio);
 const game2FinalAudio = new Audio(winAudio);
-const game2OneCard = new Audio(cardAudio);
-game2OneCard.volume = 0.5;
+const game2jumpSound = new Audio(jumpAudio);
+game2jumpSound.volume = 0.5;
 game2BackAudio.volume = 0.7;
 game2FinalAudio.volume = 0.7;
 const settings = returnLocalStorage();
@@ -27,11 +27,11 @@ export function changeGame2AudioVolume(mode: boolean) {
   if (mode === true) {
     game2BackAudio.volume = 0.7;
     game2FinalAudio.volume = 0.7;
-    game2OneCard.volume = 0.5;
+    game2jumpSound.volume = 0.5;
   } else if (mode === false) {
     game2BackAudio.volume = 0;
     game2FinalAudio.volume = 0;
-    game2OneCard.volume = 0;
+    game2jumpSound.volume = 0;
   }
 }
 
@@ -45,7 +45,7 @@ const maxJumpingHeight = gameHeight;
 const minJumpingHeight = 150;
 const groundWidth = 1000;
 const groundHeight = 200;
-const groundAndCactusSpeed = 0.5;
+const groundAndEnemySpeed = 0.5;
 
 const enemyConfig = [
   {
@@ -101,7 +101,7 @@ function createSprites() {
       ctx,
       groundWidthInGame,
       groundHeightInGame,
-      groundAndCactusSpeed,
+      groundAndEnemySpeed,
       scaleRatio
     );
 
@@ -119,7 +119,7 @@ function createSprites() {
       ctx,
       enemyImages,
       scaleRatio,
-      groundAndCactusSpeed
+      groundAndEnemySpeed
     );
 
     score = new Score(ctx, scaleRatio);
@@ -131,10 +131,10 @@ function showGameOver() {
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
+    // const fontSize = 18 * scaleRatio;
+    // gittx.font = `${fontSize}px`;
     ctx.fillStyle = "#D713C3";
-    const x = canvas.width / 3.5;
+    const x = canvas.width / 4;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
@@ -153,7 +153,6 @@ export function reset() {
     .childNodes[0] as HTMLElement;
   if (mainChild) {
     if (mainChild.classList.value === "game2-wrapper") {
-      console.log("nnnnn");
       hasAddedEventListenersForRestart = false;
       gameOver = false;
       waitingToStart = false;
@@ -203,8 +202,8 @@ function showStartGameText() {
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
+    //  const fontSize = 18 * scaleRatio;
+    //  ctx.font = `${fontSize}px`;
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3;
     const y = canvas.height / 7;
@@ -275,7 +274,7 @@ function gameLoop(currentTime: number) {
       showStartGameText();
     }
     if (player.jumpPressed && !waitingToStart) {
-      game2OneCard.play();
+      game2jumpSound.play();
     }
     const requestId = requestAnimationFrame(gameLoop);
     if (window.location.hash !== "#game2") {
@@ -333,7 +332,6 @@ export const startGameAgility = () => {
 
 window.addEventListener("hashchange", () => {
   if (window.location.hash === "#game2") {
-    console.log("changed");
     requestAnimationFrame(gameLoop);
   }
 

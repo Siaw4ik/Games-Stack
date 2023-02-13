@@ -7,7 +7,7 @@ export default class Player {
 
   walkAnimationTimer = this.walk_animation_timer;
 
-  dinoRunImages: HTMLImageElement[] = [];
+  jediRunImages: HTMLImageElement[] = [];
 
   jumpPressed = false;
 
@@ -43,9 +43,9 @@ export default class Player {
 
   image: HTMLImageElement;
 
-  dinoRunImage1: HTMLImageElement;
+  jediRunImage1: HTMLImageElement;
 
-  dinoRunImage2: HTMLImageElement;
+  jediRunImage2: HTMLImageElement;
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -71,13 +71,13 @@ export default class Player {
     this.standingStillImage.src = jedi;
     this.image = this.standingStillImage;
 
-    this.dinoRunImage1 = new Image();
-    this.dinoRunImage1.src = jediRun1;
+    this.jediRunImage1 = new Image();
+    this.jediRunImage1.src = jediRun1;
 
-    this.dinoRunImage2 = new Image();
-    this.dinoRunImage2.src = jediRun2;
-    this.dinoRunImages.push(this.dinoRunImage1);
-    this.dinoRunImages.push(this.dinoRunImage2);
+    this.jediRunImage2 = new Image();
+    this.jediRunImage2.src = jediRun2;
+    this.jediRunImages.push(this.jediRunImage1);
+    this.jediRunImages.push(this.jediRunImage2);
 
     window.removeEventListener("keydown", this.keydown);
     window.removeEventListener("keyup", this.keyup);
@@ -146,9 +146,9 @@ export default class Player {
   run(gameSpeed: number, frameTimeDelta: number) {
     if (this.walkAnimationTimer <= 0) {
       this.image =
-        this.image === this.dinoRunImages[0]
-          ? this.dinoRunImages[1]
-          : this.dinoRunImages[0];
+        this.image === this.jediRunImages[0]
+          ? this.jediRunImages[1]
+          : this.jediRunImages[0];
       this.walkAnimationTimer = this.walk_animation_timer;
     }
     this.walkAnimationTimer -= frameTimeDelta * gameSpeed;
