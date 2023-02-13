@@ -153,6 +153,7 @@ export function reset() {
     .childNodes[0] as HTMLElement;
   if (mainChild) {
     if (mainChild.classList.value === "game2-wrapper") {
+      console.log("nnnnn");
       hasAddedEventListenersForRestart = false;
       gameOver = false;
       waitingToStart = false;
@@ -233,51 +234,54 @@ function clearScreen() {
 }
 
 function gameLoop(currentTime: number) {
-  if (previousTime === null) {
+  const container = document.querySelector(".game2-main__game") as HTMLElement;
+  if (container) {
+    if (previousTime === null) {
+      previousTime = currentTime;
+      requestAnimationFrame(gameLoop);
+      return;
+    }
+    const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
-    requestAnimationFrame(gameLoop);
-    return;
+
+    clearScreen();
+
+    if (!gameOver && !waitingToStart) {
+      ground.update(gameSpeed, frameTimeDelta);
+      enemyController.update(gameSpeed, frameTimeDelta);
+      player.update(gameSpeed, frameTimeDelta);
+      score.update(frameTimeDelta);
+      updateGameSpeed(frameTimeDelta);
+    }
+
+    if (!gameOver && enemyController.collideWith(player)) {
+      gameOver = true;
+      game2BackAudio.pause();
+      game2FinalAudio.play();
+      game2FinalAudio.currentTime = 0;
+      sendScore("Jedi's Agility", Math.trunc(score.score));
+      setupGameReset();
+    }
+    ground.draw();
+    enemyController.draw();
+    player.draw();
+    score.draw();
+
+    if (gameOver) {
+      showGameOver();
+    }
+
+    if (waitingToStart) {
+      showStartGameText();
+    }
+    if (player.jumpPressed && !waitingToStart) {
+      game2OneCard.play();
+    }
+    const requestId = requestAnimationFrame(gameLoop);
+    if (window.location.hash !== "#game2") {
+      cancelAnimationFrame(requestId);
+    }
   }
-  const frameTimeDelta = currentTime - previousTime;
-  previousTime = currentTime;
-
-  clearScreen();
-
-  if (!gameOver && !waitingToStart) {
-    ground.update(gameSpeed, frameTimeDelta);
-    enemyController.update(gameSpeed, frameTimeDelta);
-    player.update(gameSpeed, frameTimeDelta);
-    score.update(frameTimeDelta);
-    updateGameSpeed(frameTimeDelta);
-  }
-
-  if (!gameOver && enemyController.collideWith(player)) {
-    gameOver = true;
-    game2BackAudio.pause();
-    game2FinalAudio.play();
-    game2FinalAudio.currentTime = 0;
-    console.log(score.score);
-    sendScore("Jedi's Agility", Math.trunc(score.score));
-    setupGameReset();
-  }
-  ground.draw();
-  enemyController.draw();
-  player.draw();
-  score.draw();
-
-  if (gameOver) {
-    showGameOver();
-  }
-
-  if (waitingToStart) {
-    showStartGameText();
-  }
-
-  requestAnimationFrame(gameLoop);
-}
-
-if (window.location.hash === "#game2") {
-  requestAnimationFrame(gameLoop);
 }
 
 export const startGameAgility = () => {
@@ -320,13 +324,28 @@ export const startGameAgility = () => {
     window.addEventListener("resize", setScreen);
   }
   requestAnimationFrame(gameLoop);
-  window.addEventListener("hashchange", () => {
-    if (window.location.href !== "#game2") {
-      game2BackAudio.pause();
-      game2FinalAudio.pause();
-    }
-  });
+  const container = document.querySelector(".game2-main__game") as HTMLElement;
+  if (container) {
+    window.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
+  }
 };
+
+window.addEventListener("hashchange", () => {
+  if (window.location.hash === "#game2") {
+    console.log("changed");
+    requestAnimationFrame(gameLoop);
+  }
+
+  if (player && window.location.hash !== "#game2") {
+    game2BackAudio.pause();
+    game2FinalAudio.pause();
+    waitingToStart = true;
+    gameOver = false;
+    window.removeEventListener("keydown", player.keydown);
+    window.removeEventListener("keyup", player.keyup);
+  }
+});
 
 export function game2() {
   const main = document.querySelector(".main") as HTMLElement;
@@ -345,7 +364,6 @@ export function game2() {
     settings.lang === "en" ? "Start Game" : "Начать Игру"
   }</span></div>`;
   main.appendChild(divWrapper);
-
   const startBtn = document.querySelector(
     ".game2-wrapper_button"
   ) as HTMLElement;
@@ -363,5 +381,18 @@ export function fixGame2() {
   });
 }
 
-window.addEventListener("keyup", reset, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
+export function translateGame2(lang: string) {
+  const description = document.querySelector(
+    ".game2-wrapper_info"
+  ) as HTMLElement;
+  const startBtn = document.querySelector(
+    ".game2-wrapper_button"
+  ) as HTMLElement;
+
+  if (startBtn && description) {
+    startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
+    description.innerHTML = `${
+      lang === "en" ? gamesData.en[1].description : gamesData.ru[1].description
+    }`;
+  }
+}
