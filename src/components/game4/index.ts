@@ -3,23 +3,28 @@ import { gamesData } from "../gamesInfo/gamesData";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
 import cardAudio from "../../assets/sounds/game5-one-card.mp3";
+import failAudio from "../../assets/sounds/failAudio-starwars.mp3";
 import { returnLocalStorage } from "../module/localStorage";
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
 const game4OneCard = new Audio(cardAudio);
+const game4failAudio = new Audio(failAudio);
 game4OneCard.volume = 0.5;
 game4BackAudio.volume = 0.7;
 game4FinalAudio.volume = 0.7;
+game4failAudio.volume = 0.7;
 
 export function changeGame4AudioVolume(mode: boolean) {
   if (mode === true) {
     game4BackAudio.volume = 0.7;
     game4FinalAudio.volume = 0.7;
+    game4failAudio.volume = 0.7;
     game4OneCard.volume = 0.5;
   } else if (mode === false) {
     game4BackAudio.volume = 0;
     game4FinalAudio.volume = 0;
+    game4failAudio.volume = 0;
     game4OneCard.volume = 0;
   }
 }
@@ -382,8 +387,15 @@ function turnClick(e: Event): void {
         : `${settingsStart.lang === "en" ? "You lose!" : "Вы проиграли!"}`
     );
     game4BackAudio.pause();
-    game4FinalAudio.play();
-    game4FinalAudio.currentTime = 0;
+    if (gameWon.player === humanPlay) {
+      game4FinalAudio.play();
+      game4FinalAudio.currentTime = 0;
+    }
+
+    if (gameWon.player === ai) {
+      game4failAudio.play();
+      game4failAudio.currentTime = 0;
+    }
   }
   function turn(squareId: string, player: string) {
     if (humanPlay) {
@@ -417,8 +429,8 @@ function turnClick(e: Event): void {
       });
       declareWinner(`${settingsStart.lang === "en" ? "Tie game!" : "Ничья!"}`);
       game4BackAudio.pause();
-      game4FinalAudio.play();
-      game4FinalAudio.currentTime = 0;
+      game4failAudio.play();
+      game4failAudio.currentTime = 0;
       return true;
     }
     return false;
@@ -467,6 +479,7 @@ export function startGameTicTac() {
   game4BackAudio.play();
   game4BackAudio.currentTime = 0;
   game4FinalAudio.pause();
+  game4failAudio.pause();
   if (settingsStart.volume === true) {
     changeGame4AudioVolume(true);
   } else if (settingsStart.volume === false) {
@@ -515,6 +528,7 @@ export function startGameTicTac() {
     if (window.location.href !== "#game4") {
       game4BackAudio.pause();
       game4FinalAudio.pause();
+      game4failAudio.pause();
     }
   });
 }
@@ -561,6 +575,7 @@ export function retryBtnclick() {
       game4BackAudio.play();
       game4BackAudio.currentTime = 0;
       game4FinalAudio.pause();
+      game4failAudio.pause();
       if (settingsStart.volume === true) {
         changeGame4AudioVolume(true);
       } else if (settingsStart.volume === false) {

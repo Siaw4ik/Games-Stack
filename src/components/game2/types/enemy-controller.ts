@@ -72,7 +72,7 @@ export default class EnemyController {
       enemy.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
     });
 
-    this.enemy = this.enemy.filter((cactus) => cactus.x > -cactus.width);
+    this.enemy = this.enemy.filter((enemy) => enemy.x > -enemy.width);
   }
 
   draw() {
