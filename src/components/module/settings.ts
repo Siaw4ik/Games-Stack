@@ -7,7 +7,6 @@ import { changeGame5AudioVolume, translateGame5 } from "../game5";
 import { changeGame4AudioVolume, translateGame4 } from "../game4";
 import { changeGame2AudioVolume, translateGame2 } from "../game2";
 import { changeGame1AudioVolume, translateGame1 } from "../game1";
-import { changeGame2JediAudioVolume } from "../game2/types/jedi";
 
 const settings: Settings = {
   lang: "en",
