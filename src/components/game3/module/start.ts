@@ -96,16 +96,14 @@ function showGameOver() {
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
-    ctx.fillStyle = "#D713C3";
-    const x = canvas.width / 3.5;
+    ctx.fillStyle = "white";
+    const x = canvas.width / 5.5;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
         settings.lang === "en"
-          ? "Game Over! Press Any Key to Start Again"
-          : "Конец игры! Нажмите оюбую клавишу, чтобы начать заново"
+          ? "          Game Over! Press Any Key to Start Again"
+          : "Конец игры! Нажмите любую клавишу, чтобы начать заново"
       }`,
       x,
       y
@@ -167,15 +165,13 @@ function showStartGameText() {
   const canvas = document.getElementById("game_3") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
-    ctx.fillStyle = "#D713C3";
+    ctx.fillStyle = "white";
     const x = canvas.width / 3;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
         settings.lang === "en"
-          ? "Press Any Key to Start"
+          ? "      Press Any Key to Start"
           : "Для начала игры нажмите на пробел"
       }`,
       x,
