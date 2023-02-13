@@ -74,3 +74,42 @@
 .raw-empty {
 	text-align: center;
 }
+
+.table-result_game1:after,
+.table-result_game2:after,
+.table-result_game3:after,
+.table-result_game4:after,
+.table-result_game5:after,
+.user-radio input:after {
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+	top: 0;
+	left: 0;
+	position: relative;
+	background-color: white;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	transition: all .5s ease-in-out;
+}
+
+.table-result_game1:checked:after,
+.table-result_game2:checked:after,
+.table-result_game3:checked:after,
+.table-result_game4:checked:after,
+.table-result_game5:checked:after,
+.user-radio input:checked:after {
+	width: 15px;
+	height: 15px;
+	border-radius: 15px;
+	top: 0;
+	left: 0;
+	position: relative;
+	background-color: #D713C3;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	border: 0;
+	transition: all .5s ease-in-out;
+}
