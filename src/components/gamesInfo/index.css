@@ -116,6 +116,7 @@ html {
   width: 60px;
   height: 60px;
   fill: #000000;
+  transition: all .3s ease-in-out;
 }
 
 .arrowUp.dark svg{
