@@ -12,13 +12,13 @@ import { sendScore } from "../results/sendScore";
 import { gamesData } from "../gamesInfo/gamesData";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
-import cardAudio from "../../assets/sounds/game5-one-card.mp3";
+import jumpAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
 
 const game2BackAudio = new Audio(backAudio);
 const game2FinalAudio = new Audio(winAudio);
-const game2OneCard = new Audio(cardAudio);
-game2OneCard.volume = 0.5;
+const game2jumpSound = new Audio(jumpAudio);
+game2jumpSound.volume = 0.5;
 game2BackAudio.volume = 0.7;
 game2FinalAudio.volume = 0.7;
 const settings = returnLocalStorage();
@@ -27,11 +27,11 @@ export function changeGame2AudioVolume(mode: boolean) {
   if (mode === true) {
     game2BackAudio.volume = 0.7;
     game2FinalAudio.volume = 0.7;
-    game2OneCard.volume = 0.5;
+    game2jumpSound.volume = 0.5;
   } else if (mode === false) {
     game2BackAudio.volume = 0;
     game2FinalAudio.volume = 0;
-    game2OneCard.volume = 0;
+    game2jumpSound.volume = 0;
   }
 }
 
@@ -45,7 +45,7 @@ const maxJumpingHeight = gameHeight;
 const minJumpingHeight = 150;
 const groundWidth = 1000;
 const groundHeight = 200;
-const groundAndCactusSpeed = 0.5;
+const groundAndEnemySpeed = 0.5;
 
 const enemyConfig = [
   {
@@ -101,7 +101,7 @@ function createSprites() {
       ctx,
       groundWidthInGame,
       groundHeightInGame,
-      groundAndCactusSpeed,
+      groundAndEnemySpeed,
       scaleRatio
     );
 
@@ -119,7 +119,7 @@ function createSprites() {
       ctx,
       enemyImages,
       scaleRatio,
-      groundAndCactusSpeed
+      groundAndEnemySpeed
     );
 
     score = new Score(ctx, scaleRatio);
@@ -131,10 +131,10 @@ function showGameOver() {
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
+    // const fontSize = 18 * scaleRatio;
+    // gittx.font = `${fontSize}px`;
     ctx.fillStyle = "#D713C3";
-    const x = canvas.width / 3.5;
+    const x = canvas.width / 4;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
@@ -202,8 +202,8 @@ function showStartGameText() {
   const canvas = document.getElementById("game_2") as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    const fontSize = 18 * scaleRatio;
-    ctx.font = `${fontSize}px Lato`;
+    //  const fontSize = 18 * scaleRatio;
+    //  ctx.font = `${fontSize}px`;
     ctx.fillStyle = "#D713C3";
     const x = canvas.width / 3;
     const y = canvas.height / 7;
@@ -233,51 +233,54 @@ function clearScreen() {
 }
 
 function gameLoop(currentTime: number) {
-  if (previousTime === null) {
+  const container = document.querySelector(".game2-main__game") as HTMLElement;
+  if (container) {
+    if (previousTime === null) {
+      previousTime = currentTime;
+      requestAnimationFrame(gameLoop);
+      return;
+    }
+    const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
-    requestAnimationFrame(gameLoop);
-    return;
+
+    clearScreen();
+
+    if (!gameOver && !waitingToStart) {
+      ground.update(gameSpeed, frameTimeDelta);
+      enemyController.update(gameSpeed, frameTimeDelta);
+      player.update(gameSpeed, frameTimeDelta);
+      score.update(frameTimeDelta);
+      updateGameSpeed(frameTimeDelta);
+    }
+
+    if (!gameOver && enemyController.collideWith(player)) {
+      gameOver = true;
+      game2BackAudio.pause();
+      game2FinalAudio.play();
+      game2FinalAudio.currentTime = 0;
+      sendScore("Jedi's Agility", Math.trunc(score.score));
+      setupGameReset();
+    }
+    ground.draw();
+    enemyController.draw();
+    player.draw();
+    score.draw();
+
+    if (gameOver) {
+      showGameOver();
+    }
+
+    if (waitingToStart) {
+      showStartGameText();
+    }
+    if (player.jumpPressed && !waitingToStart) {
+      game2jumpSound.play();
+    }
+    const requestId = requestAnimationFrame(gameLoop);
+    if (window.location.hash !== "#game2") {
+      cancelAnimationFrame(requestId);
+    }
   }
-  const frameTimeDelta = currentTime - previousTime;
-  previousTime = currentTime;
-
-  clearScreen();
-
-  if (!gameOver && !waitingToStart) {
-    ground.update(gameSpeed, frameTimeDelta);
-    enemyController.update(gameSpeed, frameTimeDelta);
-    player.update(gameSpeed, frameTimeDelta);
-    score.update(frameTimeDelta);
-    updateGameSpeed(frameTimeDelta);
-  }
-
-  if (!gameOver && enemyController.collideWith(player)) {
-    gameOver = true;
-    game2BackAudio.pause();
-    game2FinalAudio.play();
-    game2FinalAudio.currentTime = 0;
-    console.log(score.score);
-    sendScore("Jedi's Agility", Math.trunc(score.score));
-    setupGameReset();
-  }
-  ground.draw();
-  enemyController.draw();
-  player.draw();
-  score.draw();
-
-  if (gameOver) {
-    showGameOver();
-  }
-
-  if (waitingToStart) {
-    showStartGameText();
-  }
-
-  requestAnimationFrame(gameLoop);
-}
-
-if (window.location.hash === "#game2") {
-  requestAnimationFrame(gameLoop);
 }
 
 export const startGameAgility = () => {
@@ -320,13 +323,27 @@ export const startGameAgility = () => {
     window.addEventListener("resize", setScreen);
   }
   requestAnimationFrame(gameLoop);
-  window.addEventListener("hashchange", () => {
-    if (window.location.href !== "#game2") {
-      game2BackAudio.pause();
-      game2FinalAudio.pause();
-    }
-  });
+  const container = document.querySelector(".game2-main__game") as HTMLElement;
+  if (container) {
+    window.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
+  }
 };
+
+window.addEventListener("hashchange", () => {
+  if (window.location.hash === "#game2") {
+    requestAnimationFrame(gameLoop);
+  }
+
+  if (player && window.location.hash !== "#game2") {
+    game2BackAudio.pause();
+    game2FinalAudio.pause();
+    waitingToStart = true;
+    gameOver = false;
+    window.removeEventListener("keydown", player.keydown);
+    window.removeEventListener("keyup", player.keyup);
+  }
+});
 
 export function game2() {
   const main = document.querySelector(".main") as HTMLElement;
@@ -345,7 +362,6 @@ export function game2() {
     settings.lang === "en" ? "Start Game" : "Начать Игру"
   }</span></div>`;
   main.appendChild(divWrapper);
-
   const startBtn = document.querySelector(
     ".game2-wrapper_button"
   ) as HTMLElement;
@@ -363,5 +379,18 @@ export function fixGame2() {
   });
 }
 
-window.addEventListener("keyup", reset, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
+export function translateGame2(lang: string) {
+  const description = document.querySelector(
+    ".game2-wrapper_info"
+  ) as HTMLElement;
+  const startBtn = document.querySelector(
+    ".game2-wrapper_button"
+  ) as HTMLElement;
+
+  if (startBtn && description) {
+    startBtn.innerHTML = `${lang === "en" ? "Start Game" : "Начать Игру"}`;
+    description.innerHTML = `${
+      lang === "en" ? gamesData.en[1].description : gamesData.ru[1].description
+    }`;
+  }
+}
