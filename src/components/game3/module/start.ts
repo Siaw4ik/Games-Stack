@@ -82,7 +82,6 @@ function createSprites() {
 
     meteorsController = new MeteorsController(
       context,
-      [],
       scaleRatio,
       METEORS_AND_BACKGROUND_SPEED
     );
