@@ -78,7 +78,7 @@ export default class Player {
     this.jediRunImage2.src = jediRun2;
     this.jediRunImages.push(this.jediRunImage1);
     this.jediRunImages.push(this.jediRunImage2);
-
+    const canvas = document.getElementById("game_2") as HTMLCanvasElement;
     window.removeEventListener("keydown", this.keydown);
     window.removeEventListener("keyup", this.keyup);
     window.addEventListener("keydown", this.keydown);
@@ -86,8 +86,8 @@ export default class Player {
 
     window.removeEventListener("touchstart", this.touchstart);
     window.removeEventListener("touchend", this.touchend);
-    window.addEventListener("touchstart", this.touchstart);
-    window.addEventListener("touchend", this.touchend);
+    canvas.addEventListener("touchstart", this.touchstart);
+    canvas.addEventListener("touchend", this.touchend);
   }
 
   keydown = (event: KeyboardEvent) => {
@@ -103,11 +103,17 @@ export default class Player {
   };
 
   touchstart = () => {
-    this.jumpPressed = true;
+    const canvas = document.getElementById("game_2") as HTMLCanvasElement;
+    if (canvas) {
+      this.jumpPressed = true;
+    }
   };
 
   touchend = () => {
-    this.jumpPressed = false;
+    const canvas = document.getElementById("game_2") as HTMLCanvasElement;
+    if (canvas) {
+      this.jumpPressed = false;
+    }
   };
 
   update(gameSpeed: number, frameTimeDelta: number) {
