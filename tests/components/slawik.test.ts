@@ -1,4 +1,4 @@
-import { changeScore20 } from "../../components/game5/componentsGame5";
+import { changeScore20 } from "../../src/components/game5/componentsGame5";
 
 describe("changeScore20 function:", () => {
   test("should return the score minus 20", () => {
