@@ -5,9 +5,9 @@ import { METEOR_CONFIG } from "../constants/constants";
 import Ship from "./Ship";
 
 export default class MeteorsController {
-  METEORS_INTERVAL_MIN = 2500;
+  METEORS_INTERVAL_MIN = 1500;
 
-  METEORS_INTERVAL_MAX = 3500;
+  METEORS_INTERVAL_MAX = 2000;
 
   nextMeteorsLineInterval = 0;
 

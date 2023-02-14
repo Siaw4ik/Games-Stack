@@ -73,5 +73,5 @@ export const MAX_LEFT_POS = 0;
 export const MAX_MOVE_DIST = 150;
 export const MIN_MOVE_DIST = 50;
 export const METEORS_AND_BACKGROUND_SPEED = 0.5;
-export const GAME_SPEED_START = 0.35;
-export const GAME_SPEED_INCREMENT = 0.00001;
+export const GAME_SPEED_START = 0.4;
+export const GAME_SPEED_INCREMENT = 0.000035;
