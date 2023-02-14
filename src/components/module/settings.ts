@@ -87,9 +87,9 @@ export function toggleLight() {
   const containerHeaderMain = document.querySelector(
     ".conteiner_header-main"
   ) as HTMLElement;
-  const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
 
   function changeClassDark() {
+    const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
     const gamesInfoContainer = document.querySelector(
       ".games_info_container"
     ) as HTMLElement;
