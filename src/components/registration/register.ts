@@ -321,7 +321,11 @@ export function authorizeUser() {
       username: loginUser,
       password: passwordUser,
     };
-    if (isCanSend === "true" && passwordUser.length > 0) {
+    if (
+      isCanSend === "true" &&
+      passwordUser.length > 0 &&
+      loginUser.length > 0
+    ) {
       user.reсordUser(objUser).then((result) => {
         console.log(result);
         if (result.success === true) {
