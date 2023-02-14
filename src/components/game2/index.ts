@@ -11,7 +11,7 @@ import enemy3 from "../../assets/images/enemy_3.png";
 import { sendScore } from "../results/sendScore";
 import { gamesData } from "../gamesInfo/gamesData";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
-import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
+import winAudio from "../../assets/sounds/failAudio-starwars.mp3";
 import jumpAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
 

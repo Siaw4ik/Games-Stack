@@ -1,7 +1,7 @@
 import { IMeteor } from "../module/types";
 import { createRandomMeteorImg } from "../module/meteors";
 import backgroundAudio from "../../../assets/sounds/back-game5-starwars.mp3";
-import winAudio from "../../../assets/sounds/final-game5-starwars.mp3";
+import winAudio from "../../../assets/sounds/failAudio-starwars.mp3";
 import moveAudio from "../../../assets/sounds/game5-one-card.mp3";
 
 export const GAME3_BACKGROUND_AUDIO = new Audio(backgroundAudio);
@@ -73,5 +73,5 @@ export const MAX_LEFT_POS = 0;
 export const MAX_MOVE_DIST = 150;
 export const MIN_MOVE_DIST = 50;
 export const METEORS_AND_BACKGROUND_SPEED = 0.5;
-export const GAME_SPEED_START = 0.35;
-export const GAME_SPEED_INCREMENT = 0.00001;
+export const GAME_SPEED_START = 0.4;
+export const GAME_SPEED_INCREMENT = 0.000035;

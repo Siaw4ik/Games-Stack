@@ -97,13 +97,13 @@ function showGameOver() {
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     ctx.fillStyle = "white";
-    const x = canvas.width / 5.5;
+    const x = canvas.width / 6;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
         settings.lang === "en"
-          ? "          Game Over! Press Any Key to Start Again"
-          : "Конец игры! Нажмите любую клавишу, чтобы начать заново"
+          ? "            Game Over! Click mouse to Start Again"
+          : "Конец игры! Нажмите левую кнопку мыши для повтора"
       }`,
       x,
       y
@@ -138,24 +138,29 @@ export function reset() {
 }
 
 function setupGameReset() {
+  const canvas = document.getElementById("game_3") as HTMLCanvasElement;
   if (!hasAddedEventListenersForRestart) {
     hasAddedEventListenersForRestart = true;
 
     setTimeout(() => {
-      window.addEventListener(
-        "keyup",
-        () => {
-          reset();
+      canvas.addEventListener(
+        "click",
+        (e) => {
+          if (e.type === "click") {
+            reset();
+          }
         },
         { once: true }
       );
-      window.addEventListener(
-        "touchstart",
-        () => {
-          reset();
-        },
-        { once: true }
-      );
+      if (canvas) {
+        canvas.addEventListener(
+          "touchstart",
+          () => {
+            reset();
+          },
+          { once: true }
+        );
+      }
     }, 500);
   }
 }
@@ -166,13 +171,13 @@ function showStartGameText() {
   if (canvas) {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     ctx.fillStyle = "white";
-    const x = canvas.width / 3;
+    const x = canvas.width / 4;
     const y = canvas.height / 7;
     ctx.fillText(
       `${
         settings.lang === "en"
-          ? "      Press Any Key to Start"
-          : "Для начала игры нажмите на пробел"
+          ? "                     Click mouse to Start"
+          : "Для начала игры нажмите левую кнопку мыши"
       }`,
       x,
       y
@@ -285,8 +290,10 @@ export function startGame3() {
 
   const container = document.querySelector(".game3-main_game") as HTMLElement;
   if (container) {
-    window.addEventListener("keyup", reset, { once: true });
-    window.addEventListener("touchstart", reset, { once: true });
+    canvas.addEventListener("click", reset, { once: true });
+    if (canvas) {
+      canvas.addEventListener("touchstart", reset, { once: true });
+    }
   }
 }
 
@@ -294,13 +301,17 @@ window.addEventListener("hashchange", () => {
   if (window.location.hash === "#game3") {
     requestAnimationFrame(gameLoop);
   }
+  const canvas = document.getElementById("game_3") as HTMLCanvasElement;
 
   if (falcon && window.location.hash !== "#game3") {
     GAME3_BACKGROUND_AUDIO.pause();
     GAME3_FINAL_AUDIO.pause();
     waitingToStart = true;
     gameOver = false;
-    window.removeEventListener("keydown", falcon.onKeyDown);
+    window.removeEventListener("mousedown", falcon.onMouseDown);
+    if (canvas) {
+      canvas.removeEventListener("touchstart", reset);
+    }
   }
 });
 
