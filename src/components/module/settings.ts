@@ -166,7 +166,7 @@ export function toggleLang() {
   const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
   const scoreWindow = document.querySelector(".score-window") as HTMLElement;
 
-  langRu.addEventListener("click", () => {
+  function toggleRu() {
     langRu.classList.add("lang-active");
     langEn.classList.remove("lang-active");
     settings.lang = "ru";
@@ -197,9 +197,17 @@ export function toggleLang() {
     translateGame2(settings.lang);
     translateGame3(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
+  }
+
+  langRu.addEventListener("click", toggleRu);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "KeyB" && (event.ctrlKey || event.metaKey)) {
+      toggleRu();
+    }
   });
 
-  langEn.addEventListener("click", () => {
+  function toggleEn() {
     langEn.classList.add("lang-active");
     langRu.classList.remove("lang-active");
     settings.lang = "en";
@@ -230,5 +238,13 @@ export function toggleLang() {
     translateGame2(settings.lang);
     translateGame3(settings.lang);
     redrawGameInfoSectionForToggleLang(settings.lang);
+  }
+
+  langEn.addEventListener("click", toggleEn);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "KeyM" && (event.ctrlKey || event.metaKey)) {
+      toggleEn();
+    }
   });
 }
