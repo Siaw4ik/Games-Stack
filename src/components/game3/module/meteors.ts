@@ -55,13 +55,6 @@ export const meteorImgArr: HTMLImageElement[] = [
 // eslint-disable-next-line no-unused-vars
 let removedOneMeteor: IMeteor[];
 
-// export function createMeteorLine(arr: IMeteor[]): IMeteor[] {
-//   const newArr = arr.slice();
-//   const randomNum = Math.floor(Math.random() * 7);
-//   removedMeteor = newArr.splice(randomNum, 1);
-//   return newArr;
-// }
-
 export function createOneMeteorLine(arr: IMeteor[]): IMeteor[] {
   const newArr = arr.slice();
   const randomNum = Math.floor(Math.random() * 7);
