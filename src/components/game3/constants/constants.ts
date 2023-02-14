@@ -1,7 +1,7 @@
 import { IMeteor } from "../module/types";
 import { createRandomMeteorImg } from "../module/meteors";
 import backgroundAudio from "../../../assets/sounds/back-game5-starwars.mp3";
-import winAudio from "../../../assets/sounds/final-game5-starwars.mp3";
+import winAudio from "../../../assets/sounds/failAudio-starwars.mp3";
 import moveAudio from "../../../assets/sounds/game5-one-card.mp3";
 
 export const GAME3_BACKGROUND_AUDIO = new Audio(backgroundAudio);
