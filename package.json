@@ -1,7 +1,7 @@
 {
-  "name": "async-race",
+  "name": "game-stack",
   "version": "1.0.0",
-  "description": "async-race",
+  "description": "game-stack starWars",
   "main": "webpack.config.js",
   "scripts": {
     "serve": "webpack-dev-server",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Siaw4ik/Async-Race.git"
+    "url": "git+https://github.com/Siaw4ik/Games-Stack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Siaw4ik/Async-Race/issues"
+    "url": "https://github.com/Siaw4ik/Games-Stack/issues"
   },
-  "homepage": "https://github.com/Siaw4ik/Async-Race#readme",
+  "homepage": "https://github.com/Siaw4ik/Games-Stack/#readme",
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
