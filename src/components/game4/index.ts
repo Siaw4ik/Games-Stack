@@ -12,6 +12,7 @@ import {
 import { StatisticGames } from "../module/Games";
 import { ScoreGamesUserSort } from "../module/types";
 import { sendScore } from "../results/sendScore";
+import { emptySquares } from "./componentsGame4";
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
@@ -78,14 +79,14 @@ function checkWin(board: string[], player: string) {
   return gameWon;
 }
 
-function emptySquares() {
+/* function emptySquares() {
   return origBoard.filter((e) => Number(e) >= 0);
-}
+} */
 
 function bestSpot() {
   let thirdTurnAi = false;
   let aiTurn: string = "";
-  const emptyCells = emptySquares();
+  const emptyCells = emptySquares(origBoard);
   const cells: HTMLElement[] = Array.from(
     document.querySelectorAll(".game4-main__game-cell")
   );
@@ -464,7 +465,7 @@ function turnClick(e: Event): void {
       ".game4-main-score-number"
     ) as HTMLElement;
     const gameWon = checkWin(origBoard, humanPlay);
-    if (emptySquares().length === 0 && !gameWon) {
+    if (emptySquares(origBoard).length === 0 && !gameWon) {
       const settingsStart = returnLocalStorage();
       const cells: HTMLElement[] = Array.from(
         document.querySelectorAll(".game4-main__game-cell")
