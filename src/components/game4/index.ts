@@ -12,6 +12,7 @@ import {
 import { StatisticGames } from "../module/Games";
 import { ScoreGamesUserSort } from "../module/types";
 import { sendScore } from "../results/sendScore";
+import { emptySquares, checkWin } from "./componentsGame4";
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
@@ -60,32 +61,10 @@ function declareWinner(who: string) {
   endMessage.innerHTML = who;
 }
 
-function checkWin(board: string[], player: string) {
-  const plays = board.reduce(
-    (a: string[], e: string, i: number) =>
-      e === player ? a.concat(i.toString()) : a,
-    []
-  );
-  let gameWon = null;
-  for (let index = 0; index < winCombinatios.length; index += 1) {
-    if (
-      winCombinatios[index].every((elem) => plays.indexOf(elem.toString()) > -1)
-    ) {
-      gameWon = { index, player };
-      break;
-    }
-  }
-  return gameWon;
-}
-
-function emptySquares() {
-  return origBoard.filter((e) => Number(e) >= 0);
-}
-
 function bestSpot() {
   let thirdTurnAi = false;
   let aiTurn: string = "";
-  const emptyCells = emptySquares();
+  const emptyCells = emptySquares(origBoard);
   const cells: HTMLElement[] = Array.from(
     document.querySelectorAll(".game4-main__game-cell")
   );
@@ -464,7 +443,7 @@ function turnClick(e: Event): void {
       ".game4-main-score-number"
     ) as HTMLElement;
     const gameWon = checkWin(origBoard, humanPlay);
-    if (emptySquares().length === 0 && !gameWon) {
+    if (emptySquares(origBoard).length === 0 && !gameWon) {
       const settingsStart = returnLocalStorage();
       const cells: HTMLElement[] = Array.from(
         document.querySelectorAll(".game4-main__game-cell")
