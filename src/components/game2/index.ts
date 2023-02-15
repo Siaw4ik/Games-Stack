@@ -14,6 +14,7 @@ import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import winAudio from "../../assets/sounds/failAudio-starwars.mp3";
 import jumpAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
+import { deltaCurrentAnPrevTime } from "./componentsForGame2";
 
 const game2BackAudio = new Audio(backAudio);
 const game2FinalAudio = new Audio(winAudio);
@@ -162,6 +163,7 @@ export function reset() {
           window.removeEventListener("keyup", player.keyup);
         });
       }
+
       hasAddedEventListenersForRestart = false;
       gameOver = false;
       waitingToStart = false;
@@ -238,7 +240,7 @@ function gameLoop(currentTime: number) {
       requestAnimationFrame(gameLoop);
       return;
     }
-    const frameTimeDelta = currentTime - previousTime;
+    const frameTimeDelta = deltaCurrentAnPrevTime(currentTime, previousTime);
     previousTime = currentTime;
 
     clearScreen();

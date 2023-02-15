@@ -1,10 +1,10 @@
 import { StatisticGames } from "../module/Games";
 import { ScoreGameUser } from "../module/types";
-import { returnLocalStorageIsRegistred } from "../module/localStorage";
+import { returnLocalStorageIsRegistered } from "../module/localStorage";
 
 export function sendScore(game: string, result: number) {
   const statistic = new StatisticGames();
-  const userRegistred = returnLocalStorageIsRegistred();
+  const userRegistred = returnLocalStorageIsRegistered();
   const name =
     userRegistred.isRegistred === "true"
       ? userRegistred.userName

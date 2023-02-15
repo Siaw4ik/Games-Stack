@@ -8,11 +8,11 @@ import logoHeder from "../../assets/logo.svg";
 import iconNO from "../../assets/input_Unavailable.svg";
 import {
   returnLocalStorage,
-  returnLocalStorageIsRegistred,
+  returnLocalStorageIsRegistered,
 } from "./localStorage";
 
 const settings = returnLocalStorage();
-const userTrue = returnLocalStorageIsRegistred();
+const userTrue = returnLocalStorageIsRegistered();
 
 console.log(userTrue);
 
@@ -268,7 +268,7 @@ function drawHTMLLayout() {
   }
 }
 
-function addLinkCithubRS() {
+function addLinkGithubRS() {
   const logoSchool = <HTMLImageElement>document.querySelector(".logoRS");
 
   if (logoSchool) {
@@ -377,7 +377,15 @@ function drawIconVolume() {
 export function drawPage() {
   drawHTMLLayout();
   drawIconVolume();
-  addLinkCithubRS();
+  addLinkGithubRS();
   drawStyleLightOrDark();
   toggleBurger();
+}
+if (localStorage.getItem("userTrue") === null) {
+  localStorage.setItem("unknownStrategy", JSON.stringify(0));
+  const object = {
+    userName: "",
+    isRegistred: "false",
+  };
+  localStorage.setItem("userTrue", JSON.stringify(object));
 }

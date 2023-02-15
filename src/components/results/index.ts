@@ -7,7 +7,7 @@ import {
   RequestTop10,
 } from "../module/types";
 import {
-  returnLocalStorageIsRegistred,
+  returnLocalStorageIsRegistered,
   returnLocalStorage,
 } from "../module/localStorage";
 
@@ -22,7 +22,7 @@ const arrButton = [
 ];
 
 export function drawTable(lang: string) {
-  const userRegistred = returnLocalStorageIsRegistred();
+  const userRegistred = returnLocalStorageIsRegistered();
   const main = document.querySelector(".main") as HTMLElement;
   const div = document.createElement("div");
   div.classList.add("wrapper_main-result");
@@ -232,7 +232,7 @@ function changeRadioBtn() {
     radio.addEventListener("change", () => {
       const statistic = new StatisticGames();
       const settingsChange = returnLocalStorage();
-      const userRegistred = returnLocalStorageIsRegistred();
+      const userRegistred = returnLocalStorageIsRegistered();
       drawRawWait(settingsChange.lang);
       const value = radio.getAttribute("value");
       if (value && value !== "user") {
@@ -294,7 +294,7 @@ function changeRadioBtn() {
 
 export function result() {
   const settings = returnLocalStorage();
-  const userRegistred = returnLocalStorageIsRegistred();
+  const userRegistred = returnLocalStorageIsRegistered();
   const main = document.querySelector(".main") as HTMLElement;
   main.innerHTML = "";
   const statistic = new StatisticGames();

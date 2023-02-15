@@ -13,7 +13,7 @@ export function returnLocalStorage() {
   return state;
 }
 
-export function returnLocalStorageIsRegistred() {
+export function returnLocalStorageIsRegistered() {
   const storage = localStorage.getItem("userTrue");
   let result = {
     userName: "",

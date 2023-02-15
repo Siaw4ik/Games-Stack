@@ -4,7 +4,7 @@ import VImg from "../../assets/input_V.svg";
 import XImg from "../../assets/cross_input.svg";
 import {
   returnLocalStorage,
-  returnLocalStorageIsRegistred,
+  returnLocalStorageIsRegistered,
 } from "../module/localStorage";
 import { drawScoreFromBackEnd } from "../game4";
 import {
@@ -303,7 +303,7 @@ export function authorizeUser() {
     localStorage.setItem("userTrue", JSON.stringify(object));
 
     if (window.location.hash.slice(1) === "result") {
-      const userRegisred = returnLocalStorageIsRegistred();
+      const userRegisred = returnLocalStorageIsRegistered();
       const userRadio = document.querySelector(
         ".table-flip .user-radio"
       ) as HTMLElement;
