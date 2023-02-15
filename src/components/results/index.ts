@@ -11,6 +11,8 @@ import {
   returnLocalStorage,
 } from "../module/localStorage";
 
+import { createObjParametr } from "./componentsResault";
+
 const arrButton = [
   { game1: "Jedi's Mind" },
   { game2: "Jedi's Agility" },
@@ -158,10 +160,10 @@ function sortresult() {
       const nameTable = table.getAttribute("id");
       const classTable = table.getAttribute("class");
       if (nameTable && classTable === "user-table") {
-        const obj: ScoreGamesUserSort = {
-          username: nameTable.slice(6),
-          option: optionScore,
-        };
+        const obj: ScoreGamesUserSort = createObjParametr(
+          nameTable,
+          optionScore
+        );
         statistic.getScoreGamesUser(obj).then((data) => {
           if (Object.entries(data.scores).length > 0) {
             drawtbody(data);
@@ -192,10 +194,10 @@ function sortresult() {
       const classTable = table.getAttribute("class");
       if (nameTable && classTable === "user-table") {
         optionNameUser = optionNameUser === "ascGame" ? "descGame" : "ascGame";
-        const obj: ScoreGamesUserSort = {
-          username: nameTable.slice(6),
-          option: optionNameUser,
-        };
+        const obj: ScoreGamesUserSort = createObjParametr(
+          nameTable,
+          optionNameUser
+        );
         statistic.getScoreGamesUser(obj).then((data) => {
           if (Object.entries(data.scores).length > 0) {
             drawtbody(data);
