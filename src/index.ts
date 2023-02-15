@@ -16,7 +16,6 @@ import {
   closeOpenWindowRegisration,
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
-import { fixGame2 } from "./components/game2";
 import { retryBtnclick, chipClick } from "./components/game4";
 
 enableRoutChange();
@@ -35,7 +34,6 @@ authorizeUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
 
-fixGame2();
 retryBtnclick();
 chipClick();
 console.log("start page");

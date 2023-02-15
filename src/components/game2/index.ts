@@ -250,8 +250,6 @@ function gameLoop(currentTime: number) {
       score.update(frameTimeDelta);
       updateGameSpeed(frameTimeDelta);
     }
-    if (container && (gameOver || waitingToStart)) {
-    }
     if (!gameOver && !waitingToStart) {
       window.removeEventListener("keyup", reset);
       window.removeEventListener("keydown", reset);
@@ -382,12 +380,6 @@ export function game2() {
       startGameAgility();
     });
   }
-}
-
-export function fixGame2() {
-  window.addEventListener("hashchange", () => {
-    document.body.addEventListener("keyup", reset, { once: true });
-  });
 }
 
 export function translateGame2(lang: string) {
