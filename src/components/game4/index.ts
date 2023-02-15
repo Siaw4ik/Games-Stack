@@ -6,14 +6,13 @@ import cardAudio from "../../assets/sounds/game5-one-card.mp3";
 import failAudio from "../../assets/sounds/failAudio-starwars.mp3";
 import {
   returnLocalStorage,
-  returnLocalStorageIsRegistred,
+  returnLocalStorageIsRegistered,
   returnLocalStorageUnknown,
 } from "../module/localStorage";
 import { StatisticGames } from "../module/Games";
 import { ScoreGamesUserSort } from "../module/types";
 import { sendScore } from "../results/sendScore";
 import { emptySquares, checkWin } from "./componentsGame4";
-
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
@@ -41,18 +40,7 @@ export function changeGame4AudioVolume(mode: boolean) {
 let origBoard: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 let humanPlay: string = "";
 let ai: string = "";
-const winCombinatios = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [6, 4, 2],
-];
 let scoreUser: number;
-// let scoreUnknown: number;
 
 function declareWinner(who: string) {
   const endBlock = document.getElementById("game4-end") as HTMLElement;
@@ -373,7 +361,7 @@ function turnClick(e: Event): void {
     for (let i = 0; i < cells.length; i += 1) {
       cells[i].removeEventListener("click", turnClick, false);
     }
-    const userTrue = returnLocalStorageIsRegistred();
+    const userTrue = returnLocalStorageIsRegistered();
     if (gameWon.player === humanPlay) {
       if (userTrue.isRegistred === "true") {
         scoreUser += 3;
@@ -439,7 +427,7 @@ function turnClick(e: Event): void {
     }
   }
   function checkTie() {
-    const userTrue = returnLocalStorageIsRegistred();
+    const userTrue = returnLocalStorageIsRegistered();
     const scoreHTML = document.querySelector(
       ".game4-main-score-number"
     ) as HTMLElement;
@@ -513,7 +501,7 @@ export function startGame() {
 
 export function drawScoreFromBackEnd() {
   const statisticGames = new StatisticGames();
-  const userTrue = returnLocalStorageIsRegistred();
+  const userTrue = returnLocalStorageIsRegistered();
   const obj: ScoreGamesUserSort = {
     username: userTrue.userName,
     option: "ascScore",
@@ -535,7 +523,7 @@ export function drawScoreFromBackEnd() {
 
 export function startGameTicTac() {
   const settingsStart = returnLocalStorage();
-  const userTrue = returnLocalStorageIsRegistred();
+  const userTrue = returnLocalStorageIsRegistered();
   const unknownScore = returnLocalStorageUnknown();
   game4BackAudio.loop = true;
   game4BackAudio.play();
@@ -611,7 +599,7 @@ export function startGameTicTac() {
 }
 
 export function game4() {
-  const userTrue = returnLocalStorageIsRegistred();
+  const userTrue = returnLocalStorageIsRegistered();
   if (userTrue.isRegistred === "true") drawScoreFromBackEnd();
   const settings = returnLocalStorage();
   const main = document.querySelector(".main") as HTMLElement;

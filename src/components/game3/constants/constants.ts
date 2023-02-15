@@ -1,12 +1,11 @@
 import { IMeteor } from "../module/types";
 import { createRandomMeteorImg } from "../module/meteors";
-import backgroundAudio from "../../../assets/sounds/back-game5-starwars.mp3";
-import winAudio from "../../../assets/sounds/failAudio-starwars.mp3";
-import moveAudio from "../../../assets/sounds/game5-one-card.mp3";
 
-export const GAME3_BACKGROUND_AUDIO = new Audio(backgroundAudio);
-export const GAME3_FINAL_AUDIO = new Audio(winAudio);
-export const GAME3_MOVE_SOUND = new Audio(moveAudio);
+export const GAME3_BACKGROUND_AUDIO = new Audio(
+  "./assets/back-game5-starwars.mp3"
+);
+export const GAME3_FINAL_AUDIO = new Audio("./assets/failAudio-starwars.mp3");
+export const GAME3_MOVE_SOUND = new Audio("./assets/game5-one-card.mp3");
 
 const defaultMeteorSize = 80;
 const spaceBetweenMeteors = 110;

@@ -160,8 +160,9 @@ function clickAnswer() {
         .classList.add("game1-correct");
     }
     if (answer.className === "game1-main__answer") {
-      console.log("click");
-      changeQuestionsAnsweredCountby1(questionsAnsweredCount);
+      questionsAnsweredCount = changeQuestionsAnsweredCountby1(
+        questionsAnsweredCount
+      );
       if (
         answer.innerHTML === correct &&
         answersAll.filter((el) => el.classList.contains("game1-correct"))
@@ -170,7 +171,7 @@ function clickAnswer() {
           .length === 0 &&
         questionsAnsweredCount !== questionsForGame.length
       ) {
-        changeScore1(answersCount);
+        answersCount = changeScore1(answersCount);
         correctAnswers.innerHTML = String(answersCount);
         question.innerHTML = questionsForGame[questionsAnsweredCount].question;
         answersAll.forEach((element, i) => {
@@ -194,7 +195,7 @@ function clickAnswer() {
           .length === 0 &&
         questionsAnsweredCount === questionsForGame.length
       ) {
-        changeScore1(answersCount);
+        answersCount = changeScore1(answersCount);
         checkAnswerAllArray();
         clearInterval(timer);
         correctAnswers.innerHTML = String(answersCount);
