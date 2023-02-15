@@ -16,10 +16,10 @@ import {
   GAME3_MOVE_SOUND,
 } from "../constants/constants";
 
-import Ship from "./Ship";
-import Background from "./Background";
-import MeteorsController from "./MeteorsController";
-import Score from "./Score";
+import Ship from "./ship";
+import Background from "./background";
+import MeteorsController from "./meteorsController";
+import Score from "./score";
 import { sendScore } from "../../results/sendScore";
 import { gamesData } from "../../gamesInfo/gamesData";
 import { returnLocalStorage } from "../../module/localStorage";

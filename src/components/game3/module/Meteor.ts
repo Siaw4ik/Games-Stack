@@ -1,4 +1,4 @@
-import Ship from "./Ship";
+import Ship from "./ship";
 
 export default class Meteor {
   context: CanvasRenderingContext2D;

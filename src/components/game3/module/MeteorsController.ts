@@ -1,8 +1,7 @@
-// import { IMeteor } from "./types";
-import Meteor from "./Meteor";
+import Meteor from "./meteor";
 import { createOneMeteorLine } from "./meteors";
 import { METEOR_CONFIG } from "../constants/constants";
-import Ship from "./Ship";
+import Ship from "./ship";
 
 export default class MeteorsController {
   METEORS_INTERVAL_MIN = 1500;

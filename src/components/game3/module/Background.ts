@@ -1,5 +1,3 @@
-import background from "../../../assets/images_game_3/background.png";
-
 export default class Background {
   context: CanvasRenderingContext2D;
 
@@ -36,7 +34,7 @@ export default class Background {
     this.y = 0;
 
     this.imageBackground = new Image();
-    this.imageBackground.src = background;
+    this.imageBackground.src = "./assets/background.png";
   }
 
   draw() {

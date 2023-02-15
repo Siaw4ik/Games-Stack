@@ -1,5 +1,3 @@
-import background from "../../../assets/images/background.png";
-
 export default class Ground {
   ctx: CanvasRenderingContext2D;
 
@@ -37,7 +35,7 @@ export default class Ground {
     this.y = this.canvas.height - this.height;
 
     this.groundImage = new Image();
-    this.groundImage.src = background;
+    this.groundImage.src = "./assets/background_game2.png";
   }
 
   draw() {

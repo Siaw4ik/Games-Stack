@@ -1,41 +1,29 @@
 import { IMeteor } from "./types";
-import met1 from "../../../assets/images_game_3/meteor_1.png";
-import met2 from "../../../assets/images_game_3/meteor_2.png";
-import met3 from "../../../assets/images_game_3/meteor_3.png";
-import met4 from "../../../assets/images_game_3/meteor_4.png";
-import met5 from "../../../assets/images_game_3/meteor_5.png";
-import met6 from "../../../assets/images_game_3/meteor_6.png";
-import met7 from "../../../assets/images_game_3/meteor_7.png";
-import met8 from "../../../assets/images_game_3/meteor_8.png";
-import met9 from "../../../assets/images_game_3/meteor_9.png";
-import met10 from "../../../assets/images_game_3/meteor_10.png";
-import met11 from "../../../assets/images_game_3/meteor_11.png";
-import met12 from "../../../assets/images_game_3/meteor_12.png";
 
 const meteor1 = new Image();
-meteor1.src = met1;
+meteor1.src = "./assets/meteor_1.png";
 const meteor2 = new Image();
-meteor2.src = met2;
+meteor2.src = "./assets/meteor_2.png";
 const meteor3 = new Image();
-meteor3.src = met3;
+meteor3.src = "./assets/meteor_3.png";
 const meteor4 = new Image();
-meteor4.src = met4;
+meteor4.src = "./assets/meteor_4.png";
 const meteor5 = new Image();
-meteor5.src = met5;
+meteor5.src = "./assets/meteor_5.png";
 const meteor6 = new Image();
-meteor6.src = met6;
+meteor6.src = "./assets/meteor_6.png";
 const meteor7 = new Image();
-meteor7.src = met7;
+meteor7.src = "./assets/meteor_7.png";
 const meteor8 = new Image();
-meteor8.src = met8;
+meteor8.src = "./assets/meteor_8.png";
 const meteor9 = new Image();
-meteor9.src = met9;
+meteor9.src = "./assets/meteor_9.png";
 const meteor10 = new Image();
-meteor10.src = met10;
+meteor10.src = "./assets/meteor_10.png";
 const meteor11 = new Image();
-meteor11.src = met11;
+meteor11.src = "./assets/meteor_11.png";
 const meteor12 = new Image();
-meteor12.src = met12;
+meteor12.src = "./assets/meteor_12.png";
 
 export const meteorImgArr: HTMLImageElement[] = [
   meteor1,
