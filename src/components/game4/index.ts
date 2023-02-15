@@ -14,6 +14,7 @@ import { ScoreGamesUserSort } from "../module/types";
 import { sendScore } from "../results/sendScore";
 import { emptySquares, checkWin } from "./componentsGame4";
 
+
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
 const game4OneCard = new Audio(cardAudio);

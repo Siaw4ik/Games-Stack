@@ -1,3 +1,4 @@
+
 export function emptySquares(origBoard: string[]) {
   return origBoard.filter((e) => Number(e) >= 0);
 }
