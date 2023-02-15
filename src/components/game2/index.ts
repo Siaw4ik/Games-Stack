@@ -142,6 +142,8 @@ function showGameOver() {
       x,
       y
     );
+    window.addEventListener("keydown", player.keydown);
+    window.addEventListener("keyup", player.keyup);
   }
 }
 
@@ -150,6 +152,16 @@ export function reset() {
     .childNodes[0] as HTMLElement;
   if (mainChild) {
     if (mainChild.classList.value === "game2-wrapper") {
+      const container = document.querySelector(
+        ".game2-main__game"
+      ) as HTMLElement;
+      if (container) {
+        const canvas = document.getElementById("game_2") as HTMLCanvasElement;
+        canvas.addEventListener("touchstart", () => {
+          window.removeEventListener("keydown", player.keydown);
+          window.removeEventListener("keyup", player.keyup);
+        });
+      }
       hasAddedEventListenersForRestart = false;
       gameOver = false;
       waitingToStart = false;
@@ -174,28 +186,8 @@ export function reset() {
 function setupGameReset() {
   if (!hasAddedEventListenersForRestart) {
     hasAddedEventListenersForRestart = true;
-
-    setTimeout(() => {
-      window.addEventListener(
-        "keyup",
-        () => {
-          reset();
-        },
-        { once: true }
-      );
-      /*    const container = document.querySelector(
-        ".game2-main__game"
-      ) as HTMLElement;
-      if (container) {
-        container.addEventListener(
-          "touchstart",
-          () => {
-            reset();
-          },
-          { once: true }
-        );
-      } */
-    }, 1000);
+    window.addEventListener("keyup", reset, { once: true });
+    window.addEventListener("touchstart", reset, { once: true });
   }
 }
 
@@ -240,6 +232,7 @@ function gameLoop(currentTime: number) {
       player.jumpPressed = false;
       return false;
     });
+
     if (previousTime === null) {
       previousTime = currentTime;
       requestAnimationFrame(gameLoop);
@@ -257,9 +250,16 @@ function gameLoop(currentTime: number) {
       score.update(frameTimeDelta);
       updateGameSpeed(frameTimeDelta);
     }
-    if (container && (gameOver || waitingToStart)) {
-      container.addEventListener("touchend", reset, { once: true });
+
+    if (!gameOver && !waitingToStart) {
+      window.removeEventListener("keyup", reset);
+      window.removeEventListener("keydown", reset);
+      document.body.removeEventListener("keyup", reset);
+      document.body.removeEventListener("keydown", reset);
+      window.removeEventListener("touchstart", reset);
+      window.removeEventListener("touchend", reset);
     }
+
     if (!gameOver && enemyController.collideWith(player)) {
       gameOver = true;
       game2BackAudio.pause();
@@ -333,7 +333,7 @@ export const startGameAgility = () => {
   const container = document.querySelector(".game2-main__game") as HTMLElement;
   if (container) {
     window.addEventListener("keyup", reset, { once: true });
-    /*  window.addEventListener("touchstart", reset, { once: true });  */
+    window.addEventListener("touchstart", reset, { once: true });
   }
 };
 
@@ -380,20 +380,7 @@ export function game2() {
     startBtn.addEventListener("click", () => {
       startGameAgility();
     });
-    /*  startBtn.addEventListener("touchstart", () => {
-      startGameAgility();
-    }); */
-    /*  startBtn.addEventListener("touchend", () => {
-      startGameAgility();
-    }); */
   }
-}
-
-export function fixGame2() {
-  window.addEventListener("hashchange", () => {
-    document.body.addEventListener("keyup", reset, { once: true });
-    /*    window.addEventListener("touchstart", reset, { once: true }); */
-  });
 }
 
 export function translateGame2(lang: string) {

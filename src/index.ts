@@ -16,8 +16,8 @@ import {
   closeOpenWindowRegisration,
 } from "./components/registration/register";
 import { clickingIconUserandLogout } from "./components/registration/accountUser";
-import { fixGame2 } from "./components/game2";
 import { retryBtnclick, chipClick } from "./components/game4";
+import { returnLocalStorage } from "./components/module/localStorage";
 
 enableRoutChange();
 drawPage();
@@ -35,7 +35,12 @@ authorizeUser();
 closeOpenWindowRegisration();
 clickingIconUserandLogout();
 
-fixGame2();
 retryBtnclick();
 chipClick();
 console.log("start page");
+
+window.addEventListener("beforeunload", () => {
+  const settings = returnLocalStorage();
+  settings.volume = false;
+  localStorage.setItem("settings", JSON.stringify(settings));
+});

@@ -7,6 +7,10 @@ import {
   returnLocalStorageIsRegistred,
 } from "../module/localStorage";
 import { drawScoreFromBackEnd } from "../game4";
+import {
+  checkValidLoginSignUP,
+  checkValidPasswordSignUP,
+} from "./сomponentsRegister";
 
 function clearInputFalse(name: string) {
   const checkLoginImg = document.querySelector(
@@ -323,8 +327,8 @@ export function authorizeUser() {
     };
     if (
       isCanSend === "true" &&
-      passwordUser.length > 0 &&
-      loginUser.length > 0
+      checkValidPasswordSignUP(passwordUser) &&
+      checkValidLoginSignUP(loginUser)
     ) {
       user.reсordUser(objUser).then((result) => {
         console.log(result);
