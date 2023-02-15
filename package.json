@@ -64,9 +64,14 @@
   ],
   "json.schemas": [
     {
-      "fileMatch": ["/package.json"],
+      "fileMatch": [
+        "/package.json"
+      ],
       "url": "https://json.schemastore.org/package",
       "schema": true
     }
-  ]
+  ],
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  }
 }
