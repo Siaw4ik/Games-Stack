@@ -25,6 +25,7 @@ import winAudio from "../../assets/sounds/final-game5-starwars.mp3";
 import cardAudio from "../../assets/sounds/game5-one-card.mp3";
 import { returnLocalStorage } from "../module/localStorage";
 import { gamesData } from "../gamesInfo/gamesData";
+import { changeScore20 } from "./componentsGame5";
 
 const arrImage = [
   { name: "ship", src: ship },
@@ -107,7 +108,7 @@ const flipCardHandler = (event: Event) => {
       ".game5-wrapper_header .game5-move-span-count"
     ) as HTMLElement).innerHTML = String(move);
     if (move > 18) {
-      score = score > 0 ? score - 20 : 0;
+      score = score > 0 ? changeScore20(score) : 0;
       (document.querySelector(
         ".game5-wrapper_header .game5-score-span-count"
       ) as HTMLElement).innerHTML = String(score);
