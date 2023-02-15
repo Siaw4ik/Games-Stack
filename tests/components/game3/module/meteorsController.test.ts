@@ -2,7 +2,7 @@
 /**
  * @jest-environment jsdom
  */
-import MeteorsController from "../../../../src/components/game3/module/meteorsController";
+import MeteorsController from "../../../../src/components/game3/module/MeteorsController";
 
 describe("MeteorsController getRandomNumber method:", () => {
   test("should return random number between two provided min and max arguments", () => {

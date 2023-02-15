@@ -2,7 +2,7 @@
 /**
  * @jest-environment jsdom
  */
-import Background from "../../../../src/components/game3/module/background";
+import Background from "../../../../src/components/game3/module/Background";
 
 describe("Background update method:", () => {
   test("should return initial y = 0 with provided frameTimeDelta = 0", () => {

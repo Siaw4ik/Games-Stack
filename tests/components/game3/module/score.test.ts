@@ -3,7 +3,7 @@
  * @jest-environment jsdom
  */
 
-import Score from "../../../../src/components/game3/module/score";
+import Score from "../../../../src/components/game3/module/Score";
 
 describe("Score update method:", () => {
   test("should return initial score = 0 with provided frameTimeDelta = 0", () => {
