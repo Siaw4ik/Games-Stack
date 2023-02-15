@@ -250,6 +250,7 @@ function gameLoop(currentTime: number) {
       score.update(frameTimeDelta);
       updateGameSpeed(frameTimeDelta);
     }
+
     if (!gameOver && !waitingToStart) {
       window.removeEventListener("keyup", reset);
       window.removeEventListener("keydown", reset);
