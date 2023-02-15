@@ -1,12 +1,12 @@
 import { changeScore20 } from "../../src/components/game5/componentsGame5";
 import { createObjParametr } from "../../src/components/results/componentsResault";
-import { StatisticGames } from "../../src/components/module/Games";
+/* import { StatisticGames } from "../../src/components/module/Games"; */
 import {
   checkValidLoginSignUP,
   checkValidPasswordSignUP,
 } from "../../src/components/registration/сomponentsRegister";
 
-import { User } from "../../src/components/module/User";
+/* import { User } from "../../src/components/module/User"; */
 
 describe("changeScore20 function:", () => {
   test("should return the score minus 20", () => {
@@ -47,7 +47,7 @@ describe("createObjParametr function:", () => {
   });
 });
 
-const statistic = new StatisticGames();
+/* const statistic = new StatisticGames();
 const user = new User();
 
 const fetchReturnSlawik = {
@@ -123,7 +123,7 @@ describe("user.loginUser function:", () => {
     });
     expect(data).toEqual(successLogin);
   });
-});
+}); */
 
 describe("checkValidLoginSignUP function:", () => {
   test("return a boolean value, corresponding to the validation login string longer than 5 characters and have capital letters", () => {

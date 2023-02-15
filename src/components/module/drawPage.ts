@@ -381,3 +381,11 @@ export function drawPage() {
   drawStyleLightOrDark();
   toggleBurger();
 }
+if (localStorage.getItem("userTrue") === null) {
+  localStorage.setItem("unknownStrategy", JSON.stringify(0));
+  const object = {
+    userName: "",
+    isRegistred: "false",
+  };
+  localStorage.setItem("userTrue", JSON.stringify(object));
+}
