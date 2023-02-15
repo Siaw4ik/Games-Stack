@@ -1,8 +1,11 @@
 import { changeScore20 } from "../../src/components/game5/componentsGame5";
 import { createObjParametr } from "../../src/components/results/componentsResault";
 import { StatisticGames } from "../../src/components/module/Games";
-import { checkValidLoginSignUP } from "../../src/components/registration/сomponentsRegister";
-import { checkValidPasswordSignUP } from "../../src/components/registration/сomponentsRegister";
+import {
+  checkValidLoginSignUP,
+  checkValidPasswordSignUP,
+} from "../../src/components/registration/сomponentsRegister";
+
 import { User } from "../../src/components/module/User";
 
 describe("changeScore20 function:", () => {
@@ -48,15 +51,15 @@ const statistic = new StatisticGames();
 const user = new User();
 
 const fetchReturnSlawik = {
-  "success": true,
-  "username": "TestGameStack001",
-  "scores": {
-      "Jedi's Memory": 260,
-      "Jedi's Agility": 44,
-      "Jedi's Mobility": 36,
-      "Jedi's Mind": 11,
-      "Jedi's Strategy": 4
-  }
+  success: true,
+  username: "TestGameStack001",
+  scores: {
+    "Jedi's Memory": 260,
+    "Jedi's Agility": 44,
+    "Jedi's Mobility": 48,
+    "Jedi's Mind": 11,
+    "Jedi's Strategy": 4,
+  },
 };
 
 describe("StatisticGames.getScoreGamesUser function:", () => {
@@ -86,38 +89,38 @@ describe("user.reсordUser function:", () => {
   test("should return a response from the server stating that this user already exists on the server", async () => {
     const data = await user.reсordUser({
       username: "Slawik",
-      password: "slawacool"
-  });
+      password: "slawacool",
+    });
     expect(data).toEqual({
       success: false,
-      message: "Username is already exists"
-  });
+      message: "Username is already exists",
+    });
   });
 });
 
 const successLogin = {
-  "success": true,
-  "user": {
-      "_id": "63ecaff846cea8759fe949a9",
-      "username": "TestGameStack001",
-      "__v": 0,
-      "password": "testgamestack001",
-      "highScores": {
-          "Jedi's Mind": 11,
-          "Jedi's Agility": 44,
-          "Jedi's Mobility": 36,
-          "Jedi's Strategy": 4,
-          "Jedi's Memory": 260
-      }
-  }
+  success: true,
+  user: {
+    _id: "63ecaff846cea8759fe949a9",
+    username: "TestGameStack001",
+    __v: 0,
+    password: "testgamestack001",
+    highScores: {
+      "Jedi's Mind": 11,
+      "Jedi's Agility": 44,
+      "Jedi's Mobility": 48,
+      "Jedi's Strategy": 4,
+      "Jedi's Memory": 260,
+    },
+  },
 };
 
 describe("user.loginUser function:", () => {
   test("should return a response from the server stating that the user has successfully registered on the site", async () => {
     const data = await user.loginUser({
       username: "TestGameStack001",
-      password: "testgamestack001"
-  });
+      password: "testgamestack001",
+    });
     expect(data).toEqual(successLogin);
   });
 });
