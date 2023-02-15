@@ -12,6 +12,10 @@ import incorrectAudio from "../../assets/sounds/incorrectAnswer.mp3";
 import backAudio from "../../assets/sounds/back-game5-starwars.mp3";
 import failAudio from "../../assets/sounds/failAudio-starwars.mp3";
 import successAudio from "../../assets/sounds/final-game5-starwars.mp3";
+import {
+  changeScore1,
+  changeQuestionsAnsweredCountby1,
+} from "./componentsGame1";
 
 const settingsLoadPage = returnLocalStorage();
 
@@ -157,7 +161,7 @@ function clickAnswer() {
     }
     if (answer.className === "game1-main__answer") {
       console.log("click");
-      questionsAnsweredCount += 1;
+      changeQuestionsAnsweredCountby1(questionsAnsweredCount);
       if (
         answer.innerHTML === correct &&
         answersAll.filter((el) => el.classList.contains("game1-correct"))
@@ -166,7 +170,7 @@ function clickAnswer() {
           .length === 0 &&
         questionsAnsweredCount !== questionsForGame.length
       ) {
-        answersCount += 1;
+        changeScore1(answersCount);
         correctAnswers.innerHTML = String(answersCount);
         question.innerHTML = questionsForGame[questionsAnsweredCount].question;
         answersAll.forEach((element, i) => {
@@ -190,7 +194,7 @@ function clickAnswer() {
           .length === 0 &&
         questionsAnsweredCount === questionsForGame.length
       ) {
-        answersCount += 1;
+        changeScore1(answersCount);
         checkAnswerAllArray();
         clearInterval(timer);
         correctAnswers.innerHTML = String(answersCount);
