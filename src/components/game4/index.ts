@@ -12,7 +12,8 @@ import {
 import { StatisticGames } from "../module/Games";
 import { ScoreGamesUserSort } from "../module/types";
 import { sendScore } from "../results/sendScore";
-import { emptySquares } from "./componentsGame4";
+import { emptySquares, checkWin } from "./componentsGame4";
+
 
 const game4BackAudio = new Audio(backAudio);
 const game4FinalAudio = new Audio(winAudio);
@@ -60,28 +61,6 @@ function declareWinner(who: string) {
   endBlock.classList.add("open");
   endMessage.innerHTML = who;
 }
-
-function checkWin(board: string[], player: string) {
-  const plays = board.reduce(
-    (a: string[], e: string, i: number) =>
-      e === player ? a.concat(i.toString()) : a,
-    []
-  );
-  let gameWon = null;
-  for (let index = 0; index < winCombinatios.length; index += 1) {
-    if (
-      winCombinatios[index].every((elem) => plays.indexOf(elem.toString()) > -1)
-    ) {
-      gameWon = { index, player };
-      break;
-    }
-  }
-  return gameWon;
-}
-
-/* function emptySquares() {
-  return origBoard.filter((e) => Number(e) >= 0);
-} */
 
 function bestSpot() {
   let thirdTurnAi = false;
