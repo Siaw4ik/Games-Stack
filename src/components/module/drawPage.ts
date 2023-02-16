@@ -335,29 +335,61 @@ function toggleBurger() {
   const { body } = document;
 
   burger.addEventListener("click", () => {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
+    const arrowDown = document.querySelector(".arrowDown") as HTMLElement;
     menu.classList.add("active");
     body.classList.add("lock");
     shadow.classList.add("active");
+    arrowDown.classList.add("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.add("active");
+    }
   });
 
   burgerNav.forEach((item) => {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
+    const arrowDown = document.querySelector(".arrowDown") as HTMLElement;
     item.addEventListener("click", () => {
       menu.classList.remove("active");
       body.classList.remove("lock");
       shadow.classList.remove("active");
+      arrowDown.classList.remove("active");
+      if (gamesInfoContainer) {
+        gamesInfoContainer.classList.remove("active");
+      }
     });
   });
 
   cross.addEventListener("click", () => {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
+    const arrowDown = document.querySelector(".arrowDown") as HTMLElement;
     menu.classList.remove("active");
     body.classList.remove("lock");
     shadow.classList.remove("active");
+    arrowDown.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
   });
 
   shadow.addEventListener("click", () => {
+    const gamesInfoContainer = document.querySelector(
+      ".games_info_container"
+    ) as HTMLElement;
+    const arrowDown = document.querySelector(".arrowDown") as HTMLElement;
     menu.classList.remove("active");
     body.classList.remove("lock");
     shadow.classList.remove("active");
+    arrowDown.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
   });
 }
 
