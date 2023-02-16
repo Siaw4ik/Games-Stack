@@ -97,8 +97,22 @@ export function closeOpenWindowRegisration() {
     const shadow = document.querySelector(
       `.shadow_login-window`
     ) as HTMLElement;
+    const gamesInfoContainer = document.querySelector(
+      `.games_info_container`
+    ) as HTMLElement;
+    const body = document.querySelector(`.body`) as HTMLElement;
+    const arrowDown = document.querySelector(`.arrowDown `) as HTMLElement;
     window.classList.add("active");
     shadow.classList.add("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.add("active");
+    }
+    if (body) {
+      body.classList.add("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.add("active");
+    }
   }
 
   function closeWindowRegistration(name: string) {
@@ -109,10 +123,24 @@ export function closeOpenWindowRegisration() {
     const shadow = document.querySelector(
       `.shadow_login-window`
     ) as HTMLElement;
+    const gamesInfoContainer = document.querySelector(
+      `.games_info_container`
+    ) as HTMLElement;
+    const body = document.querySelector(`.body`) as HTMLElement;
+    const arrowDown = document.querySelector(`.arrowDown `) as HTMLElement;
 
     crossLogin.addEventListener("click", () => {
       window.classList.remove("active");
       shadow.classList.remove("active");
+      if (gamesInfoContainer) {
+        gamesInfoContainer.classList.remove("active");
+      }
+      if (body) {
+        body.classList.remove("active");
+      }
+      if (arrowDown) {
+        arrowDown.classList.remove("active");
+      }
       if (name === "login") {
         drawFailBlock("remove");
       }
@@ -121,6 +149,15 @@ export function closeOpenWindowRegisration() {
     shadow.addEventListener("click", () => {
       shadow.classList.remove("active");
       window.classList.remove("active");
+      if (gamesInfoContainer) {
+        gamesInfoContainer.classList.remove("active");
+      }
+      if (body) {
+        body.classList.remove("active");
+      }
+      if (arrowDown) {
+        arrowDown.classList.remove("active");
+      }
       if (name === "login") {
         drawFailBlock("remove");
       }

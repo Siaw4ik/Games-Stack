@@ -4,7 +4,8 @@
   font-family: "Lato", sans-serif;
 }
 
-body.lock {
+body.lock,
+body.active {
   overflow: hidden;
 }
 
@@ -70,6 +71,10 @@ body.lock {
 
 .shadow_login-window.active {
   display: block;
+}
+
+.games_info_container.active {
+  z-index: 4;
 }
 
 .up-header {
@@ -631,7 +636,7 @@ body.lock {
   color: #ffffff;
   font-size: 16px;
   height: 60px;
-  z-index: 5;
+  z-index: 4;
 }
 
 .footer p{
