@@ -4728,7 +4728,7 @@ function drawHTMLLayout() {
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
-          <a class="wrap_logo_a" href=".index.html">
+          <a class="wrap_logo_a" href="./index.html">
             <div class="logo">
               <img class="logoHeader" src="${_assets_logo_svg__WEBPACK_IMPORTED_MODULE_6__}">
             </div>
