@@ -381,7 +381,11 @@ export function drawPage() {
   drawStyleLightOrDark();
   toggleBurger();
 }
-if (localStorage.getItem("userTrue") === null) {
+
+if (
+  localStorage.getItem("userTrue") === null ||
+  userTrue.isRegistred === "false"
+) {
   localStorage.setItem("unknownStrategy", JSON.stringify(0));
   const object = {
     userName: "",

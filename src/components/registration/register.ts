@@ -188,7 +188,6 @@ function checkInputLogNameTrue() {
     ".signup-window_button"
   ) as HTMLElement;
 
-  console.log("такое имя есть");
   const settings = returnLocalStorage();
   checkLogin.classList.add("active");
   checkLogin.innerHTML = `${
@@ -274,7 +273,7 @@ export function authorizeUser() {
     const objUser = {
       username: loginUser,
     };
-    if (loginUser.length > 0) {
+    if (checkValidLoginSignUP(loginUser)) {
       user.checkUser(objUser).then((result) => {
         if (result.success === true) {
           checkInputLogNameTrue();
@@ -285,10 +284,35 @@ export function authorizeUser() {
     }
   });
 
+  passwordUserInput.addEventListener("input", () => {
+    const passwordUser = passwordUserInput.value;
+    if (checkValidPasswordSignUP(passwordUser)) {
+      passwordUserInput.style.color = "green";
+      btnSendSignup.setAttribute("id", "true");
+    } else {
+      passwordUserInput.style.color = "red";
+      btnSendSignup.setAttribute("id", "false");
+    }
+  });
+
   loginUserInput.addEventListener("input", () => {
+    const loginUser = loginUserInput.value;
+    if (checkValidPasswordSignUP(loginUser)) {
+      loginUserInput.style.color = "green";
+      btnSendSignup.setAttribute("id", "true");
+    } else if (loginUser.length === 0) {
+      loginUserInput.style.color = "black";
+      clearInputFalse("signup");
+    } else {
+      loginUserInput.style.color = "red";
+      btnSendSignup.setAttribute("id", "false");
+    }
+  });
+
+  /* loginUserInput.addEventListener("input", () => {
     loginUserInput.style.color = "black";
     clearInputFalse("signup");
-  });
+  }); */
 
   function activeIconandBtn(userLogin: string) {
     btnSignup.style.display = "none";
