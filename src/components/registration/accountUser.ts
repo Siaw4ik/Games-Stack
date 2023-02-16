@@ -34,30 +34,81 @@ export function clickingIconUserandLogout() {
   const accountStatistic = document.querySelector(
     ".score-window"
   ) as HTMLElement;
+  const gamesInfoContainer = document.querySelector(
+    `.games_info_container`
+  ) as HTMLElement;
+  const body = document.querySelector(`.body`) as HTMLElement;
+  const arrowDown = document.querySelector(`.arrowDown `) as HTMLElement;
 
   iconUser.addEventListener("click", () => {
     accountWindow.classList.add("active");
     shadowAccount.classList.add("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.add("active");
+    }
+    if (body) {
+      body.classList.add("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.add("active");
+    }
   });
 
   shadowAccount.addEventListener("click", () => {
     accountWindow.classList.remove("active");
     shadowAccount.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
+    if (body) {
+      body.classList.remove("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
   });
 
   crossAccWindow.addEventListener("click", () => {
     accountWindow.classList.remove("active");
     shadowAccount.classList.remove("active");
+    gamesInfoContainer.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
+    if (body) {
+      body.classList.remove("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
   });
 
   accountStatistic.addEventListener("click", () => {
     accountWindow.classList.remove("active");
     shadowAccount.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
+    if (body) {
+      body.classList.remove("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
   });
 
   btnLogout.addEventListener("click", () => {
     accountWindow.classList.remove("active");
     shadowAccount.classList.remove("active");
+    if (gamesInfoContainer) {
+      gamesInfoContainer.classList.remove("active");
+    }
+    if (body) {
+      body.classList.remove("active");
+    }
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
 
     btnSignup.style.display = "flex";
     btnSignupBurger.style.display = "flex";
