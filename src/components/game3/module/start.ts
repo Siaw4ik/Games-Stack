@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 import {
   GAME_HEIGHT,
@@ -82,7 +83,6 @@ function createSprites() {
 
     meteorsController = new MeteorsController(
       context,
-      [],
       scaleRatio,
       METEORS_AND_BACKGROUND_SPEED
     );

@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const path = require("path");
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -48,6 +49,74 @@ const config = {
         {
           from: "src/assets/favicon.ico",
           to: "assets/favicon.ico",
+        },
+        {
+          from: "src/assets/images_game_3/background.png",
+          to: "assets/background.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_1.png",
+          to: "assets/meteor_1.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_2.png",
+          to: "assets/meteor_2.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_3.png",
+          to: "assets/meteor_3.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_4.png",
+          to: "assets/meteor_4.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_5.png",
+          to: "assets/meteor_5.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_6.png",
+          to: "assets/meteor_6.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_7.png",
+          to: "assets/meteor_7.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_8.png",
+          to: "assets/meteor_8.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_9.png",
+          to: "assets/meteor_9.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_10.png",
+          to: "assets/meteor_10.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_11.png",
+          to: "assets/meteor_11.png",
+        },
+        {
+          from: "src/assets/images_game_3/meteor_12.png",
+          to: "assets/meteor_12.png",
+        },
+        {
+          from: "src/assets/sounds/back-game5-starwars.mp3",
+          to: "assets/back-game5-starwars.mp3",
+        },
+        {
+          from: "src/assets/sounds/failAudio-starwars.mp3",
+          to: "assets/failAudio-starwars.mp3",
+        },
+        {
+          from: "src/assets/sounds/game5-one-card.mp3",
+          to: "assets/game5-one-card.mp3",
+        },
+        {
+          from: "src/assets/images/background.png",
+          to: "assets/background_game2.png",
         },
       ],
     }),

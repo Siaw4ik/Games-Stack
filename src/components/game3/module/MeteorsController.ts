@@ -1,4 +1,3 @@
-import { IMeteor } from "./types";
 import Meteor from "./Meteor";
 import { createOneMeteorLine } from "./meteors";
 import { METEOR_CONFIG } from "../constants/constants";
@@ -17,21 +16,17 @@ export default class MeteorsController {
 
   canvas: HTMLCanvasElement;
 
-  meteorsImages: IMeteor[];
-
   scaleRatio: number;
 
   speed: number;
 
   constructor(
     context: CanvasRenderingContext2D,
-    meteorsImages: IMeteor[],
     scaleRatio: number,
     speed: number
   ) {
     this.context = context;
     this.canvas = context.canvas;
-    this.meteorsImages = meteorsImages;
     this.scaleRatio = scaleRatio;
     this.speed = speed;
 
