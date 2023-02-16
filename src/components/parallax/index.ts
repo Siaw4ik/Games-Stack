@@ -61,5 +61,26 @@ export function parallax() {
       coordXpercent = (coordX / parallaxWidth) * 100;
       coordYpercent = (coordY / parallaxHeight) * 100;
     });
+
+    function handleOrientation(event: DeviceOrientationEvent) {
+      const betta = event.beta;
+      const gama = event.gamma;
+
+      if (event && betta !== null && gama !== null) {
+        const parallaxWidth = parallaxed.offsetWidth;
+        const parallaxHeight = parallaxed.offsetHeight;
+
+        const coordX = gama - parallaxWidth / 4;
+        const coordY = betta - parallaxHeight / 4;
+        coordXpercent = (coordX / parallaxWidth) * 100;
+        coordYpercent = (coordY / parallaxHeight) * 100;
+      }
+    }
+
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", handleOrientation, true);
+    } else {
+      console.log("DeviceMotionEvent is not supported");
+    }
   }
 }
