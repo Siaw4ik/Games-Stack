@@ -32,7 +32,7 @@ function drawHTMLLayout() {
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
-          <a class="wrap_logo_a" href="../../#about">
+          <a class="wrap_logo_a" href=".index.html">
             <div class="logo">
               <img class="logoHeader" src="${logoHeder}">
             </div>
@@ -94,7 +94,7 @@ function drawHTMLLayout() {
       <div class="burger_menu">
         <div class="wrap_burger_up">
           <div class="wrap_logo">
-            <a class="wrap_logo_a" href="../../#about">
+            <a class="wrap_logo_a" href="./index.html">
               <div class="logo">
                 <p><span class="one-part">GAME </span><span class="two-part"> STACK</span></p>
               </div>
