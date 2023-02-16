@@ -528,13 +528,26 @@ body.active {
   color: red;
 }
 
-.signup-window_logName img {
+.signup-window_logName-imgok,
+.signup-window_logName-imgfail {
   position: absolute;
   top: 9px;
   right: 5px;
   width: 16px;
   height: 16px;
   z-index: 50;
+  display: none;
+}
+
+.signup-window_logName-imgok.active,
+.signup-window_logName-imgfail.active {
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  z-index: 50;
+  display: block;
 }
 
 .account-window {

@@ -6,6 +6,8 @@ import iconUser from "../../assets/account.png";
 import iconOk from "../../assets/input_OK.svg";
 import logoHeder from "../../assets/logo.svg";
 import iconNO from "../../assets/input_Unavailable.svg";
+import inputOk from "../../assets/iconOKInput.svg";
+import inputFail from "../../assets/cross_input.svg";
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistered,
@@ -186,7 +188,8 @@ function drawHTMLLayout() {
           <div class="signup-window_logName">
             <p>${settings?.lang === "en" ? "Login:" : "Логин:"}</p>
             <input type="text">
-            <img src="">
+            <img class="signup-window_logName-imgok" src="${inputOk}">
+            <img class="signup-window_logName-imgfail" src="${inputFail}">
             <div class="check-login"></div>
           </div>
           <p class="signup_check-login-down"></p>
@@ -342,7 +345,9 @@ function toggleBurger() {
     menu.classList.add("active");
     body.classList.add("lock");
     shadow.classList.add("active");
-    arrowDown.classList.add("active");
+    if (arrowDown) {
+      arrowDown.classList.add("active");
+    }
     if (gamesInfoContainer) {
       gamesInfoContainer.classList.add("active");
     }
@@ -357,7 +362,9 @@ function toggleBurger() {
       menu.classList.remove("active");
       body.classList.remove("lock");
       shadow.classList.remove("active");
-      arrowDown.classList.remove("active");
+      if (arrowDown) {
+        arrowDown.classList.remove("active");
+      }
       if (gamesInfoContainer) {
         gamesInfoContainer.classList.remove("active");
       }
@@ -372,7 +379,9 @@ function toggleBurger() {
     menu.classList.remove("active");
     body.classList.remove("lock");
     shadow.classList.remove("active");
-    arrowDown.classList.remove("active");
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
     if (gamesInfoContainer) {
       gamesInfoContainer.classList.remove("active");
     }
@@ -386,7 +395,9 @@ function toggleBurger() {
     menu.classList.remove("active");
     body.classList.remove("lock");
     shadow.classList.remove("active");
-    arrowDown.classList.remove("active");
+    if (arrowDown) {
+      arrowDown.classList.remove("active");
+    }
     if (gamesInfoContainer) {
       gamesInfoContainer.classList.remove("active");
     }

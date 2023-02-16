@@ -1,5 +1,5 @@
 export function checkValidLoginSignUP(value: string) {
-  if (value.length >= 5 && !(value === value.toLowerCase())) {
+  if (value.length >= 5) {
     return true;
   }
   return false;

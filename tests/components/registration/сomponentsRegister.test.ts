@@ -6,7 +6,7 @@ import {
 describe("checkValidLoginSignUP function:", () => {
   test("return a boolean value, corresponding to the validation login string longer than 5 characters and have capital letters", () => {
     expect(checkValidLoginSignUP("Slawik")).toBe(true);
-    expect(checkValidLoginSignUP("slawa")).toBe(false);
+    expect(checkValidLoginSignUP("slawa")).toBe(true);
     expect(checkValidLoginSignUP("s")).toBe(false);
     expect(checkValidLoginSignUP("SlawikCool")).toBe(true);
   });

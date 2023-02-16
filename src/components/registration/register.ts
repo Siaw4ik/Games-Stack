@@ -1,7 +1,7 @@
 import { User } from "../module/User";
 import { TypeUser } from "../module/types";
-import VImg from "../../assets/input_V.svg";
-import XImg from "../../assets/cross_input.svg";
+/* import VImg from "../../assets/iconOKInput.svg";
+import XImg from "../../assets/cross_input.svg"; */
 import {
   returnLocalStorage,
   returnLocalStorageIsRegistered,
@@ -13,16 +13,24 @@ import {
 } from "./сomponentsRegister";
 
 function clearInputFalse(name: string) {
-  const checkLoginImg = document.querySelector(
+  /* const checkLoginImg = document.querySelector(
     `.${name}-window_logName img`
-  ) as HTMLElement;
+  ) as HTMLElement; */
   const checkLoginDown = document.querySelector(
     `.${name}_check-login-down`
   ) as HTMLElement;
   const checkLogin = document.querySelector(".check-login") as HTMLElement;
+  const imgInputOk = document.querySelector(
+    ".signup-window_logName-imgok"
+  ) as HTMLElement;
+  const imgInputFail = document.querySelector(
+    ".signup-window_logName-imgfail"
+  ) as HTMLElement;
 
   checkLoginDown.innerHTML = "";
-  checkLoginImg.setAttribute("src", "");
+  imgInputFail.classList.remove("active");
+  imgInputOk.classList.remove("active");
+  // checkLoginImg.setAttribute("src", "");
   if (name === "signup") {
     checkLogin.classList.remove("active");
   }
@@ -215,14 +223,17 @@ function checkInputLogNameTrue() {
   const checkLoginDown = document.querySelector(
     ".signup_check-login-down"
   ) as HTMLElement;
-  const checkLoginImg = document.querySelector(
+  /* const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
-  ) as HTMLElement;
+  ) as HTMLElement; */
   const loginUserInput = document.querySelector(
     ".signup-window_logName input"
   ) as HTMLInputElement;
   const btnSendSignup = document.querySelector(
     ".signup-window_button"
+  ) as HTMLElement;
+  const imgInputFail = document.querySelector(
+    ".signup-window_logName-imgfail"
   ) as HTMLElement;
 
   const settings = returnLocalStorage();
@@ -237,7 +248,8 @@ function checkInputLogNameTrue() {
       ? "This login is already taken, use another one..."
       : "Этот логин уже занят, используйте другой..."
   }`;
-  checkLoginImg.setAttribute("src", XImg);
+  // checkLoginImg.setAttribute("src", XImg);
+  imgInputFail.classList.add("active");
   loginUserInput.style.color = "red";
   btnSendSignup.setAttribute("id", "false");
   setTimeout(() => {
@@ -249,18 +261,23 @@ function checkInputLogNameFalse() {
   const checkLoginDown = document.querySelector(
     ".signup_check-login-down"
   ) as HTMLElement;
-  const checkLoginImg = document.querySelector(
+  /* const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
-  ) as HTMLElement;
+  ) as HTMLElement; */
   const loginUserInput = document.querySelector(
     ".signup-window_logName input"
   ) as HTMLInputElement;
   const btnSendSignup = document.querySelector(
     ".signup-window_button"
   ) as HTMLElement;
+  const imgInputOk = document.querySelector(
+    ".signup-window_logName-imgok"
+  ) as HTMLElement;
+
   console.log("такого имени нет");
   checkLoginDown.innerHTML = "";
-  checkLoginImg.setAttribute("src", VImg);
+  // checkLoginImg.setAttribute("src", VImg);
+  imgInputOk.classList.add("active");
   loginUserInput.style.color = "green";
   btnSendSignup.setAttribute("id", "true");
 }
@@ -277,9 +294,9 @@ export function authorizeUser() {
   const passwordUserInput = document.querySelector(
     ".signup-window_password input"
   ) as HTMLInputElement;
-  const checkLoginImg = document.querySelector(
+  /* const checkLoginImg = document.querySelector(
     ".signup-window_logName img"
-  ) as HTMLElement;
+  ) as HTMLElement; */
   const signupWindow = document.querySelector(".signup-window") as HTMLElement;
   const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
   const btnSignup = document.querySelector(".authorin") as HTMLElement;
@@ -303,6 +320,13 @@ export function authorizeUser() {
 
   const accountNameUser = document.querySelector(
     ".account_nameUser"
+  ) as HTMLElement;
+
+  const imgInputOk = document.querySelector(
+    ".signup-window_logName-imgok"
+  ) as HTMLElement;
+  const imgInputFail = document.querySelector(
+    ".signup-window_logName-imgfail"
   ) as HTMLElement;
 
   loginUserInput.addEventListener("blur", () => {
@@ -397,7 +421,9 @@ export function authorizeUser() {
           drawSuccessBlock("signup", loginUser);
           loginUserInput.value = "";
           passwordUserInput.value = "";
-          checkLoginImg.setAttribute("src", "");
+          // checkLoginImg.setAttribute("src", "");
+          imgInputFail.classList.remove("active");
+          imgInputOk.classList.remove("active");
           loginUserInput.style.color = "black";
           activeIconandBtn(loginUser);
           accountNameUser.innerHTML = loginUser;
