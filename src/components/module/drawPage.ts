@@ -59,7 +59,7 @@ function drawHTMLLayout() {
               userTrue.isRegistred === "true"
                 ? "display: none;"
                 : "display: flex;"
-            }">${settings?.lang === "en" ? "Sign up" : "Авторизация"}</div>
+            }">${settings?.lang === "en" ? "Sign up" : "Регистрация"}</div>
             <div class="btn_autorization login" style="${
               userTrue.isRegistred === "true"
                 ? "display: none;"
@@ -125,7 +125,7 @@ function drawHTMLLayout() {
                 userTrue.isRegistred === "true"
                   ? "display: none;"
                   : "display: flex;"
-              }">${settings?.lang === "en" ? "Sign up" : "Авторизация"}</div>
+              }">${settings?.lang === "en" ? "Sign up" : "Регистрация"}</div>
               <div class="btn_autorization-burger login-burger" style="${
                 userTrue.isRegistred === "true"
                   ? "display: none;"
@@ -140,7 +140,7 @@ function drawHTMLLayout() {
       <div class="shadow_account-window"></div>
       <div class="login-window">
         <div class="login-window_header">
-          <p>Login to Game Stack</p>
+          <p>${settings?.lang === "en" ? "Login" : "Логин"}</p>
           <div class="login-window_cross">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
@@ -174,7 +174,7 @@ function drawHTMLLayout() {
       </div>
       <div class="signup-window">
         <div class="signup-window_header">
-          <p>Sign Up to Game Stack</p>
+          <p>${settings?.lang === "en" ? "Sign Up" : "Регистрация"}</p>
           <div class="signup-window_cross">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
@@ -219,7 +219,7 @@ function drawHTMLLayout() {
           }</div>
         </div>
         <p class="score-window">${
-          settings.lang === "en" ? "Game statistics" : "Статистика игр"
+          settings.lang === "en" ? "Games statistics" : "Статистика игр"
         }</p>
         <p class="btn-logout">${settings.lang === "en" ? "Logout" : "Выйти"}</p>
       </div>

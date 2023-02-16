@@ -165,6 +165,12 @@ export function toggleLang() {
   ) as HTMLElement;
   const logoutBtn = document.querySelector(".btn-logout") as HTMLElement;
   const scoreWindow = document.querySelector(".score-window") as HTMLElement;
+  const signUpTitle = document.querySelector(
+    ".signup-window_header p"
+  ) as HTMLElement;
+  const logInTitle = document.querySelector(
+    ".login-window_header p"
+  ) as HTMLElement;
 
   function toggleRu() {
     langRu.classList.add("lang-active");
@@ -172,15 +178,17 @@ export function toggleLang() {
     settings.lang = "ru";
     localStorage.setItem("settings", JSON.stringify(settings));
 
-    btnAuthorin.innerHTML = "Авторизация";
+    btnAuthorin.innerHTML = "Регистрация";
     btnLogin.innerHTML = "Войти";
-    btnBurgerAuthorin.innerHTML = "Авторизация";
+    btnBurgerAuthorin.innerHTML = "Регистрация";
     btnBurgerLogin.innerHTML = "Войти";
     about.innerHTML = "Главная";
     result.innerHTML = "Результаты";
     burgerAbout.innerHTML = "Главная";
     burgerResult.innerHTML = "Результаты";
 
+    signUpTitle.innerHTML = "Регистрация";
+    logInTitle.innerHTML = "Логин";
     loginLogNameP.innerHTML = "Логин";
     loginPasswordP.innerHTML = "Пароль";
     loginBtn.innerHTML = "Войти";
@@ -222,6 +230,8 @@ export function toggleLang() {
     burgerAbout.innerHTML = "Home";
     burgerResult.innerHTML = "Results";
 
+    signUpTitle.innerHTML = "Sign Up";
+    logInTitle.innerHTML = "Login";
     loginLogNameP.innerHTML = "Login";
     loginPasswordP.innerHTML = "Password";
     loginBtn.innerHTML = "Login";
