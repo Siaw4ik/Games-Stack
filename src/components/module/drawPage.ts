@@ -16,8 +16,6 @@ import {
 const settings = returnLocalStorage();
 const userTrue = returnLocalStorageIsRegistered();
 
-console.log(userTrue);
-
 function drawHTMLLayout() {
   const div = document.createElement("div");
   div.classList.add("wrapper");
