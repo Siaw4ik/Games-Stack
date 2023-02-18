@@ -37,7 +37,6 @@ clickingIconUserandLogout();
 
 retryBtnclick();
 chipClick();
-console.log("start page");
 
 window.addEventListener("beforeunload", () => {
   const settings = returnLocalStorage();

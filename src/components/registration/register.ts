@@ -261,9 +261,6 @@ function checkInputLogNameFalse() {
   const checkLoginDown = document.querySelector(
     ".signup_check-login-down"
   ) as HTMLElement;
-  /* const checkLoginImg = document.querySelector(
-    ".signup-window_logName img"
-  ) as HTMLElement; */
   const loginUserInput = document.querySelector(
     ".signup-window_logName input"
   ) as HTMLInputElement;
@@ -274,9 +271,7 @@ function checkInputLogNameFalse() {
     ".signup-window_logName-imgok"
   ) as HTMLElement;
 
-  console.log("такого имени нет");
   checkLoginDown.innerHTML = "";
-  // checkLoginImg.setAttribute("src", VImg);
   imgInputOk.classList.add("active");
   loginUserInput.style.color = "green";
   btnSendSignup.setAttribute("id", "true");
@@ -294,9 +289,6 @@ export function authorizeUser() {
   const passwordUserInput = document.querySelector(
     ".signup-window_password input"
   ) as HTMLInputElement;
-  /* const checkLoginImg = document.querySelector(
-    ".signup-window_logName img"
-  ) as HTMLElement; */
   const signupWindow = document.querySelector(".signup-window") as HTMLElement;
   const shadow = document.querySelector(".shadow_login-window") as HTMLElement;
   const btnSignup = document.querySelector(".authorin") as HTMLElement;
@@ -370,11 +362,6 @@ export function authorizeUser() {
     }
   });
 
-  /* loginUserInput.addEventListener("input", () => {
-    loginUserInput.style.color = "black";
-    clearInputFalse("signup");
-  }); */
-
   function activeIconandBtn(userLogin: string) {
     btnSignup.style.display = "none";
     btnSignupBurger.style.display = "none";
@@ -416,12 +403,10 @@ export function authorizeUser() {
       checkValidLoginSignUP(loginUser)
     ) {
       user.reсordUser(objUser).then((result) => {
-        console.log(result);
         if (result.success === true) {
           drawSuccessBlock("signup", loginUser);
           loginUserInput.value = "";
           passwordUserInput.value = "";
-          // checkLoginImg.setAttribute("src", "");
           imgInputFail.classList.remove("active");
           imgInputOk.classList.remove("active");
           loginUserInput.style.color = "black";
@@ -446,11 +431,9 @@ export function authorizeUser() {
       username: loginUser,
       password: passwordUser,
     };
-    console.log(objUser);
 
     user.loginUser(objUser).then((result) => {
       if (result.success === true) {
-        console.log(result);
         drawSuccessBlock("login", loginUser);
         loginLogInInput.value = "";
         passwordLogInInput.value = "";
@@ -462,7 +445,6 @@ export function authorizeUser() {
           shadow.classList.remove("active");
         }, 3000);
       } else if (result.success === false) {
-        console.log(result);
         drawFailBlock("add");
         setTimeout(() => {
           drawFailBlock("remove");
