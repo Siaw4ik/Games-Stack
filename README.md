@@ -23,8 +23,8 @@ on 'https://rsclonetestserver-production.up.railway.app/user/addscore'
 { 'username': 'User_Name', 'gamename': 'tetris', 'score': 1 }  
 on 'https://rsclonetestserver-production.up.railway.app/top/addscore'  
   - **Get current user scores with sorting ability:** ***POST request with body:***  
-{ 'username': 'User_Name', 'options': 'ascScore'/'descScore'/'ascGame'/'descGame'/ }  
+{ 'username': 'User_Name', 'option': 'ascScore'/'descScore'/'ascGame'/'descGame'/ }  
 on 'https://rsclonetestserver-production.up.railway.app/user/scores'  
   - **Get specified game TOP10 with sorting ability:** ***POST request with body:***  
-{ 'gamename': 'tetris', 'options': 'ascScore'/'descScore'/'ascName'/'descName'/ }  
+{ 'gamename': 'tetris', 'option': 'ascScore'/'descScore'/'ascName'/'descName'/ }  
 on 'https://rsclonetestserver-production.up.railway.app/game/top10'  
