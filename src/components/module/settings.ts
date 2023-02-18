@@ -1,6 +1,6 @@
 import light from "../../assets/sunny.svg";
 import dark from "../../assets/moon.svg";
-import { Settings } from "./types";
+// import { Settings } from "./types";
 import { redrawGameInfoSectionForToggleLang } from "../gamesInfo";
 import { translateHeaderTable } from "../results";
 import { changeGame5AudioVolume, translateGame5 } from "../game5";
@@ -13,12 +13,6 @@ import { returnLocalStorage } from "./localStorage";
 
 const backHomeAudio = new Audio(backAudio);
 backHomeAudio.loop = true;
-
-const settings: Settings = {
-  lang: "en",
-  style: "light",
-  volume: false,
-};
 
 window.addEventListener("hashchange", () => {
   const settingsChange = returnLocalStorage();
@@ -37,11 +31,12 @@ export function toggleVolume() {
   const volumeSlash = document.querySelector(".volume-slash") as HTMLElement;
 
   function changeClassVolume() {
+    const settingsChange = returnLocalStorage();
     volume.classList.toggle("active");
     if (volume.classList.value === "volumeOn") {
       volumeSlash.classList.remove("active");
-      settings.volume = false;
-      localStorage.setItem("settings", JSON.stringify(settings));
+      settingsChange.volume = false;
+      localStorage.setItem("settings", JSON.stringify(settingsChange));
       changeGame5AudioVolume(false);
       changeGame4AudioVolume(false);
       changeGame1AudioVolume(false);
@@ -53,8 +48,8 @@ export function toggleVolume() {
     }
     if (volume.classList.value === "volumeOn active") {
       volumeSlash.classList.add("active");
-      settings.volume = true;
-      localStorage.setItem("settings", JSON.stringify(settings));
+      settingsChange.volume = true;
+      localStorage.setItem("settings", JSON.stringify(settingsChange));
       changeGame5AudioVolume(true);
       changeGame4AudioVolume(true);
       changeGame1AudioVolume(true);
@@ -89,6 +84,7 @@ export function toggleLight() {
   ) as HTMLElement;
 
   function changeClassDark() {
+    const settingsChange = returnLocalStorage();
     const arrowUP = document.querySelector(".arrowUp") as HTMLElement;
     const gamesInfoContainer = document.querySelector(
       ".games_info_container"
@@ -107,13 +103,13 @@ export function toggleLight() {
     menuItem.forEach((item) => item.classList.toggle("dark"));
     if (btnLight.classList.value === "btn-style light") {
       btnLight.setAttribute("src", light);
-      settings.style = "light";
-      localStorage.setItem("settings", JSON.stringify(settings));
+      settingsChange.style = "light";
+      localStorage.setItem("settings", JSON.stringify(settingsChange));
     }
     if (btnLight.classList.value === "btn-style") {
       btnLight.setAttribute("src", dark);
-      settings.style = "dark";
-      localStorage.setItem("settings", JSON.stringify(settings));
+      settingsChange.style = "dark";
+      localStorage.setItem("settings", JSON.stringify(settingsChange));
     }
   }
   btnLight.addEventListener("click", () => {
@@ -173,10 +169,11 @@ export function toggleLang() {
   ) as HTMLElement;
 
   function toggleRu() {
+    const settingsChange = returnLocalStorage();
     langRu.classList.add("lang-active");
     langEn.classList.remove("lang-active");
-    settings.lang = "ru";
-    localStorage.setItem("settings", JSON.stringify(settings));
+    settingsChange.lang = "ru";
+    localStorage.setItem("settings", JSON.stringify(settingsChange));
 
     btnAuthorin.innerHTML = "Регистрация";
     btnLogin.innerHTML = "Войти";
@@ -198,13 +195,13 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Выйти";
     scoreWindow.innerHTML = "Статистика игр";
-    translateHeaderTable(settings.lang);
-    translateGame5(settings.lang);
-    translateGame4(settings.lang);
-    translateGame1(settings.lang);
-    translateGame2(settings.lang);
-    translateGame3(settings.lang);
-    redrawGameInfoSectionForToggleLang(settings.lang);
+    translateHeaderTable(settingsChange.lang);
+    translateGame5(settingsChange.lang);
+    translateGame4(settingsChange.lang);
+    translateGame1(settingsChange.lang);
+    translateGame2(settingsChange.lang);
+    translateGame3(settingsChange.lang);
+    redrawGameInfoSectionForToggleLang(settingsChange.lang);
   }
 
   langRu.addEventListener("click", toggleRu);
@@ -216,10 +213,11 @@ export function toggleLang() {
   });
 
   function toggleEn() {
+    const settingsChange = returnLocalStorage();
     langEn.classList.add("lang-active");
     langRu.classList.remove("lang-active");
-    settings.lang = "en";
-    localStorage.setItem("settings", JSON.stringify(settings));
+    settingsChange.lang = "en";
+    localStorage.setItem("settings", JSON.stringify(settingsChange));
 
     btnAuthorin.innerHTML = "Sign up";
     btnLogin.innerHTML = "Login";
@@ -241,13 +239,13 @@ export function toggleLang() {
 
     logoutBtn.innerHTML = "Logout";
     scoreWindow.innerHTML = "Game statistics";
-    translateHeaderTable(settings.lang);
-    translateGame5(settings.lang);
-    translateGame4(settings.lang);
-    translateGame1(settings.lang);
-    translateGame2(settings.lang);
-    translateGame3(settings.lang);
-    redrawGameInfoSectionForToggleLang(settings.lang);
+    translateHeaderTable(settingsChange.lang);
+    translateGame5(settingsChange.lang);
+    translateGame4(settingsChange.lang);
+    translateGame1(settingsChange.lang);
+    translateGame2(settingsChange.lang);
+    translateGame3(settingsChange.lang);
+    redrawGameInfoSectionForToggleLang(settingsChange.lang);
   }
 
   langEn.addEventListener("click", toggleEn);

@@ -372,7 +372,7 @@ function startGameMind() {
 </div>`;
 
   window.addEventListener("hashchange", () => {
-    if (window.location.href !== "#game5") {
+    if (window.location.href !== "#game1") {
       game1BackAudio.pause();
       game1FinalFailAudio.pause();
       game1FinalSuccessAudio.pause();
