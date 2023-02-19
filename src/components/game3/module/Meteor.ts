@@ -43,7 +43,7 @@ export default class Meteor {
   }
 
   collideWith(falcon: Ship) {
-    const adjustBy = 1.2;
+    const adjustBy = 5;
     if (
       falcon.x < this.x + this.width / adjustBy &&
       falcon.x + falcon.width / adjustBy > this.x &&
