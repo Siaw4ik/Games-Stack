@@ -164,7 +164,6 @@ export function redrawGameInfoSectionForToggleLang(language: string) {
   const sections = document.querySelectorAll(".game_section");
   sections.forEach((section) => {
     const id = section.getAttribute("class")?.slice(0, 5);
-    console.log(id);
 
     const dataArr = language === "ru" ? gamesData.ru : gamesData.en;
     if (id) {

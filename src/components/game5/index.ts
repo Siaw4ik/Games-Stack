@@ -120,7 +120,6 @@ const flipCardHandler = (event: Event) => {
       firstCard.removeEventListener("click", flipCardHandler);
       secondCard.removeEventListener("click", flipCardHandler);
       result18 += 1;
-      console.log(result18);
       if (result18 === 18) {
         sendScore("Jedi's Memory", score);
         (document.querySelector(

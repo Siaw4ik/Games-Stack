@@ -466,6 +466,10 @@
     height: 90px;
     font-size: 22px;
   }
+
+  .game1-main__answer:hover {
+    background-color: unset;
+  }
 }
 
 @media (max-width: 640px) {

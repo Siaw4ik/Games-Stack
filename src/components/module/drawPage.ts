@@ -16,8 +16,6 @@ import {
 const settings = returnLocalStorage();
 const userTrue = returnLocalStorageIsRegistered();
 
-console.log(userTrue);
-
 function drawHTMLLayout() {
   const div = document.createElement("div");
   div.classList.add("wrapper");
@@ -32,7 +30,7 @@ function drawHTMLLayout() {
     <header class="header">
       <div class="up-header">
         <div class="wrap_logo">
-          <a class="wrap_logo_a" href="../../#about">
+          <a class="wrap_logo_a" href="./index.html">
             <div class="logo">
               <img class="logoHeader" src="${logoHeder}">
             </div>
@@ -45,7 +43,9 @@ function drawHTMLLayout() {
               <div class="lang_en lang-active">en</div>
             </div>
             <div class="style">
-              <img class="btn-style light" src="" alt="light">
+              <img class="btn-style light" src="${
+                settings.style === "dark" ? dark : light
+              }" alt="light">
             </div>
             <div class="volume">
               <div class="volumeOn">
@@ -61,12 +61,12 @@ function drawHTMLLayout() {
               userTrue.isRegistred === "true"
                 ? "display: none;"
                 : "display: flex;"
-            }">${settings?.lang === "en" ? "Sign up" : "Регистрация"}</div>
+            }">${settings.lang === "en" ? "Sign up" : "Регистрация"}</div>
             <div class="btn_autorization login" style="${
               userTrue.isRegistred === "true"
                 ? "display: none;"
                 : "display: flex;"
-            }">${settings?.lang === "en" ? "Login" : "Войти"}</div>
+            }">${settings.lang === "en" ? "Login" : "Войти"}</div>
           </div>
           <img class="${
             userTrue.isRegistred === "true" ? "iconUser active" : "iconUser"
@@ -81,20 +81,20 @@ function drawHTMLLayout() {
         </div>
       </div>
       <div class="pages">
-        <p class="about">${settings?.lang === "en" ? "Home" : "Главная"}</p>
+        <p class="about">${settings.lang === "en" ? "Home" : "Главная"}</p>
         <p class="game1">Jedi's Mind</p>
         <p class="game2">Jedi's Agility</p>
         <p class="game3">Jedi's Mobility</p>
         <p class="game4">Jedi's Strategy</p>
         <p class="game5">Jedi's Memory</p>
         <p class="result">${
-          settings?.lang === "en" ? "Results" : "Результаты"
+          settings.lang === "en" ? "Results" : "Результаты"
         }</p>
       </div>
       <div class="burger_menu">
         <div class="wrap_burger_up">
           <div class="wrap_logo">
-            <a class="wrap_logo_a" href="../../#about">
+            <a class="wrap_logo_a" href="./index.html">
               <div class="logo">
                 <p><span class="one-part">GAME </span><span class="two-part"> STACK</span></p>
               </div>
@@ -111,7 +111,7 @@ function drawHTMLLayout() {
           <nav class="burger_nav">
             <ul class="burger_nav_ul">
               <li class="burger_nav_ul_item burger-about">
-              ${settings?.lang === "en" ? "Home" : "Главная"}
+              ${settings.lang === "en" ? "Home" : "Главная"}
               </li>
               <li class="burger_nav_ul_item burger-game1">Jedi's Mind</li>
               <li class="burger_nav_ul_item burger-game2">Jedi's Agility</li>
@@ -119,7 +119,7 @@ function drawHTMLLayout() {
               <li class="burger_nav_ul_item burger-game4">Jedi's Strategy</li>
               <li class="burger_nav_ul_item burger-game5">Jedi's Memory</li>
               <li class="burger_nav_ul_item burger-result">
-              ${settings?.lang === "en" ? "Results" : "Результаты"}
+              ${settings.lang === "en" ? "Results" : "Результаты"}
               </li>
             </ul>
             <div class="authorization-burger">
@@ -127,12 +127,12 @@ function drawHTMLLayout() {
                 userTrue.isRegistred === "true"
                   ? "display: none;"
                   : "display: flex;"
-              }">${settings?.lang === "en" ? "Sign up" : "Регистрация"}</div>
+              }">${settings.lang === "en" ? "Sign up" : "Регистрация"}</div>
               <div class="btn_autorization-burger login-burger" style="${
                 userTrue.isRegistred === "true"
                   ? "display: none;"
                   : "display: flex;"
-              }">${settings?.lang === "en" ? "Login" : "Войти"}</div>
+              }">${settings.lang === "en" ? "Login" : "Войти"}</div>
             </div>
           </nav>
         </div>
@@ -142,7 +142,7 @@ function drawHTMLLayout() {
       <div class="shadow_account-window"></div>
       <div class="login-window">
         <div class="login-window_header">
-          <p>${settings?.lang === "en" ? "Login" : "Логин"}</p>
+          <p>${settings.lang === "en" ? "Login" : "Логин"}</p>
           <div class="login-window_cross">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
@@ -152,17 +152,17 @@ function drawHTMLLayout() {
         </div>
         <div class="login-window_main">
           <div class="login-window_logName">
-            <p>${settings?.lang === "en" ? "Login:" : "Логин:"}</p>
+            <p>${settings.lang === "en" ? "Login:" : "Логин:"}</p>
             <input type="text">
             <img src="">
           </div>
           <p class="login_check-login-down"></p>
           <div class="login-window_password">
-            <p>${settings?.lang === "en" ? "Password:" : "Пароль:"}</p>
+            <p>${settings.lang === "en" ? "Password:" : "Пароль:"}</p>
             <input type="text">
           </div>
           <div class="login-window_button">
-            <span>${settings?.lang === "en" ? "Login" : "Войти"}</span>
+            <span>${settings.lang === "en" ? "Login" : "Войти"}</span>
           </div>
         </div>
         <div class="wrapper-login-success">
@@ -176,7 +176,7 @@ function drawHTMLLayout() {
       </div>
       <div class="signup-window">
         <div class="signup-window_header">
-          <p>${settings?.lang === "en" ? "Sign Up" : "Регистрация"}</p>
+          <p>${settings.lang === "en" ? "Sign Up" : "Регистрация"}</p>
           <div class="signup-window_cross">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 14C0.744141 14 0.488281 13.9023 0.292969 13.707C-0.0976562 13.3164 -0.0976562 12.6836 0.292969 12.293L12.293 0.292969C12.6836 -0.0976562 13.3164 -0.0976562 13.707 0.292969C14.0977 0.683594 14.0977 1.31641 13.707 1.70703L1.70703 13.707C1.51172 13.9023 1.25586 14 1 14Z" fill="#4684ff"/>
@@ -186,7 +186,7 @@ function drawHTMLLayout() {
         </div>
         <div class="signup-window_main">
           <div class="signup-window_logName">
-            <p>${settings?.lang === "en" ? "Login:" : "Логин:"}</p>
+            <p>${settings.lang === "en" ? "Login:" : "Логин:"}</p>
             <input type="text">
             <img class="signup-window_logName-imgok" src="${inputOk}">
             <img class="signup-window_logName-imgfail" src="${inputFail}">
@@ -194,12 +194,12 @@ function drawHTMLLayout() {
           </div>
           <p class="signup_check-login-down"></p>
           <div class="signup-window_password">
-            <p>${settings?.lang === "en" ? "Password:" : "Пароль:"}</p>
+            <p>${settings.lang === "en" ? "Password:" : "Пароль:"}</p>
             <input type="text">
           </div>
           <div class="signup-window_button">
             <span>${
-              settings?.lang === "en" ? "Sign Up" : "Зарегистрироваться"
+              settings.lang === "en" ? "Sign Up" : "Зарегистрироваться"
             }</span>
           </div>
         </div>
@@ -312,7 +312,7 @@ function drawStyleLightOrDark() {
     menu.classList.add("dark");
     containerHeaderMain.classList.add("dark");
     menuItem.forEach((item) => item.classList.add("dark"));
-    btnLight.setAttribute("src", dark);
+    // btnLight.setAttribute("src", dark);
     btnLight.classList.remove("light");
   } else if (settings.style === "light") {
     if (gamesInfoContainer) {
@@ -325,7 +325,7 @@ function drawStyleLightOrDark() {
     containerHeaderMain.classList.remove("dark");
 
     menuItem.forEach((item) => item.classList.remove("dark"));
-    btnLight.setAttribute("src", light);
+    // btnLight.setAttribute("src", light);
   }
 }
 
