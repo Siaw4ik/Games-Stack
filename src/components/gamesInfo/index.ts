@@ -150,6 +150,17 @@ export function redrawGameInfoSectionForToggleLang(language: string) {
     blockquoteTitle.textContent = dataQuote;
   }
 
+  const gamesInfoSectionBtns = document.querySelectorAll(".game_btn");
+  if (gamesInfoSectionBtns) {
+    gamesInfoSectionBtns.forEach((btn) => {
+      if (language === "ru") {
+        btn.textContent = "Играть";
+      } else {
+        btn.textContent = "Play";
+      }
+    });
+  }
+
   const sections = document.querySelectorAll(".game_section");
   sections.forEach((section) => {
     const id = section.getAttribute("class")?.slice(0, 5);
