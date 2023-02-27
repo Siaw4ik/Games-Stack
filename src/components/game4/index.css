@@ -1,0 +1,260 @@
+.game4-wrapper {
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+  padding: 10px 100px;
+}
+
+.game4-wrapper h2 {
+  color: white;
+}
+
+.game4-wrapper.game4-start {
+  padding: 0;
+}
+
+.game4-wrapper_info {
+  font-size: 18px;
+  text-align: center;
+}
+
+.game4-wrapper_button {
+  width: 130px;
+  padding: 10px;
+  background-color: fuchsia;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.game4-wrapper_button:hover {
+  transform: scale(1.1);
+}
+
+._game4-container {
+  margin: 0px auto;
+  max-width: 1000px;
+}
+
+/*========================================================================================================*/
+
+.game4-main__container {
+  margin-top: 15px;
+}
+
+.game4-main-header {
+  position: relative;
+  color: white;
+  width: 410px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game4-main__chips {
+  position: relative;
+  width: 450px;
+  margin: 0px auto;
+}
+
+.game4-main__chip {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  cursor: pointer;
+  opacity: 0.5;
+}
+#game4-yoda-chip {
+  top: 140px;
+  left: -125px;
+}
+
+#game4-dart-chip {
+  top: 140px;
+  left: 445px;
+}
+
+.game4-main__chip:hover {
+  transition: 0.2s;
+  opacity: 1;
+}
+
+#game4-yoda-chip {
+  background-image: url("../../assets/game4images/Yoda.png");
+  background-position-y: -10px;
+}
+
+#game4-dart-chip {
+  background-image: url("../../assets/game4images/Anakin.png");
+}
+
+.game4-main__game-table {
+  margin: 0px auto;
+  position: relative;
+  width: 394px;
+  border: 8px solid rgb(77, 75, 75);
+}
+.game4-main__game-row {
+  display: flex;
+}
+
+.game4-main__game-cell {
+  background-color: #121212;
+  border: 2px solid rgb(77, 75, 75);
+  width: 130px;
+  height: 130px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 36px;
+  cursor: pointer;
+  color: transparent;
+  user-select: none;
+}
+.game4-main__game-cell:hover {
+  opacity: 0.7;
+}
+
+.game4-yoda {
+  background-image: url("../../assets/game4images/Yoda.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 95% 95%;
+  background-position-y: -5px;
+}
+
+.game4-dart {
+  background-image: url("../../assets/game4images/Anakin.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 95% 95%;
+}
+
+.game4-main__game-table {
+  border-collapse: collapse;
+}
+.game4-main__game-table .game4-main__game-row:first-child div {
+  border-top: 0;
+}
+
+.game4-main__game-table .game4-main__game-row:last-child div {
+  border-bottom: 0;
+}
+
+.game4-main__game-table .game4-main__game-row div:first-child {
+  border-left: 0;
+}
+
+.game4-main__game-table .game4-main__game-row div:last-child {
+  border-right: 0;
+}
+
+.game4-main__endgame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
+  display: none;
+  background-color: black;
+}
+
+.game4-endgame__message {
+  padding-top: 100px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+.game4-endgame__button {
+  font-size: 22px;
+  border-radius: 5px;
+  display: block;
+  margin: 40px auto 0px auto;
+  width: 50%;
+  height: 60px;
+  cursor: pointer;
+}
+
+.game4-endgame__button:hover {
+  background-color: gray;
+  transition: 0.3s;
+}
+
+.open {
+  display: block;
+}
+.disable {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.chosen {
+  opacity: 1;
+}
+.transparent {
+  transition: 1s;
+  color: transparent;
+}
+
+@media (max-width: 800px) {
+  .game4-wrapper {
+    padding: 10px 10px;
+  }
+}
+
+@media (max-width: 790px) {
+  .game4-main__game-table {
+    width: 308px;
+  }
+  .game4-main__game-cell {
+    width: 100px;
+    height: 100px;
+  }
+
+  .game4-main-header {
+    color: white;
+    width: 310px;
+  }
+
+  .game4-main__chips {
+    width: 225px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .game4-main__chip {
+    top: auto;
+    left: auto;
+    position: static;
+    height: 100px;
+    width: 100px;
+  }
+
+  .game4-endgame__message {
+    padding-top: 60px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+  }
+
+  .game4-endgame__button {
+    font-size: 18px;
+    width: 50%;
+    height: 50px;
+  }
+}

@@ -1,0 +1,67 @@
+.game2-wrapper {
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.game2-wrapper h2 {
+  color: white;
+}
+
+.game2-wrapper.game2-start {
+  padding: 0;
+}
+
+.game2-wrapper_info {
+  font-size: 18px;
+  text-align: center;
+}
+
+.game2-wrapper_button {
+  width: 130px;
+  padding: 10px;
+  background-color: fuchsia;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.game2-wrapper_button:hover {
+  transform: scale(1.1);
+}
+
+._game2-container {
+  margin: 0px auto;
+  max-width: 1400px;
+}
+
+.game2-main__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game2-main__game {
+  width: 71vw;
+  max-width: 1400px;
+}
+
+@media (max-width: 1400px) {
+  .game2-wrapper {
+    width: 95vw;
+  }
+
+  .game2-main__game {
+    width: 100%;
+  }
+}

@@ -1,0 +1,104 @@
+.parallax_background_container {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.parallax_background {
+  position: absolute;
+  height: 120%;
+  width: 120%;
+  top: -10%;
+  left: -10%;
+}
+
+.parallax_container {
+  height: calc(100vh - 125px - 60px);
+  position: relative;
+  z-index: 2;
+  width: 120%;
+  top: -10%;
+  left: -10%;
+}
+
+.parallax_images {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.images-parallax {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.images-parallax_item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* .image_dark_hole {
+  width: 16%;
+  height: 39%;
+  position: absolute;
+  background: url(../../assets/dark_hole.png) top / cover no-repeat;
+  top: 0;
+  right: 160px;
+  z-index: 5;
+  animation: 20s linear infinite rotate;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.images-parallax_galaxy {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url(../../assets/parallax_galaxy_light.jpg) top / cover no-repeat;
+  top: 0;
+  left: 0;
+}
+
+.conteiner_header-main.dark .images-parallax_galaxy {
+  background: url(../../assets/parallax_galaxy.png) top / cover no-repeat;
+}
+
+.images-parallax_death-star {
+  height: 100%;
+  width: 70%;
+  position: relative;
+  background: url(../../assets/parallax_star.png) center / contain no-repeat;
+  z-index: 2;
+  margin: auto auto;
+}
+
+.images-parallax_ship {
+  position: relative;
+  scale: 0.8;
+  height: 30vh;
+  width: 30vw;
+  background: url(../../assets/parallax_ship.png) center / contain no-repeat;
+  left: 20%;
+  top: 30%;
+  z-index: 3;
+}

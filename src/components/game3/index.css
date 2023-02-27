@@ -1,0 +1,78 @@
+.game3-wrapper {
+  overflow: hidden;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 100px;
+  margin: 0 auto;
+  height: calc(100% - 20px);
+  max-width: 100%;
+}
+
+.game3-wrapper_info {
+  font-size: 18px;
+  text-align: center;
+}
+
+.game3-wrapper_button {
+  width: 130px;
+  padding: 10px;
+  background-color: fuchsia;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all .3s ease-in-out
+}
+
+.game3-wrapper_button:hover {
+  transform: scale(1.1);
+}
+
+.wrapper_game_3 {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 100%;
+}
+
+#game_3 {
+  position: relative;
+  background-color: aqua;
+}
+
+._game3-container {
+  margin: 0px auto;
+}
+
+.game3-main_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.game3-main_game {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1400px) {
+  .game3-wrapper {
+    width: 95vw;
+    padding: 10px 10px;
+  }
+
+  .game3-main_game {
+    width: 100%;
+  }
+}
